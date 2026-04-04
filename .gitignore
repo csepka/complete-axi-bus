@@ -1,0 +1,18 @@
+# Verilator output
+obj_dir/
+*.vcd
+*.fst
+
+# Build artifacts
+*.o
+*.a
+*.so
+
+# Simulation output
+sim/logs/
+sim/waves/
+
+# Editor
+.vscode/
+*.swp
+*.swo
