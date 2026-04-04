@@ -1,0 +1,169 @@
+{
+  "extensionVersion": "1.5.0",
+  "fileName": "/Users/christophersepka/AMBA-interface-Group-Project/tb/tb_top.vcd",
+  "markerTime": 185282,
+  "altMarkerTime": null,
+  "selectedSignal": null,
+  "zoomRatio": 0.017492780946471612,
+  "scrollLeft": 169270,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 7,
+      "name": "tb_top.ACLK",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "ACLK",
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 8,
+      "name": "tb_top.ARESETn",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "ARESETn",
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "signal-separator",
+      "label": "---",
+      "rowHeight": 1
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 9,
+      "name": "tb_top.mgr_sel",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "mgr_sel",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 12,
+      "name": "tb_top.cmd_addr",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "cmd_addr",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 13,
+      "name": "tb_top.cmd_wdata",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "cmd_wdata",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "signal-separator",
+      "label": "---",
+      "rowHeight": 1
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 158,
+      "name": "tb_top.dut.m_cmd_wdata.[0]",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "[0]",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 159,
+      "name": "tb_top.dut.m_cmd_wdata.[1]",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "[1]",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 160,
+      "name": "tb_top.dut.m_cmd_wdata.[2]",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "[2]",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "signal-separator",
+      "label": "---",
+      "rowHeight": 1
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 450,
+      "name": "tb_top.dut.sub0.saved_WDATA",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "saved_WDATA",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 493,
+      "name": "tb_top.dut.sub1.saved_WDATA",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "saved_WDATA",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 536,
+      "name": "tb_top.dut.sub2.saved_WDATA",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "saved_WDATA",
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    }
+  ]
+}

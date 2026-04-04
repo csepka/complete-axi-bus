@@ -1,0 +1,18 @@
+{
+  "compilations": [
+    {
+      "name": "default",
+      "files": [
+        "src/axi_lite_sub.sv",
+        "tb/axi_lite_sub_tb.sv"
+      ],
+      "includePaths": [
+        "src",
+        "tb"
+      ],
+      "defines": [],
+      "topLevel": "axi_lite_sub_tb",
+      "fileLists": ["files.f"]
+    }
+  ]
+}

@@ -1,18 +1,14 @@
-# Verilator output
+sim.out
+slpp_all
+
+synthesis/subordinate/runs/*
+!synthesis/subordinate/runs/RUN_2026-03-01_16-58-32/
+synthesis/subordinate/runs/RUN_2026-03-01_16-58-32/**
+
+synthesis/top/runs/*
+!synthesis/top/runs/RUN_2026-03-03_15-20-40/
+synthesis/top/runs/RUN_2026-03-03_15-20-40/**
+
 obj_dir/
-*.vcd
-*.fst
 
-# Build artifacts
-*.o
-*.a
-*.so
-
-# Simulation output
-sim/logs/
-sim/waves/
-
-# Editor
-.vscode/
-*.swp
-*.swo
+sim/*.vcd
