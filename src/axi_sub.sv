@@ -4,6 +4,7 @@
 module axi_lite_sub #(
     parameter ADDR_W = 32,
     parameter DATA_W = 32,
+    parameter ID_W = 8,
     parameter int BYTES  = DATA_W/8,
 
     parameter int MEM_BYTES = 256 //reduced for PnR
@@ -11,7 +12,7 @@ module axi_lite_sub #(
     input logic ACLK,
     input logic ARESETn,
 
-    axi_lite_if.sub axi
+    axi_if.sub axi
 );
 
     // memory parameters 
@@ -26,6 +27,10 @@ module axi_lite_sub #(
 
     // Write Address Latches
     logic [ADDR_W-1:0] saved_AWADDR;
+    logic [ID_W-1:0] saved_AWID;
+    logic [7:0] saved_AWLEN;
+    logic [2:0] saved_AWSIZE;
+    logic [1:0] saved_AWBURST;
 
     // Write Data Latches
     logic [DATA_W-1:0] saved_WDATA;
@@ -33,6 +38,10 @@ module axi_lite_sub #(
 
     // Read Address Latches
     logic [ADDR_W-1:0] saved_ARADDR;
+    logic [ID_W-1:0] saved_ARID;
+    logic [7:0] saved_ARLEN;
+    logic [2:0] saved_ARSIZE;
+    logic [1:0] saved_ARBURST;
 
     // decode word index from saved addresses (use wire so continuous assign is valid)
     wire [IDX_W-1:0] widx = saved_AWADDR[IDX_W+1:2];
@@ -132,11 +141,27 @@ module axi_lite_sub #(
             saved_WDATA  <= '0;
             saved_WSTRB  <= '0;
             saved_ARADDR <= '0;
+
+            saved_AWID <= '0;
+            saved_AWLEN <= '0;
+            saved_AWSIZE <= '0;
+            saved_AWBURST <= '0;
+
+            saved_ARID <= '0;
+            saved_ARLEN <= '0;
+            saved_ARSIZE <= '0;
+            saved_ARBURST <= '0;
+
         end else begin
             case (curr_write_state)
                 W_IDLE: begin
                     if (axi.AWVALID && axi.AWREADY) begin
                         saved_AWADDR <= axi.AWADDR;
+                        
+                        saved_AWID <= axi.AWID;
+                        saved_AWLEN <= axi.AWLEN;
+                        saved_AWSIZE <= axi.AWSIZE;
+                        saved_AWBURST <= axi.AWBURST;
                     end
 
                     if (axi.WVALID && axi.WREADY) begin
@@ -150,8 +175,13 @@ module axi_lite_sub #(
 
             case (curr_read_state)
                 R_IDLE: begin
-                    if (axi.ARVALID && axi.ARREADY)
-                        saved_ARADDR <= axi.ARADDR;
+                    if (axi.ARVALID && axi.ARREADY) begin
+                        saved_ARADDR  <= axi.ARADDR;
+                        saved_ARID    <= axi.ARID;
+                        saved_ARLEN   <= axi.ARLEN;
+                        saved_ARSIZE  <= axi.ARSIZE;
+                        saved_ARBURST <= axi.ARBURST;
+                    end
                 end
             endcase
         end
@@ -164,6 +194,8 @@ module axi_lite_sub #(
             for (int i = 0; i < DEPTH; i = i + 1)
                 regs[i] = '0;
 
+            axi.BID <= '0;
+            axi.RID <= '0;
             axi.BVALID <= 0;
             axi.RDATA <= '0;
             axi.RVALID <= 0;
@@ -181,6 +213,8 @@ module axi_lite_sub #(
                 end
                 regs[widx] <= new_word;
                 axi.BVALID <= 1;
+
+                axi.BID <= saved_AWID;
             end
 
             if (axi.BVALID && axi.BREADY)
@@ -189,6 +223,7 @@ module axi_lite_sub #(
             // READ
             if (read_fire) begin
                 axi.RDATA <= regs[ridx];
+                axi.RID <= saved_ARID;
                 axi.RVALID <= 1;
             end
 

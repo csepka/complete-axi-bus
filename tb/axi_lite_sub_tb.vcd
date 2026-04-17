@@ -1,0 +1,720 @@
+$date
+	Thu Apr 16 19:43:39 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module axi_lite_sub_tb $end
+$var wire 1 ! WREADY $end
+$var wire 1 " RVALID $end
+$var wire 32 # RDATA [31:0] $end
+$var wire 1 $ BVALID $end
+$var wire 1 % AWREADY $end
+$var wire 1 & ARREADY $end
+$var parameter 32 ' ADDR_W $end
+$var parameter 64 ( CLK_PERIOD $end
+$var parameter 32 ) DATA_W $end
+$var parameter 32 * DEPTH $end
+$var reg 1 + ACLK $end
+$var reg 32 , ARADDR [31:0] $end
+$var reg 1 - ARESETn $end
+$var reg 1 . ARVALID $end
+$var reg 32 / AWADDR [31:0] $end
+$var reg 1 0 AWVALID $end
+$var reg 1 1 BREADY $end
+$var reg 1 2 RREADY $end
+$var reg 32 3 WDATA [31:0] $end
+$var reg 4 4 WSTRB [3:0] $end
+$var reg 1 5 WVALID $end
+$var integer 32 6 checks_failed [31:0] $end
+$var integer 32 7 checks_total [31:0] $end
+$scope module dut $end
+$var wire 1 + ACLK $end
+$var wire 32 8 ARADDR [31:0] $end
+$var wire 1 - ARESETn $end
+$var wire 1 & ARREADY $end
+$var wire 1 . ARVALID $end
+$var wire 32 9 AWADDR [31:0] $end
+$var wire 1 % AWREADY $end
+$var wire 1 0 AWVALID $end
+$var wire 1 1 BREADY $end
+$var wire 1 2 RREADY $end
+$var wire 32 : WDATA [31:0] $end
+$var wire 1 ! WREADY $end
+$var wire 4 ; WSTRB [3:0] $end
+$var wire 1 5 WVALID $end
+$var wire 1 < read_fire $end
+$var wire 1 = write_fire $end
+$var wire 6 > widx [5:0] $end
+$var wire 6 ? ridx [5:0] $end
+$var parameter 32 @ ADDR_W $end
+$var parameter 32 A BYTES $end
+$var parameter 32 B DATA_W $end
+$var parameter 32 C DEPTH $end
+$var parameter 32 D IDX_W $end
+$var parameter 32 E MEM_BYTES $end
+$var reg 2 F BRESP [1:0] $end
+$var reg 1 $ BVALID $end
+$var reg 32 G RDATA [31:0] $end
+$var reg 2 H RRESP [1:0] $end
+$var reg 1 " RVALID $end
+$var reg 1 I ar_pending $end
+$var reg 1 J aw_pending $end
+$var reg 32 K saved_ARADDR [31:0] $end
+$var reg 32 L saved_AWADDR [31:0] $end
+$var reg 32 M saved_WDATA [31:0] $end
+$var reg 4 N saved_WSTRB [3:0] $end
+$var reg 1 O w_pending $end
+$var integer 32 P curr_read_state [31:0] $end
+$var integer 32 Q curr_write_state [31:0] $end
+$var integer 32 R next_read_state [31:0] $end
+$var integer 32 S next_write_state [31:0] $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 T i [31:0] $end
+$upscope $end
+$scope begin $unm_blk_25 $end
+$var reg 32 U new_word [31:0] $end
+$scope begin $ivl_for_loop1 $end
+$var integer 32 V b [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope begin $unm_blk_55 $end
+$var reg 32 W rd_data [31:0] $end
+$upscope $end
+$scope task axi_read $end
+$upscope $end
+$scope task axi_write $end
+$upscope $end
+$scope task check $end
+$upscope $end
+$scope task do_reset $end
+$upscope $end
+$scope task init_drives $end
+$upscope $end
+$scope task init_exp_mem $end
+$upscope $end
+$scope task issue_write_no_resp $end
+$upscope $end
+$scope task test_b_backpressure $end
+$upscope $end
+$scope task test_r_backpressure $end
+$upscope $end
+$scope task test_write_and_read $end
+$upscope $end
+$scope task write_addr_phase $end
+$upscope $end
+$scope task write_data_phase $end
+$upscope $end
+$scope task write_response_phase $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b100000000 E
+b110 D
+b1000000 C
+b100000 B
+b100 A
+b100000 @
+b10000000 *
+b100000 )
+b1010 (
+b100000 '
+$end
+#0
+$dumpvars
+bx W
+b0 V
+bx U
+b1000000 T
+b0 S
+b0 R
+b0 Q
+b0 P
+0O
+b0 N
+b0 M
+b0 L
+b0 K
+0J
+0I
+b0 H
+b0 G
+b0 F
+b0 ?
+b0 >
+0=
+0<
+b0 ;
+b0 :
+b0 9
+b0 8
+b0 7
+b0 6
+05
+b0 4
+b0 3
+02
+01
+00
+b0 /
+0.
+0-
+b0 ,
+0+
+1&
+1%
+0$
+b0 #
+0"
+1!
+$end
+#5000
+b1000000 T
+1+
+#10000
+0+
+#15000
+b1000000 T
+1+
+#20000
+0+
+#25000
+b1000000 T
+1+
+#30000
+0+
+#35000
+1-
+1+
+#40000
+0+
+#45000
+10
+b11 /
+b11 9
+15
+b1111 4
+b1111 ;
+b10100101101001010000000000000011 3
+b10100101101001010000000000000011 :
+b101 7
+1+
+#50000
+0+
+#55000
+b1 S
+1=
+0!
+0%
+1O
+1J
+b1111 N
+b10100101101001010000000000000011 M
+b11 L
+11
+05
+00
+1+
+#60000
+0+
+#65000
+0=
+b0 S
+1$
+b1 Q
+b100 V
+b10100101101001010000000000000011 U
+1+
+#70000
+0+
+#75000
+b0 S
+1%
+1!
+0=
+b0 Q
+0O
+0J
+0$
+1+
+#80000
+0+
+#85000
+1.
+b11 ,
+b11 8
+01
+1+
+#90000
+0+
+#95000
+b1 R
+0&
+1<
+1I
+b11 K
+12
+0.
+1+
+#100000
+0+
+#105000
+0<
+b0 R
+1"
+b10100101101001010000000000000011 #
+b10100101101001010000000000000011 G
+b1 P
+1+
+#110000
+0+
+#115000
+1&
+b0 P
+0I
+0"
+1+
+#120000
+0+
+#125000
+10
+b111 /
+b111 9
+02
+b110 7
+1+
+#130000
+0+
+#135000
+0%
+b1 >
+1J
+b111 L
+00
+1+
+#140000
+0+
+#145000
+1+
+#150000
+0+
+#155000
+15
+b10100101101001010000000000000111 3
+b10100101101001010000000000000111 :
+1+
+#160000
+0+
+#165000
+b1 S
+1=
+0!
+b10100101101001010000000000000111 M
+1O
+11
+05
+1+
+#170000
+0+
+#175000
+0=
+b0 S
+1$
+b1 Q
+b100 V
+b10100101101001010000000000000111 U
+1+
+#180000
+0+
+#185000
+b0 S
+1%
+1!
+0=
+0O
+0J
+b0 Q
+0$
+1+
+#190000
+0+
+#195000
+1.
+b111 ,
+b111 8
+01
+1+
+#200000
+0+
+#205000
+b1 R
+b1 ?
+0&
+1<
+b111 K
+1I
+12
+0.
+1+
+#210000
+0+
+#215000
+0<
+b0 R
+1"
+b10100101101001010000000000000111 #
+b10100101101001010000000000000111 G
+b1 P
+1+
+#220000
+0+
+#225000
+1&
+0I
+b0 P
+0"
+1+
+#230000
+0+
+#235000
+15
+b10100101101001010000000000001001 3
+b10100101101001010000000000001001 :
+02
+b111 7
+1+
+#240000
+0+
+#245000
+0!
+b10100101101001010000000000001001 M
+1O
+05
+1+
+#250000
+0+
+#255000
+1+
+#260000
+0+
+#265000
+10
+b1001 /
+b1001 9
+1+
+#270000
+0+
+#275000
+b1 S
+1=
+0%
+b10 >
+1J
+b1001 L
+11
+00
+1+
+#280000
+0+
+#285000
+0=
+b0 S
+1$
+b1 Q
+b100 V
+b10100101101001010000000000001001 U
+1+
+#290000
+0+
+#295000
+b0 S
+1%
+1!
+0=
+b0 Q
+0O
+0J
+0$
+1+
+#300000
+0+
+#305000
+1.
+b1001 ,
+b1001 8
+01
+1+
+#310000
+0+
+#315000
+b1 R
+0&
+1<
+b10 ?
+1I
+b1001 K
+12
+0.
+1+
+#320000
+0+
+#325000
+0<
+b0 R
+1"
+b10100101101001010000000000001001 #
+b10100101101001010000000000001001 G
+b1 P
+1+
+#330000
+0+
+#335000
+1&
+b0 P
+0I
+0"
+1+
+#340000
+0+
+#345000
+02
+b1000 7
+1+
+#350000
+0+
+#355000
+1+
+#360000
+0+
+#365000
+1.
+b11 ,
+b11 8
+1+
+#370000
+0+
+#375000
+b1 R
+0&
+1<
+b0 ?
+1I
+b11 K
+0.
+1+
+#380000
+0+
+#385000
+0<
+1"
+b10100101101001010000000000000011 #
+b10100101101001010000000000000011 G
+b1 P
+1+
+#390000
+0+
+#395000
+b0 R
+12
+1+
+#400000
+0+
+#405000
+1&
+0"
+0I
+b0 P
+10
+b10101 /
+b10101 9
+15
+b10111110111011110000000000100001 3
+b10111110111011110000000000100001 :
+02
+b1001 7
+b10100101101001010000000000000011 W
+1+
+#410000
+0+
+#415000
+b1 S
+1=
+0!
+0%
+b101 >
+1O
+1J
+b10111110111011110000000000100001 M
+b10101 L
+05
+00
+1+
+#420000
+0+
+#425000
+0=
+1$
+b1 Q
+b100 V
+b10111110111011110000000000100001 U
+1+
+#430000
+0+
+#435000
+1+
+#440000
+0+
+#445000
+b1010 7
+1+
+#450000
+0+
+#455000
+b1011 7
+1+
+#460000
+0+
+#465000
+b0 S
+11
+b1100 7
+1+
+#470000
+0+
+#475000
+b0 S
+1%
+1!
+0=
+b0 Q
+0O
+0J
+0$
+01
+1+
+#480000
+0+
+#485000
+10
+b11001 /
+b11001 9
+15
+b11001010111111100000000000100101 3
+b11001010111111100000000000100101 :
+b1101 7
+1+
+#490000
+0+
+#495000
+b1 S
+1=
+0!
+0%
+b110 >
+1O
+1J
+b11001010111111100000000000100101 M
+b11001 L
+11
+05
+00
+1+
+#500000
+0+
+#505000
+0=
+b0 S
+1$
+b1 Q
+b100 V
+b11001010111111100000000000100101 U
+1+
+#510000
+0+
+#515000
+b0 S
+1%
+1!
+0=
+b0 Q
+0O
+0J
+0$
+1+
+#520000
+0+
+#525000
+1.
+b11001 ,
+b11001 8
+01
+1+
+#530000
+0+
+#535000
+b1 R
+0&
+1<
+b110 ?
+1I
+b11001 K
+0.
+1+
+#540000
+0+
+#545000
+0<
+1"
+b11001010111111100000000000100101 #
+b11001010111111100000000000100101 G
+b1 P
+1+
+#550000
+0+
+#555000
+1+
+#560000
+0+
+#565000
+b1110 7
+1+
+#570000
+0+
+#575000
+b1111 7
+1+
+#580000
+0+
+#585000
+b0 R
+12
+b10000 7
+1+
+#590000
+0+
+#595000
+1&
+b0 P
+0I
+0"
+02
+1+
+#600000
+0+
+#605000
+b10010 7
+1+
+#610000
+0+
+#615000
+1+
+#620000
+0+
+#625000
+1+

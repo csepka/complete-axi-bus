@@ -1,6 +1,6 @@
-# AXI4 Manager/Subordinate Implementation
+# AXI5 Manager/Subordinate Implementation
 
-A complete SystemVerilog implementation of the full AXI4 protocol, including both Manager (Master) and Subordinate (Slave) interfaces. This is a full AXI4 implementation — not AXI4-Lite.
+A complete SystemVerilog implementation of the full AXI5 protocol, including both Manager (Master) and Subordinate (Slave) interfaces. This is a full AXI5 implementation — not AXI5-Lite.
 
 ## Overview
 
@@ -12,7 +12,7 @@ This project implements the full AXI4 bus protocol with all five channels:
 - **AR** — Read Address Channel
 - **R** — Read Data Channel
 
-Supports AXI4 features including burst transfers, outstanding transactions, and all burst types (FIXED, INCR, WRAP).
+Supports AXI5 features including burst transfers, outstanding transactions, all burst types (FIXED, INCR, WRAP), atomic transactions, and poison signals.
 
 ## Requirements
 
@@ -42,6 +42,6 @@ verilator --lint-only -sv rtl/*.sv
 make sim
 ```
 
-## AXI4 Protocol Reference
+## AXI5 Protocol Reference
 
-- [ARM AXI4 Specification (IHI0022)](https://developer.arm.com/documentation/ihi0022/latest)
+- [ARM AXI5 Specification (IHI0022H)](https://developer.arm.com/documentation/ihi0022/latest)

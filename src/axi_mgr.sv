@@ -4,7 +4,8 @@
 
 module axi_lite_mgr #(
     parameter ADDR_W = 32,
-    parameter DATA_W = 32
+    parameter DATA_W = 32,
+    parameter ID_W = 8
 
 )(
     input logic ACLK,
@@ -54,7 +55,7 @@ module axi_lite_mgr #(
     output logic [DATA_W-1:0] cmd_rdata,
 
 
-    axi_lite_if.mgr axi
+    axi_if.mgr axi
 
 
 );
