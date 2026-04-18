@@ -1,7 +1,7 @@
-// Making this for AXI5-LITE
+// AXI5 Subordinate
 `timescale 1ns/1ps
 
-module axi_lite_sub #(
+module axi_sub #(
     parameter ADDR_W = 32,
     parameter DATA_W = 32,
     parameter ID_W = 8,
@@ -42,6 +42,10 @@ module axi_lite_sub #(
     logic [7:0] saved_ARLEN;
     logic [2:0] saved_ARSIZE;
     logic [1:0] saved_ARBURST;
+
+    // Burst read states
+    logic [7:0] r_beat_cnt;
+    logic [ADDR_W-1:0] r_cur_addr;
 
     // decode word index from saved addresses (use wire so continuous assign is valid)
     wire [IDX_W-1:0] widx = saved_AWADDR[IDX_W+1:2];
@@ -101,7 +105,7 @@ module axi_lite_sub #(
             end
 
             R_RESP: begin
-                if (axi.RVALID && axi.RREADY)
+                if (axi.RVALID && axi.RREADY && axi.RLAST)
                     next_read_state = R_IDLE;
             end
         endcase
@@ -129,7 +133,7 @@ module axi_lite_sub #(
                 w_pending  <= 0;
             end
 
-            if (axi.RREADY && axi.RVALID)
+            if (axi.RREADY && axi.RVALID && axi.RLAST)
                 ar_pending <= 0;
         end
     end
@@ -194,6 +198,10 @@ module axi_lite_sub #(
             for (int i = 0; i < DEPTH; i = i + 1)
                 regs[i] = '0;
 
+            r_beat_cnt <= '0;
+            r_cur_addr <= '0;
+            axi.RLAST <= '0;
+
             axi.BID <= '0;
             axi.RID <= '0;
             axi.BVALID <= 0;
@@ -206,7 +214,7 @@ module axi_lite_sub #(
                 // each byte chunk is 8 bits
                 logic [DATA_W-1:0] new_word;
                 new_word = regs[widx]; // current word
-                for (int b = 0; b < BYTES; b = b + 1) begin
+                for (int b = 0; b < BYTES; b++) begin
                     if (saved_WSTRB[b]) begin
                         new_word[8*b +: 8] = saved_WDATA[8*b +: 8];
                     end
@@ -222,13 +230,24 @@ module axi_lite_sub #(
 
             // READ
             if (read_fire) begin
-                axi.RDATA <= regs[ridx];
+                r_beat_cnt <= saved_ARLEN;
+                r_cur_addr <= saved_ARADDR;
+                axi.RDATA <= regs[saved_ARADDR[IDX_W+1:2]];
                 axi.RID <= saved_ARID;
+                axi.RLAST <= (saved_ARLEN == 0);
                 axi.RVALID <= 1;
             end
 
             if (axi.RVALID && axi.RREADY)
-                axi.RVALID <= 0;
+                if (r_beat_cnt > 0) begin
+                    r_beat_cnt <= r_beat_cnt - 1;
+                    r_cur_addr <= r_cur_addr + (1 << saved_ARSIZE); // INCR
+                    axi.RDATA <= regs[(r_cur_addr + (1 << saved_ARSIZE))[IDX_W+1:2]];
+                    axi.RLAST <= (r_beat_cnt == 1);
+                end else begin
+                    axi.RVALID <= 0;
+                    axi.RLAST <= 0;
+                end
         end
     end
 
