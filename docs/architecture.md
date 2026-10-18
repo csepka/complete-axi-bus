@@ -1,123 +1,108 @@
-# Architecture Decision Record
+# AXI4 Interconnect Architecture
 
-This document tracks the architectural choices made for the AXI4 Manager/Subordinate implementation.
-Update this file as decisions are made or revised during development.
+## 1. Scope
 
----
+This repository implements a bounded, synthesizable AXI4 memory interconnect. It is designed as a portfolio-quality example of AMBA microarchitecture, integration, verification, and automation—not as a drop-in, formally certified commercial IP block.
 
-## Protocol
+The interface includes the core AXI4 burst and ID signals. Optional AXI4 sidebands (LOCK, CACHE, QOS, REGION, USER) and AXI5 additions are intentionally excluded. Aligned, full-width transfers are supported; malformed, narrow, unaligned, out-of-range, and 4-KiB-crossing requests terminate with an error response.
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Protocol | AXI5 (full) | Full burst support, out-of-order transactions, atomics, and poison/trace signals |
-| Version | AXI5 (AMBA 5, IHI0022H+) | Latest ARM standard; adds atomic transactions, poison, wake-up signals over AXI4 |
-| Variant | Not AXI5-Lite, not AXI5-Stream | Full AXI5 required for burst transfers, transaction IDs, and atomic operations |
+## 2. Block Responsibilities
 
----
+| Block | Responsibility |
+|---|---|
+| `axi_if` | Typed five-channel interface with manager/subordinate modports |
+| `axi_interconnect` | Independent read/write arbitration, decode, burst route locking, and DECERR termination |
+| `axi_mgr` | Demonstration command adapter that emits one-beat INCR transactions |
+| `axi_sub` | Interface wrapper for the flat-port RAM core |
+| `axi_ram` | Burst address generation, memory access, request validation, and response generation |
+| `axi_protocol_checker` | Backpressure stability and known-last-beat assertions |
+| `axi_top` | Parameterized integration example with N adapters and N RAM targets |
 
-## AXI5 Additions Over AXI4
+## 3. Interconnect Microarchitecture
 
-These are the signals and features AXI5 introduces that do not exist in AXI4. All are 🔲 pending implementation.
+### Independent datapaths
 
-| Feature | Signals | Notes |
-|---------|---------|-------|
-| Atomic transactions | `AWATOP[5:0]` | Encodes atomic operation type (load, store, swap, compare). On AW channel only. |
-| Poison | `AWPOISON`, `WPOISON`, `BPOISON`, `ARPOISON`, `RPOISON` | 1-bit per channel. Marks data as corrupted/invalid without raising an error response. |
-| Trace | `AWTRACE`, `WTRACE`, `BTRACE`, `ARTRACE`, `RTRACE` | 1-bit per channel. Used for debug/trace infrastructure. |
-| Wake-up signals | `AWAKEUP` | Optional. Allows manager to wake a subordinate before a transaction. |
-| Write data poison | `WPOISON` | Per-beat poison on write data channel. |
-| MECID (Memory Encryption Context ID) | `AWMECID`, `ARMECID` | Optional. For memory encryption tagging. |
-| MPAM (Memory Partitioning and Monitoring) | `AWMPAM`, `ARMPAM` | Optional. For QoS memory partitioning. |
+The write path uses `W_IDLE → W_DATA → W_RESP`. The read path uses `R_IDLE → R_DATA`. Because these state machines are independent, a read burst and a write burst can progress concurrently, including to the same subordinate when the target accepts both channels.
 
-> **Priority for this project:** `AWATOP` (atomics) and poison signals are the most impactful AXI5 additions. Wake-up, MECID, and MPAM are optional and can be deferred.
+### Arbitration
 
----
+Read and write address channels each have a round-robin pointer. In an idle state, the arbiter scans managers beginning at that pointer and selects the first valid request. The pointer advances after address acceptance. Route ownership is then held until `BVALID && BREADY` for writes or `RVALID && RREADY && RLAST` for reads.
 
-## Bus Topology
+This policy guarantees transaction integrity and prevents channel interleaving. It is fair under the assumption that every accepted transaction eventually completes. There is one globally active write and one globally active read, so response reordering is unnecessary.
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Topology | Shared bus (single manager, single subordinate) | Simplest starting point; interconnect/crossbar can be added later |
-| Interface style | SystemVerilog `interface` with modports | Enforces direction at compile time, reduces wiring errors |
-| Interface name | `axi_if` | Renamed from `axi_lite_if` to reflect full AXI4 |
+### Address decode
 
-> **Future:** A crossbar or interconnect module can be inserted between manager and subordinate to support multiple managers/subordinates without changing the interface definition.
+Subordinate `s` owns:
 
----
+```text
+BASE_ADDR + (s << S_ADDR_WIDTH)
+    through
+BASE_ADDR + ((s + 1) << S_ADDR_WIDTH) - 1
+```
 
-## Bus Parameters
+The default `BASE_ADDR=0` and `S_ADDR_WIDTH=16` produce 64-KiB contiguous windows. A request outside all configured windows is accepted by the interconnect and completed locally:
 
-| Parameter | Value | Notes |
-|-----------|-------|-------|
-| `ADDR_W` | 32 bits | Standard 32-bit address space. Parameterized — can be widened to 64-bit. |
-| `DATA_W` | 32 bits | 32-bit data bus. AXI4 allows 32–1024 bits in powers of 2. Parameterized. |
-| `ID_W` | 8 bits | Supports up to 256 outstanding transaction IDs per channel. Parameterized. |
+- Write: consume the number of W beats declared by AWLEN, then return `BRESP=DECERR` and the original AWID.
+- Read: generate `ARLEN+1` zero-data beats with `RRESP=DECERR`, the original ARID, and correctly placed RLAST.
 
----
+This avoids deadlock on decode misses.
 
-## Reset
+## 4. AXI RAM Behavior
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Reset polarity | Active-low (`ARESETn`) | Required by AXI4 spec |
-| Reset style | Asynchronous assert, synchronous deassert | Standard practice for metastability safety |
+The RAM accepts one write address transaction and one read address transaction concurrently. Write data is accepted after AW; AXI permits this legal backpressure policy. Responses preserve their transaction IDs.
 
----
+### Burst address generation
 
-## Transaction Support
+- **FIXED:** every beat accesses the starting address.
+- **INCR:** each beat advances by `2^AxSIZE` bytes.
+- **WRAP:** increment within the aligned `(AxLEN+1) × 2^AxSIZE` boundary and wrap to its base.
 
-| Feature | Supported | Notes |
-|---------|-----------|-------|
-| Single transfers | ✅ | Burst length of 1 (AWLEN/ARLEN = 0) |
-| Burst transfers | 🔲 | INCR, FIXED, WRAP burst types |
-| Out-of-order responses | 🔲 | Enabled by ID signals; requires ID tracking in subordinate |
-| Exclusive access | 🔲 | AWLOCK/ARLOCK signals present; logic not yet implemented |
-| Narrow transfers | 🔲 | AWSIZE/ARSIZE < data bus width |
-| Unaligned transfers | 🔲 | Start address not aligned to beat size |
+The target validates:
 
----
+- bus-width transfer size
+- beat-aligned start address
+- legal burst encoding
+- FIXED maximum of 16 beats
+- WRAP lengths of 2, 4, 8, or 16 beats
+- no INCR crossing of a 4-KiB boundary
+- complete transaction range inside implemented memory
+- WLAST position matching AWLEN
 
-## Subordinate Memory Model
+Request validation failures return `SLVERR`. Decode failures remain the interconnect’s responsibility and return `DECERR`.
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Storage type | Register array (`logic [DATA_W-1:0] regs[DEPTH]`) | Simple, synthesizable, easy to verify |
-| Memory size | Parameterized via `MEM_BYTES` (default 256 B) | Kept small for synthesis; increase for simulation |
-| Write strobes | Supported (`WSTRB`) | Byte-lane granularity writes already implemented |
-| Address decode | Word-indexed (`addr[IDX_W+1:2]`) | Drops byte offset bits, indexes into word array |
+### Memory inference
 
----
+Storage writes are isolated in a reset-free clocked process. This allows synthesis to retain the array as a memory (the default configuration reports one 32-Kbit memory) rather than converting it to resettable flip-flops. Simulation initializes the behavioral array to zero for deterministic regression; production SRAM contents after reset are intentionally unspecified.
 
-## Testbench
+## 5. Reset
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| TB style | OOP SystemVerilog (driver, monitor, scoreboard) | Inherited from AXI-Lite project; extensible for AXI4 |
-| Simulator | Verilator | Open-source, fast, good C++ integration |
-| TB language | SystemVerilog + C++ (Verilator harness) | Matches toolchain choice |
+Control and channel-valid state uses active-low asynchronous assertion (`ARESETn`). The environment must deassert reset synchronously to ACLK. Reset cancels in-flight control state and clears generated response valid signals; it does not reset inferred hardware memory contents.
 
----
+## 6. Parameterization
 
-## Naming Conventions
+| Parameter | Default | Meaning |
+|---|---:|---|
+| `NM` | 3 in `axi_top` | Manager port count |
+| `NS` | 3 in `axi_top` | Subordinate port count |
+| `ADDR_W` | 32 | Address width |
+| `DATA_W` | 32 | Data width; power of two, 32–1024 |
+| `ID_W` | 4 | Transaction ID width |
+| `S_ADDR_WIDTH` | 16 | Log2 bytes per subordinate decode window |
+| `MEM_BYTES` | 4096 | Implemented bytes per RAM target; power of two |
 
-| Item | Convention | Example |
-|------|-----------|---------|
-| Module names | `snake_case` | `axi_mgr`, `axi_sub` |
-| Signal names | `UPPER_CASE` | `AWVALID`, `RDATA` |
-| Parameters | `UPPER_CASE` | `ADDR_W`, `DATA_W` |
-| Local variables | `snake_case` | `saved_awaddr`, `aw_sent` |
-| State enums | `S_` prefix | `S_IDLE`, `S_W_SEND` |
-| File names | `snake_case.sv` | `axi_mgr.sv`, `axi_if.sv` |
+Elaboration assertions reject invalid interface and memory configurations.
 
----
+## 7. Ordering and Throughput
 
-## Open Decisions
+- At most one active write transaction globally.
+- At most one active read transaction globally.
+- Reads and writes may overlap.
+- Bursts are never interleaved.
+- Responses preserve request order because there is only one active transaction in each direction.
+- Peak accepted data throughput after arbitration is one W beat and one R beat per cycle when endpoints remain ready.
 
-Items not yet decided — update this section as choices are made.
+## 8. Deliberate Limitations
 
-| Item | Options | Notes |
-|------|---------|-------|
-| Max outstanding transactions | 1, 4, 16, ... | Currently 1 (single-outstanding). Needs decision before implementing ID tracking. |
-| Burst types to support | INCR only vs INCR+WRAP+FIXED | INCR is mandatory; WRAP needed for cache-line ops |
-| Interconnect | None (point-to-point) vs simple crossbar | Depends on whether multiple managers/subordinates are needed |
-| Formal verification | None vs SVA assertions | SVA properties for handshake rules would strengthen correctness |
+The design does not support multiple outstanding transactions, out-of-order completion, narrow/unaligned transfers, exclusive accesses, cache attributes, QoS, protection-domain enforcement, CDC, ECC, or AXI5 extensions. These are explicitly excluded rather than silently ignored.
+
+A higher-throughput successor would use per-subordinate arbiters, skid buffers, ID widening/remapping, outstanding scoreboards, and independent response arbitration.

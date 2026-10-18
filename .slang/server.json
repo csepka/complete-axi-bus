@@ -1,17 +1,11 @@
 {
   "compilations": [
     {
-      "name": "default",
-      "files": [
-        "src/axi_lite_sub.sv",
-        "tb/axi_lite_sub_tb.sv"
-      ],
-      "includePaths": [
-        "src",
-        "tb"
-      ],
+      "name": "axi4-rtl",
+      "files": [],
+      "includePaths": ["src", "tb"],
       "defines": [],
-      "topLevel": "axi_lite_sub_tb",
+      "topLevel": "axi_top",
       "fileLists": ["files.f"]
     }
   ]

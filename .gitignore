@@ -1,14 +1,23 @@
-sim.out
-slpp_all
+# macOS
+.DS_Store
 
-synthesis/subordinate/runs/*
-!synthesis/subordinate/runs/RUN_2026-03-01_16-58-32/
-synthesis/subordinate/runs/RUN_2026-03-01_16-58-32/**
-
-synthesis/top/runs/*
-!synthesis/top/runs/RUN_2026-03-03_15-20-40/
-synthesis/top/runs/RUN_2026-03-03_15-20-40/**
-
+# Verilator / Yosys
+build/
 obj_dir/
+*.d
+*.o
 
-sim/*.vcd
+# Simulation artifacts
+sim/
+*.out
+*.vcd
+*.fst
+coverage.dat
+
+# EDA tool output
+slpp_all/
+synthesis/**/runs/
+
+# Editors
+*.swp
+*~

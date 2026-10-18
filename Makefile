@@ -1,110 +1,62 @@
-
-# Definitions for files
-
-# OOP top defintions
-OOP_TB_DIR ?= tb/oop_tb
-OOP_TB_TOP ?= axi_lite_tb_top_oop
-OOP_TB_OUT ?= sim_oop
-OOP_TB_SRCS ?= $(OOP_TB_DIR)/cmd_if.sv \
-			   $(OOP_TB_DIR)/axi_lite_monitor.sv \
-			   $(OOP_TB_DIR)/axi_lite_scoreboard.sv \
-			   $(OOP_TB_DIR)/axi_lite_driver.sv \
-			   $(OOP_TB_DIR)/axi_lite_env.sv \
-			   $(OOP_TB_DIR)/axi_lite_test.sv \
-			   $(OOP_TB_DIR)/axi_lite_top_tb_oop.sv
-
-# First top definitions
-TOP       ?= tb_top
-OUT       ?= sim_top
-TB_OUTDIR ?= sim
-
-TB        ?= tb/$(TOP).sv
-VCD       ?= $(TB_OUTDIR)/$(TOP).vcd
-SRCS      ?= src/axi_if.sv src/axi_top.sv src/axi_lite_bus.sv src/axi_lite_mgr.sv src/axi_lite_sub.sv
-
-# Standalone testbench flow (Icarus Verilog)
-IVERILOG  ?= iverilog
-VVP       ?= vvp
-SUB_TB_OUT ?= $(TB_OUTDIR)/axi_lite_sub_tb.out
-MGR_TB_OUT ?= $(TB_OUTDIR)/axi_lite_mgr_tb.out
-
-# Verilator
 VERILATOR ?= verilator
-VFLAGS    ?= -sv --timing -Wno-fatal --binary --top-module $(TOP)
-
-# mac specific
-SDKROOT   ?= $(shell xcrun --sdk macosx --show-sdk-path 2>/dev/null)
-CFLAGS    ?= -isysroot $(SDKROOT) -isystem $(SDKROOT)/usr/include/c++/v1
-
-# Tracing
+YOSYS     ?= yosys
+BUILD_DIR ?= build
 TRACE     ?= 0
+RUN_ARGS  ?=
+
+RTL := src/axi_if.sv \
+       src/axi_ram.sv \
+       src/axi_sub.sv \
+       src/axi_mgr.sv \
+       src/axi_interconnect.sv \
+       src/axi_top.sv
+
+CHECKER := src/axi_protocol_checker.sv
+VFLAGS  := -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET
+
 ifeq ($(TRACE),1)
-	VFLAGS += --trace --trace-depth 10 --trace-max-array 2048
+VFLAGS += --trace --trace-depth 6
 endif
 
-# targets
-.PHONY: all build run waves tb-sub-build tb-sub-run tb-mgr-build tb-mgr-run tb-run-all oop-run oop-waves clean help
+.PHONY: all lint test test-top test-burst synth ci waves clean help
 
-all: build
+all: ci
 
-build:
-	mkdir -p $(TB_OUTDIR)
-	$(VERILATOR) $(VFLAGS) \
-	  $(TB) $(SRCS) \
-	  -CFLAGS "$(CFLAGS)" \
-	  -o $(OUT)
+lint:
+	$(VERILATOR) $(VFLAGS) --lint-only --top-module axi_top $(RTL)
 
-run: build
-	./obj_dir/$(OUT)
+test: test-top test-burst
+
+test-top:
+	mkdir -p $(BUILD_DIR)/obj_top
+	$(VERILATOR) $(VFLAGS) --binary --Mdir $(BUILD_DIR)/obj_top \
+		--top-module tb_top tb/tb_top.sv $(RTL) -o Vtb_top
+	$(BUILD_DIR)/obj_top/Vtb_top
+
+test-burst:
+	mkdir -p $(BUILD_DIR)/obj_burst
+	$(VERILATOR) $(VFLAGS) --binary --Mdir $(BUILD_DIR)/obj_burst \
+		--top-module tb_axi_burst tb/tb_axi_burst.sv $(CHECKER) $(RTL) tb/axi_stall_sub.sv -o Vtb_axi_burst
+	$(BUILD_DIR)/obj_burst/Vtb_axi_burst $(RUN_ARGS)
+
+synth:
+	mkdir -p $(BUILD_DIR)
+	$(YOSYS) -q -l $(BUILD_DIR)/yosys.log -p \
+		'read_verilog -sv -DSYNTHESIS src/axi_ram.sv; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat'
+	@grep -E '^[[:space:]]+[0-9]+ (wires|wire bits|memories|memory bits|cells)' $(BUILD_DIR)/yosys.log
+
+ci: lint test synth
 
 waves:
-	$(MAKE) TRACE=1 run
-
-tb-sub-build:
-	mkdir -p $(TB_OUTDIR)
-	$(IVERILOG) -g2012 -o $(SUB_TB_OUT) src/legacy/axi_lite_sub.sv tb/axi_lite_sub_tb.sv
-
-tb-sub-run: tb-sub-build
-	$(VVP) $(SUB_TB_OUT)
-
-tb-mgr-build:
-	mkdir -p $(TB_OUTDIR)
-	$(IVERILOG) -g2012 -o $(MGR_TB_OUT) src/legacy/axi_lite_mgr.sv src/legacy/axi_lite_sub.sv tb/axi_lite_mgr_tb.sv
-
-tb-mgr-run: tb-mgr-build
-	$(VVP) $(MGR_TB_OUT)
-
-tb-run-all: tb-sub-run tb-mgr-run
-
-oop-run:
-	mkdir -p $(TB_OUTDIR)
-	$(VERILATOR) -sv --timing --trace -Wno-fatal --binary --top-module $(OOP_TB_TOP) \
-		$(OOP_TB_SRCS) $(SRCS) \
-		-CFLAGS "$(CFLAGS)" \
-		-o $(OOP_TB_OUT)
-	./obj_dir/$(OOP_TB_OUT)
-
-oop-waves:
-	mkdir -p $(TB_OUTDIR)
-	$(VERILATOR) -sv --timing --trace -Wno-fatal --binary --top-module $(OOP_TB_TOP) \
-		$(OOP_TB_SRCS) $(SRCS) \
-		-CFLAGS "$(CFLAGS)" \
-		-o $(OOP_TB_OUT)
-	./obj_dir/$(OOP_TB_OUT)
-
-
+	$(MAKE) TRACE=1 RUN_ARGS=+trace test-burst
 
 clean:
-	rm -rf obj_dir $(OUT) *.vcd $(TB_OUTDIR)/*.vcd $(SUB_TB_OUT) $(MGR_TB_OUT)
+	rm -rf $(BUILD_DIR)
 
 help:
-	@echo "make build        # build simulator"
-	@echo "make run          # build  + run"
-	@echo "make waves        # build + run with --trace"
-	@echo "make tb-sub-run   # build + run axi_lite_sub_tb (iverilog)"
-	@echo "make tb-mgr-run   # build + run axi_lite_mgr_tb (iverilog)"
-	@echo "make tb-run-all   # run both standalone testbenches"
-	@echo "make clean        # remove build products"
-	@echo ""
-	@echo "Knobs:"
-	@echo "  TOP=tb_top OUT=sim_top TRACE=1"
+	@echo "make lint        Lint the complete integrated RTL"
+	@echo "make test        Run command-level and burst regressions"
+	@echo "make synth       Synthesize the flat AXI RAM core with Yosys"
+	@echo "make ci          Run the full local CI flow"
+	@echo "make waves       Run burst regression with VCD tracing"
+	@echo "make clean       Remove generated build products"
