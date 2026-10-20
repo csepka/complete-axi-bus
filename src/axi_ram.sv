@@ -71,6 +71,7 @@ module axi_ram #(
     logic [2:0]        read_size;
     logic [1:0]        read_burst;
     logic              read_error;
+    logic [ADDR_W-1:0] read_next_addr;
 
     integer i;
     integer b;
@@ -153,6 +154,7 @@ module axi_ram #(
     assign WREADY  = write_active && !BVALID;
     assign ARREADY = !read_active && !RVALID;
     assign write_mem_fire = WVALID && WREADY && !write_error;
+    assign read_next_addr = next_address(read_addr, read_size, read_burst, read_len);
 
     always_comb begin
         write_merged = mem[word_index(write_addr)];
@@ -249,10 +251,8 @@ module axi_ram #(
                     RLAST       <= 1'b0;
                 end else begin
                     read_beats_left <= read_beats_left - 9'd1;
-                    read_addr <= next_address(read_addr, read_size, read_burst, read_len);
-                    RDATA <= read_error ? '0
-                             : mem[word_index(next_address(read_addr, read_size,
-                                                           read_burst, read_len))];
+                    read_addr <= read_next_addr;
+                    RDATA <= read_error ? '0 : mem[word_index(read_next_addr)];
                     RLAST <= (read_beats_left == 9'd2);
                 end
             end
