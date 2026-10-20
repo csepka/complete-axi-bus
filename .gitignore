@@ -18,6 +18,10 @@ coverage.dat
 slpp_all/
 synthesis/**/runs/
 
+# Python
+__pycache__/
+*.py[cod]
+
 # Editors
 *.swp
 *~

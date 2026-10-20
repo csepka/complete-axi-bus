@@ -1,5 +1,6 @@
 VERILATOR ?= verilator
 YOSYS     ?= yosys
+PYTHON    ?= python3
 BUILD_DIR ?= build
 TRACE     ?= 0
 RUN_ARGS  ?=
@@ -18,7 +19,7 @@ ifeq ($(TRACE),1)
 VFLAGS += --trace --trace-depth 6
 endif
 
-.PHONY: all lint test test-top test-burst synth ci waves clean help
+.PHONY: all lint test test-top test-burst synth ci waves waveform clean help
 
 all: ci
 
@@ -50,6 +51,9 @@ ci: lint test synth
 waves:
 	$(MAKE) TRACE=1 RUN_ARGS=+trace test-burst
 
+waveform: waves
+	$(PYTHON) tools/vcd_to_svg.py $(BUILD_DIR)/tb_axi_burst.vcd docs/images/axi-aw-backpressure.svg
+
 clean:
 	rm -rf $(BUILD_DIR)
 
@@ -59,4 +63,5 @@ help:
 	@echo "make synth       Synthesize the flat AXI RAM core with Yosys"
 	@echo "make ci          Run the full local CI flow"
 	@echo "make waves       Run burst regression with VCD tracing"
+	@echo "make waveform    Regenerate the documented SVG from the VCD"
 	@echo "make clean       Remove generated build products"

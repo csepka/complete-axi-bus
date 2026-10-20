@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="688" viewBox="0 0 1200 688" role="img" aria-labelledby="title desc">
+<title id="title">AXI4 write-address backpressure trace</title>
+<desc id="desc">Waveform generated from the passing burst regression. Manager 1 retains the write-address grant while subordinate 0 is stalled and manager 0 begins requesting.</desc>
+<rect width="100%" height="100%" fill="#0d1117"/>
+<style>text{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.title{fill:#f0f6fc;font-size:20px;font-weight:700}.sub{fill:#8b949e;font-size:12px}.label{fill:#c9d1d9;font-size:13px}.tick{fill:#8b949e;font-size:11px}.digital{fill:none;stroke:#58a6ff;stroke-width:2}.bus{fill:#238636;fill-opacity:.18;stroke:#3fb950;stroke-width:1.5}.busText{fill:#aff5b4;font-size:11px}.grid{stroke:#30363d;stroke-width:1}.event{stroke:#d29922;stroke-width:1.5;stroke-dasharray:5 4}.eventText{fill:#e3b341;font-size:11px}</style>
+<text class="title" x="24" y="30">AW arbitration under subordinate backpressure</text>
+<text class="sub" x="24" y="52">Generated from build/tb_axi_burst.vcd by tools/vcd_to_svg.py</text>
+<line class="grid" x1="215.36" y1="91" x2="215.36" y2="637"/>
+<text class="tick" x="215.36" y="83" text-anchor="middle">60 ns</text>
+<line class="grid" x1="286.07" y1="91" x2="286.07" y2="637"/>
+<text class="tick" x="286.07" y="83" text-anchor="middle">70 ns</text>
+<line class="grid" x1="356.79" y1="91" x2="356.79" y2="637"/>
+<text class="tick" x="356.79" y="83" text-anchor="middle">80 ns</text>
+<line class="grid" x1="427.50" y1="91" x2="427.50" y2="637"/>
+<text class="tick" x="427.50" y="83" text-anchor="middle">90 ns</text>
+<line class="grid" x1="498.21" y1="91" x2="498.21" y2="637"/>
+<text class="tick" x="498.21" y="83" text-anchor="middle">100 ns</text>
+<line class="grid" x1="568.93" y1="91" x2="568.93" y2="637"/>
+<text class="tick" x="568.93" y="83" text-anchor="middle">110 ns</text>
+<line class="grid" x1="639.64" y1="91" x2="639.64" y2="637"/>
+<text class="tick" x="639.64" y="83" text-anchor="middle">120 ns</text>
+<line class="grid" x1="710.36" y1="91" x2="710.36" y2="637"/>
+<text class="tick" x="710.36" y="83" text-anchor="middle">130 ns</text>
+<line class="grid" x1="781.07" y1="91" x2="781.07" y2="637"/>
+<text class="tick" x="781.07" y="83" text-anchor="middle">140 ns</text>
+<line class="grid" x1="851.79" y1="91" x2="851.79" y2="637"/>
+<text class="tick" x="851.79" y="83" text-anchor="middle">150 ns</text>
+<line class="grid" x1="922.50" y1="91" x2="922.50" y2="637"/>
+<text class="tick" x="922.50" y="83" text-anchor="middle">160 ns</text>
+<line class="grid" x1="993.21" y1="91" x2="993.21" y2="637"/>
+<text class="tick" x="993.21" y="83" text-anchor="middle">170 ns</text>
+<line class="grid" x1="1063.93" y1="91" x2="1063.93" y2="637"/>
+<text class="tick" x="1063.93" y="83" text-anchor="middle">180 ns</text>
+<line class="grid" x1="1134.64" y1="91" x2="1134.64" y2="637"/>
+<text class="tick" x="1134.64" y="83" text-anchor="middle">190 ns</text>
+<line class="event" x1="1028.57" y1="93" x2="1028.57" y2="637"/>
+<text class="eventText" x="1023.57" y="65" text-anchor="end">M1 AW handshake (175 ns)</text>
+<text class="label" x="168" y="134.00" text-anchor="end">ACLK</text>
+<line class="grid" x1="180" y1="151" x2="1170" y2="151"/>
+<polyline class="digital" points="180.00,119.00 215.36,119.00 215.36,139.00 250.71,139.00 250.71,119.00 286.07,119.00 286.07,139.00 321.43,139.00 321.43,119.00 356.79,119.00 356.79,139.00 392.14,139.00 392.14,119.00 427.50,119.00 427.50,139.00 462.86,139.00 462.86,119.00 498.21,119.00 498.21,139.00 533.57,139.00 533.57,119.00 568.93,119.00 568.93,139.00 604.29,139.00 604.29,119.00 639.64,119.00 639.64,139.00 675.00,139.00 675.00,119.00 710.36,119.00 710.36,139.00 745.71,139.00 745.71,119.00 781.07,119.00 781.07,139.00 816.43,139.00 816.43,119.00 851.79,119.00 851.79,139.00 887.14,139.00 887.14,119.00 922.50,119.00 922.50,139.00 957.86,139.00 957.86,119.00 993.21,119.00 993.21,139.00 1028.57,139.00 1028.57,119.00 1063.93,119.00 1063.93,139.00 1099.29,139.00 1099.29,119.00 1134.64,119.00 1134.64,139.00 1170.00,139.00 1170.00,119.00 1170.00,119.00"/>
+<text class="label" x="168" y="182.00" text-anchor="end">AW stall</text>
+<line class="grid" x1="180" y1="199" x2="1170" y2="199"/>
+<polyline class="digital" points="180.00,187.00 250.71,187.00 250.71,167.00 993.21,167.00 993.21,187.00 1170.00,187.00"/>
+<text class="label" x="168" y="230.00" text-anchor="end">M1 AWVALID</text>
+<line class="grid" x1="180" y1="247" x2="1170" y2="247"/>
+<polyline class="digital" points="180.00,235.00 286.07,235.00 286.07,215.00 1063.93,215.00 1063.93,235.00 1170.00,235.00"/>
+<text class="label" x="168" y="278.00" text-anchor="end">M1 AWREADY</text>
+<line class="grid" x1="180" y1="295" x2="1170" y2="295"/>
+<polyline class="digital" points="180.00,283.00 993.21,283.00 993.21,263.00 1028.57,263.00 1028.57,283.00 1170.00,283.00"/>
+<text class="label" x="168" y="326.00" text-anchor="end">M1 AWADDR</text>
+<line class="grid" x1="180" y1="343" x2="1170" y2="343"/>
+<rect class="bus" x="180.00" y="310.00" width="990.00" height="22" rx="3"/>
+<text class="busText" x="675.00" y="325.00" text-anchor="middle">0x00000000</text>
+<text class="label" x="168" y="374.00" text-anchor="end">M0 AWVALID</text>
+<line class="grid" x1="180" y1="391" x2="1170" y2="391"/>
+<polyline class="digital" points="180.00,379.00 498.21,379.00 498.21,359.00 1170.00,359.00"/>
+<text class="label" x="168" y="422.00" text-anchor="end">M0 AWREADY</text>
+<line class="grid" x1="180" y1="439" x2="1170" y2="439"/>
+<polyline class="digital" points="180.00,427.00 1170.00,427.00"/>
+<text class="label" x="168" y="470.00" text-anchor="end">S0 AWVALID</text>
+<line class="grid" x1="180" y1="487" x2="1170" y2="487"/>
+<polyline class="digital" points="180.00,475.00 286.07,475.00 286.07,455.00 1028.57,455.00 1028.57,475.00 1170.00,475.00"/>
+<text class="label" x="168" y="518.00" text-anchor="end">S0 AWREADY</text>
+<line class="grid" x1="180" y1="535" x2="1170" y2="535"/>
+<polyline class="digital" points="180.00,503.00 250.71,503.00 250.71,523.00 993.21,523.00 993.21,503.00 1028.57,503.00 1028.57,523.00 1170.00,523.00"/>
+<text class="label" x="168" y="566.00" text-anchor="end">Grant held</text>
+<line class="grid" x1="180" y1="583" x2="1170" y2="583"/>
+<polyline class="digital" points="180.00,571.00 321.43,571.00 321.43,551.00 1028.57,551.00 1028.57,571.00 1170.00,571.00"/>
+<text class="label" x="168" y="614.00" text-anchor="end">Held owner</text>
+<line class="grid" x1="180" y1="631" x2="1170" y2="631"/>
+<polyline class="digital" points="180.00,619.00 321.43,619.00 321.43,599.00 1170.00,599.00"/>
+<text class="sub" x="180" y="670">Window: 55–195 ns · source regression: BURST REGRESSION PASS (1,346 checks)</text>
+</svg>

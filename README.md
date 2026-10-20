@@ -1,24 +1,12 @@
 # Parameterized AXI4 Burst Interconnect
 
+[![RTL CI](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/csepka/complete-axi-bus)](LICENSE) [![SystemVerilog](https://img.shields.io/badge/SystemVerilog-RTL-6B4FBB)](src)
+
 A synthesizable SystemVerilog AXI4 interconnect demonstrating subsystem RTL design, AMBA integration, protocol validation, and hardware build automation. The design connects a configurable number of managers and memory-mapped subordinates through independent read and write datapaths.
 
 > **Scope:** This is an intentionally bounded AXI4 implementation, not AXI5 and not a claim of full AMBA conformance. The supported and unsupported features are explicit below.
 
-## Highlights
-
-- Parameterized manager count, subordinate count, address width, data width, ID width, and memory size
-- Five AXI channels with independent read/write progress
-- Transaction-level round-robin arbitration with ownership retained through completion
-- FIXED, INCR, and WRAP bursts with 1–256 beats where legal
-- End-to-end transaction ID propagation (`AWID/BID`, `ARID/RID`)
-- Byte-enable writes through `WSTRB`
-- Backpressure-safe VALID/payload behavior
-- Deterministic `DECERR` generation for unmapped address windows
-- `SLVERR` generation for malformed, unaligned, 4-KiB-crossing, or out-of-range requests
-- Synthesizable RAM core structured for memory inference
-- Reusable SVA protocol checker for all five channels
-- 1,764 self-checking regression checks plus assertion monitoring
-- Verilator lint/simulation and Yosys synthesis in one command and in GitHub Actions
+**Proof points:** five AXI channels · FIXED, INCR, and WRAP bursts · legal bursts up to 256 beats · 1,764 self-checking regression checks plus SVA monitoring
 
 ## Architecture
 
@@ -43,6 +31,12 @@ flowchart LR
 The read and write arbiters operate independently. Each allows one globally active transaction, locks its manager/subordinate route for the complete burst, and advances a round-robin pointer after address acceptance. This provides concurrency between one read and one write while keeping ordering behavior easy to reason about and verify.
 
 See [the architecture document](docs/architecture.md) for microarchitecture, reset behavior, address decode, and design tradeoffs.
+
+## Regression Waveform
+
+![AXI4 write-address arbitration under subordinate backpressure](docs/images/axi-aw-backpressure.svg)
+
+*Generated from the passing burst regression: manager 1 retains the AW grant while subordinate 0 applies backpressure, even after manager 0 requests service. The address transfers when the stall is released.* Regenerate it with `make waveform`; the raw VCD remains ignored.
 
 ## Supported Feature Matrix
 
@@ -99,6 +93,7 @@ make lint        # warning-clean integrated RTL lint
 make test        # both self-checking simulations
 make synth       # Yosys elaboration and coarse synthesis of axi_ram
 make waves       # burst regression with VCD tracing
+make waveform    # regenerate the documented SVG from the traced regression
 make clean       # remove generated build products
 ```
 
@@ -132,6 +127,9 @@ docs/
   architecture.md          microarchitecture and design decisions
   signals.md               implemented signal contract
   verification.md          verification strategy and coverage map
+  images/axi-aw-backpressure.svg  regression-derived waveform evidence
+tools/
+  vcd_to_svg.py            dependency-free waveform renderer
 synthesis/
   subordinate/config.json  OpenLane-ready RAM-core configuration
 .github/workflows/ci.yml    automated lint, simulation, and synthesis
