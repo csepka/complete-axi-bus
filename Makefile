@@ -49,7 +49,8 @@ test-params:
 synth:
 	mkdir -p $(BUILD_DIR)
 	$(YOSYS) -q -l $(BUILD_DIR)/yosys.log -p \
-		'read_verilog -sv -DSYNTHESIS src/axi_ram.sv; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat'
+		'read_verilog -sv -DSYNTHESIS src/axi_ram.sv; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat' || \
+		{ cat $(BUILD_DIR)/yosys.log; exit 1; }
 	@grep -E '^[[:space:]]+[0-9]+ (wires|wire bits|memories|memory bits|cells)' $(BUILD_DIR)/yosys.log
 
 ci: lint test synth
