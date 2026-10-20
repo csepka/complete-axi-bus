@@ -84,13 +84,14 @@ Expected regression summaries:
 ```text
 TOP REGRESSION PASS: 418 checks
 BURST REGRESSION PASS: 1346 checks
+PARAMETER REGRESSION PASS: burst endpoint carry preserved
 ```
 
 Useful individual targets:
 
 ```bash
 make lint        # warning-clean integrated RTL lint
-make test        # both self-checking simulations
+make test        # all self-checking simulations
 make synth       # Yosys elaboration and coarse synthesis of axi_ram
 make waves       # burst regression with VCD tracing
 make waveform    # regenerate the documented SVG from the traced regression
@@ -122,6 +123,7 @@ src/
 tb/
   tb_top.sv                randomized command-level integration regression
   tb_axi_burst.sv          direct protocol-level burst/concurrency regression
+  tb_axi_ram_params.sv     burst-extent parameter boundary regression
   axi_stall_sub.sv         test-only channel-backpressure shim
 docs/
   architecture.md          microarchitecture and design decisions
@@ -137,7 +139,7 @@ synthesis/
 
 ## Verification Evidence
 
-`tb_top` checks endpoint routing, manager selection, memory isolation, error propagation, and 250 deterministic randomized command transactions. `tb_axi_burst` directly drives the AXI interfaces to check all supported burst types, IDs, byte strobes, backpressure, simultaneous managers, independent reads/writes, and negative/error cases. Both testbenches use bounded timeouts and self-checking scoreboards.
+`tb_top` checks endpoint routing, manager selection, memory isolation, error propagation, and 250 deterministic randomized command transactions. `tb_axi_burst` directly drives the AXI interfaces to check all supported burst types, IDs, byte strobes, backpressure, simultaneous managers, independent reads/writes, and negative/error cases. `tb_axi_ram_params` checks that endpoint arithmetic retains carry for a 256-beat burst at the minimum address width. The main testbenches use bounded timeouts and self-checking scoreboards.
 
 The protocol checker asserts that AW, W, B, AR, and R payloads remain stable whenever `VALID=1` and `READY=0`, and checks that last-beat indicators are known whenever their channels are valid.
 

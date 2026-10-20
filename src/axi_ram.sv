@@ -44,6 +44,10 @@ module axi_ram #(
 );
     localparam int BYTES    = DATA_W / 8;
     localparam int BEAT_LG2 = $clog2(BYTES);
+    localparam int CALC_W   = ADDR_W + 9;
+    localparam logic [2:0] BEAT_SIZE = 3'($clog2(BYTES));
+    localparam logic [CALC_W-1:0] MEM_BYTES_CALC = CALC_W'(MEM_BYTES);
+    localparam logic [CALC_W-1:0] FOUR_KIB_CALC = CALC_W'(4096);
     localparam int DEPTH    = MEM_BYTES / BYTES;
     localparam int IDX_W    = (DEPTH > 1) ? $clog2(DEPTH) : 1;
 
@@ -88,19 +92,21 @@ module axi_ram #(
         input logic [2:0]        size,
         input logic [1:0]        burst
     );
-        integer beat_bytes;
-        integer total_bytes;
-        integer local_start;
-        integer wrap_base;
+        logic [CALC_W-1:0] beat_bytes;
+        logic [CALC_W-1:0] total_bytes;
+        logic [CALC_W-1:0] local_start;
+        logic [CALC_W-1:0] wrap_base;
         begin
-            beat_bytes = 1 << size;
-            total_bytes = (int'(len) + 1) << size;
-            local_start = int'(addr[ADDR_OFFSET_W-1:0]);
-            wrap_base = local_start & ~(total_bytes - 1);
+            beat_bytes = {{(CALC_W-1){1'b0}}, 1'b1} << size;
+            total_bytes = {{(CALC_W-8){1'b0}}, len};
+            total_bytes = (total_bytes + 1'b1) << size;
+            local_start = {{(CALC_W-ADDR_OFFSET_W){1'b0}},
+                           addr[ADDR_OFFSET_W-1:0]};
+            wrap_base = local_start & ~(total_bytes - 1'b1);
             request_error = 1'b0;
-            if (int'(size) != BEAT_LG2)
+            if ((BEAT_LG2 > 7) || (size != BEAT_SIZE))
                 request_error = 1'b1;
-            if ((addr & (beat_bytes - 1)) != 0)
+            if ((local_start & (beat_bytes - 1'b1)) != '0)
                 request_error = 1'b1;
             if (burst == 2'b11)
                 request_error = 1'b1;
@@ -109,13 +115,17 @@ module axi_ram #(
             if (burst == BURST_WRAP && !((len == 8'd1) || (len == 8'd3) ||
                                          (len == 8'd7) || (len == 8'd15)))
                 request_error = 1'b1;
-            if (local_start >= MEM_BYTES)
+            if (local_start >= MEM_BYTES_CALC)
                 request_error = 1'b1;
-            if (burst == BURST_INCR && (local_start + total_bytes) > MEM_BYTES)
+            if (burst == BURST_INCR &&
+                (local_start + total_bytes) > MEM_BYTES_CALC)
                 request_error = 1'b1;
-            if (burst == BURST_WRAP && (wrap_base + total_bytes) > MEM_BYTES)
+            if (burst == BURST_WRAP &&
+                (wrap_base + total_bytes) > MEM_BYTES_CALC)
                 request_error = 1'b1;
-            if (burst == BURST_INCR && (int'(addr[11:0]) + total_bytes) > 4096)
+            if (burst == BURST_INCR &&
+                ({{(CALC_W-12){1'b0}}, addr[11:0]} + total_bytes) >
+                FOUR_KIB_CALC)
                 request_error = 1'b1;
         end
     endfunction
@@ -136,7 +146,8 @@ module axi_ram #(
             end else begin
                 incremented = addr + ({{(ADDR_W-1){1'b0}}, 1'b1} << size);
                 if (burst == BURST_WRAP) begin
-                    wrap_bytes = ADDR_W'(int'(len) + 1) << size;
+                    wrap_bytes = {{(ADDR_W-8){1'b0}}, len};
+                    wrap_bytes = (wrap_bytes + 1'b1) << size;
                     wrap_mask = wrap_bytes - 1'b1;
                     wrap_base = addr & ~wrap_mask;
                     if (incremented >= (wrap_base + wrap_bytes))
@@ -263,6 +274,9 @@ module axi_ram #(
     initial begin
         for (i = 0; i < DEPTH; i = i + 1)
             mem[i] = '0;
+        assert (DATA_W >= 8 && (DATA_W % 8) == 0 &&
+                (BYTES & (BYTES-1)) == 0 && BEAT_LG2 <= 7)
+            else $fatal(1, "DATA_W must encode a power-of-two byte width in AxSIZE");
         assert (ADDR_OFFSET_W >= 12 && ADDR_OFFSET_W <= ADDR_W)
             else $fatal(1, "ADDR_OFFSET_W must be between 12 and ADDR_W");
         assert (MEM_BYTES <= (1 << ADDR_OFFSET_W))
