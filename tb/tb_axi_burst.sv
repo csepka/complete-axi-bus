@@ -251,7 +251,8 @@ module tb_axi_burst;
         input logic [DATA_W-1:0] seed,
         input logic [DATA_W/8-1:0] strobe,
         input logic [1:0] expected_response,
-        input logic malformed_last = 1'b0
+        input logic malformed_last = 1'b0,
+        input logic [2:0] transfer_size = 3'($clog2(DATA_W/8))
     );
         logic [ADDR_W-1:0] address;
         logic [DATA_W-1:0] beat_data;
@@ -263,7 +264,7 @@ module tb_axi_burst;
         d_awaddr[manager] = start_address;
         d_awid[manager] = id;
         d_awlen[manager] = length;
-        d_awsize[manager] = 3'($clog2(DATA_W/8));
+        d_awsize[manager] = transfer_size;
         d_awburst[manager] = burst;
         d_awprot[manager] = 3'b000;
         d_awvalid[manager] = 1'b1;
@@ -506,6 +507,27 @@ module tb_axi_burst;
         axi_read (1, 32'h0000_0000, 8'd0, BURST_INCR, 4'h6, RESP_SLVERR, 3'd1);
         axi_write(0, 32'h0000_00C0, 8'd1, BURST_INCR, 4'h7,
                   32'hBAD0_0000, 4'hF, RESP_SLVERR, 1'b1);
+
+        // Complete legal WRAP-length coverage and FIXED length boundary.
+        axi_write(0,32'h0000_0104,8'd1,BURST_WRAP,4'h1,32'h8100_0000,4'hF,RESP_OKAY);
+        axi_read(1,32'h0000_0104,8'd1,BURST_WRAP,4'h1,RESP_OKAY);
+        axi_write(0,32'h0000_011C,8'd7,BURST_WRAP,4'h2,32'h8200_0000,4'hF,RESP_OKAY);
+        axi_read(1,32'h0000_011C,8'd7,BURST_WRAP,4'h2,RESP_OKAY);
+        axi_write(0,32'h0000_013C,8'd15,BURST_WRAP,4'h3,32'h8300_0000,4'hF,RESP_OKAY);
+        axi_read(1,32'h0000_013C,8'd15,BURST_WRAP,4'h3,RESP_OKAY);
+        axi_write(0,32'h0000_0180,8'd15,BURST_FIXED,4'h4,32'h8400_0000,4'hF,RESP_OKAY);
+        axi_read(1,32'h0000_0180,8'd15,BURST_FIXED,4'h4,RESP_OKAY);
+        axi_write(0,32'h0000_0180,8'd16,BURST_FIXED,4'h5,32'hBAD0_0000,4'hF,RESP_SLVERR);
+        axi_read(1,32'h0000_0180,8'd16,BURST_FIXED,4'h5,RESP_SLVERR);
+        // Last aligned beat is legal; crossing a 4-KiB page is rejected.
+        axi_write(0,32'h0000_0FFC,8'd0,BURST_INCR,4'h6,32'h8600_0000,4'hF,RESP_OKAY);
+        axi_read(1,32'h0000_0FFC,8'd0,BURST_INCR,4'h6,RESP_OKAY);
+        axi_write(0,32'h0000_0FFC,8'd1,BURST_INCR,4'h7,32'hBAD0_0000,4'hF,RESP_SLVERR);
+        axi_read(1,32'h0000_0FFC,8'd1,BURST_INCR,4'h7,RESP_SLVERR);
+        axi_write(0,32'h0000_0190,8'd0,BURST_INCR,4'h8,32'hBAD0_0000,4'hF,RESP_SLVERR,0,3'd1);
+        axi_write(0,32'h0000_0192,8'd0,BURST_INCR,4'h9,32'hBAD0_0000,4'hF,RESP_SLVERR);
+        axi_write(0,32'h0000_0190,8'd0,2'b11,4'hA,32'hBAD0_0000,4'hF,RESP_SLVERR);
+        axi_read(1,32'h0000_0190,8'd0,2'b11,4'hA,RESP_SLVERR);
 
         if (failures != 0)
             $fatal(1, "BURST REGRESSION FAILED: %0d of %0d checks", failures, checks);

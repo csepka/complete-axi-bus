@@ -1,0 +1,20 @@
+{
+  "arguments": {
+    "queue": true,
+    "fabric": false,
+    "nm": 2,
+    "ns": 2,
+    "addr_width": 32,
+    "width": 64,
+    "depth": 3,
+    "label": "queued"
+  },
+  "command": "read_verilog -sv -DSYNTHESIS build/axi_request_queue_flat.sv; chparam -set ADDR_W 32 -set DATA_W 64 -set MAX_OUTSTANDING 3 axi_request_queue_flat; hierarchy -check -top axi_request_queue_flat; synth -top axi_request_queue_flat -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/queued-queue-d3-w64-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/queued-queue-d3-w64-netlist.v",
+  "summary": {
+    "generic_cells": 93,
+    "register_bits": 24,
+    "memory_bits": 312
+  },
+  "yosys": "Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)",
+  "exit_code": 0
+}

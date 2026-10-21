@@ -1,0 +1,36 @@
+{
+  "revision": "f9179373c65cef2a17053db31c6d6e58164f8404",
+  "dirty": true,
+  "rtl_from_git": false,
+  "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101",
+  "source_sha256": {
+    "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
+    "src/axi_interconnect.sv": "1a000710cf6734964b192bb113ac79c03bad1e46463d8984be6b54251acb2382",
+    "src/axi_mgr.sv": "4771e89cd13c4019c6b2298b8527c09d25a0416266ae8acc66a83c7e94c35d6a",
+    "src/axi_ram.sv": "2f433887cf3a027dfb9962c5c8537873936ed53f3725609871906101a00d415d",
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "src/axi_sub.sv": "d4746267122615524e1ba0405d5f5ddc4a8a2948777ed42dc450957e2d560133",
+    "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
+    "src/axi_top.sv": "385f50c91414b8f76e5ce70dbb094c9222d73d614f2ce8b67c2e1cf8372dbf81",
+    "tb/tb_axi_benchmark.sv": "31cbaa867883eea928e2bf15a5711fa6f5fbe72c47595ed4eb88e3eb69835f51",
+    "src/axi_protocol_checker.sv": "fbf8f3cc987ab7a2cb13d797771092f113104dcb08658c79fb8bef2c513b1387"
+  },
+  "arguments": {
+    "revision": null,
+    "label": "stress-97",
+    "config": [
+      "4x4x128"
+    ],
+    "depth": 4,
+    "addr_width": 32,
+    "clock_mhz": 100,
+    "transactions": 128,
+    "seed": 97,
+    "burst": 8,
+    "read_percent": null,
+    "mode": 2,
+    "distribution": 2,
+    "ready": 47,
+    "arrival": 39
+  }
+}

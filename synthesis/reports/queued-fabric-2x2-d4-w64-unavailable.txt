@@ -1,0 +1,1 @@
+ERROR: Can't load module `./slang': dlopen(/opt/homebrew/bin/../share/yosys/plugins/slang.so, 0x0005): tried: '/opt/homebrew/bin/../share/yosys/plugins/slang.so' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/bin/../share/yosys/plugins/slang.so' (no such file), '/opt/homebrew/bin/../share/yosys/plugins/slang.so' (no such file)

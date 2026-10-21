@@ -1,14 +1,14 @@
 TOTAL,1185,4,4,4,4
-MANAGER,0,512,512,600,1119,32,609,1771,46,64,3554,87
-MANAGER,1,512,512,601,1100,32,600,1763,49,64,3528,89
-MANAGER,2,512,512,581,1119,32,603,1746,49,64,3510,96
-MANAGER,3,512,512,585,1074,32,570,1719,55,64,3442,104
+MANAGER,0,512,512,600,1119,32,609,1771,46,64,3554,87,0,0
+MANAGER,1,512,512,601,1100,32,600,1763,49,64,3528,89,0,0
+MANAGER,2,512,512,581,1119,32,603,1746,49,64,3510,96,0,0
+MANAGER,3,512,512,585,1074,32,570,1719,55,64,3442,104,0,0
 TARGET,0,512,512
 TARGET,1,512,512
 TARGET,2,512,512
 TARGET,3,512,512
 BENCHMARK PASS
-- tb/tb_axi_benchmark.sv:245: Verilog $finish
+- tb/tb_axi_benchmark.sv:269: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 12us; walltime 0.002 s; speed 6.166 ms/s
-- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+- Verilator: $finish at 12us; walltime 0.003 s; speed 3.863 ms/s
+- Verilator: cpu 0.003 s on 1 threads; alloced 2 MB

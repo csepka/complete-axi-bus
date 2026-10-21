@@ -1,0 +1,63 @@
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --lint-only --top-module axi_top src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.351 MB sources in 9 modules, into 1.257 MB in 7 C++ files needing 0.000 MB
+- Verilator: Walltime 0.149 s (elab=0.016, cvt=0.110, bld=0.000); cpu 0.140 s on 1 threads; alloced 30.625 MB
+mkdir -p build/obj_top
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary --Mdir build/obj_top \
+		--top-module tb_top tb/tb_top.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv -o Vtb_top
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.028 s (elab=0.000, cvt=0.000, bld=0.027); cpu 0.002 s on 1 threads; alloced 3.141 MB
+build/obj_top/Vtb_top
+TOP REGRESSION PASS: 418 checks
+- tb/tb_top.sv:197: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 18us; walltime 0.002 s; speed 12.112 ms/s
+- Verilator: cpu 0.001 s on 1 threads; alloced 2 MB
+mkdir -p build/obj_burst
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary --Mdir build/obj_burst \
+		--top-module tb_axi_burst tb/tb_axi_burst.sv src/axi_protocol_checker.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv tb/axi_stall_sub.sv -o Vtb_axi_burst
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.031 s (elab=0.000, cvt=0.000, bld=0.030); cpu 0.002 s on 1 threads; alloced 3.109 MB
+build/obj_burst/Vtb_axi_burst 
+BURST REGRESSION PASS: 1618 checks
+- tb/tb_axi_burst.sv:535: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 21us; walltime 0.002 s; speed 9.894 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+mkdir -p build/obj_params
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary --Mdir build/obj_params \
+		--top-module tb_axi_ram_params tb/tb_axi_ram_params.sv src/axi_ram.sv -o Vtb_axi_ram_params
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.019 s (elab=0.000, cvt=0.000, bld=0.018); cpu 0.001 s on 1 threads; alloced 3.062 MB
+build/obj_params/Vtb_axi_ram_params
+PARAMETER REGRESSION PASS: burst endpoint carry preserved
+- tb/tb_axi_ram_params.sv:99: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 5us; walltime 0.000 s; speed 32.930 ms/s
+- Verilator: cpu 0.000 s on 1 threads; alloced 2 MB
+mkdir -p build/obj_outstanding_d4
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary -j 4 --Mdir build/obj_outstanding_d4 \
+		--output-split 0 +define+AXI_INTERNAL_CHECKS --top-module tb_axi_outstanding -GDEPTH=4 tb/tb_axi_outstanding.sv src/axi_protocol_checker.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv tb/axi_stall_sub.sv -o Vtb_axi_outstanding
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.022 s (elab=0.000, cvt=0.000, bld=0.021); cpu 0.001 s on 4 threads; alloced 3.156 MB
+build/obj_outstanding_d4/Vtb_axi_outstanding
+OUTSTANDING REGRESSION PASS: depth=4 checks=525 peak W/R=3/3
+- tb/tb_axi_outstanding.sv:324: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 11us; walltime 0.002 s; speed 6.767 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+mkdir -p build
+yosys -q -l build/yosys.log -p \
+		'read_verilog -sv -DSYNTHESIS src/axi_ram.sv; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:fine; check -assert; stat' || \
+		{ cat build/yosys.log; exit 1; }
+      370 wires
+     5177 wire bits
+      275 cells

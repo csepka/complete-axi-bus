@@ -33,3 +33,6 @@ jobs:
 
       - name: Run lint, regressions, and synthesis
         run: make ci
+
+      - name: Verify queue depths, synthesized queue, and parameter matrix
+        run: make extended

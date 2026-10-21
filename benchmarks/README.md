@@ -49,7 +49,8 @@ burst regression separately exercises subordinate AW/W/AR stalls.
   Offered latency also includes waiting from first VALID assertion. Queuing changes
   admission time, so compare both, not accepted latency alone.
 - AW/AR waits: source-visible VALID&&!READY cycles (includes admission/arbitration);
-  these are not a pure internal arbiter service-time measurement.
+  these are not a pure internal arbiter service-time measurement. Separate
+  `arb_aw_wait` / `arb_ar_wait` count VALID&&!READY at dispatch into target arbitration.
 - W stalls and R stalls: corresponding VALID&&!READY cycles summed over managers.
 - Peak outstanding: accepted addresses minus completed responses; queued work is
   included and must not be confused with concurrently executing target requests.

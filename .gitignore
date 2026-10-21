@@ -25,3 +25,7 @@ __pycache__/
 # Editors
 *.swp
 *~
+
+# Reproducible synthesis netlists (reports/scripts are tracked)
+synthesis/reports/*-netlist.json
+synthesis/reports/*-netlist.v

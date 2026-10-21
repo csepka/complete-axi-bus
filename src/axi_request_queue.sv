@@ -2,7 +2,7 @@
 // acceptance, so MAX_OUTSTANDING includes the executing head. Strict head issue
 // preserves all IDs' ordering without ID widening or response reorder storage.
 module axi_request_queue #(
-    parameter int ADDR_W=32, DATA_W=32, ID_W=4, MAX_OUTSTANDING=1
+    parameter int ADDR_W=32, DATA_W=32, ID_W=4, MAX_OUTSTANDING=4
 )(
     input logic ACLK, ARESETn,
     axi_if.sub up,
@@ -10,15 +10,10 @@ module axi_request_queue #(
 );
     localparam int PTR_W=(MAX_OUTSTANDING>1)?$clog2(MAX_OUTSTANDING):1;
     localparam int COUNT_W=$clog2(MAX_OUTSTANDING+1);
-    typedef struct packed {
-        logic [ADDR_W-1:0] addr;
-        logic [2:0] prot;
-        logic [ID_W-1:0] id;
-        logic [7:0] len;
-        logic [2:0] size;
-        logic [1:0] burst;
-    } request_t;
-    request_t wq[MAX_OUTSTANDING], rq[MAX_OUTSTANDING];
+    localparam int REQUEST_W=ADDR_W+3+ID_W+8+3+2;
+    // Packed payload, explicit unpacked bounds: portable to stock Yosys after
+    // interface port expansion (its frontend misinterprets struct arrays).
+    logic [REQUEST_W-1:0] wq[0:MAX_OUTSTANDING-1],rq[0:MAX_OUTSTANDING-1];
     logic [PTR_W-1:0] wh,wt,rh,rt;
     logic [COUNT_W-1:0] wc,rc;
     logic w_sent,r_sent,w_done;
@@ -28,7 +23,7 @@ module axi_request_queue #(
     wire wpop=up.BVALID && up.BREADY;
     wire rpop=up.RVALID && up.RREADY && up.RLAST;
     function automatic logic [PTR_W-1:0] advance(input logic [PTR_W-1:0] ptr);
-        return ptr==PTR_W'(MAX_OUTSTANDING-1) ? '0 : ptr+1'b1;
+        advance = ptr==PTR_W'(MAX_OUTSTANDING-1) ? '0 : ptr+1'b1;
     endfunction
     assign up.AWREADY=ARESETn && wc<COUNT_W'(MAX_OUTSTANDING);
     assign up.ARREADY=ARESETn && rc<COUNT_W'(MAX_OUTSTANDING);

@@ -3,7 +3,7 @@
 module axi_interconnect #(
     parameter int NM=2, NS=2, ADDR_W=32, DATA_W=32, ID_W=4,
     parameter int S_ADDR_WIDTH=16,
-    parameter int MAX_OUTSTANDING=1,
+    parameter int MAX_OUTSTANDING=4,
     parameter logic [ADDR_W-1:0] BASE_ADDR='0
 )(
     input logic ACLK, ARESETn,
@@ -19,6 +19,9 @@ module axi_interconnect #(
         return (addr>=BASE_ADDR && slot<ADDR_W'(NS)) ? SEL_W'(slot) : SEL_W'(NS);
     endfunction
     for(genvar m=0;m<NM;m++) begin : g_manager
+`ifdef AXI_INTERNAL_CHECKS
+        axi_protocol_checker dispatch_checker(.ACLK,.ARESETn,.axi(dispatch[m]));
+`endif
         wire [SEL_W-1:0] wselect=decode(dispatch[m].AWADDR);
         wire [SEL_W-1:0] rselect=decode(dispatch[m].ARADDR);
         axi_request_queue #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W),
@@ -54,6 +57,9 @@ module axi_interconnect #(
             .S_ADDR_WIDTH(S_ADDR_WIDTH),.BASE_ADDR(t<NS ? BASE_ADDR+(ADDR_W'(t)<<S_ADDR_WIDTH) : BASE_ADDR),
             .FORCE_DECERR(t==NS)) u_arbiter(.ACLK,.ARESETn,.m_axi(links),.s_axi(endpoint));
         for(genvar m=0;m<NM;m++) begin : g_link
+`ifdef AXI_INTERNAL_CHECKS
+            axi_protocol_checker link_checker(.ACLK,.ARESETn,.axi(links[m]));
+`endif
             assign links[m].AWVALID=dispatch[m].AWVALID && g_manager[m].wselect==SEL_W'(t);
             assign g_manager[m].mux_AWREADY[t]=links[m].AWREADY;
             assign links[m].AWADDR=dispatch[m].AWADDR;

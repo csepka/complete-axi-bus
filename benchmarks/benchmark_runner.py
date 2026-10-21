@@ -2,6 +2,7 @@
 """Compile and measure real AXI simulations; no third-party Python dependencies."""
 import argparse
 import csv
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -33,6 +34,7 @@ def main():
     p.add_argument('--transactions', type=int, default=32)
     p.add_argument('--seed', type=int, default=7)
     p.add_argument('--burst', type=int, help='Run only a custom scenario')
+    p.add_argument('--read-percent', type=int, help='custom mixed case read transaction percentage (0..100)')
     p.add_argument('--mode', type=int, choices=[0, 1, 2], default=2, help='0 read, 1 write, 2 both')
     p.add_argument('--distribution', type=int, choices=[0, 1, 2], default=0, help='0 independent, 1 hotspot, 2 rotating')
     p.add_argument('--ready', type=int, default=100)
@@ -40,6 +42,8 @@ def main():
     a = p.parse_args()
     if not a.label.replace('-', '').replace('_', '').isalnum():
         p.error('label must contain only letters, digits, hyphens, underscores')
+    if a.seed<0 or (a.read_percent is not None and (not a.burst or a.mode!=2 or not 0<=a.read_percent<=100)):
+        p.error('nonnegative seed required; read-percent requires custom burst, mode 2, and 0..100')
     if a.clock_mhz <= 0:
         p.error('clock must be positive')
     results = ROOT/'benchmarks/results'/a.label
@@ -68,7 +72,7 @@ def main():
                    '--top-module', 'tb_axi_benchmark', f'-GNM={nm}', f'-GNS={ns}',
                    f'-GDATA_W={width}', f'-GADDR_W={a.addr_width}', f'-GDEPTH={a.depth}']
         if queued:
-            command += ['+define+QUEUED_FABRIC']
+            command += ['+define+QUEUED_FABRIC', '+define+AXI_INTERNAL_CHECKS']
         command += ['tb/tb_axi_benchmark.sv', 'src/axi_protocol_checker.sv'] + [str(rtl_dir/f) for f in names]
         run(command, results/f'{cfg}-build.log')
         max_burst = min(256, 4096//(width//8))
@@ -85,9 +89,14 @@ def main():
         if a.burst:
             cases = [('custom', a.burst, a.mode, a.distribution, a.ready, a.arrival, nm)]
         for case, burst, mode, dist, ready, arrival, managers in cases:
+            reads=a.transactions if mode!=1 else 0
+            writes=a.transactions if mode!=0 else 0
+            if a.read_percent is not None:
+                reads=2*a.transactions*a.read_percent//100;writes=2*a.transactions-reads
+            mix_args=[] if a.read_percent is None else [f'+read_percent={a.read_percent}']
             output = run([str(build/'Vtb_axi_benchmark'), f'+burst={burst}', f'+mode={mode}',
                           f'+distribution={dist}', f'+ready={ready}', f'+arrival={arrival}',
-                          f'+managers={managers}', f'+transactions={a.transactions}', f'+seed={a.seed}'],
+                          f'+managers={managers}', f'+transactions={a.transactions}', f'+seed={a.seed}', *mix_args],
                          results/f'{cfg}-{case}.log')
             if 'BENCHMARK PASS' not in output:
                 raise RuntimeError('Missing benchmark completion')
@@ -97,11 +106,17 @@ def main():
             ts = [list(map(int, l.split(',')[1:])) for l in output.splitlines() if l.startswith('TARGET,')]
             wbeats, rbeats = sum(m[1] for m in ms), sum(m[2] for m in ms)
             count = sum(m[9] for m in ms)
+            assert sum(t[1] for t in ts)==wbeats and sum(t[2] for t in ts)==rbeats, 'Manager/target beat conservation'
+            assert wbeats==writes*burst*managers and rbeats==reads*burst*managers, 'Missing/extra data beats'
+            if queued and dist==0 and ready==100 and arrival==100 and ns>=managers:
+                assert peak_w==(managers if writes else 0) and peak_r==(managers if reads else 0), 'Independent-target concurrency regression'
+            if queued:
+                assert peak_ow<=managers*a.depth and peak_or<=managers*a.depth, 'Outstanding bound exceeded'
             gbps = (wbeats+rbeats)*(width//8)/cycles*a.clock_mhz/1000
             row = dict(label=a.label, config=cfg, case=case, depth=a.depth if queued else 1,
                        burst=burst, mode=mode, distribution=dist, ready_percent=ready,
                        arrival_percent=arrival, seed=a.seed, transactions=a.transactions,
-                       active_managers=managers, cycles=cycles, write_beats=wbeats, read_beats=rbeats,
+                       active_managers=managers, reads_per_manager=reads, writes_per_manager=writes, cycles=cycles, write_beats=wbeats, read_beats=rbeats,
                        useful_bytes=(wbeats+rbeats)*(width//8), bus_bytes=(wbeats+rbeats)*(width//8),
                        write_GBs=wbeats*(width//8)/cycles*a.clock_mhz/1000,
                        read_GBs=rbeats*(width//8)/cycles*a.clock_mhz/1000,
@@ -115,6 +130,7 @@ def main():
                        avg_offered_latency=sum(m[10] for m in ms)/count,
                        max_offered_latency=max(m[11] for m in ms),
                        aw_wait=sum(m[3] for m in ms), ar_wait=sum(m[4] for m in ms),
+                       arb_aw_wait=sum(m[12] for m in ms), arb_ar_wait=sum(m[13] for m in ms),
                        w_stalls=sum(m[5] for m in ms), r_stalls=sum(m[6] for m in ms),
                        peak_w_beats_per_cycle=peak_w, peak_r_beats_per_cycle=peak_r,
                        peak_outstanding_w=peak_ow, peak_outstanding_r=peak_or)
@@ -126,9 +142,11 @@ def main():
             print(f'{a.label} {cfg} {case}: {cycles} cycles, {gbps:.4f} GB/s (assumed clock)', flush=True)
     for name, data in [('summary.csv', rows), ('ports.csv', ports)]:
         with (results/name).open('w', newline='') as f:
-            writer=csv.DictWriter(f, fieldnames=list(data[0]));writer.writeheader();writer.writerows(data)
+            writer=csv.DictWriter(f, fieldnames=list(data[0]), lineterminator="\n");writer.writeheader();writer.writerows(data)
     (results/'metadata.json').write_text(json.dumps(dict(revision=revision, dirty=bool(run(['git','status','--porcelain'])),
         rtl_from_git=bool(a.revision), verilator=run(['verilator','--version']).strip(),
+        source_sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
+                       for f in [*(rtl_dir/n for n in names),ROOT/'tb/tb_axi_benchmark.sv',ROOT/'src/axi_protocol_checker.sv']},
         arguments=vars(a)), indent=2)+'\n')
     md = '# Measured simulation results\n\nClock assumption: '+str(a.clock_mhz)+' MHz; no STA/Fmax claim.\n\n'
     md += '| Config | Scenario | Cycles | GB/s | Gb/s | Avg / max accepted latency | Peak W / R beats per cycle |\n|---|---|---:|---:|---:|---:|---:|\n'

@@ -1,0 +1,1451 @@
+
+-- Running command `read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set DATA_W 128 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/corrected-ram-w128-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/corrected-ram-w128-netlist.v' --
+
+1. Executing Verilog-2005 frontend: src/axi_ram.sv
+Parsing SystemVerilog input from `src/axi_ram.sv' to AST representation.
+Generating RTLIL representation for module `\axi_ram'.
+Successfully finished Verilog frontend.
+Parameter \DATA_W = 128
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_ram'.
+Parameter \DATA_W = 128
+Generating RTLIL representation for module `$paramod\axi_ram\DATA_W=32'00000000000000000000000010000000'.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+3.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 16 switch rules as full_case in process $proc$src/axi_ram.sv:170$495 in module axi_ram.
+Marked 1 switch rules as full_case in process $proc$src/axi_ram.sv:178$500 in module axi_ram.
+Marked 16 switch rules as full_case in process $proc$src/axi_ram.sv:183$512 in module axi_ram.
+Marked 31 switch rules as full_case in process $proc$src/axi_ram.sv:228$656 in module axi_ram.
+Marked 3 switch rules as full_case in process $proc$src/axi_ram.sv:168$910 in module axi_ram.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 83 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \ARESETn in `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+Found async reset \ARESETn in `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~67 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+     1/16: $16\write_merged[127:120]
+     2/16: $15\write_merged[119:112]
+     3/16: $14\write_merged[111:104]
+     4/16: $13\write_merged[103:96]
+     5/16: $12\write_merged[95:88]
+     6/16: $11\write_merged[87:80]
+     7/16: $10\write_merged[79:72]
+     8/16: $9\write_merged[71:64]
+     9/16: $8\write_merged[63:56]
+    10/16: $7\write_merged[55:48]
+    11/16: $6\write_merged[47:40]
+    12/16: $5\write_merged[39:32]
+    13/16: $4\write_merged[31:24]
+    14/16: $3\write_merged[23:16]
+    15/16: $2\write_merged[15:8]
+    16/16: $1\write_merged[7:0]
+Creating decoders for process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+     1/5: $1$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$510
+     2/5: $1$memwr$\mem$src/axi_ram.sv:180$483_DATA[127:0]$509
+     3/5: $1$memwr$\mem$src/axi_ram.sv:180$483_ADDR[7:0]$508
+     4/5: $1\word_index$func$src/axi_ram.sv:180$474.$result[7:0]$506
+     5/5: $1\word_index$func$src/axi_ram.sv:180$474.addr[31:0]$507
+Creating decoders for process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+     1/75: $6\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$655
+     2/75: $5\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$644
+     3/75: $5\next_address$func$src/axi_ram.sv:222$476.wrap_base[31:0]$647
+     4/75: $5\next_address$func$src/axi_ram.sv:222$476.wrap_mask[31:0]$646
+     5/75: $5\next_address$func$src/axi_ram.sv:222$476.wrap_bytes[31:0]$645
+     6/75: $4\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$636
+     7/75: $4\next_address$func$src/axi_ram.sv:222$476.wrap_base[31:0]$640
+     8/75: $4\next_address$func$src/axi_ram.sv:222$476.wrap_mask[31:0]$639
+     9/75: $4\next_address$func$src/axi_ram.sv:222$476.wrap_bytes[31:0]$638
+    10/75: $4\next_address$func$src/axi_ram.sv:222$476.incremented[31:0]$637
+    11/75: $3\next_address$func$src/axi_ram.sv:222$476.wrap_base[31:0]$630
+    12/75: $3\next_address$func$src/axi_ram.sv:222$476.wrap_mask[31:0]$629
+    13/75: $3\next_address$func$src/axi_ram.sv:222$476.wrap_bytes[31:0]$628
+    14/75: $3\next_address$func$src/axi_ram.sv:222$476.incremented[31:0]$627
+    15/75: $3\next_address$func$src/axi_ram.sv:222$476.len[7:0]$626
+    16/75: $3\next_address$func$src/axi_ram.sv:222$476.burst[1:0]$625
+    17/75: $3\next_address$func$src/axi_ram.sv:222$476.size[2:0]$624
+    18/75: $3\next_address$func$src/axi_ram.sv:222$476.addr[31:0]$623
+    19/75: $3\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$622
+    20/75: $2\next_address$func$src/axi_ram.sv:222$476.wrap_base[31:0]$618
+    21/75: $2\next_address$func$src/axi_ram.sv:222$476.wrap_mask[31:0]$617
+    22/75: $2\next_address$func$src/axi_ram.sv:222$476.wrap_bytes[31:0]$616
+    23/75: $2\next_address$func$src/axi_ram.sv:222$476.incremented[31:0]$615
+    24/75: $2\next_address$func$src/axi_ram.sv:222$476.len[7:0]$614
+    25/75: $2\next_address$func$src/axi_ram.sv:222$476.burst[1:0]$613
+    26/75: $2\next_address$func$src/axi_ram.sv:222$476.size[2:0]$612
+    27/75: $2\next_address$func$src/axi_ram.sv:222$476.addr[31:0]$611
+    28/75: $2\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$610
+    29/75: $11\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$608
+    30/75: $10\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$603
+    31/75: $9\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$598
+    32/75: $8\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$593
+    33/75: $7\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$591
+    34/75: $6\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$580
+    35/75: $5\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$576
+    36/75: $4\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$574
+    37/75: $3\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$570
+    38/75: $2\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$552
+    39/75: $2\request_error$func$src/axi_ram.sv:208$475.wrap_base[40:0]$560
+    40/75: $2\request_error$func$src/axi_ram.sv:208$475.local_start[40:0]$559
+    41/75: $2\request_error$func$src/axi_ram.sv:208$475.total_bytes[40:0]$558
+    42/75: $2\request_error$func$src/axi_ram.sv:208$475.beat_bytes[40:0]$557
+    43/75: $2\request_error$func$src/axi_ram.sv:208$475.burst[1:0]$556
+    44/75: $2\request_error$func$src/axi_ram.sv:208$475.size[2:0]$555
+    45/75: $2\request_error$func$src/axi_ram.sv:208$475.len[7:0]$554
+    46/75: $2\request_error$func$src/axi_ram.sv:208$475.addr[31:0]$553
+    47/75: $1\next_address$func$src/axi_ram.sv:222$476.wrap_base[31:0]$549
+    48/75: $1\next_address$func$src/axi_ram.sv:222$476.wrap_mask[31:0]$548
+    49/75: $1\next_address$func$src/axi_ram.sv:222$476.wrap_bytes[31:0]$547
+    50/75: $1\next_address$func$src/axi_ram.sv:222$476.incremented[31:0]$546
+    51/75: $1\next_address$func$src/axi_ram.sv:222$476.len[7:0]$545
+    52/75: $1\next_address$func$src/axi_ram.sv:222$476.burst[1:0]$544
+    53/75: $1\next_address$func$src/axi_ram.sv:222$476.size[2:0]$543
+    54/75: $1\next_address$func$src/axi_ram.sv:222$476.addr[31:0]$542
+    55/75: $1\next_address$func$src/axi_ram.sv:222$476.$result[31:0]$541
+    56/75: $1\request_error$func$src/axi_ram.sv:208$475.wrap_base[40:0]$540
+    57/75: $1\request_error$func$src/axi_ram.sv:208$475.local_start[40:0]$539
+    58/75: $1\request_error$func$src/axi_ram.sv:208$475.total_bytes[40:0]$538
+    59/75: $1\request_error$func$src/axi_ram.sv:208$475.beat_bytes[40:0]$537
+    60/75: $1\request_error$func$src/axi_ram.sv:208$475.burst[1:0]$536
+    61/75: $1\request_error$func$src/axi_ram.sv:208$475.size[2:0]$535
+    62/75: $1\request_error$func$src/axi_ram.sv:208$475.len[7:0]$534
+    63/75: $1\request_error$func$src/axi_ram.sv:208$475.addr[31:0]$533
+    64/75: $1\request_error$func$src/axi_ram.sv:208$475.$result[0:0]$532
+    65/75: $0\write_error[0:0]
+    66/75: $0\write_burst[1:0]
+    67/75: $0\write_size[2:0]
+    68/75: $0\write_len[7:0]
+    69/75: $0\write_beats_left[8:0]
+    70/75: $0\write_id[3:0]
+    71/75: $0\write_addr[31:0]
+    72/75: $0\write_active[0:0]
+    73/75: $0\BID[3:0]
+    74/75: $0\BRESP[1:0]
+    75/75: $0\BVALID[0:0]
+Creating decoders for process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+     1/105: $4\word_index$func$src/axi_ram.sv:266$481.addr[31:0]$904
+     2/105: $4\word_index$func$src/axi_ram.sv:266$481.$result[7:0]$903
+     3/105: $3\word_index$func$src/axi_ram.sv:266$481.addr[31:0]$901
+     4/105: $3\word_index$func$src/axi_ram.sv:266$481.$result[7:0]$900
+     5/105: $11\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$896
+     6/105: $10\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$891
+     7/105: $9\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$886
+     8/105: $8\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$881
+     9/105: $7\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$879
+    10/105: $6\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$868
+    11/105: $5\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$864
+    12/105: $4\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$862
+    13/105: $3\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$858
+    14/105: $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846
+    15/105: $10\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$841
+    16/105: $9\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$836
+    17/105: $8\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$831
+    18/105: $7\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$829
+    19/105: $6\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$818
+    20/105: $5\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$814
+    21/105: $4\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$812
+    22/105: $3\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$808
+    23/105: $11\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$799
+    24/105: $10\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$794
+    25/105: $9\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$789
+    26/105: $8\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$784
+    27/105: $7\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$782
+    28/105: $6\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$771
+    29/105: $5\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$767
+    30/105: $4\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$765
+    31/105: $3\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$761
+    32/105: $2\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$741
+    33/105: $2\request_error$func$src/axi_ram.sv:254$480.wrap_base[40:0]$749
+    34/105: $2\request_error$func$src/axi_ram.sv:254$480.local_start[40:0]$748
+    35/105: $2\request_error$func$src/axi_ram.sv:254$480.total_bytes[40:0]$747
+    36/105: $2\request_error$func$src/axi_ram.sv:254$480.beat_bytes[40:0]$746
+    37/105: $2\request_error$func$src/axi_ram.sv:254$480.burst[1:0]$745
+    38/105: $2\request_error$func$src/axi_ram.sv:254$480.size[2:0]$744
+    39/105: $2\request_error$func$src/axi_ram.sv:254$480.len[7:0]$743
+    40/105: $2\request_error$func$src/axi_ram.sv:254$480.addr[31:0]$742
+    41/105: $2\word_index$func$src/axi_ram.sv:253$479.$result[7:0]$739
+    42/105: $2\word_index$func$src/axi_ram.sv:253$479.addr[31:0]$740
+    43/105: $2\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$730
+    44/105: $2\request_error$func$src/axi_ram.sv:252$478.wrap_base[40:0]$738
+    45/105: $2\request_error$func$src/axi_ram.sv:252$478.local_start[40:0]$737
+    46/105: $2\request_error$func$src/axi_ram.sv:252$478.total_bytes[40:0]$736
+    47/105: $2\request_error$func$src/axi_ram.sv:252$478.beat_bytes[40:0]$735
+    48/105: $2\request_error$func$src/axi_ram.sv:252$478.burst[1:0]$734
+    49/105: $2\request_error$func$src/axi_ram.sv:252$478.size[2:0]$733
+    50/105: $2\request_error$func$src/axi_ram.sv:252$478.len[7:0]$732
+    51/105: $2\request_error$func$src/axi_ram.sv:252$478.addr[31:0]$731
+    52/105: $2\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$721
+    53/105: $2\request_error$func$src/axi_ram.sv:250$477.wrap_base[40:0]$729
+    54/105: $2\request_error$func$src/axi_ram.sv:250$477.local_start[40:0]$728
+    55/105: $2\request_error$func$src/axi_ram.sv:250$477.total_bytes[40:0]$727
+    56/105: $2\request_error$func$src/axi_ram.sv:250$477.beat_bytes[40:0]$726
+    57/105: $2\request_error$func$src/axi_ram.sv:250$477.burst[1:0]$725
+    58/105: $2\request_error$func$src/axi_ram.sv:250$477.size[2:0]$724
+    59/105: $2\request_error$func$src/axi_ram.sv:250$477.len[7:0]$723
+    60/105: $2\request_error$func$src/axi_ram.sv:250$477.addr[31:0]$722
+    61/105: $2\word_index$func$src/axi_ram.sv:266$481.addr[31:0]$751
+    62/105: $2\word_index$func$src/axi_ram.sv:266$481.$result[7:0]$750
+    63/105: $1\word_index$func$src/axi_ram.sv:266$481.addr[31:0]$719
+    64/105: $1\word_index$func$src/axi_ram.sv:266$481.$result[7:0]$718
+    65/105: $1\request_error$func$src/axi_ram.sv:254$480.wrap_base[40:0]$717
+    66/105: $1\request_error$func$src/axi_ram.sv:254$480.local_start[40:0]$716
+    67/105: $1\request_error$func$src/axi_ram.sv:254$480.total_bytes[40:0]$715
+    68/105: $1\request_error$func$src/axi_ram.sv:254$480.beat_bytes[40:0]$714
+    69/105: $1\request_error$func$src/axi_ram.sv:254$480.burst[1:0]$713
+    70/105: $1\request_error$func$src/axi_ram.sv:254$480.size[2:0]$712
+    71/105: $1\request_error$func$src/axi_ram.sv:254$480.len[7:0]$711
+    72/105: $1\request_error$func$src/axi_ram.sv:254$480.addr[31:0]$710
+    73/105: $1\request_error$func$src/axi_ram.sv:254$480.$result[0:0]$709
+    74/105: $1\word_index$func$src/axi_ram.sv:253$479.addr[31:0]$708
+    75/105: $1\word_index$func$src/axi_ram.sv:253$479.$result[7:0]$707
+    76/105: $1\request_error$func$src/axi_ram.sv:252$478.wrap_base[40:0]$706
+    77/105: $1\request_error$func$src/axi_ram.sv:252$478.local_start[40:0]$705
+    78/105: $1\request_error$func$src/axi_ram.sv:252$478.total_bytes[40:0]$704
+    79/105: $1\request_error$func$src/axi_ram.sv:252$478.beat_bytes[40:0]$703
+    80/105: $1\request_error$func$src/axi_ram.sv:252$478.burst[1:0]$702
+    81/105: $1\request_error$func$src/axi_ram.sv:252$478.size[2:0]$701
+    82/105: $1\request_error$func$src/axi_ram.sv:252$478.len[7:0]$700
+    83/105: $1\request_error$func$src/axi_ram.sv:252$478.addr[31:0]$699
+    84/105: $1\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$698
+    85/105: $1\request_error$func$src/axi_ram.sv:250$477.wrap_base[40:0]$697
+    86/105: $1\request_error$func$src/axi_ram.sv:250$477.local_start[40:0]$696
+    87/105: $1\request_error$func$src/axi_ram.sv:250$477.total_bytes[40:0]$695
+    88/105: $1\request_error$func$src/axi_ram.sv:250$477.beat_bytes[40:0]$694
+    89/105: $1\request_error$func$src/axi_ram.sv:250$477.burst[1:0]$693
+    90/105: $1\request_error$func$src/axi_ram.sv:250$477.size[2:0]$692
+    91/105: $1\request_error$func$src/axi_ram.sv:250$477.len[7:0]$691
+    92/105: $1\request_error$func$src/axi_ram.sv:250$477.addr[31:0]$690
+    93/105: $1\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$689
+    94/105: $0\read_error[0:0]
+    95/105: $0\read_burst[1:0]
+    96/105: $0\read_size[2:0]
+    97/105: $0\read_len[7:0]
+    98/105: $0\read_beats_left[8:0]
+    99/105: $0\read_addr[31:0]
+   100/105: $0\read_active[0:0]
+   101/105: $0\RLAST[0:0]
+   102/105: $0\RID[3:0]
+   103/105: $0\RRESP[1:0]
+   104/105: $0\RDATA[127:0]
+   105/105: $0\RVALID[0:0]
+Creating decoders for process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+     1/10: $3\next_address$func$src/axi_ram.sv:168$482.$result[31:0]$941
+     2/10: $2\next_address$func$src/axi_ram.sv:168$482.$result[31:0]$930
+     3/10: $2\next_address$func$src/axi_ram.sv:168$482.wrap_base[31:0]$933
+     4/10: $2\next_address$func$src/axi_ram.sv:168$482.wrap_mask[31:0]$932
+     5/10: $2\next_address$func$src/axi_ram.sv:168$482.wrap_bytes[31:0]$931
+     6/10: $1\next_address$func$src/axi_ram.sv:168$482.$result[31:0]$922
+     7/10: $1\next_address$func$src/axi_ram.sv:168$482.wrap_base[31:0]$926
+     8/10: $1\next_address$func$src/axi_ram.sv:168$482.wrap_mask[31:0]$925
+     9/10: $1\next_address$func$src/axi_ram.sv:168$482.wrap_bytes[31:0]$924
+    10/10: $1\next_address$func$src/axi_ram.sv:168$482.incremented[31:0]$923
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\axi_ram.\b' from process `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+No latch inferred for signal `\axi_ram.\write_merged' from process `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+No latch inferred for signal `\axi_ram.\word_index$func$src/axi_ram.sv:171$473.$result' from process `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+No latch inferred for signal `\axi_ram.\word_index$func$src/axi_ram.sv:171$473.addr' from process `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$472.$result' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.$result' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.addr' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.size' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.burst' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.len' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.incremented' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.wrap_bytes' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.wrap_mask' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+No latch inferred for signal `\axi_ram.\next_address$func$src/axi_ram.sv:168$482.wrap_base' from process `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:180$474.$result' using process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+  created $dff cell `$procdff$1747' with positive edge clock.
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:180$474.addr' using process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+  created $dff cell `$procdff$1748' with positive edge clock.
+Creating register for signal `\axi_ram.$memwr$\mem$src/axi_ram.sv:180$483_ADDR' using process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+  created $dff cell `$procdff$1749' with positive edge clock.
+Creating register for signal `\axi_ram.$memwr$\mem$src/axi_ram.sv:180$483_DATA' using process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+  created $dff cell `$procdff$1750' with positive edge clock.
+Creating register for signal `\axi_ram.$memwr$\mem$src/axi_ram.sv:180$483_EN' using process `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+  created $dff cell `$procdff$1751' with positive edge clock.
+Creating register for signal `\axi_ram.\BVALID' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1756' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\BRESP' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1761' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\BID' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1766' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_active' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1771' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_addr' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1776' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_id' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1781' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_beats_left' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1786' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_len' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1791' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_size' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1796' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_burst' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1801' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\write_error' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1806' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.$result' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1811' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.addr' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1816' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.len' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1821' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.size' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1826' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.burst' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1831' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.beat_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1836' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.total_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1841' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.local_start' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1846' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:208$475.wrap_base' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1851' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.$result' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1856' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.addr' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1861' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.size' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1866' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.burst' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1871' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.len' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1876' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.incremented' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1881' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.wrap_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1886' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.wrap_mask' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1891' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\next_address$func$src/axi_ram.sv:222$476.wrap_base' using process `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+  created $adff cell `$procdff$1896' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\RVALID' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1901' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\RDATA' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1906' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\RRESP' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1911' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\RID' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1916' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\RLAST' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1921' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_active' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1926' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1931' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_beats_left' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1936' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_len' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1941' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_size' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1946' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_burst' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1951' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\read_error' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1956' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.$result' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1961' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1966' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.len' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1971' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.size' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1976' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.burst' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1981' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.beat_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1986' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.total_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1991' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.local_start' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$1996' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:250$477.wrap_base' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2001' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.$result' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2006' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2011' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.len' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2016' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.size' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2021' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.burst' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2026' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.beat_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2031' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.total_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2036' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.local_start' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2041' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:252$478.wrap_base' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2046' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:253$479.$result' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2051' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:253$479.addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2056' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.$result' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2061' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2066' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.len' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2071' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.size' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2076' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.burst' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2081' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.beat_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2086' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.total_bytes' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2091' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.local_start' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2096' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\request_error$func$src/axi_ram.sv:254$480.wrap_base' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2101' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:266$481.$result' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2106' with positive edge clock and positive level reset.
+Creating register for signal `\axi_ram.\word_index$func$src/axi_ram.sv:266$481.addr' using process `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+  created $adff cell `$procdff$2111' with positive edge clock and positive level reset.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 16 empty switches in `\axi_ram.$proc$src/axi_ram.sv:170$495'.
+Removing empty process `axi_ram.$proc$src/axi_ram.sv:170$495'.
+Found and cleaned up 1 empty switch in `\axi_ram.$proc$src/axi_ram.sv:178$500'.
+Removing empty process `axi_ram.$proc$src/axi_ram.sv:178$500'.
+Found and cleaned up 17 empty switches in `\axi_ram.$proc$src/axi_ram.sv:183$512'.
+Removing empty process `axi_ram.$proc$src/axi_ram.sv:183$512'.
+Found and cleaned up 30 empty switches in `\axi_ram.$proc$src/axi_ram.sv:228$656'.
+Removing empty process `axi_ram.$proc$src/axi_ram.sv:228$656'.
+Found and cleaned up 3 empty switches in `\axi_ram.$proc$src/axi_ram.sv:168$910'.
+Removing empty process `axi_ram.$proc$src/axi_ram.sv:168$910'.
+Cleaned up 67 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+<suppressed ~163 debug messages>
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 241 unused cells and 893 unused wires.
+<suppressed ~286 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module axi_ram...
+Found and reported 0 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+<suppressed ~243 debug messages>
+Removed a total of 81 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$1010.
+    dead port 1/2 on $mux $procmux$1013.
+    dead port 1/2 on $mux $procmux$1016.
+    dead port 2/2 on $mux $procmux$1018.
+    dead port 1/2 on $mux $procmux$1025.
+    dead port 1/2 on $mux $procmux$1028.
+    dead port 2/2 on $mux $procmux$1030.
+    dead port 1/2 on $mux $procmux$1073.
+    dead port 2/2 on $mux $procmux$1075.
+    dead port 2/2 on $mux $procmux$1198.
+    dead port 2/2 on $mux $procmux$1204.
+    dead port 2/2 on $mux $procmux$1210.
+    dead port 2/2 on $mux $procmux$1216.
+    dead port 2/2 on $mux $procmux$1222.
+    dead port 2/2 on $mux $procmux$1228.
+    dead port 2/2 on $mux $procmux$1234.
+    dead port 2/2 on $mux $procmux$1240.
+    dead port 2/2 on $mux $procmux$1246.
+    dead port 2/2 on $mux $procmux$1382.
+    dead port 2/2 on $mux $procmux$1388.
+    dead port 2/2 on $mux $procmux$1394.
+    dead port 2/2 on $mux $procmux$1400.
+    dead port 2/2 on $mux $procmux$1406.
+    dead port 2/2 on $mux $procmux$1412.
+    dead port 2/2 on $mux $procmux$1418.
+    dead port 2/2 on $mux $procmux$1424.
+    dead port 2/2 on $mux $procmux$1436.
+    dead port 2/2 on $mux $procmux$1442.
+    dead port 2/2 on $mux $procmux$1448.
+    dead port 2/2 on $mux $procmux$1454.
+    dead port 2/2 on $mux $procmux$1460.
+    dead port 2/2 on $mux $procmux$1466.
+    dead port 2/2 on $mux $procmux$1472.
+    dead port 2/2 on $mux $procmux$1478.
+    dead port 2/2 on $mux $procmux$1484.
+    dead port 2/2 on $mux $procmux$1490.
+    dead port 2/2 on $mux $procmux$1496.
+    dead port 2/2 on $mux $procmux$1502.
+    dead port 2/2 on $mux $procmux$1508.
+    dead port 2/2 on $mux $procmux$1514.
+    dead port 2/2 on $mux $procmux$1520.
+    dead port 2/2 on $mux $procmux$1526.
+    dead port 2/2 on $mux $procmux$1532.
+    dead port 2/2 on $mux $procmux$1703.
+    dead port 1/2 on $mux $procmux$1706.
+    dead port 1/2 on $mux $procmux$1712.
+Removed 46 multiplexer ports.
+<suppressed ~240 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+    Consolidated identical input bits for $mux cell $procmux$991:
+      Old ports: A=128'00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, B=128'11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111, Y=$0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0]
+      New connections: $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [127:1] = { $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] $0$memwr$\mem$src/axi_ram.sv:180$483_EN[127:0]$505 [0] }
+  Optimizing cells in module \axi_ram.
+Performed a total of 1 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 0 unused cells and 146 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~175 debug messages>
+
+4.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+4.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.6.16. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing FSM pass (extract and optimize FSM).
+
+4.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking axi_ram.BRESP as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+Not marking axi_ram.RRESP as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+
+4.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+4.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~175 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1956 ($adff) from module axi_ram (D = $11\request_error$func$src/axi_ram.sv:250$477.$result[0:0]$799, Q = \read_error).
+Adding EN signal on $procdff$1951 ($adff) from module axi_ram (D = \ARBURST, Q = \read_burst).
+Adding EN signal on $procdff$1946 ($adff) from module axi_ram (D = \ARSIZE, Q = \read_size).
+Adding EN signal on $procdff$1941 ($adff) from module axi_ram (D = \ARLEN, Q = \read_len).
+Adding EN signal on $procdff$1936 ($adff) from module axi_ram (D = $0\read_beats_left[8:0], Q = \read_beats_left).
+Adding EN signal on $procdff$1931 ($adff) from module axi_ram (D = $0\read_addr[31:0] [11:4], Q = \read_addr [11:4]).
+Adding EN signal on $procdff$1931 ($adff) from module axi_ram (D = { $0\read_addr[31:0] [31:12] $0\read_addr[31:0] [3:0] }, Q = { \read_addr [31:12] \read_addr [3:0] }).
+Adding EN signal on $procdff$1926 ($adff) from module axi_ram (D = $0\read_active[0:0], Q = \read_active).
+Adding EN signal on $procdff$1921 ($adff) from module axi_ram (D = $0\RLAST[0:0], Q = \RLAST).
+Adding EN signal on $procdff$1916 ($adff) from module axi_ram (D = \ARID, Q = \RID).
+Adding EN signal on $procdff$1911 ($adff) from module axi_ram (D = $ternary$src/axi_ram.sv:254$897_Y, Q = \RRESP).
+Adding EN signal on $procdff$1906 ($adff) from module axi_ram (D = $0\RDATA[127:0], Q = \RDATA).
+Adding EN signal on $procdff$1901 ($adff) from module axi_ram (D = $0\RVALID[0:0], Q = \RVALID).
+Adding EN signal on $procdff$1801 ($adff) from module axi_ram (D = \AWBURST, Q = \write_burst).
+Adding EN signal on $procdff$1796 ($adff) from module axi_ram (D = \AWSIZE, Q = \write_size).
+Adding EN signal on $procdff$1791 ($adff) from module axi_ram (D = \AWLEN, Q = \write_len).
+Adding EN signal on $procdff$1781 ($adff) from module axi_ram (D = \AWID, Q = \write_id).
+Adding EN signal on $procdff$1776 ($adff) from module axi_ram (D = $0\write_addr[31:0], Q = \write_addr).
+Adding EN signal on $procdff$1766 ($adff) from module axi_ram (D = \write_id, Q = \BID).
+Adding EN signal on $procdff$1761 ($adff) from module axi_ram (D = $ternary$src/axi_ram.sv:219$633_Y, Q = \BRESP).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 14 unused cells and 14 unused wires.
+<suppressed ~15 debug messages>
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+<suppressed ~9 debug messages>
+
+4.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~133 debug messages>
+
+4.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 0 unused cells and 18 unused wires.
+<suppressed ~1 debug messages>
+
+4.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+<suppressed ~1 debug messages>
+
+4.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~129 debug messages>
+
+4.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.8.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~129 debug messages>
+
+4.8.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.8.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.8.27. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+4.8.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.8.30. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 9) from port A of cell axi_ram.$add$src/axi_ram.sv:204$561 ($add).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$add$src/axi_ram.sv:204$561 ($add).
+Removed top 40 bits (of 41) from port A of cell axi_ram.$shl$src/axi_ram.sv:100$562 ($shl).
+Removed top 33 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:102$563 ($add).
+Removed top 32 bits (of 41) from port Y of cell axi_ram.$add$src/axi_ram.sv:102$563 ($add).
+Removed top 32 bits (of 41) from port A of cell axi_ram.$shl$src/axi_ram.sv:102$564 ($shl).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$and$src/axi_ram.sv:105$567 ($and).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$and$src/axi_ram.sv:109$572 ($and).
+Removed top 4 bits (of 8) from port B of cell axi_ram.$gt$src/axi_ram.sv:113$578 ($gt).
+Removed top 7 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:115$582 ($eq).
+Removed top 6 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:115$583 ($eq).
+Removed top 5 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:116$585 ($eq).
+Removed top 4 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:116$587 ($eq).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$ge$src/axi_ram.sv:118$592 ($ge).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$ge$src/axi_ram.sv:118$592 ($ge).
+Removed top 1 bits (of 2) from port B of cell axi_ram.$eq$src/axi_ram.sv:120$594 ($eq).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:121$595 ($add).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:121$596 ($gt).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:124$601 ($gt).
+Removed top 29 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:127$605 ($add).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:127$606 ($gt).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$eq$src/axi_ram.sv:212$619 ($eq).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$sub$src/axi_ram.sv:221$634 ($sub).
+Removed top 31 bits (of 32) from port A of cell axi_ram.$shl$src/axi_ram.sv:147$641 ($shl).
+Removed top 24 bits (of 32) from port A of cell axi_ram.$add$src/axi_ram.sv:150$648 ($add).
+Removed top 23 bits (of 32) from port Y of cell axi_ram.$add$src/axi_ram.sv:150$648 ($add).
+Removed top 23 bits (of 32) from port A of cell axi_ram.$shl$src/axi_ram.sv:150$649 ($shl).
+Removed top 1 bits (of 9) from port A of cell axi_ram.$add$src/axi_ram.sv:246$752 ($add).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$add$src/axi_ram.sv:246$752 ($add).
+Removed top 40 bits (of 41) from port A of cell axi_ram.$shl$src/axi_ram.sv:100$753 ($shl).
+Removed top 33 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:102$754 ($add).
+Removed top 32 bits (of 41) from port Y of cell axi_ram.$add$src/axi_ram.sv:102$754 ($add).
+Removed top 32 bits (of 41) from port A of cell axi_ram.$shl$src/axi_ram.sv:102$755 ($shl).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$and$src/axi_ram.sv:105$758 ($and).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$and$src/axi_ram.sv:109$763 ($and).
+Removed top 4 bits (of 8) from port B of cell axi_ram.$gt$src/axi_ram.sv:113$769 ($gt).
+Removed top 7 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:115$773 ($eq).
+Removed top 6 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:115$774 ($eq).
+Removed top 5 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:116$776 ($eq).
+Removed top 4 bits (of 8) from port B of cell axi_ram.$eq$src/axi_ram.sv:116$778 ($eq).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$ge$src/axi_ram.sv:118$783 ($ge).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$ge$src/axi_ram.sv:118$783 ($ge).
+Removed top 1 bits (of 2) from port B of cell axi_ram.$eq$src/axi_ram.sv:120$785 ($eq).
+Removed top 25 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:121$786 ($add).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:121$787 ($gt).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:124$792 ($gt).
+Removed top 29 bits (of 41) from port A of cell axi_ram.$add$src/axi_ram.sv:127$796 ($add).
+Removed top 28 bits (of 41) from port B of cell axi_ram.$gt$src/axi_ram.sv:127$797 ($gt).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$eq$src/axi_ram.sv:259$902 ($eq).
+Removed top 8 bits (of 9) from port B of cell axi_ram.$sub$src/axi_ram.sv:264$905 ($sub).
+Removed top 7 bits (of 9) from port B of cell axi_ram.$eq$src/axi_ram.sv:267$909 ($eq).
+Removed top 31 bits (of 32) from port A of cell axi_ram.$shl$src/axi_ram.sv:147$927 ($shl).
+Removed top 24 bits (of 32) from port A of cell axi_ram.$add$src/axi_ram.sv:150$934 ($add).
+Removed top 23 bits (of 32) from port Y of cell axi_ram.$add$src/axi_ram.sv:150$934 ($add).
+Removed top 23 bits (of 32) from port A of cell axi_ram.$shl$src/axi_ram.sv:150$935 ($shl).
+Removed top 32 bits (of 41) from wire axi_ram.$add$src/axi_ram.sv:102$563_Y.
+Removed top 32 bits (of 41) from wire axi_ram.$add$src/axi_ram.sv:102$754_Y.
+Removed top 23 bits (of 32) from wire axi_ram.$add$src/axi_ram.sv:150$648_Y.
+Removed top 23 bits (of 32) from wire axi_ram.$add$src/axi_ram.sv:150$934_Y.
+Removed top 1 bits (of 41) from wire axi_ram.$shl$src/axi_ram.sv:100$562_Y.
+Removed top 2 bits (of 41) from wire axi_ram.$shl$src/axi_ram.sv:100$753_Y.
+
+4.10. Executing PEEPOPT pass (run peephole optimizers).
+
+4.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+4.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module axi_ram:
+  creating $macc model for $add$src/axi_ram.sv:102$563 ($add).
+  creating $macc model for $add$src/axi_ram.sv:102$754 ($add).
+  creating $macc model for $add$src/axi_ram.sv:121$595 ($add).
+  creating $macc model for $add$src/axi_ram.sv:121$786 ($add).
+  creating $macc model for $add$src/axi_ram.sv:124$600 ($add).
+  creating $macc model for $add$src/axi_ram.sv:124$838 ($add).
+  creating $macc model for $add$src/axi_ram.sv:127$605 ($add).
+  creating $macc model for $add$src/axi_ram.sv:127$796 ($add).
+  creating $macc model for $add$src/axi_ram.sv:147$642 ($add).
+  creating $macc model for $add$src/axi_ram.sv:147$928 ($add).
+  creating $macc model for $add$src/axi_ram.sv:150$648 ($add).
+  creating $macc model for $add$src/axi_ram.sv:150$934 ($add).
+  creating $macc model for $add$src/axi_ram.sv:153$653 ($add).
+  creating $macc model for $add$src/axi_ram.sv:153$939 ($add).
+  creating $macc model for $add$src/axi_ram.sv:204$561 ($add).
+  creating $macc model for $add$src/axi_ram.sv:246$752 ($add).
+  creating $macc model for $sub$src/axi_ram.sv:105$565 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:105$756 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:109$571 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:109$762 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:151$650 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:151$936 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:221$634 ($sub).
+  creating $macc model for $sub$src/axi_ram.sv:264$905 ($sub).
+  creating $alu model for $macc $sub$src/axi_ram.sv:264$905.
+  creating $alu model for $macc $sub$src/axi_ram.sv:221$634.
+  creating $alu model for $macc $sub$src/axi_ram.sv:151$936.
+  creating $alu model for $macc $sub$src/axi_ram.sv:151$650.
+  creating $alu model for $macc $sub$src/axi_ram.sv:109$762.
+  creating $alu model for $macc $sub$src/axi_ram.sv:109$571.
+  creating $alu model for $macc $sub$src/axi_ram.sv:105$756.
+  creating $alu model for $macc $sub$src/axi_ram.sv:105$565.
+  creating $alu model for $macc $add$src/axi_ram.sv:246$752.
+  creating $alu model for $macc $add$src/axi_ram.sv:204$561.
+  creating $alu model for $macc $add$src/axi_ram.sv:153$939.
+  creating $alu model for $macc $add$src/axi_ram.sv:153$653.
+  creating $alu model for $macc $add$src/axi_ram.sv:150$934.
+  creating $alu model for $macc $add$src/axi_ram.sv:150$648.
+  creating $alu model for $macc $add$src/axi_ram.sv:147$928.
+  creating $alu model for $macc $add$src/axi_ram.sv:147$642.
+  creating $alu model for $macc $add$src/axi_ram.sv:127$796.
+  creating $alu model for $macc $add$src/axi_ram.sv:127$605.
+  creating $alu model for $macc $add$src/axi_ram.sv:124$838.
+  creating $alu model for $macc $add$src/axi_ram.sv:124$600.
+  creating $alu model for $macc $add$src/axi_ram.sv:121$786.
+  creating $alu model for $macc $add$src/axi_ram.sv:121$595.
+  creating $alu model for $macc $add$src/axi_ram.sv:102$754.
+  creating $alu model for $macc $add$src/axi_ram.sv:102$563.
+  creating $alu model for $ge$src/axi_ram.sv:118$592 ($ge): new $alu
+  creating $alu model for $ge$src/axi_ram.sv:118$783 ($ge): new $alu
+  creating $alu model for $ge$src/axi_ram.sv:153$654 ($ge): new $alu
+  creating $alu model for $ge$src/axi_ram.sv:153$940 ($ge): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:113$578 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:113$769 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:121$596 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:121$787 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:124$601 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:124$792 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:127$606 ($gt): new $alu
+  creating $alu model for $gt$src/axi_ram.sv:127$797 ($gt): new $alu
+  creating $alu model for $eq$src/axi_ram.sv:116$587 ($eq): merged with $gt$src/axi_ram.sv:113$578.
+  creating $alu model for $eq$src/axi_ram.sv:116$778 ($eq): merged with $gt$src/axi_ram.sv:113$769.
+  creating $alu model for $eq$src/axi_ram.sv:212$619 ($eq): merged with $sub$src/axi_ram.sv:221$634.
+  creating $alu model for $eq$src/axi_ram.sv:259$902 ($eq): merged with $sub$src/axi_ram.sv:264$905.
+  creating $alu cell for $gt$src/axi_ram.sv:127$797: $auto$alumacc.cc:495:replace_alu$2197
+  creating $alu cell for $gt$src/axi_ram.sv:127$606: $auto$alumacc.cc:495:replace_alu$2208
+  creating $alu cell for $gt$src/axi_ram.sv:124$792: $auto$alumacc.cc:495:replace_alu$2219
+  creating $alu cell for $gt$src/axi_ram.sv:124$601: $auto$alumacc.cc:495:replace_alu$2230
+  creating $alu cell for $gt$src/axi_ram.sv:121$787: $auto$alumacc.cc:495:replace_alu$2241
+  creating $alu cell for $gt$src/axi_ram.sv:121$596: $auto$alumacc.cc:495:replace_alu$2252
+  creating $alu cell for $gt$src/axi_ram.sv:113$769, $eq$src/axi_ram.sv:116$778: $auto$alumacc.cc:495:replace_alu$2263
+  creating $alu cell for $gt$src/axi_ram.sv:113$578, $eq$src/axi_ram.sv:116$587: $auto$alumacc.cc:495:replace_alu$2274
+  creating $alu cell for $ge$src/axi_ram.sv:153$940: $auto$alumacc.cc:495:replace_alu$2285
+  creating $alu cell for $ge$src/axi_ram.sv:153$654: $auto$alumacc.cc:495:replace_alu$2298
+  creating $alu cell for $ge$src/axi_ram.sv:118$783: $auto$alumacc.cc:495:replace_alu$2311
+  creating $alu cell for $ge$src/axi_ram.sv:118$592: $auto$alumacc.cc:495:replace_alu$2324
+  creating $alu cell for $add$src/axi_ram.sv:121$595: $auto$alumacc.cc:495:replace_alu$2337
+  creating $alu cell for $add$src/axi_ram.sv:121$786: $auto$alumacc.cc:495:replace_alu$2340
+  creating $alu cell for $add$src/axi_ram.sv:124$600: $auto$alumacc.cc:495:replace_alu$2343
+  creating $alu cell for $add$src/axi_ram.sv:124$838: $auto$alumacc.cc:495:replace_alu$2346
+  creating $alu cell for $add$src/axi_ram.sv:127$605: $auto$alumacc.cc:495:replace_alu$2349
+  creating $alu cell for $add$src/axi_ram.sv:127$796: $auto$alumacc.cc:495:replace_alu$2352
+  creating $alu cell for $add$src/axi_ram.sv:147$642: $auto$alumacc.cc:495:replace_alu$2355
+  creating $alu cell for $add$src/axi_ram.sv:147$928: $auto$alumacc.cc:495:replace_alu$2358
+  creating $alu cell for $add$src/axi_ram.sv:150$648: $auto$alumacc.cc:495:replace_alu$2361
+  creating $alu cell for $add$src/axi_ram.sv:150$934: $auto$alumacc.cc:495:replace_alu$2364
+  creating $alu cell for $add$src/axi_ram.sv:153$653: $auto$alumacc.cc:495:replace_alu$2367
+  creating $alu cell for $add$src/axi_ram.sv:153$939: $auto$alumacc.cc:495:replace_alu$2370
+  creating $alu cell for $add$src/axi_ram.sv:102$563: $auto$alumacc.cc:495:replace_alu$2373
+  creating $alu cell for $add$src/axi_ram.sv:204$561: $auto$alumacc.cc:495:replace_alu$2376
+  creating $alu cell for $add$src/axi_ram.sv:102$754: $auto$alumacc.cc:495:replace_alu$2379
+  creating $alu cell for $add$src/axi_ram.sv:246$752: $auto$alumacc.cc:495:replace_alu$2382
+  creating $alu cell for $sub$src/axi_ram.sv:105$565: $auto$alumacc.cc:495:replace_alu$2385
+  creating $alu cell for $sub$src/axi_ram.sv:105$756: $auto$alumacc.cc:495:replace_alu$2388
+  creating $alu cell for $sub$src/axi_ram.sv:109$571: $auto$alumacc.cc:495:replace_alu$2391
+  creating $alu cell for $sub$src/axi_ram.sv:109$762: $auto$alumacc.cc:495:replace_alu$2394
+  creating $alu cell for $sub$src/axi_ram.sv:151$650: $auto$alumacc.cc:495:replace_alu$2397
+  creating $alu cell for $sub$src/axi_ram.sv:151$936: $auto$alumacc.cc:495:replace_alu$2400
+  creating $alu cell for $sub$src/axi_ram.sv:221$634, $eq$src/axi_ram.sv:212$619: $auto$alumacc.cc:495:replace_alu$2403
+  creating $alu cell for $sub$src/axi_ram.sv:264$905, $eq$src/axi_ram.sv:259$902: $auto$alumacc.cc:495:replace_alu$2408
+  created 36 $alu and 0 $macc cells.
+
+4.13. Executing SHARE pass (SAT-based resource sharing).
+Found 10 cells in module axi_ram that may be considered for resource sharing.
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:150$935 ($shl):
+    Found 2 activation_patterns using ctrl signal { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 }.
+    Found 2 candidates: $shl$src/axi_ram.sv:150$649 $shl$src/axi_ram.sv:102$564
+    Analyzing resource sharing with $shl$src/axi_ram.sv:150$649 ($shl):
+      Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$940_Y $ge$src/axi_ram.sv:153$654_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:150$935: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y } = 2'10
+      Activation pattern for cell $shl$src/axi_ram.sv:150$935: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 } = 3'101
+      Activation pattern for cell $shl$src/axi_ram.sv:150$649: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y } = 4'0101
+      Activation pattern for cell $shl$src/axi_ram.sv:150$649: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 5'01011
+      Size of SAT problem: 31 cells, 6349 variables, 16879 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 8'01011011
+    Analyzing resource sharing with $shl$src/axi_ram.sv:102$564 ($shl):
+      Found 6 activation_patterns using ctrl signal { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$940_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:150$935: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y } = 2'10
+      Activation pattern for cell $shl$src/axi_ram.sv:150$935: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 } = 3'101
+      Activation pattern for cell $shl$src/axi_ram.sv:102$564: { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y } = 3'011
+      Activation pattern for cell $shl$src/axi_ram.sv:102$564: { $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y } = 2'10
+      Size of SAT problem: 22 cells, 3305 variables, 8772 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y } = 6'101010
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:150$649 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 }.
+    Found 1 candidates: $shl$src/axi_ram.sv:102$564
+    Analyzing resource sharing with $shl$src/axi_ram.sv:102$564 ($shl):
+      Found 6 activation_patterns using ctrl signal { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$654_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:150$649: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y } = 4'0101
+      Activation pattern for cell $shl$src/axi_ram.sv:150$649: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 5'01011
+      Activation pattern for cell $shl$src/axi_ram.sv:102$564: { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y } = 3'011
+      Activation pattern for cell $shl$src/axi_ram.sv:102$564: { $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y } = 2'10
+      Size of SAT problem: 22 cells, 3309 variables, 8792 clauses
+      According to the SAT solver this pair of cells can be shared.
+      Activation signal for $shl$src/axi_ram.sv:102$564: $auto$share.cc:1070:make_cell_activation_logic$2416
+      New cell: $auto$share.cc:669:make_supercell$2423 ($shl)
+  Analyzing resource sharing options for $auto$share.cc:669:make_supercell$2423 ($shl):
+    Found 4 activation_patterns using ctrl signal { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:147$641 ($shl):
+    Found 2 activation_patterns using ctrl signal { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 }.
+    Found 3 candidates: $shl$src/axi_ram.sv:147$927 $shl$src/axi_ram.sv:100$753 $shl$src/axi_ram.sv:100$562
+    Analyzing resource sharing with $shl$src/axi_ram.sv:147$927 ($shl):
+      Found 2 activation_patterns using ctrl signal { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$940_Y $ge$src/axi_ram.sv:153$654_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y } = 3'001
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 5'01010
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: $eq$src/axi_ram.sv:144$921_Y = 1'0
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 } = 3'100
+      Size of SAT problem: 31 cells, 6347 variables, 16871 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 8'00010011
+    Analyzing resource sharing with $shl$src/axi_ram.sv:100$753 ($shl):
+      Found 1 activation_patterns using ctrl signal { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 }.
+      Forbidden control signals for this pair of cells: { $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $ne$src/axi_ram.sv:109$764_Y $ge$src/axi_ram.sv:153$654_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y } = 3'001
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 5'01010
+      Activation pattern for cell $shl$src/axi_ram.sv:100$753: { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 } = 7'0000000
+      Size of SAT problem: 66 cells, 9573 variables, 25758 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $auto$rtlil.cc:2962:ReduceAnd$2407 $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2323 $auto$rtlil.cc:2963:ReduceOr$2310 } = 12'000000000101
+    Analyzing resource sharing with $shl$src/axi_ram.sv:100$562 ($shl):
+      Found 2 activation_patterns using ctrl signal { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$654_Y $ne$src/axi_ram.sv:109$573_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y } = 3'001
+      Activation pattern for cell $shl$src/axi_ram.sv:147$641: { $auto$rtlil.cc:2962:ReduceAnd$2407 $eq$src/axi_ram.sv:148$643_Y $eq$src/axi_ram.sv:144$635_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2310 } = 5'01010
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 10'0000000110
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 9'000000100
+      Size of SAT problem: 70 cells, 9609 variables, 25872 clauses
+      According to the SAT solver this pair of cells can be shared.
+      Activation signal for $shl$src/axi_ram.sv:147$641: $auto$share.cc:1070:make_cell_activation_logic$2429
+      New cell: $auto$share.cc:669:make_supercell$2436 ($shl)
+      New topology contains loops! Rolling back..
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:100$562 ($shl):
+    Found 2 activation_patterns using ctrl signal { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 }.
+    Found 2 candidates: $shl$src/axi_ram.sv:100$753 $shl$src/axi_ram.sv:147$927
+    Analyzing resource sharing with $shl$src/axi_ram.sv:100$753 ($shl):
+      Found 1 activation_patterns using ctrl signal { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 }.
+      Forbidden control signals for this pair of cells: { $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $ne$src/axi_ram.sv:109$764_Y $ne$src/axi_ram.sv:109$573_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 10'0000000110
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 9'000000100
+      Activation pattern for cell $shl$src/axi_ram.sv:100$753: { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 } = 7'0000000
+      Size of SAT problem: 105 cells, 12830 variables, 34738 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 $auto$rtlil.cc:2963:ReduceOr$2323 } = 17'00000000000001000
+    Analyzing resource sharing with $shl$src/axi_ram.sv:147$927 ($shl):
+      Found 2 activation_patterns using ctrl signal { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$940_Y $ne$src/axi_ram.sv:109$573_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 10'0000000110
+      Activation pattern for cell $shl$src/axi_ram.sv:100$562: { $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 9'000000100
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: $eq$src/axi_ram.sv:144$921_Y = 1'0
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 } = 3'100
+      Size of SAT problem: 70 cells, 9604 variables, 25851 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 $ne$src/axi_ram.sv:212$620_Y $logic_and$src/axi_ram.sv:126$607_Y $logic_and$src/axi_ram.sv:123$602_Y $logic_and$src/axi_ram.sv:120$597_Y $logic_and$src/axi_ram.sv:115$590_Y $logic_and$src/axi_ram.sv:113$579_Y $eq$src/axi_ram.sv:111$575_Y $logic_and$src/axi_ram.sv:200$551_Y $logic_and$src/axi_ram.sv:167$492_Y $auto$rtlil.cc:2963:ReduceOr$2336 } = 13'1010000000100
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:100$753 ($shl):
+    Found 1 activation_patterns using ctrl signal { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 }.
+    Found 1 candidates: $shl$src/axi_ram.sv:147$927
+    Analyzing resource sharing with $shl$src/axi_ram.sv:147$927 ($shl):
+      Found 2 activation_patterns using ctrl signal { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 }.
+      Forbidden control signals for this pair of cells: { $ge$src/axi_ram.sv:153$940_Y $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $ne$src/axi_ram.sv:109$764_Y }
+      Activation pattern for cell $shl$src/axi_ram.sv:100$753: { $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 } = 7'0000000
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: $eq$src/axi_ram.sv:144$921_Y = 1'0
+      Activation pattern for cell $shl$src/axi_ram.sv:147$927: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 } = 3'100
+      Size of SAT problem: 61 cells, 9384 variables, 25268 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 $logic_and$src/axi_ram.sv:126$798_Y $logic_and$src/axi_ram.sv:123$793_Y $logic_and$src/axi_ram.sv:120$788_Y $logic_and$src/axi_ram.sv:115$781_Y $logic_and$src/axi_ram.sv:113$770_Y $eq$src/axi_ram.sv:111$766_Y $auto$rtlil.cc:2963:ReduceOr$2323 } = 10'0010000000
+  Analyzing resource sharing options for $shl$src/axi_ram.sv:147$927 ($shl):
+    Found 2 activation_patterns using ctrl signal { $eq$src/axi_ram.sv:148$929_Y $eq$src/axi_ram.sv:144$921_Y $auto$rtlil.cc:2963:ReduceOr$2297 }.
+    No candidates found.
+  Analyzing resource sharing options for $memrd$\mem$src/axi_ram.sv:266$907 ($memrd):
+    Found 1 activation_patterns using ctrl signal { $logic_and$src/axi_ram.sv:258$899_Y $logic_and$src/axi_ram.sv:243$720_Y $auto$rtlil.cc:2962:ReduceAnd$2412 \read_error }.
+    Found 2 candidates: $memrd$\mem$src/axi_ram.sv:253$848 $memrd$\mem$src/axi_ram.sv:171$499
+    Analyzing resource sharing with $memrd$\mem$src/axi_ram.sv:253$848 ($memrd):
+      Found 1 activation_patterns using ctrl signal { $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $logic_and$src/axi_ram.sv:243$720_Y }.
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:266$907: { $logic_and$src/axi_ram.sv:258$899_Y $logic_and$src/axi_ram.sv:243$720_Y $auto$rtlil.cc:2962:ReduceAnd$2412 \read_error } = 4'1000
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:253$848: { $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $logic_and$src/axi_ram.sv:243$720_Y } = 2'01
+      According to the SAT solver this pair of cells can be shared. (Pattern only case)
+      Simplified activation pattern for cell $memrd$\mem$src/axi_ram.sv:266$907: $logic_and$src/axi_ram.sv:243$720_Y = 1'0
+      Simplified activation pattern for cell $memrd$\mem$src/axi_ram.sv:253$848: $logic_and$src/axi_ram.sv:243$720_Y = 1'1
+      Activation signal for $memrd$\mem$src/axi_ram.sv:266$907: $auto$share.cc:1060:make_cell_activation_logic$2439
+      New cell: $auto$share.cc:713:make_supercell$2441 ($memrd)
+  Analyzing resource sharing options for $auto$share.cc:713:make_supercell$2441 ($memrd):
+    Found 2 activation_patterns using ctrl signal { $logic_and$src/axi_ram.sv:258$899_Y $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $logic_and$src/axi_ram.sv:243$720_Y $auto$rtlil.cc:2962:ReduceAnd$2412 \read_error }.
+    Found 1 candidates: $memrd$\mem$src/axi_ram.sv:171$499
+    Analyzing resource sharing with $memrd$\mem$src/axi_ram.sv:171$499 ($memrd):
+      Found 16 activation_patterns using ctrl signal { \write_mem_fire \WSTRB }.
+      Activation pattern for cell $auto$share.cc:713:make_supercell$2441: { $logic_and$src/axi_ram.sv:258$899_Y $logic_and$src/axi_ram.sv:243$720_Y $auto$rtlil.cc:2962:ReduceAnd$2412 \read_error } = 4'1000
+      Activation pattern for cell $auto$share.cc:713:make_supercell$2441: { $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $logic_and$src/axi_ram.sv:243$720_Y } = 2'01
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [0] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [1] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [2] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [3] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [4] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [5] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [6] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [7] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [8] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [9] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [10] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [11] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [12] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [13] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [14] } = 2'10
+      Activation pattern for cell $memrd$\mem$src/axi_ram.sv:171$499: { \write_mem_fire \WSTRB [15] } = 2'10
+      Size of SAT problem: 72 cells, 7637 variables, 20534 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: { $logic_and$src/axi_ram.sv:258$899_Y $11\request_error$func$src/axi_ram.sv:252$478.$result[0:0]$846 $logic_and$src/axi_ram.sv:243$720_Y $auto$rtlil.cc:2962:ReduceAnd$2412 \write_mem_fire \read_error \WSTRB } = 22'1000100000000000000000
+  Analyzing resource sharing options for $memrd$\mem$src/axi_ram.sv:171$499 ($memrd):
+    Found 16 activation_patterns using ctrl signal { \write_mem_fire \WSTRB }.
+    No candidates found.
+Removing 4 cells in module axi_ram:
+  Removing cell $memrd$\mem$src/axi_ram.sv:253$848 ($memrd).
+  Removing cell $memrd$\mem$src/axi_ram.sv:266$907 ($memrd).
+  Removing cell $shl$src/axi_ram.sv:102$564 ($shl).
+  Removing cell $shl$src/axi_ram.sv:150$649 ($shl).
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+<suppressed ~2 debug messages>
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+<suppressed ~10 debug messages>
+Removed a total of 2 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~141 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+    New input vector for $reduce_and cell $auto$opt_dff.cc:273:make_patterns_logic$2175: { $logic_and$src/axi_ram.sv:167$492_Y $auto$alumacc.cc:511:replace_alu$2404 }
+  Optimizing cells in module \axi_ram.
+Performed a total of 1 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 1 unused cells and 31 unused wires.
+<suppressed ~5 debug messages>
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_ram..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~141 debug messages>
+
+4.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_ram.
+Performed a total of 0 changes.
+
+4.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_ram'.
+Removed a total of 0 cells.
+
+4.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+4.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_ram.
+
+4.14.16. Finished OPT passes. (There is nothing left to do.)
+
+4.15. Executing MEMORY pass.
+
+4.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing axi_ram.mem write port 0.
+Populating enable bits on write ports of memory axi_ram.mem with async read feedback:
+    Port 0 bit 127: added enable logic for 1 different cases.
+    Port 0 bit 126: added enable logic for 1 different cases.
+    Port 0 bit 125: added enable logic for 1 different cases.
+    Port 0 bit 124: added enable logic for 1 different cases.
+    Port 0 bit 123: added enable logic for 1 different cases.
+    Port 0 bit 122: added enable logic for 1 different cases.
+    Port 0 bit 121: added enable logic for 1 different cases.
+    Port 0 bit 120: added enable logic for 1 different cases.
+    Port 0 bit 119: added enable logic for 1 different cases.
+    Port 0 bit 118: added enable logic for 1 different cases.
+    Port 0 bit 117: added enable logic for 1 different cases.
+    Port 0 bit 116: added enable logic for 1 different cases.
+    Port 0 bit 115: added enable logic for 1 different cases.
+    Port 0 bit 114: added enable logic for 1 different cases.
+    Port 0 bit 113: added enable logic for 1 different cases.
+    Port 0 bit 112: added enable logic for 1 different cases.
+    Port 0 bit 111: added enable logic for 1 different cases.
+    Port 0 bit 110: added enable logic for 1 different cases.
+    Port 0 bit 109: added enable logic for 1 different cases.
+    Port 0 bit 108: added enable logic for 1 different cases.
+    Port 0 bit 107: added enable logic for 1 different cases.
+    Port 0 bit 106: added enable logic for 1 different cases.
+    Port 0 bit 105: added enable logic for 1 different cases.
+    Port 0 bit 104: added enable logic for 1 different cases.
+    Port 0 bit 103: added enable logic for 1 different cases.
+    Port 0 bit 102: added enable logic for 1 different cases.
+    Port 0 bit 101: added enable logic for 1 different cases.
+    Port 0 bit 100: added enable logic for 1 different cases.
+    Port 0 bit 99: added enable logic for 1 different cases.
+    Port 0 bit 98: added enable logic for 1 different cases.
+    Port 0 bit 97: added enable logic for 1 different cases.
+    Port 0 bit 96: added enable logic for 1 different cases.
+    Port 0 bit 95: added enable logic for 1 different cases.
+    Port 0 bit 94: added enable logic for 1 different cases.
+    Port 0 bit 93: added enable logic for 1 different cases.
+    Port 0 bit 92: added enable logic for 1 different cases.
+    Port 0 bit 91: added enable logic for 1 different cases.
+    Port 0 bit 90: added enable logic for 1 different cases.
+    Port 0 bit 89: added enable logic for 1 different cases.
+    Port 0 bit 88: added enable logic for 1 different cases.
+    Port 0 bit 87: added enable logic for 1 different cases.
+    Port 0 bit 86: added enable logic for 1 different cases.
+    Port 0 bit 85: added enable logic for 1 different cases.
+    Port 0 bit 84: added enable logic for 1 different cases.
+    Port 0 bit 83: added enable logic for 1 different cases.
+    Port 0 bit 82: added enable logic for 1 different cases.
+    Port 0 bit 81: added enable logic for 1 different cases.
+    Port 0 bit 80: added enable logic for 1 different cases.
+    Port 0 bit 79: added enable logic for 1 different cases.
+    Port 0 bit 78: added enable logic for 1 different cases.
+    Port 0 bit 77: added enable logic for 1 different cases.
+    Port 0 bit 76: added enable logic for 1 different cases.
+    Port 0 bit 75: added enable logic for 1 different cases.
+    Port 0 bit 74: added enable logic for 1 different cases.
+    Port 0 bit 73: added enable logic for 1 different cases.
+    Port 0 bit 72: added enable logic for 1 different cases.
+    Port 0 bit 71: added enable logic for 1 different cases.
+    Port 0 bit 70: added enable logic for 1 different cases.
+    Port 0 bit 69: added enable logic for 1 different cases.
+    Port 0 bit 68: added enable logic for 1 different cases.
+    Port 0 bit 67: added enable logic for 1 different cases.
+    Port 0 bit 66: added enable logic for 1 different cases.
+    Port 0 bit 65: added enable logic for 1 different cases.
+    Port 0 bit 64: added enable logic for 1 different cases.
+    Port 0 bit 63: added enable logic for 1 different cases.
+    Port 0 bit 62: added enable logic for 1 different cases.
+    Port 0 bit 61: added enable logic for 1 different cases.
+    Port 0 bit 60: added enable logic for 1 different cases.
+    Port 0 bit 59: added enable logic for 1 different cases.
+    Port 0 bit 58: added enable logic for 1 different cases.
+    Port 0 bit 57: added enable logic for 1 different cases.
+    Port 0 bit 56: added enable logic for 1 different cases.
+    Port 0 bit 55: added enable logic for 1 different cases.
+    Port 0 bit 54: added enable logic for 1 different cases.
+    Port 0 bit 53: added enable logic for 1 different cases.
+    Port 0 bit 52: added enable logic for 1 different cases.
+    Port 0 bit 51: added enable logic for 1 different cases.
+    Port 0 bit 50: added enable logic for 1 different cases.
+    Port 0 bit 49: added enable logic for 1 different cases.
+    Port 0 bit 48: added enable logic for 1 different cases.
+    Port 0 bit 47: added enable logic for 1 different cases.
+    Port 0 bit 46: added enable logic for 1 different cases.
+    Port 0 bit 45: added enable logic for 1 different cases.
+    Port 0 bit 44: added enable logic for 1 different cases.
+    Port 0 bit 43: added enable logic for 1 different cases.
+    Port 0 bit 42: added enable logic for 1 different cases.
+    Port 0 bit 41: added enable logic for 1 different cases.
+    Port 0 bit 40: added enable logic for 1 different cases.
+    Port 0 bit 39: added enable logic for 1 different cases.
+    Port 0 bit 38: added enable logic for 1 different cases.
+    Port 0 bit 37: added enable logic for 1 different cases.
+    Port 0 bit 36: added enable logic for 1 different cases.
+    Port 0 bit 35: added enable logic for 1 different cases.
+    Port 0 bit 34: added enable logic for 1 different cases.
+    Port 0 bit 33: added enable logic for 1 different cases.
+    Port 0 bit 32: added enable logic for 1 different cases.
+    Port 0 bit 31: added enable logic for 1 different cases.
+    Port 0 bit 30: added enable logic for 1 different cases.
+    Port 0 bit 29: added enable logic for 1 different cases.
+    Port 0 bit 28: added enable logic for 1 different cases.
+    Port 0 bit 27: added enable logic for 1 different cases.
+    Port 0 bit 26: added enable logic for 1 different cases.
+    Port 0 bit 25: added enable logic for 1 different cases.
+    Port 0 bit 24: added enable logic for 1 different cases.
+    Port 0 bit 23: added enable logic for 1 different cases.
+    Port 0 bit 22: added enable logic for 1 different cases.
+    Port 0 bit 21: added enable logic for 1 different cases.
+    Port 0 bit 20: added enable logic for 1 different cases.
+    Port 0 bit 19: added enable logic for 1 different cases.
+    Port 0 bit 18: added enable logic for 1 different cases.
+    Port 0 bit 17: added enable logic for 1 different cases.
+    Port 0 bit 16: added enable logic for 1 different cases.
+    Port 0 bit 15: added enable logic for 1 different cases.
+    Port 0 bit 14: added enable logic for 1 different cases.
+    Port 0 bit 13: added enable logic for 1 different cases.
+    Port 0 bit 12: added enable logic for 1 different cases.
+    Port 0 bit 11: added enable logic for 1 different cases.
+    Port 0 bit 10: added enable logic for 1 different cases.
+    Port 0 bit 9: added enable logic for 1 different cases.
+    Port 0 bit 8: added enable logic for 1 different cases.
+    Port 0 bit 7: added enable logic for 1 different cases.
+    Port 0 bit 6: added enable logic for 1 different cases.
+    Port 0 bit 5: added enable logic for 1 different cases.
+    Port 0 bit 4: added enable logic for 1 different cases.
+    Port 0 bit 3: added enable logic for 1 different cases.
+    Port 0 bit 2: added enable logic for 1 different cases.
+    Port 0 bit 1: added enable logic for 1 different cases.
+    Port 0 bit 0: added enable logic for 1 different cases.
+
+4.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\mem'[0] in module `\axi_ram': no output FF found.
+Checking read port address `\mem'[0] in module `\axi_ram': no address FF found.
+
+4.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+4.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+
+5. Executing CHECK pass (checking for obvious problems).
+Checking module axi_ram...
+Found and reported 0 problems.
+
+6. Printing statistics.
+
+=== axi_ram ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      394 wires
+     6265 wire bits
+       60 public wires
+      942 public wire bits
+       31 ports
+      396 port bits
+      311 cells
+        4   $adff
+       19   $adffe
+       34   $alu
+        6   $and
+       17   $eq
+       18   $logic_and
+       12   $logic_not
+        7   $logic_or
+        1   $mem_v2
+       81   $mux
+       22   $ne
+       28   $not
+       12   $or
+       34   $reduce_and
+        4   $reduce_bool
+        5   $reduce_or
+        7   $shl
+
+7. Executing JSON backend.
+
+8. Executing TECHMAP pass (map to technology primitives).
+
+8.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+8.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod$constmap:fb6b3b0703f83241d5ac8a396e347d2bdd870fa2$paramod$e57543164965b04936be4451c1164d4870fe98b9\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$a2af9b43308e3114c3b5dd3f4dc3329b2387395d\_90_alu for cells of type $alu.
+Using template $paramod$constmap:6ee42cc06352b55ae61255e2cbd1a40b7331d5b2$paramod$f3b5e595ff07a0cfa53e2fadc6fa663a6f20daa7\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$fb19113c59c6aad749ae20488fd3e604290e0776\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$constmap:14d3d7093c5578ce85694badba9bf5b18c4b0847$paramod$a76515e22df66fbf937fc79de039ef39eb2ac0ac\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod$constmap:0cb9b852fd1aa44f09e1677e80df085136f4628e$paramod$f9d58efef684129c8e7c79db4c1152dacf6de683\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$8970b75a86168f7367222464294230c66c7be257\_90_alu for cells of type $alu.
+Using template $paramod$50421b562f8eb1318d93ca56f0d931d9bef85d75\_90_alu for cells of type $alu.
+Using template $paramod$35a69cb9a70c12a16833c695168dfe15d5378044\_90_alu for cells of type $alu.
+Using template $paramod$d15bc33fbf5b943942ee8f58ee6e092ea573a335\_90_alu for cells of type $alu.
+Using template $paramod$e70b962f85b831f93e2d5d65974fff1328c54730\_90_alu for cells of type $alu.
+Using template $paramod$6f67705c43e5e94c02b6ebb52209ce5aa5ade4c1\_90_alu for cells of type $alu.
+Using template $paramod$c04af8dbf0e5d1d69bbccb2c7bd8a93fc9ef54dc\_90_alu for cells of type $alu.
+Using template $paramod$8566e740d04f74bcf985006e358778bd42fe2a0e\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000101001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~7153 debug messages>
+
+9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_ram..
+Removed 1090 unused cells and 1251 unused wires.
+<suppressed ~1091 debug messages>
+
+10. Executing CHECK pass (checking for obvious problems).
+Checking module axi_ram...
+Found and reported 0 problems.
+
+11. Executing Verilog backend.
+
+11.1. Executing BMUXMAP pass.
+
+11.2. Executing DEMUXMAP pass.
+Dumping module `\axi_ram'.

@@ -1,0 +1,91 @@
+/Library/Developer/CommandLineTools/usr/bin/make DEPTH=1 test-outstanding
+mkdir -p build/obj_outstanding_d1
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary -j 4 --Mdir build/obj_outstanding_d1 \
+		--output-split 0 +define+AXI_INTERNAL_CHECKS --top-module tb_axi_outstanding -GDEPTH=1 tb/tb_axi_outstanding.sv src/axi_protocol_checker.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv tb/axi_stall_sub.sv -o Vtb_axi_outstanding
+make[2]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.022 s (elab=0.000, cvt=0.000, bld=0.021); cpu 0.002 s on 4 threads; alloced 3.141 MB
+build/obj_outstanding_d1/Vtb_axi_outstanding
+OUTSTANDING REGRESSION PASS: depth=1 checks=375 peak W/R=3/3
+- tb/tb_axi_outstanding.sv:324: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 9us; walltime 0.002 s; speed 6.080 ms/s
+- Verilator: cpu 0.001 s on 1 threads; alloced 2 MB
+/Library/Developer/CommandLineTools/usr/bin/make DEPTH=3 test-outstanding
+mkdir -p build/obj_outstanding_d3
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary -j 4 --Mdir build/obj_outstanding_d3 \
+		--output-split 0 +define+AXI_INTERNAL_CHECKS --top-module tb_axi_outstanding -GDEPTH=3 tb/tb_axi_outstanding.sv src/axi_protocol_checker.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv tb/axi_stall_sub.sv -o Vtb_axi_outstanding
+make[2]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.023 s (elab=0.000, cvt=0.000, bld=0.022); cpu 0.002 s on 4 threads; alloced 3.141 MB
+build/obj_outstanding_d3/Vtb_axi_outstanding
+OUTSTANDING REGRESSION PASS: depth=3 checks=475 peak W/R=3/3
+- tb/tb_axi_outstanding.sv:324: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 10us; walltime 0.002 s; speed 6.666 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+/Library/Developer/CommandLineTools/usr/bin/make DEPTH=5 test-outstanding
+mkdir -p build/obj_outstanding_d5
+verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary -j 4 --Mdir build/obj_outstanding_d5 \
+		--output-split 0 +define+AXI_INTERNAL_CHECKS --top-module tb_axi_outstanding -GDEPTH=5 tb/tb_axi_outstanding.sv src/axi_protocol_checker.sv src/axi_if.sv src/axi_ram.sv src/axi_sub.sv src/axi_mgr.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv src/axi_top.sv tb/axi_stall_sub.sv -o Vtb_axi_outstanding
+make[2]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.022 s (elab=0.000, cvt=0.000, bld=0.020); cpu 0.001 s on 4 threads; alloced 3.125 MB
+build/obj_outstanding_d5/Vtb_axi_outstanding
+OUTSTANDING REGRESSION PASS: depth=5 checks=575 peak W/R=3/3
+- tb/tb_axi_outstanding.sv:324: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 11us; walltime 0.002 s; speed 6.206 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+/Library/Developer/CommandLineTools/usr/bin/make test-queue-netlist
+python3 synthesis/scripts/check_queue_netlist.py --depth 4
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$a2af9b43308e3114c3b5dd3f4dc3329b2387395d\_90_alu for cells of type $alu.
+Using template $paramod$6f67705c43e5e94c02b6ebb52209ce5aa5ade4c1\_90_alu for cells of type $alu.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~844 debug messages>
+
+9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_request_queue_flat..
+Removed 48 unused cells and 330 unused wires.
+<suppressed ~49 debug messages>
+
+10. Executing CHECK pass (checking for obvious problems).
+Checking module axi_request_queue_flat...
+Found and reported 0 problems.
+
+11. Executing Verilog backend.
+
+11.1. Executing BMUXMAP pass.
+
+11.2. Executing DEMUXMAP pass.
+Dumping module `\axi_request_queue_flat'.
+make[2]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.022 s (elab=0.000, cvt=0.000, bld=0.020); cpu 0.002 s on 4 threads; alloced 3.188 MB
+OUTSTANDING REGRESSION PASS: depth=4 checks=525 peak W/R=3/3
+- tb/tb_axi_outstanding.sv:324: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 11us; walltime 0.002 s; speed 5.470 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
+python3 benchmarks/verify_matrix.py
+edge-1x1 1x1x32 custom: 2512 cycles, 0.3261 GB/s (assumed clock)
+asym-3x2 3x2x64 custom: 3529 cycles, 1.3928 GB/s (assumed clock)
+asym-2x3 2x3x128 custom: 2539 cycles, 2.5812 GB/s (assumed clock)
+stress-1 4x4x128 custom: 2734 cycles, 4.7941 GB/s (assumed clock)
+stress-23 4x4x128 custom: 9140 cycles, 1.4340 GB/s (assumed clock)
+stress-97 4x4x128 custom: 2779 cycles, 4.7165 GB/s (assumed clock)
+mixed75 3x2x64 custom: 2295 cycles, 1.0708 GB/s (assumed clock)

@@ -1,0 +1,6 @@
+config,case,kind,index,write_beats,read_beats,GBs
+3x2x64,custom,manager,0,256,768,0.3569498910675381
+3x2x64,custom,manager,1,256,768,0.3569498910675381
+3x2x64,custom,manager,2,256,768,0.3569498910675381
+3x2x64,custom,target,0,384,1152,0.5354248366013071
+3x2x64,custom,target,1,384,1152,0.5354248366013071

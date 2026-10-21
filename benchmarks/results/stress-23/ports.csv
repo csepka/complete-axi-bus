@@ -1,0 +1,9 @@
+config,case,kind,index,write_beats,read_beats,GBs
+4x4x128,custom,manager,0,1024,1024,0.3585120350109409
+4x4x128,custom,manager,1,1024,1024,0.3585120350109409
+4x4x128,custom,manager,2,1024,1024,0.3585120350109409
+4x4x128,custom,manager,3,1024,1024,0.3585120350109409
+4x4x128,custom,target,0,4096,4096,1.4340481400437637
+4x4x128,custom,target,1,0,0,0.0
+4x4x128,custom,target,2,0,0,0.0
+4x4x128,custom,target,3,0,0,0.0

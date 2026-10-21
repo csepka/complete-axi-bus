@@ -11,6 +11,7 @@ Working tree was clean. Local `make ci` passed before RTL changes on 2026-10-20
 |---|---|---|
 | High (performance) | `axi_interconnect` has one W and one R FSM globally; unrelated targets serialize. | Reuse the existing route-locking arbiter per target. |
 | High (verification) | 418 integration + 1,346 burst checks are comparisons, not coverage points. Burst checker checks stability, not full AXI compliance. | Retain tests; add independent concurrency, queue, ordering, reset and parameter tests. |
+| High (evidence) | Original `synth -run begin:coarse` stops before the coarse label. Logs retain 5 RAM processes: this is elaboration, not coarse synthesis. Discovered while validating the new queue. | Correct to `begin:fine`, require `check -assert`, and distinguish corrected evidence. |
 | High (integration) | `axi_top` serializes its command port; it cannot expose fabric throughput. | Benchmark direct AXI manager interfaces. |
 | Medium | IDs are preserved, but no outstanding storage exists. | Bounded address queues; retain ownership through completion, enforce strict per-manager ordering. |
 | Medium | Decode subtract/shift, linear RR scan, dynamic muxes and READY propagation are combinational. | Measure structure and simulations; do not assert timing without STA. |
@@ -38,7 +39,7 @@ checks endpoint carry at minimum address width. They are not 1,764 unique scenar
 functional coverage, code coverage, or proof of conformance. Existing maximum burst,
 WRAP, strobe, negative, stall and competing-manager tests passed.
 
-Generic coarse RAM synthesis: 599 wires, 9,803 wire bits, 215 generic cells,
+Original RAM elaboration-only statistics (the advertised coarse pass did not execute): 599 wires, 9,803 wire bits, 215 generic cells,
 one 32,768-bit memory. This is neither full-interconnect area nor mapped ASIC area.
 No Liberty library, STA executable or place-and-route evidence was found. No Fmax
 or timing-closed bandwidth is claimed.
