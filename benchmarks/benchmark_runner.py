@@ -28,6 +28,7 @@ def main():
     p.add_argument('--revision', help='Read immutable RTL from git (e.g. '+BASELINE+'); working tree by default')
     p.add_argument('--label', default='current')
     p.add_argument('--config', action='append', help='NMxNSxDATA_W, repeatable; default 2x2x64')
+    p.add_argument('--pipeline',type=int,choices=[0,1],default=0)
     p.add_argument('--depth', type=int, default=4)
     p.add_argument('--addr-width', type=int, default=32)
     p.add_argument('--clock-mhz', type=float, default=100)
@@ -62,17 +63,23 @@ def main():
     else:
         names = [f.name for f in sorted(rtl_dir.glob('*.sv')) if 'checker' not in f.name]
         names.sort(key=lambda f: f != 'axi_if.sv')
-    queued = 'MAX_OUTSTANDING' in (rtl_dir/'axi_interconnect.sv').read_text()
+    fabric_source=(rtl_dir/'axi_interconnect.sv').read_text()
+    queued = 'MAX_OUTSTANDING' in fabric_source
+    supports_pipeline = 'TARGET_PIPELINE' in fabric_source
+    if a.pipeline and not supports_pipeline:
+        p.error('selected RTL revision does not support target pipelining')
     rows, ports = [], []
     for cfg in a.config or ['2x2x64']:
         nm, ns, width = map(int, cfg.split('x'))
-        build = ROOT/'build'/f'bench-{a.label}-{cfg}-d{a.depth}-a{a.addr_width}'
+        build = ROOT/'build'/f'bench-{a.label}-{cfg}-d{a.depth}-a{a.addr_width}-p{a.pipeline}'
         build.mkdir(parents=True, exist_ok=True)
         command = ['verilator', *FLAGS, '--binary', '-j', '4', '--Mdir', str(build),
                    '--top-module', 'tb_axi_benchmark', f'-GNM={nm}', f'-GNS={ns}',
-                   f'-GDATA_W={width}', f'-GADDR_W={a.addr_width}', f'-GDEPTH={a.depth}']
+                   f'-GDATA_W={width}', f'-GADDR_W={a.addr_width}', f'-GDEPTH={a.depth}', f'-GPIPELINE={a.pipeline}']
         if queued:
             command += ['+define+QUEUED_FABRIC', '+define+AXI_INTERNAL_CHECKS']
+        if supports_pipeline:
+            command += ['+define+PIPELINED_FABRIC']
         command += ['tb/tb_axi_benchmark.sv', 'src/axi_protocol_checker.sv'] + [str(rtl_dir/f) for f in names]
         run(command, results/f'{cfg}-build.log')
         max_burst = min(256, 4096//(width//8))
@@ -101,7 +108,7 @@ def main():
             if 'BENCHMARK PASS' not in output:
                 raise RuntimeError('Missing benchmark completion')
             total = next(list(map(int, l.split(',')[1:])) for l in output.splitlines() if l.startswith('TOTAL,'))
-            cycles, peak_w, peak_r, peak_ow, peak_or = total
+            cycles, peak_w, peak_r, peak_ow, peak_or, cumulative_w, cumulative_r = total
             ms = [list(map(int, l.split(',')[1:])) for l in output.splitlines() if l.startswith('MANAGER,')]
             ts = [list(map(int, l.split(',')[1:])) for l in output.splitlines() if l.startswith('TARGET,')]
             wbeats, rbeats = sum(m[1] for m in ms), sum(m[2] for m in ms)
@@ -114,7 +121,7 @@ def main():
                 assert peak_ow<=managers*a.depth and peak_or<=managers*a.depth, 'Outstanding bound exceeded'
             gbps = (wbeats+rbeats)*(width//8)/cycles*a.clock_mhz/1000
             row = dict(label=a.label, config=cfg, case=case, depth=a.depth if queued else 1,
-                       burst=burst, mode=mode, distribution=dist, ready_percent=ready,
+                       pipeline=a.pipeline, burst=burst, mode=mode, distribution=dist, ready_percent=ready,
                        arrival_percent=arrival, seed=a.seed, transactions=a.transactions,
                        active_managers=managers, reads_per_manager=reads, writes_per_manager=writes, cycles=cycles, write_beats=wbeats, read_beats=rbeats,
                        useful_bytes=(wbeats+rbeats)*(width//8), bus_bytes=(wbeats+rbeats)*(width//8),
@@ -133,7 +140,10 @@ def main():
                        arb_aw_wait=sum(m[12] for m in ms), arb_ar_wait=sum(m[13] for m in ms),
                        w_stalls=sum(m[5] for m in ms), r_stalls=sum(m[6] for m in ms),
                        peak_w_beats_per_cycle=peak_w, peak_r_beats_per_cycle=peak_r,
-                       peak_outstanding_w=peak_ow, peak_outstanding_r=peak_or)
+                       peak_outstanding_w=peak_ow, peak_outstanding_r=peak_or,
+                       avg_outstanding_w=cumulative_w/cycles, avg_outstanding_r=cumulative_r/cycles,
+                       outstanding_w_utilization=cumulative_w/cycles/(managers*a.depth if queued else 1),
+                       outstanding_r_utilization=cumulative_r/cycles/(managers*a.depth if queued else 1))
             rows.append(row)
             for kind, values in [('manager', ms), ('target', ts)]:
                 for v in values:

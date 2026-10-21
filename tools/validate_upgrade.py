@@ -10,13 +10,16 @@ REPORTS.mkdir(parents=True,exist_ok=True)
 commands=[('final-ci',['make','ci']),('extended',['make','extended']),
           ('netlist-depth3',['python3','synthesis/scripts/check_queue_netlist.py','--depth','3'])]
 for label,extra in [('baseline',['--revision','2ec5059cf00b51b40ee441fab273f5a2d1d8f462']),
-                    ('concurrent-d1',['--depth','1']),('queued-d4',['--depth','4'])]:
+                    ('concurrent-d1',['--depth','1']),('queued-d4',['--depth','4']),('pipelined-d4',['--depth','4','--pipeline','1'])]:
     commands.append((label+'-bench',['python3','benchmarks/benchmark_runner.py','--label',label,*extra,
         '--config','2x2x64','--config','4x4x128','--config','8x8x256']))
 for width in [32,64,128,256]:
     commands.append((f'ram-{width}',['python3','synthesis/scripts/run_synthesis.py','--label','corrected','--width',str(width)]))
 for depth in [1,3,4]:
     commands.append((f'queue-{depth}',['python3','synthesis/scripts/run_synthesis.py','--queue','--label','queued','--width','64','--depth',str(depth)]))
+for width in [64,256]:
+    commands.append((f'slice-{width}',['python3','synthesis/scripts/run_synthesis.py','--slice','--width',str(width),'--label','pipeline']))
+commands.append(('waveform',['make','waveform']))
 results=[]
 for name,cmd in commands:
     print('Running '+name,flush=True)

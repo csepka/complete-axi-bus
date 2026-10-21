@@ -33,8 +33,8 @@ SIGNALS = [
     Signal("tb_axi_burst.m_axi[0].AWREADY", "M0 AWREADY"),
     Signal("tb_axi_burst.s_axi[0].AWVALID", "S0 AWVALID"),
     Signal("tb_axi_burst.s_axi[0].AWREADY", "S0 AWREADY"),
-    Signal("tb_axi_burst.dut.w_addr_hold", "Grant held"),
-    Signal("tb_axi_burst.dut.w_hold_owner", "Held owner"),
+    Signal("tb_axi_burst.dut.g_target[0].u_arbiter.w_addr_hold", "Grant held"),
+    Signal("tb_axi_burst.dut.g_target[0].u_arbiter.w_hold_owner", "Held owner"),
 ]
 
 UNIT_FS = {
@@ -121,18 +121,18 @@ def clipped_changes(signal: Signal, start: int, end: int) -> list[tuple[int, str
     return changes
 
 
-def first_rising_handshake(start: int, end: int) -> int:
+def first_rising_handshake(start: int, end: int, port: str = "m_axi[1]") -> int:
     by_path = {signal.path: signal for signal in SIGNALS}
     clock = by_path["tb_axi_burst.ACLK"]
-    valid = by_path["tb_axi_burst.m_axi[1].AWVALID"]
-    ready = by_path["tb_axi_burst.m_axi[1].AWREADY"]
+    valid = by_path[f"tb_axi_burst.{port}.AWVALID"]
+    ready = by_path[f"tb_axi_burst.{port}.AWREADY"]
     for time, value in clock.changes:
         if start <= time <= end and value == "1":
             # READY can fall in the same VCD timestamp after the accepting edge,
             # so sample the settled values immediately before the clock event.
             if value_at(valid, time - 1) == "1" and value_at(ready, time - 1) == "1":
                 return time
-    raise ValueError("no manager 1 AW handshake found in the selected window")
+    raise ValueError("no AW handshake found in the selected window")
 
 
 def bus_label(value: str, width: int) -> str:
@@ -176,7 +176,13 @@ def render_svg(output: Path, start: int, end: int, scale_fs: int) -> None:
     event_x = x(handshake_time)
     handshake_ns = handshake_time * scale_fs / UNIT_FS["ns"]
     svg.append(f'<line class="event" x1="{event_x:.2f}" y1="{top - 12}" x2="{event_x:.2f}" y2="{height - bottom + 4}"/>')
-    svg.append(f'<text class="eventText" x="{event_x - 5:.2f}" y="{top - 40}" text-anchor="end">M1 AW handshake ({handshake_ns:g} ns)</text>')
+    svg.append(f'<text class="eventText" x="{event_x - 5:.2f}" y="{top - 40}" text-anchor="end">M1 queued ({handshake_ns:g} ns)</text>')
+
+    target_time = first_rising_handshake(start, end, "s_axi[0]")
+    target_x = x(target_time)
+    target_ns = target_time * scale_fs / UNIT_FS["ns"]
+    svg.append(f'<line class="event" x1="{target_x:.2f}" y1="{top - 12}" x2="{target_x:.2f}" y2="{height - bottom + 4}"/>')
+    svg.append(f'<text class="eventText" x="{target_x - 5:.2f}" y="{top - 40}" text-anchor="end">S0 accepts ({target_ns:g} ns)</text>')
 
     for index, signal in enumerate(SIGNALS):
         row_top = top + index * row_height
@@ -205,7 +211,7 @@ def render_svg(output: Path, start: int, end: int, scale_fs: int) -> None:
                 if x2 - x1 > 44:
                     svg.append(f'<text class="busText" x="{(x1 + x2) / 2:.2f}" y="{mid + 4:.2f}" text-anchor="middle">{html.escape(bus_label(value, signal.width))}</text>')
 
-    svg.append(f'<text class="sub" x="{left}" y="{height - 18}">Window: {start_ns:g}–{end_ns:g} ns · source regression: BURST REGRESSION PASS (1,346 checks)</text>')
+    svg.append(f'<text class="sub" x="{left}" y="{height - 18}">Window: {start_ns:g}–{end_ns:g} ns · source regression: burst regression (see run log for check count)</text>')
     svg.append("</svg>")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(svg) + "\n", encoding="utf-8")

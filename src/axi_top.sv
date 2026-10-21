@@ -7,6 +7,7 @@ module axi_top #(
     parameter int MGR_SEL_W    = (NM > 1) ? $clog2(NM) : 1,
     parameter int S_ADDR_WIDTH = 16,
     parameter int MAX_OUTSTANDING = 4,
+    parameter bit TARGET_PIPELINE = 0,
     parameter int MEM_BYTES    = 4096
 ) (
     input  logic                 ACLK,
@@ -110,7 +111,8 @@ module axi_top #(
         .DATA_W(DATA_W),
         .ID_W(ID_W),
         .S_ADDR_WIDTH(S_ADDR_WIDTH),
-        .MAX_OUTSTANDING(MAX_OUTSTANDING)
+        .MAX_OUTSTANDING(MAX_OUTSTANDING),
+        .TARGET_PIPELINE(TARGET_PIPELINE)
     ) u_interconnect (
         .ACLK,
         .ARESETn,

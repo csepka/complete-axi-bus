@@ -4,6 +4,7 @@ module axi_interconnect #(
     parameter int NM=2, NS=2, ADDR_W=32, DATA_W=32, ID_W=4,
     parameter int S_ADDR_WIDTH=16,
     parameter int MAX_OUTSTANDING=4,
+    parameter bit TARGET_PIPELINE=0,
     parameter logic [ADDR_W-1:0] BASE_ADDR='0
 )(
     input logic ACLK, ARESETn,
@@ -93,37 +94,9 @@ module axi_interconnect #(
             assign g_manager[m].mux_RLAST[t]=links[m].RLAST;
         end
         if(t<NS) begin : g_real
-            assign s_axi[t].AWVALID=endpoint[0].AWVALID;
-            assign endpoint[0].AWREADY=s_axi[t].AWREADY;
-            assign s_axi[t].AWADDR=endpoint[0].AWADDR;
-            assign s_axi[t].AWPROT=endpoint[0].AWPROT;
-            assign s_axi[t].AWID=endpoint[0].AWID;
-            assign s_axi[t].AWLEN=endpoint[0].AWLEN;
-            assign s_axi[t].AWSIZE=endpoint[0].AWSIZE;
-            assign s_axi[t].AWBURST=endpoint[0].AWBURST;
-            assign s_axi[t].WVALID=endpoint[0].WVALID;
-            assign endpoint[0].WREADY=s_axi[t].WREADY;
-            assign s_axi[t].WDATA=endpoint[0].WDATA;
-            assign s_axi[t].WSTRB=endpoint[0].WSTRB;
-            assign s_axi[t].WLAST=endpoint[0].WLAST;
-            assign endpoint[0].BVALID=s_axi[t].BVALID;
-            assign s_axi[t].BREADY=endpoint[0].BREADY;
-            assign endpoint[0].BRESP=s_axi[t].BRESP;
-            assign endpoint[0].BID=s_axi[t].BID;
-            assign s_axi[t].ARVALID=endpoint[0].ARVALID;
-            assign endpoint[0].ARREADY=s_axi[t].ARREADY;
-            assign s_axi[t].ARADDR=endpoint[0].ARADDR;
-            assign s_axi[t].ARPROT=endpoint[0].ARPROT;
-            assign s_axi[t].ARID=endpoint[0].ARID;
-            assign s_axi[t].ARLEN=endpoint[0].ARLEN;
-            assign s_axi[t].ARSIZE=endpoint[0].ARSIZE;
-            assign s_axi[t].ARBURST=endpoint[0].ARBURST;
-            assign endpoint[0].RVALID=s_axi[t].RVALID;
-            assign s_axi[t].RREADY=endpoint[0].RREADY;
-            assign endpoint[0].RDATA=s_axi[t].RDATA;
-            assign endpoint[0].RRESP=s_axi[t].RRESP;
-            assign endpoint[0].RID=s_axi[t].RID;
-            assign endpoint[0].RLAST=s_axi[t].RLAST;
+            axi_register_slice #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W),
+                .ENABLE(TARGET_PIPELINE)) u_slice(
+                .ACLK,.ARESETn,.up(endpoint[0]),.down(s_axi[t]));
         end else begin : g_error
             // FORCE_DECERR ensures the arbiter never drives this unused endpoint.
             assign endpoint[0].AWREADY='0;

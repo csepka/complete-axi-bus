@@ -2,6 +2,7 @@
 // Direct AXI traffic: deterministic arrival and sink pacing, independent checks.
 module tb_axi_benchmark #(
     parameter int NM=2, NS=2, DATA_W=64, ADDR_W=32,
+    parameter bit PIPELINE=0,
     parameter int DEPTH=1
 );
     localparam int ID_W=4, BYTES=DATA_W/8;
@@ -120,6 +121,9 @@ module tb_axi_benchmark #(
     axi_interconnect #(.NM(NM),.NS(NS),.ADDR_W(ADDR_W),.DATA_W(DATA_W)
 `ifdef QUEUED_FABRIC
         ,.MAX_OUTSTANDING(DEPTH)
+`ifdef PIPELINED_FABRIC
+        ,.TARGET_PIPELINE(PIPELINE)
+`endif
 `endif
     ) dut(.ACLK,.ARESETn,.m_axi,.s_axi);
 
@@ -136,6 +140,7 @@ module tb_axi_benchmark #(
     int wbeats[NM], rbeats[NM], wait_aw[NM], wait_ar[NM], stall_w[NM], stall_r[NM];
     int target_w[NS], target_r[NS];
     int lat_sum[NM], lat_max[NM], completed[NM], peak_w=0, peak_r=0;
+    longint unsigned cumulative_w=0,cumulative_r=0;
     int outstanding_w[NM], outstanding_r[NM], peak_ow=0, peak_or=0;
     int arb_aw_wait[NM],arb_ar_wait[NM];
     int aw_offer[NM], ar_offer[NM], offer_sum[NM], offer_max[NM];
@@ -171,7 +176,7 @@ module tb_axi_benchmark #(
             && ready_pct>0 && ready_pct<=100 && arrival_pct>0 && arrival_pct<=100)
             else $fatal(1,"invalid benchmark configuration");
         ARESETn=0;
-        assert(DEPTH>0) else $fatal;
+        assert(DEPTH>0 && (PIPELINE==0 || PIPELINE==1)) else $fatal;
         reads=(mode!=1)?transactions:0;writes=(mode!=0)?transactions:0;
         if($value$plusargs("read_percent=%d",read_percent))begin
             assert(read_percent>=0 && read_percent<=100 && mode==2)else $fatal(1,"invalid mix");
@@ -250,6 +255,7 @@ module tb_axi_benchmark #(
                 if(target_rfire[t])target_r[t]++;
             end
             if(fw>peak_w)peak_w=fw;if(fr>peak_r)peak_r=fr;
+            cumulative_w+=64'(ow);cumulative_r+=64'(orr);
             if(ow>peak_ow)peak_ow=ow;if(orr>peak_or)peak_or=orr;
             if(done_all) break;
             if(cycles>2000000) $fatal(1,"benchmark timeout");
@@ -261,7 +267,7 @@ module tb_axi_benchmark #(
                 d_awvalid &= ~af;d_arvalid &= ~rf;d_wvalid &= ~wf;
             end
         end
-        $display("TOTAL,%0d,%0d,%0d,%0d,%0d",cycles,peak_w,peak_r,peak_ow,peak_or);
+        $display("TOTAL,%0d,%0d,%0d,%0d,%0d,%0d,%0d",cycles,peak_w,peak_r,peak_ow,peak_or,cumulative_w,cumulative_r);
         for(int m=0;m<NM;m++)
             $display("MANAGER,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d,%0d",m,wbeats[m],rbeats[m],wait_aw[m],wait_ar[m],stall_w[m],stall_r[m],lat_sum[m],lat_max[m],completed[m],offer_sum[m],offer_max[m],arb_aw_wait[m],arb_ar_wait[m]);
         for(int s=0;s<NS;s++) $display("TARGET,%0d,%0d,%0d",s,target_w[s],target_r[s]);

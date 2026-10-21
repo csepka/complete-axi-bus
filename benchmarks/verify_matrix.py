@@ -14,3 +14,7 @@ for label,cfg,depth,addr,seed,distribution in cases:
 subprocess.run(['python3','benchmarks/benchmark_runner.py','--label','mixed75','--config','3x2x64',
     '--depth','3','--burst','8','--transactions','64','--read-percent','75','--distribution','2',
     '--ready','57','--arrival','63','--seed','42'],cwd=ROOT,check=True)
+
+subprocess.run(['python3','benchmarks/benchmark_runner.py','--label','pipeline-stress','--config','3x2x64',
+    '--depth','3','--pipeline','1','--burst','8','--transactions','128','--distribution','2',
+    '--ready','37','--arrival','61','--seed','71'],cwd=ROOT,check=True)

@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 module tb_axi_outstanding #(
+    parameter bit PIPELINE=0,
     parameter int DEPTH=4, DATA_W=64, ADDR_W=40
 );
     localparam int NM=3,NS=3,ID_W=4,BYTES=DATA_W/8,WORDS=4096/BYTES;
@@ -102,7 +103,7 @@ module tb_axi_outstanding #(
         end
     endgenerate
     axi_interconnect #(.NM(NM),.NS(NS),.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W),
-        .MAX_OUTSTANDING(DEPTH),.BASE_ADDR(BASE)) dut(.ACLK,.ARESETn,.m_axi,.s_axi);
+        .MAX_OUTSTANDING(DEPTH),.TARGET_PIPELINE(PIPELINE),.BASE_ADDR(BASE)) dut(.ACLK,.ARESETn,.m_axi,.s_axi);
     always @(posedge ACLK) if(!ARESETn) begin
         max_w_parallel<=0;max_r_parallel<=0;
     end else begin

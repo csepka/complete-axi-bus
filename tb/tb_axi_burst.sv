@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module tb_axi_burst;
+module tb_axi_burst #(parameter bit PIPELINE=0);
     localparam int ADDR_W       = 32;
     localparam int DATA_W       = 32;
     localparam int ID_W         = 4;
@@ -148,7 +148,8 @@ module tb_axi_burst;
         .ADDR_W(ADDR_W),
         .DATA_W(DATA_W),
         .ID_W(ID_W),
-        .S_ADDR_WIDTH(S_ADDR_WIDTH)
+        .S_ADDR_WIDTH(S_ADDR_WIDTH),
+        .TARGET_PIPELINE(PIPELINE)
     ) dut (
         .ACLK, .ARESETn, .m_axi, .s_axi
     );
