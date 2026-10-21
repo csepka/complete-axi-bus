@@ -1,0 +1,65 @@
+
+-- Running command `read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set DATA_W 128 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat' --
+
+1. Executing Verilog-2005 frontend: src/axi_ram.sv
+Parsing SystemVerilog input from `src/axi_ram.sv' to AST representation.
+Generating RTLIL representation for module `\axi_ram'.
+Successfully finished Verilog frontend.
+Parameter \DATA_W = 128
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_ram'.
+Parameter \DATA_W = 128
+Generating RTLIL representation for module `$paramod\axi_ram\DATA_W=32'00000000000000000000000010000000'.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+3.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+5. Printing statistics.
+
+=== axi_ram ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      611 wires
+    11411 wire bits
+      114 public wires
+     2179 public wire bits
+       31 ports
+      396 port bits
+        1 memories
+    32768 memory bits
+        5 processes
+      215 cells
+       24   $add
+       10   $and
+       49   $eq
+        6   $ge
+       16   $gt
+       30   $logic_and
+       13   $logic_not
+       17   $logic_or
+        3   $memrd
+        4   $mux
+        9   $ne
+        6   $not
+       12   $shl
+        4   $shr
+       12   $sub
+

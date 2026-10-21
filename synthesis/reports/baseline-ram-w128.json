@@ -1,0 +1,13 @@
+{
+  "arguments": {
+    "fabric": false,
+    "nm": 2,
+    "ns": 2,
+    "width": 128,
+    "depth": 4,
+    "label": "baseline"
+  },
+  "command": "read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set DATA_W 128 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat",
+  "yosys": "Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)",
+  "exit_code": 0
+}

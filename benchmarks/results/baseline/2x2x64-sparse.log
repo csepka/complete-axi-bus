@@ -1,0 +1,10 @@
+TOTAL,1156,1,1,1,1
+MANAGER,0,512,512,985,932,0,0,1056,17,64,3037,53
+MANAGER,1,512,512,1030,928,0,0,1056,17,64,3078,53
+TARGET,0,512,512
+TARGET,1,512,512
+BENCHMARK PASS
+- tb/tb_axi_benchmark.sv:245: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
+- Verilator: $finish at 12us; walltime 0.001 s; speed 13.218 ms/s
+- Verilator: cpu 0.001 s on 1 threads; alloced 2 MB

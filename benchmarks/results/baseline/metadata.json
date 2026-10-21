@@ -1,0 +1,25 @@
+{
+  "revision": "2ec5059cf00b51b40ee441fab273f5a2d1d8f462",
+  "dirty": true,
+  "rtl_from_git": true,
+  "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101",
+  "arguments": {
+    "revision": "2ec5059cf00b51b40ee441fab273f5a2d1d8f462",
+    "label": "baseline",
+    "config": [
+      "2x2x64",
+      "4x4x128",
+      "8x8x256"
+    ],
+    "depth": 4,
+    "addr_width": 32,
+    "clock_mhz": 100,
+    "transactions": 32,
+    "seed": 7,
+    "burst": null,
+    "mode": 2,
+    "distribution": 0,
+    "ready": 100,
+    "arrival": 100
+  }
+}

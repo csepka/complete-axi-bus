@@ -1,0 +1,1 @@
+read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set DATA_W 256 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat
