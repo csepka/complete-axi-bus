@@ -1,0 +1,25 @@
+{
+  "revision": "b2e596873827ab002764d3527fa00e8e956e7207",
+  "dirty": true,
+  "rtl_from_git": false,
+  "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101",
+  "arguments": {
+    "revision": null,
+    "label": "concurrent-d1",
+    "config": [
+      "2x2x64",
+      "4x4x128",
+      "8x8x256"
+    ],
+    "depth": 1,
+    "addr_width": 32,
+    "clock_mhz": 100,
+    "transactions": 32,
+    "seed": 7,
+    "burst": null,
+    "mode": 2,
+    "distribution": 0,
+    "ready": 100,
+    "arrival": 100
+  }
+}

@@ -1,457 +1,145 @@
+// Per-target concurrency with one ordered head transaction per manager/direction.
+// Payload storage and outstanding accounting live in axi_request_queue.
 module axi_interconnect #(
-    parameter int NM             = 2,
-    parameter int NS             = 2,
-    parameter int ADDR_W         = 32,
-    parameter int DATA_W         = 32,
-    parameter int ID_W           = 4,
-    parameter int S_ADDR_WIDTH   = 16,
-    parameter logic [ADDR_W-1:0] BASE_ADDR = '0
-) (
-    input logic ACLK,
-    input logic ARESETn,
-    axi_if m_axi [NM],
-    axi_if s_axi [NS]
+    parameter int NM=2, NS=2, ADDR_W=32, DATA_W=32, ID_W=4,
+    parameter int S_ADDR_WIDTH=16,
+    parameter int MAX_OUTSTANDING=1,
+    parameter logic [ADDR_W-1:0] BASE_ADDR='0
+)(
+    input logic ACLK, ARESETn,
+    axi_if m_axi[NM],
+    axi_if s_axi[NS]
 );
-    localparam int BYTES   = DATA_W / 8;
-    localparam int M_IDX_W = (NM > 1) ? $clog2(NM) : 1;
-    localparam int S_IDX_W = (NS > 1) ? $clog2(NS) : 1;
-    localparam logic [ADDR_W-1:0] WINDOW_MASK =
-        {ADDR_W{1'b1}} >> (ADDR_W - S_ADDR_WIDTH);
-
-    localparam logic [1:0] RESP_DECERR = 2'b11;
-
-    typedef enum logic [1:0] {W_IDLE, W_DATA, W_RESP} w_state_t;
-    typedef enum logic       {R_IDLE, R_DATA} r_state_t;
-
-    w_state_t w_state;
-    r_state_t r_state;
-
-    logic [M_IDX_W-1:0] w_rr_ptr, r_rr_ptr;
-    logic [M_IDX_W-1:0] w_owner, r_owner;
-    logic [S_IDX_W-1:0] w_target, r_target;
-    logic                w_decode_error, r_decode_error;
-    logic [ID_W-1:0]     w_error_id, r_error_id;
-    logic [8:0]          w_beats_left, r_beats_left;
-
-    // Address grants are retained while a selected subordinate applies backpressure.
-    logic                w_addr_hold, r_addr_hold;
-    logic [M_IDX_W-1:0]  w_hold_owner, r_hold_owner;
-    logic [S_IDX_W-1:0]  w_hold_target, r_hold_target;
-    logic                w_hold_dec_ok, r_hold_dec_ok;
-
-    logic                w_have_grant, r_have_grant;
-    logic [M_IDX_W-1:0]  w_pick, r_pick;
-    logic                w_dec_ok, r_dec_ok;
-    logic [S_IDX_W-1:0]  w_dec_target, r_dec_target;
-    logic [ADDR_W-1:0]   w_dec_slot, r_dec_slot;
-    wire                  w_addr_present = w_addr_hold || w_have_grant;
-    wire                  r_addr_present = r_addr_hold || r_have_grant;
-    wire [M_IDX_W-1:0]    w_sel_owner = w_addr_hold ? w_hold_owner : w_pick;
-    wire [M_IDX_W-1:0]    r_sel_owner = r_addr_hold ? r_hold_owner : r_pick;
-    wire [S_IDX_W-1:0]    w_sel_target = w_addr_hold ? w_hold_target : w_dec_target;
-    wire [S_IDX_W-1:0]    r_sel_target = r_addr_hold ? r_hold_target : r_dec_target;
-    wire                  w_sel_dec_ok = w_addr_hold ? w_hold_dec_ok : w_dec_ok;
-    wire                  r_sel_dec_ok = r_addr_hold ? r_hold_dec_ok : r_dec_ok;
-
-    logic [NM-1:0] M_AWVALID, M_AWREADY;
-    logic [NM-1:0][ADDR_W-1:0] M_AWADDR;
-    logic [NM-1:0][2:0] M_AWPROT;
-    logic [NM-1:0][ID_W-1:0] M_AWID;
-    logic [NM-1:0][7:0] M_AWLEN;
-    logic [NM-1:0][2:0] M_AWSIZE;
-    logic [NM-1:0][1:0] M_AWBURST;
-
-    logic [NM-1:0] M_WVALID, M_WREADY, M_WLAST;
-    logic [NM-1:0][DATA_W-1:0] M_WDATA;
-    logic [NM-1:0][BYTES-1:0] M_WSTRB;
-
-    logic [NM-1:0] M_BVALID, M_BREADY;
-    logic [NM-1:0][1:0] M_BRESP;
-    logic [NM-1:0][ID_W-1:0] M_BID;
-
-    logic [NM-1:0] M_ARVALID, M_ARREADY;
-    logic [NM-1:0][ADDR_W-1:0] M_ARADDR;
-    logic [NM-1:0][2:0] M_ARPROT;
-    logic [NM-1:0][ID_W-1:0] M_ARID;
-    logic [NM-1:0][7:0] M_ARLEN;
-    logic [NM-1:0][2:0] M_ARSIZE;
-    logic [NM-1:0][1:0] M_ARBURST;
-
-    logic [NM-1:0] M_RVALID, M_RREADY, M_RLAST;
-    logic [NM-1:0][DATA_W-1:0] M_RDATA;
-    logic [NM-1:0][1:0] M_RRESP;
-    logic [NM-1:0][ID_W-1:0] M_RID;
-
-    logic [NS-1:0] S_AWVALID, S_AWREADY;
-    logic [NS-1:0][ADDR_W-1:0] S_AWADDR;
-    logic [NS-1:0][2:0] S_AWPROT;
-    logic [NS-1:0][ID_W-1:0] S_AWID;
-    logic [NS-1:0][7:0] S_AWLEN;
-    logic [NS-1:0][2:0] S_AWSIZE;
-    logic [NS-1:0][1:0] S_AWBURST;
-
-    logic [NS-1:0] S_WVALID, S_WREADY, S_WLAST;
-    logic [NS-1:0][DATA_W-1:0] S_WDATA;
-    logic [NS-1:0][BYTES-1:0] S_WSTRB;
-
-    logic [NS-1:0] S_BVALID, S_BREADY;
-    logic [NS-1:0][1:0] S_BRESP;
-    logic [NS-1:0][ID_W-1:0] S_BID;
-
-    logic [NS-1:0] S_ARVALID, S_ARREADY;
-    logic [NS-1:0][ADDR_W-1:0] S_ARADDR;
-    logic [NS-1:0][2:0] S_ARPROT;
-    logic [NS-1:0][ID_W-1:0] S_ARID;
-    logic [NS-1:0][7:0] S_ARLEN;
-    logic [NS-1:0][2:0] S_ARSIZE;
-    logic [NS-1:0][1:0] S_ARBURST;
-
-    logic [NS-1:0] S_RVALID, S_RREADY, S_RLAST;
-    logic [NS-1:0][DATA_W-1:0] S_RDATA;
-    logic [NS-1:0][1:0] S_RRESP;
-    logic [NS-1:0][ID_W-1:0] S_RID;
-
-    generate
-        for (genvar m = 0; m < NM; m++) begin : g_manager_map
-            assign M_AWVALID[m] = m_axi[m].AWVALID;
-            assign M_AWADDR[m] = m_axi[m].AWADDR;
-            assign M_AWPROT[m] = m_axi[m].AWPROT;
-            assign M_AWID[m] = m_axi[m].AWID;
-            assign M_AWLEN[m] = m_axi[m].AWLEN;
-            assign M_AWSIZE[m] = m_axi[m].AWSIZE;
-            assign M_AWBURST[m] = m_axi[m].AWBURST;
-            assign m_axi[m].AWREADY = M_AWREADY[m];
-
-            assign M_WVALID[m] = m_axi[m].WVALID;
-            assign M_WDATA[m] = m_axi[m].WDATA;
-            assign M_WSTRB[m] = m_axi[m].WSTRB;
-            assign M_WLAST[m] = m_axi[m].WLAST;
-            assign m_axi[m].WREADY = M_WREADY[m];
-
-            assign m_axi[m].BVALID = M_BVALID[m];
-            assign m_axi[m].BRESP = M_BRESP[m];
-            assign m_axi[m].BID = M_BID[m];
-            assign M_BREADY[m] = m_axi[m].BREADY;
-
-            assign M_ARVALID[m] = m_axi[m].ARVALID;
-            assign M_ARADDR[m] = m_axi[m].ARADDR;
-            assign M_ARPROT[m] = m_axi[m].ARPROT;
-            assign M_ARID[m] = m_axi[m].ARID;
-            assign M_ARLEN[m] = m_axi[m].ARLEN;
-            assign M_ARSIZE[m] = m_axi[m].ARSIZE;
-            assign M_ARBURST[m] = m_axi[m].ARBURST;
-            assign m_axi[m].ARREADY = M_ARREADY[m];
-
-            assign m_axi[m].RVALID = M_RVALID[m];
-            assign m_axi[m].RDATA = M_RDATA[m];
-            assign m_axi[m].RRESP = M_RRESP[m];
-            assign m_axi[m].RID = M_RID[m];
-            assign m_axi[m].RLAST = M_RLAST[m];
-            assign M_RREADY[m] = m_axi[m].RREADY;
+    localparam int SEL_W=$clog2(NS+1);
+    localparam logic [ADDR_W-1:0] WINDOW_MASK={ADDR_W{1'b1}} >> (ADDR_W-S_ADDR_WIDTH);
+    axi_if #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W)) dispatch[NM](.ACLK,.ARESETn);
+    function automatic logic [SEL_W-1:0] decode(input logic [ADDR_W-1:0] addr);
+        logic [ADDR_W-1:0] slot;
+        slot=(addr-BASE_ADDR)>>S_ADDR_WIDTH;
+        return (addr>=BASE_ADDR && slot<ADDR_W'(NS)) ? SEL_W'(slot) : SEL_W'(NS);
+    endfunction
+    for(genvar m=0;m<NM;m++) begin : g_manager
+        wire [SEL_W-1:0] wselect=decode(dispatch[m].AWADDR);
+        wire [SEL_W-1:0] rselect=decode(dispatch[m].ARADDR);
+        axi_request_queue #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W),
+            .MAX_OUTSTANDING(MAX_OUTSTANDING)) u_queue(
+            .ACLK,.ARESETn,.up(m_axi[m]),.down(dispatch[m]));
+        wire [NS:0] mux_AWREADY;
+        assign dispatch[m].AWREADY=mux_AWREADY[wselect];
+        wire [NS:0] mux_WREADY;
+        assign dispatch[m].WREADY=mux_WREADY[wselect];
+        wire [NS:0] mux_BVALID;
+        assign dispatch[m].BVALID=mux_BVALID[wselect];
+        wire [NS:0][2-1:0] mux_BRESP;
+        assign dispatch[m].BRESP=mux_BRESP[wselect];
+        wire [NS:0][ID_W-1:0] mux_BID;
+        assign dispatch[m].BID=mux_BID[wselect];
+        wire [NS:0] mux_ARREADY;
+        assign dispatch[m].ARREADY=mux_ARREADY[rselect];
+        wire [NS:0] mux_RVALID;
+        assign dispatch[m].RVALID=mux_RVALID[rselect];
+        wire [NS:0][DATA_W-1:0] mux_RDATA;
+        assign dispatch[m].RDATA=mux_RDATA[rselect];
+        wire [NS:0][2-1:0] mux_RRESP;
+        assign dispatch[m].RRESP=mux_RRESP[rselect];
+        wire [NS:0][ID_W-1:0] mux_RID;
+        assign dispatch[m].RID=mux_RID[rselect];
+        wire [NS:0] mux_RLAST;
+        assign dispatch[m].RLAST=mux_RLAST[rselect];
+    end
+    for(genvar t=0;t<=NS;t++) begin : g_target
+        axi_if #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W)) links[NM](.ACLK,.ARESETn);
+        axi_if #(.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W)) endpoint[1](.ACLK,.ARESETn);
+        axi_target_arbiter #(.NM(NM),.NS(1),.ADDR_W(ADDR_W),.DATA_W(DATA_W),.ID_W(ID_W),
+            .S_ADDR_WIDTH(S_ADDR_WIDTH),.BASE_ADDR(t<NS ? BASE_ADDR+(ADDR_W'(t)<<S_ADDR_WIDTH) : BASE_ADDR),
+            .FORCE_DECERR(t==NS)) u_arbiter(.ACLK,.ARESETn,.m_axi(links),.s_axi(endpoint));
+        for(genvar m=0;m<NM;m++) begin : g_link
+            assign links[m].AWVALID=dispatch[m].AWVALID && g_manager[m].wselect==SEL_W'(t);
+            assign g_manager[m].mux_AWREADY[t]=links[m].AWREADY;
+            assign links[m].AWADDR=dispatch[m].AWADDR;
+            assign links[m].AWPROT=dispatch[m].AWPROT;
+            assign links[m].AWID=dispatch[m].AWID;
+            assign links[m].AWLEN=dispatch[m].AWLEN;
+            assign links[m].AWSIZE=dispatch[m].AWSIZE;
+            assign links[m].AWBURST=dispatch[m].AWBURST;
+            assign links[m].WVALID=dispatch[m].WVALID && g_manager[m].wselect==SEL_W'(t);
+            assign g_manager[m].mux_WREADY[t]=links[m].WREADY;
+            assign links[m].WDATA=dispatch[m].WDATA;
+            assign links[m].WSTRB=dispatch[m].WSTRB;
+            assign links[m].WLAST=dispatch[m].WLAST;
+            assign g_manager[m].mux_BVALID[t]=links[m].BVALID;
+            assign links[m].BREADY=dispatch[m].BREADY && g_manager[m].wselect==SEL_W'(t);
+            assign g_manager[m].mux_BRESP[t]=links[m].BRESP;
+            assign g_manager[m].mux_BID[t]=links[m].BID;
+            assign links[m].ARVALID=dispatch[m].ARVALID && g_manager[m].rselect==SEL_W'(t);
+            assign g_manager[m].mux_ARREADY[t]=links[m].ARREADY;
+            assign links[m].ARADDR=dispatch[m].ARADDR;
+            assign links[m].ARPROT=dispatch[m].ARPROT;
+            assign links[m].ARID=dispatch[m].ARID;
+            assign links[m].ARLEN=dispatch[m].ARLEN;
+            assign links[m].ARSIZE=dispatch[m].ARSIZE;
+            assign links[m].ARBURST=dispatch[m].ARBURST;
+            assign g_manager[m].mux_RVALID[t]=links[m].RVALID;
+            assign links[m].RREADY=dispatch[m].RREADY && g_manager[m].rselect==SEL_W'(t);
+            assign g_manager[m].mux_RDATA[t]=links[m].RDATA;
+            assign g_manager[m].mux_RRESP[t]=links[m].RRESP;
+            assign g_manager[m].mux_RID[t]=links[m].RID;
+            assign g_manager[m].mux_RLAST[t]=links[m].RLAST;
         end
-
-        for (genvar s = 0; s < NS; s++) begin : g_subordinate_map
-            assign s_axi[s].AWVALID = S_AWVALID[s];
-            assign s_axi[s].AWADDR = S_AWADDR[s];
-            assign s_axi[s].AWPROT = S_AWPROT[s];
-            assign s_axi[s].AWID = S_AWID[s];
-            assign s_axi[s].AWLEN = S_AWLEN[s];
-            assign s_axi[s].AWSIZE = S_AWSIZE[s];
-            assign s_axi[s].AWBURST = S_AWBURST[s];
-            assign S_AWREADY[s] = s_axi[s].AWREADY;
-
-            assign s_axi[s].WVALID = S_WVALID[s];
-            assign s_axi[s].WDATA = S_WDATA[s];
-            assign s_axi[s].WSTRB = S_WSTRB[s];
-            assign s_axi[s].WLAST = S_WLAST[s];
-            assign S_WREADY[s] = s_axi[s].WREADY;
-
-            assign S_BVALID[s] = s_axi[s].BVALID;
-            assign S_BRESP[s] = s_axi[s].BRESP;
-            assign S_BID[s] = s_axi[s].BID;
-            assign s_axi[s].BREADY = S_BREADY[s];
-
-            assign s_axi[s].ARVALID = S_ARVALID[s];
-            assign s_axi[s].ARADDR = S_ARADDR[s];
-            assign s_axi[s].ARPROT = S_ARPROT[s];
-            assign s_axi[s].ARID = S_ARID[s];
-            assign s_axi[s].ARLEN = S_ARLEN[s];
-            assign s_axi[s].ARSIZE = S_ARSIZE[s];
-            assign s_axi[s].ARBURST = S_ARBURST[s];
-            assign S_ARREADY[s] = s_axi[s].ARREADY;
-
-            assign S_RVALID[s] = s_axi[s].RVALID;
-            assign S_RDATA[s] = s_axi[s].RDATA;
-            assign S_RRESP[s] = s_axi[s].RRESP;
-            assign S_RID[s] = s_axi[s].RID;
-            assign S_RLAST[s] = s_axi[s].RLAST;
-            assign s_axi[s].RREADY = S_RREADY[s];
-        end
-    endgenerate
-
-    always_comb begin : write_arbiter
-        integer idx;
-        w_have_grant = 1'b0;
-        w_pick = w_rr_ptr;
-        for (integer k = 0; k < NM; k = k + 1) begin
-            idx = (int'(w_rr_ptr) + k) % NM;
-            if (!w_have_grant && M_AWVALID[idx]) begin
-                w_have_grant = 1'b1;
-                w_pick = M_IDX_W'(idx);
-            end
-        end
-        w_dec_ok = 1'b0;
-        w_dec_target = '0;
-        w_dec_slot = '0;
-        if (w_have_grant && M_AWADDR[w_pick] >= BASE_ADDR) begin
-            w_dec_slot = (M_AWADDR[w_pick] - BASE_ADDR) >> S_ADDR_WIDTH;
-            if (w_dec_slot < ADDR_W'(NS)) begin
-                w_dec_ok = 1'b1;
-                w_dec_target = S_IDX_W'(w_dec_slot);
-            end
+        if(t<NS) begin : g_real
+            assign s_axi[t].AWVALID=endpoint[0].AWVALID;
+            assign endpoint[0].AWREADY=s_axi[t].AWREADY;
+            assign s_axi[t].AWADDR=endpoint[0].AWADDR;
+            assign s_axi[t].AWPROT=endpoint[0].AWPROT;
+            assign s_axi[t].AWID=endpoint[0].AWID;
+            assign s_axi[t].AWLEN=endpoint[0].AWLEN;
+            assign s_axi[t].AWSIZE=endpoint[0].AWSIZE;
+            assign s_axi[t].AWBURST=endpoint[0].AWBURST;
+            assign s_axi[t].WVALID=endpoint[0].WVALID;
+            assign endpoint[0].WREADY=s_axi[t].WREADY;
+            assign s_axi[t].WDATA=endpoint[0].WDATA;
+            assign s_axi[t].WSTRB=endpoint[0].WSTRB;
+            assign s_axi[t].WLAST=endpoint[0].WLAST;
+            assign endpoint[0].BVALID=s_axi[t].BVALID;
+            assign s_axi[t].BREADY=endpoint[0].BREADY;
+            assign endpoint[0].BRESP=s_axi[t].BRESP;
+            assign endpoint[0].BID=s_axi[t].BID;
+            assign s_axi[t].ARVALID=endpoint[0].ARVALID;
+            assign endpoint[0].ARREADY=s_axi[t].ARREADY;
+            assign s_axi[t].ARADDR=endpoint[0].ARADDR;
+            assign s_axi[t].ARPROT=endpoint[0].ARPROT;
+            assign s_axi[t].ARID=endpoint[0].ARID;
+            assign s_axi[t].ARLEN=endpoint[0].ARLEN;
+            assign s_axi[t].ARSIZE=endpoint[0].ARSIZE;
+            assign s_axi[t].ARBURST=endpoint[0].ARBURST;
+            assign endpoint[0].RVALID=s_axi[t].RVALID;
+            assign s_axi[t].RREADY=endpoint[0].RREADY;
+            assign endpoint[0].RDATA=s_axi[t].RDATA;
+            assign endpoint[0].RRESP=s_axi[t].RRESP;
+            assign endpoint[0].RID=s_axi[t].RID;
+            assign endpoint[0].RLAST=s_axi[t].RLAST;
+        end else begin : g_error
+            // FORCE_DECERR ensures the arbiter never drives this unused endpoint.
+            assign endpoint[0].AWREADY='0;
+            assign endpoint[0].WREADY='0;
+            assign endpoint[0].BVALID='0;
+            assign endpoint[0].BRESP='0;
+            assign endpoint[0].BID='0;
+            assign endpoint[0].ARREADY='0;
+            assign endpoint[0].RVALID='0;
+            assign endpoint[0].RDATA='0;
+            assign endpoint[0].RRESP='0;
+            assign endpoint[0].RID='0;
+            assign endpoint[0].RLAST='0;
         end
     end
-
-    always_comb begin : read_arbiter
-        integer idx;
-        r_have_grant = 1'b0;
-        r_pick = r_rr_ptr;
-        for (integer k = 0; k < NM; k = k + 1) begin
-            idx = (int'(r_rr_ptr) + k) % NM;
-            if (!r_have_grant && M_ARVALID[idx]) begin
-                r_have_grant = 1'b1;
-                r_pick = M_IDX_W'(idx);
-            end
-        end
-        r_dec_ok = 1'b0;
-        r_dec_target = '0;
-        r_dec_slot = '0;
-        if (r_have_grant && M_ARADDR[r_pick] >= BASE_ADDR) begin
-            r_dec_slot = (M_ARADDR[r_pick] - BASE_ADDR) >> S_ADDR_WIDTH;
-            if (r_dec_slot < ADDR_W'(NS)) begin
-                r_dec_ok = 1'b1;
-                r_dec_target = S_IDX_W'(r_dec_slot);
-            end
-        end
-    end
-
-    always_ff @(posedge ACLK or negedge ARESETn) begin
-        if (!ARESETn) begin
-            w_state        <= W_IDLE;
-            w_rr_ptr       <= '0;
-            w_owner        <= '0;
-            w_target       <= '0;
-            w_decode_error <= 1'b0;
-            w_error_id     <= '0;
-            w_beats_left   <= '0;
-            w_addr_hold     <= 1'b0;
-            w_hold_owner    <= '0;
-            w_hold_target   <= '0;
-            w_hold_dec_ok   <= 1'b0;
-        end else begin
-            case (w_state)
-                W_IDLE: begin
-                    if (w_addr_present && M_AWVALID[w_sel_owner] && M_AWREADY[w_sel_owner]) begin
-                        w_owner        <= w_sel_owner;
-                        w_target       <= w_sel_target;
-                        w_decode_error <= !w_sel_dec_ok;
-                        w_error_id     <= M_AWID[w_sel_owner];
-                        w_beats_left   <= {1'b0, M_AWLEN[w_sel_owner]} + 9'd1;
-                        w_rr_ptr       <= (w_sel_owner == M_IDX_W'(NM-1))
-                                          ? '0 : w_sel_owner + 1'b1;
-                        w_addr_hold    <= 1'b0;
-                        w_state        <= W_DATA;
-                    end else if (!w_addr_hold && w_have_grant) begin
-                        w_addr_hold   <= 1'b1;
-                        w_hold_owner  <= w_pick;
-                        w_hold_target <= w_dec_target;
-                        w_hold_dec_ok <= w_dec_ok;
-                    end
-                end
-                W_DATA: begin
-                    if (M_WVALID[w_owner] && M_WREADY[w_owner]) begin
-                        if (w_beats_left == 9'd1)
-                            w_state <= W_RESP;
-                        else
-                            w_beats_left <= w_beats_left - 9'd1;
-                    end
-                end
-                W_RESP: begin
-                    if (M_BVALID[w_owner] && M_BREADY[w_owner])
-                        w_state <= W_IDLE;
-                end
-                default: w_state <= W_IDLE;
-            endcase
-        end
-    end
-
-    always_ff @(posedge ACLK or negedge ARESETn) begin
-        if (!ARESETn) begin
-            r_state        <= R_IDLE;
-            r_rr_ptr       <= '0;
-            r_owner        <= '0;
-            r_target       <= '0;
-            r_decode_error <= 1'b0;
-            r_error_id     <= '0;
-            r_beats_left   <= '0;
-            r_addr_hold     <= 1'b0;
-            r_hold_owner    <= '0;
-            r_hold_target   <= '0;
-            r_hold_dec_ok   <= 1'b0;
-        end else begin
-            case (r_state)
-                R_IDLE: begin
-                    if (r_addr_present && M_ARVALID[r_sel_owner] && M_ARREADY[r_sel_owner]) begin
-                        r_owner        <= r_sel_owner;
-                        r_target       <= r_sel_target;
-                        r_decode_error <= !r_sel_dec_ok;
-                        r_error_id     <= M_ARID[r_sel_owner];
-                        r_beats_left   <= {1'b0, M_ARLEN[r_sel_owner]} + 9'd1;
-                        r_rr_ptr       <= (r_sel_owner == M_IDX_W'(NM-1))
-                                          ? '0 : r_sel_owner + 1'b1;
-                        r_addr_hold    <= 1'b0;
-                        r_state        <= R_DATA;
-                    end else if (!r_addr_hold && r_have_grant) begin
-                        r_addr_hold   <= 1'b1;
-                        r_hold_owner  <= r_pick;
-                        r_hold_target <= r_dec_target;
-                        r_hold_dec_ok <= r_dec_ok;
-                    end
-                end
-                R_DATA: begin
-                    if (M_RVALID[r_owner] && M_RREADY[r_owner]) begin
-                        if (M_RLAST[r_owner]) begin
-                            r_state <= R_IDLE;
-                        end else if (r_decode_error) begin
-                            r_beats_left <= r_beats_left - 9'd1;
-                        end
-                    end
-                end
-                default: r_state <= R_IDLE;
-            endcase
-        end
-    end
-
-    always_comb begin : route_channels
-        for (integer m = 0; m < NM; m = m + 1) begin
-            M_AWREADY[m] = 1'b0;
-            M_WREADY[m]  = 1'b0;
-            M_BVALID[m]  = 1'b0;
-            M_BRESP[m]   = 2'b00;
-            M_BID[m]     = '0;
-            M_ARREADY[m] = 1'b0;
-            M_RVALID[m]  = 1'b0;
-            M_RDATA[m]   = '0;
-            M_RRESP[m]   = 2'b00;
-            M_RID[m]     = '0;
-            M_RLAST[m]   = 1'b0;
-        end
-
-        for (integer s = 0; s < NS; s = s + 1) begin
-            S_AWVALID[s] = 1'b0;
-            S_AWADDR[s]  = '0;
-            S_AWPROT[s]  = '0;
-            S_AWID[s]    = '0;
-            S_AWLEN[s]   = '0;
-            S_AWSIZE[s]  = '0;
-            S_AWBURST[s] = '0;
-            S_WVALID[s]  = 1'b0;
-            S_WDATA[s]   = '0;
-            S_WSTRB[s]   = '0;
-            S_WLAST[s]   = 1'b0;
-            S_BREADY[s]  = 1'b0;
-            S_ARVALID[s] = 1'b0;
-            S_ARADDR[s]  = '0;
-            S_ARPROT[s]  = '0;
-            S_ARID[s]    = '0;
-            S_ARLEN[s]   = '0;
-            S_ARSIZE[s]  = '0;
-            S_ARBURST[s] = '0;
-            S_RREADY[s]  = 1'b0;
-        end
-
-        if (w_state == W_IDLE && w_addr_present) begin
-            if (w_sel_dec_ok) begin
-                S_AWVALID[w_sel_target] = M_AWVALID[w_sel_owner];
-                S_AWADDR[w_sel_target]  = M_AWADDR[w_sel_owner];
-                S_AWPROT[w_sel_target]  = M_AWPROT[w_sel_owner];
-                S_AWID[w_sel_target]    = M_AWID[w_sel_owner];
-                S_AWLEN[w_sel_target]   = M_AWLEN[w_sel_owner];
-                S_AWSIZE[w_sel_target]  = M_AWSIZE[w_sel_owner];
-                S_AWBURST[w_sel_target] = M_AWBURST[w_sel_owner];
-                M_AWREADY[w_sel_owner]  = S_AWREADY[w_sel_target];
-            end else begin
-                M_AWREADY[w_sel_owner] = 1'b1;
-            end
-        end
-
-        if (w_state == W_DATA) begin
-            if (w_decode_error) begin
-                M_WREADY[w_owner] = 1'b1;
-            end else begin
-                S_WVALID[w_target] = M_WVALID[w_owner];
-                S_WDATA[w_target]  = M_WDATA[w_owner];
-                S_WSTRB[w_target]  = M_WSTRB[w_owner];
-                S_WLAST[w_target]  = M_WLAST[w_owner];
-                M_WREADY[w_owner]  = S_WREADY[w_target];
-            end
-        end
-
-        if (w_state == W_RESP) begin
-            if (w_decode_error) begin
-                M_BVALID[w_owner] = 1'b1;
-                M_BRESP[w_owner]  = RESP_DECERR;
-                M_BID[w_owner]    = w_error_id;
-            end else begin
-                M_BVALID[w_owner] = S_BVALID[w_target];
-                M_BRESP[w_owner]  = S_BRESP[w_target];
-                M_BID[w_owner]    = S_BID[w_target];
-                S_BREADY[w_target] = M_BREADY[w_owner];
-            end
-        end
-
-        if (r_state == R_IDLE && r_addr_present) begin
-            if (r_sel_dec_ok) begin
-                S_ARVALID[r_sel_target] = M_ARVALID[r_sel_owner];
-                S_ARADDR[r_sel_target]  = M_ARADDR[r_sel_owner];
-                S_ARPROT[r_sel_target]  = M_ARPROT[r_sel_owner];
-                S_ARID[r_sel_target]    = M_ARID[r_sel_owner];
-                S_ARLEN[r_sel_target]   = M_ARLEN[r_sel_owner];
-                S_ARSIZE[r_sel_target]  = M_ARSIZE[r_sel_owner];
-                S_ARBURST[r_sel_target] = M_ARBURST[r_sel_owner];
-                M_ARREADY[r_sel_owner]  = S_ARREADY[r_sel_target];
-            end else begin
-                M_ARREADY[r_sel_owner] = 1'b1;
-            end
-        end
-
-        if (r_state == R_DATA) begin
-            if (r_decode_error) begin
-                M_RVALID[r_owner] = 1'b1;
-                M_RDATA[r_owner]  = '0;
-                M_RRESP[r_owner]  = RESP_DECERR;
-                M_RID[r_owner]    = r_error_id;
-                M_RLAST[r_owner]  = (r_beats_left == 9'd1);
-            end else begin
-                M_RVALID[r_owner] = S_RVALID[r_target];
-                M_RDATA[r_owner]  = S_RDATA[r_target];
-                M_RRESP[r_owner]  = S_RRESP[r_target];
-                M_RID[r_owner]    = S_RID[r_target];
-                M_RLAST[r_owner]  = S_RLAST[r_target];
-                S_RREADY[r_target] = M_RREADY[r_owner];
-            end
-        end
-    end
-
 `ifndef SYNTHESIS
     initial begin
-        assert (NM > 0 && NS > 0) else $fatal(1, "NM and NS must be positive");
-        assert (S_ADDR_WIDTH >= 12 && S_ADDR_WIDTH < ADDR_W)
-            else $fatal(1, "S_ADDR_WIDTH must be between 12 and ADDR_W-1");
-        assert ((BASE_ADDR & WINDOW_MASK) == '0)
-            else $fatal(1, "BASE_ADDR must align to a subordinate window");
-        assert (NS <= (1 << (ADDR_W-S_ADDR_WIDTH)))
-            else $fatal(1, "Subordinate windows exceed the address space");
+        assert(NM>0 && NS>0 && MAX_OUTSTANDING>0) else $fatal(1,"positive port counts/depth required");
+        assert(S_ADDR_WIDTH>=12 && S_ADDR_WIDTH<ADDR_W) else $fatal(1,"invalid address window");
+        assert((BASE_ADDR & WINDOW_MASK)=='0) else $fatal(1,"unaligned BASE_ADDR");
+        assert(({1'b0,BASE_ADDR}+((ADDR_W+1)'(NS)<<S_ADDR_WIDTH)) <= ((ADDR_W+1)'(1)<<ADDR_W))
+            else $fatal(1,"address map exceeds address space");
     end
 `endif
 endmodule
