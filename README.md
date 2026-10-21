@@ -1,158 +1,134 @@
-# Parameterized AXI4 Burst Interconnect
+# Concurrent AXI4 Burst Interconnect
 
-[![RTL CI](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/csepka/complete-axi-bus)](LICENSE) [![SystemVerilog](https://img.shields.io/badge/SystemVerilog-RTL-6B4FBB)](src)
+[![RTL CI](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/csepka/complete-axi-bus)](LICENSE)
 
-A synthesizable SystemVerilog AXI4 interconnect demonstrating subsystem RTL design, AMBA integration, protocol validation, and hardware build automation. The design connects a configurable number of managers and memory-mapped subordinates through independent read and write datapaths.
+A parameterized SystemVerilog memory interconnect with **per-target arbitration,
+bounded outstanding request queues, strict per-manager ordering, and optional
+registered target channels**. It incrementally extends the preserved
+single-outstanding baseline rather than replacing the project.
 
-> **Scope:** This is an intentionally bounded AXI4 implementation, not AXI5 and not a claim of full AMBA conformance. The supported and unsupported features are explicit below.
+At 8x8/256 bits, the measured 16-beat independent-target workload falls from **4,608
+to 577 cycles (7.99x)**. At an **assumed 100 MHz**, that is **45.432 GB/s aggregate
+(363.458 Gb/s)** across reads and writes. These are simulated cycle results;
+full-fabric technology timing and ASIC area have not been established.
 
-**Proof points:** five AXI channels · FIXED, INCR, and WRAP bursts · legal bursts up to 256 beats · 1,764 self-checking regression checks plus SVA monitoring
-
-## Architecture
+## Architecture and bounded policy
 
 ```mermaid
 flowchart LR
-    C[Command demo port] --> M0[AXI manager 0]
-    C --> M1[AXI manager 1]
-    C --> MN[AXI manager N]
-    M0 --> W[Write round-robin arbiter]
-    M1 --> W
-    MN --> W
-    M0 --> R[Read round-robin arbiter]
-    M1 --> R
-    MN --> R
-    W --> D[Address decode / DECERR]
-    R --> D
-    D --> S0[AXI RAM 0]
-    D --> S1[AXI RAM 1]
-    D --> SN[AXI RAM N]
+  M[AXI managers] --> Q[Per-manager AW / AR queues]
+  Q --> X[Decode and crossbar]
+  X --> T0[Target 0 read/write arbiters]
+  X --> T1[Target 1 read/write arbiters]
+  X --> TN[Other target arbiters]
+  X --> E[Local DECERR service]
+  T0 <--> P0[Optional channel stages]
+  T1 <--> P1[Optional channel stages]
+  TN <--> PN[Optional channel stages]
+  P0 <--> R0[RAM 0]
+  P1 <--> R1[RAM 1]
+  PN <--> RN[Other RAMs]
 ```
 
-The read and write arbiters operate independently. Each allows one globally active transaction, locks its manager/subordinate route for the complete burst, and advances a round-robin pointer after address acceptance. This provides concurrency between one read and one write while keeping ordering behavior easy to reason about and verify.
+`MAX_OUTSTANDING=4` accepts four requests **per manager, per direction**, including
+the executing head. Only one head per manager/direction issues at once. Independent
+managers can use independent targets concurrently; a blocked head prevents that
+manager's later requests from bypassing it. All responses remain ordered per
+manager, including different IDs. IDs may overlap across managers because target
+ownership determines return routing. W data is never interleaved.
 
-See [the architecture document](docs/architecture.md) for microarchitecture, reset behavior, address decode, and design tradeoffs.
+`TARGET_PIPELINE=1` inserts two-entry stages on all five channels at real targets.
+It cuts combinational paths across that boundary but adds cycles/storage. It is
+disabled by default; no unmeasured Fmax benefit is claimed.
 
-## Regression Waveform
+## Measured comparison
 
-![AXI4 write-address arbitration under subordinate backpressure](docs/images/axi-aw-backpressure.svg)
+16-beat INCR, 32 requests per manager per direction, independent targets, ready
+sinks, full strobes, seed 7; 100 MHz **assumed**, startup/drain included.
 
-*Generated from the passing burst regression: manager 1 retains the AW grant while subordinate 0 applies backpressure, even after manager 0 requests service. The address transfers when the stall is released.* Regenerate it with `make waveform`; the raw VCD remains ignored.
+| Configuration | Baseline cycles | Queued depth-4 cycles | Aggregate GB/s | Aggregate Gb/s |
+|---|---:|---:|---:|---:|
+| 2x2 / 64-bit | 1,152 | 577 | 2.840 | 22.716 |
+| 4x4 / 128-bit | 2,304 | 577 | 11.358 | 90.864 |
+| 8x8 / 256-bit | 4,608 | 577 | 45.432 | 363.458 |
 
-## Supported Feature Matrix
+![Simulated throughput at an assumed 100 MHz](benchmarks/plots/queued-d4.svg)
 
-| Feature | Status | Notes |
-|---|---:|---|
-| Five AXI channels | ✅ | AW, W, B, AR, R |
-| `VALID/READY` backpressure | ✅ | Payload stability checked with SVA |
-| Transaction IDs | ✅ | Routed end to end; one active read and write globally |
-| FIXED bursts | ✅ | Up to 16 beats |
-| INCR bursts | ✅ | Up to 256 beats; 4-KiB rule checked |
-| WRAP bursts | ✅ | Legal lengths 2, 4, 8, and 16 |
-| Write strobes | ✅ | Per-byte lane updates |
-| Read/write concurrency | ✅ | Independent arbitration state machines |
-| Multiple outstanding transactions | ❌ | One read plus one write may be active globally |
-| Out-of-order responses | ❌ | Not needed under the single-outstanding policy |
-| Narrow transfers | ❌ | Requests smaller than the bus width are rejected |
-| Unaligned transfers | ❌ | Rejected with `SLVERR` |
-| Exclusive accesses / atomics | ❌ | LOCK/ATOP not implemented |
-| CACHE/QOS/REGION/USER sidebands | ❌ | Deliberately outside this project’s interface |
-| AXI5 poison, trace, or MPAM | ❌ | This project targets an AXI4 core subset |
+Hotspot traffic remains limited by one target. The optional pipeline increases the
+8x8 main workload to 641 cycles. See [full comparison](docs/architecture_comparison.md),
+[100 Gb/s analysis](docs/performance_100g.md), and [benchmark methodology](benchmarks/README.md)
+for single-direction rates, unfavorable cases, latency, occupancy, stalls and raw CSV.
 
-## Quick Start
+## Verified features and explicit limits
 
-### Dependencies
+| Feature | Implemented scope |
+|---|---|
+| Five AXI channels / IDs / backpressure | End-to-end routing and stall-stability assertions |
+| Concurrent independent targets | Up to min(NM,NS) useful reads and writes concurrently |
+| Bounded outstanding requests | Configurable per-manager AW/AR queues; depth 4 default |
+| Ordering | Strict per-manager/per-direction completion order; no different-ID bypass |
+| FIXED / INCR / WRAP | FIXED <=16; INCR <=256 subject to 4 KiB; WRAP 2/4/8/16 |
+| Byte strobes | Per-byte updates on full-width aligned transactions |
+| Optional pipelining | Two-entry stages for AW/W/B/AR/R at each real target |
+| Decode / validation errors | DECERR on misses; RAM SLVERR on invalid mapped requests |
+| Width / count validation | Benchmarks at 2x2/64, 4x4/128, 8x8/256 plus asymmetric cases |
+| Narrow / unaligned transfers | Unsupported; rejected by RAM |
+| Exclusives, atomics, CACHE/QOS/REGION/USER, AXI5 | Not implemented |
+| Full AXI compliance, formal closure, silicon proof | Not claimed |
 
-- Verilator 5.x
-- Yosys 0.40 or newer
-- GNU Make
-- A C++20 compiler
+The command-port `axi_top` is intentionally serial; direct-AXI benches measure the
+fabric. Default target windows are 64 KiB, with 4 KiB RAM implemented per window.
+Accesses outside RAM but inside its window return SLVERR; unmapped windows return
+DECERR. Reset cancels work but does not clear memory or roll back completed writes.
 
-On macOS with Homebrew:
+## Run it
 
-```bash
-brew install verilator yosys make
+Dependencies: Verilator 5.x, Yosys, Python 3, GNU Make and a C++20 compiler.
+Locally verified with Verilator 5.044 and Yosys 0.57. CI pins an EDA-suite release.
+
+```sh
+make ci                          # lint, default regressions, corrected RAM synthesis
+make extended                    # depth/pipeline/netlist/seed/parameter checks
+make benchmark                   # default measured performance matrix
+python3 tools/validate_upgrade.py # complete before/after evidence reproduction
+make waveform                    # VCD-derived arbitration waveform
 ```
 
-Run the complete local CI flow:
+Default results: **418 integration + 1,618 burst + 525 outstanding checks**, plus
+**5,455 FIFO payload checks** and separate carry/page-boundary regressions. Extended
+runs include depths 1/3/5, pipeline traffic, independent scoreboards, overlapping
+IDs, reset with pending work, mixed errors, asymmetric ports, 40-bit addresses,
+multiple seeds, and synthesized queue/slice substitutions. Counts are comparisons,
+not code/functional coverage percentages. See [verification](docs/verification.md).
 
-```bash
-make ci
-```
+## Synthesis evidence
 
-Expected regression summaries:
+Actual coarse synthesis covers the RAM, mechanically flattened request queue, and
+register slice. The original baseline command stopped before process lowering;
+that flow and its documentation are corrected. The default 32-bit RAM has 275
+coarse operator cells, 162 explicit FF bits and 32,768 memory bits. These are
+**not full-fabric or ASIC area figures**.
 
-```text
-TOP REGRESSION PASS: 418 checks
-BURST REGRESSION PASS: 1346 checks
-PARAMETER REGRESSION PASS: burst endpoint carry preserved
-```
+Full-fabric synthesis needs an interface-capable frontend absent from this local
+installation. Mapped area, critical paths, STA and P&R remain unavailable.
+[Scripts, results and constraints](synthesis/README.md) distinguish executed evidence
+from future technology work.
 
-Useful individual targets:
+## Learn and review
 
-```bash
-make lint        # warning-clean integrated RTL lint
-make test        # all self-checking simulations
-make synth       # Yosys elaboration and coarse synthesis of axi_ram
-make waves       # burst regression with VCD tracing
-make waveform    # regenerate the documented SVG from the traced regression
-make clean       # remove generated build products
-```
+- [Engineering mastery](ENGINEERING_MASTERY.md): every major module, timing walkthroughs,
+  design tradeoffs and **60 implementation-grounded interview questions/answers**.
+- [Architecture](docs/architecture.md): acceptance policy, ownership, decode and reset.
+- [Engineering audit](docs/engineering_audit.md): findings, fixes and remaining gaps.
+- [Project progress](PROJECT_PROGRESS.md): preserved baseline, milestones and exact resume steps.
+- [Source map](src/README.md) and [tests](tb/README.md).
 
-## Address Map
+![Current AW arbitration trace](docs/images/axi-aw-backpressure.svg)
 
-The default interconnect assigns one contiguous 64-KiB window per subordinate (`S_ADDR_WIDTH=16`):
+The trace distinguishes manager-queue acceptance from later target acceptance while
+a target grant is held under backpressure.
 
-| Subordinate | Address range |
-|---:|---|
-| 0 | `0x0000_0000`–`0x0000_FFFF` |
-| 1 | `0x0001_0000`–`0x0001_FFFF` |
-| 2 | `0x0002_0000`–`0x0002_FFFF` |
+## License and protocol reference
 
-Only `MEM_BYTES` bytes are physically implemented in each window (4 KiB by default). Accesses in a valid window but beyond that RAM return `SLVERR`; accesses beyond the configured subordinate windows return `DECERR` from the interconnect.
-
-## Repository Layout
-
-```text
-src/
-  axi_if.sv                AXI channel interface and modports
-  axi_interconnect.sv      independent read/write arbitration and routing
-  axi_mgr.sv               single-beat command-to-AXI demonstration manager
-  axi_ram.sv               flat-port burst-capable synthesizable RAM target
-  axi_sub.sv               interface wrapper around axi_ram
-  axi_protocol_checker.sv  reusable handshake/payload SVA
-tb/
-  tb_top.sv                randomized command-level integration regression
-  tb_axi_burst.sv          direct protocol-level burst/concurrency regression
-  tb_axi_ram_params.sv     burst-extent parameter boundary regression
-  axi_stall_sub.sv         test-only channel-backpressure shim
-docs/
-  architecture.md          microarchitecture and design decisions
-  signals.md               implemented signal contract
-  verification.md          verification strategy and coverage map
-  images/axi-aw-backpressure.svg  regression-derived waveform evidence
-tools/
-  vcd_to_svg.py            dependency-free waveform renderer
-synthesis/
-  subordinate/config.json  OpenLane-ready RAM-core configuration
-.github/workflows/ci.yml    automated lint, simulation, and synthesis
-```
-
-## Verification Evidence
-
-`tb_top` checks endpoint routing, manager selection, memory isolation, error propagation, and 250 deterministic randomized command transactions. `tb_axi_burst` directly drives the AXI interfaces to check all supported burst types, IDs, byte strobes, backpressure, simultaneous managers, independent reads/writes, and negative/error cases. `tb_axi_ram_params` checks that endpoint arithmetic retains carry for a 256-beat burst at the minimum address width. The main testbenches use bounded timeouts and self-checking scoreboards.
-
-The protocol checker asserts that AW, W, B, AR, and R payloads remain stable whenever `VALID=1` and `READY=0`, and checks that last-beat indicators are known whenever their channels are valid.
-
-See [verification.md](docs/verification.md) for the requirement-to-test map.
-
-## Design Limitations and Next Steps
-
-The implementation favors clear, reviewable control logic over maximum throughput. The logical next milestone is per-subordinate arbitration with multiple outstanding ID-tracked transactions. Additional production steps would include formal liveness/fairness proofs, CDC/reset-domain integration, ECC, low-power intent, configurable sparse address maps, and a technology-specific SRAM wrapper.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
-
-## Protocol Reference
-
-- [Arm AMBA AXI and ACE Protocol Specification](https://developer.arm.com/documentation/ihi0022/latest)
+MIT — [LICENSE](LICENSE). Protocol reference:
+[Arm AMBA AXI and ACE specification](https://developer.arm.com/documentation/ihi0022/latest).

@@ -1,0 +1,52 @@
+{
+  "generation_command": [
+    "python3",
+    "synthesis/scripts/make_flat_top.py"
+  ],
+  "generation_exit_code": 0,
+  "wrapper_sha256": "0c81e20e902369d97460ab4382779ebb82b15c9c758d64a22212212eae1df583",
+  "results": [
+    {
+      "command": [
+        "verilator",
+        "-sv",
+        "--timing",
+        "--assert",
+        "--Wall",
+        "-Wno-UNUSEDSIGNAL",
+        "-Wno-UNSIGNED",
+        "-Wno-SYNCASYNCNET",
+        "--lint-only",
+        "--top-module",
+        "axi_fabric_flat",
+        "-f",
+        "files.f",
+        "build/axi_fabric_flat.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "verilator",
+        "-sv",
+        "--timing",
+        "--assert",
+        "--Wall",
+        "-Wno-UNUSEDSIGNAL",
+        "-Wno-UNSIGNED",
+        "-Wno-SYNCASYNCNET",
+        "--lint-only",
+        "--top-module",
+        "axi_fabric_flat",
+        "-GNM=8",
+        "-GNS=8",
+        "-GDATA_W=256",
+        "-GTARGET_PIPELINE=1",
+        "-f",
+        "files.f",
+        "build/axi_fabric_flat.sv"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

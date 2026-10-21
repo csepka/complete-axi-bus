@@ -1,13 +1,18 @@
-# RTL Sources
+# RTL sources
 
-| File | Purpose |
+| Module | Responsibility |
 |---|---|
-| `axi_if.sv` | Core AXI4 channel interface and modports |
-| `axi_interconnect.sv` | N-to-N shared burst interconnect with independent read/write arbitration |
-| `axi_mgr.sv` | Single-beat command adapter used by the integration example |
-| `axi_ram.sv` | Flat-port burst RAM core suitable for standalone synthesis |
-| `axi_sub.sv` | `axi_if` wrapper around `axi_ram` |
-| `axi_protocol_checker.sv` | Simulation-only SVA checker |
-| `axi_top.sv` | Parameterized integration example |
+| `axi_if` | Implemented AXI signals, directions and width checks |
+| `axi_interconnect` | Per-manager queues, head decode, structural crossbar and per-target arbitration |
+| `axi_request_queue` | Bounded accepted-address storage and strict ordered head issue |
+| `axi_target_arbiter` | Baseline round-robin arbitration, burst ownership and local DECERR service |
+| `axi_register_slice` | Optional independent target-boundary stages on five channels |
+| `axi_channel_fifo` | Two-entry registered channel stage with occupancy-based READY |
+| `axi_ram` | Flat-port full-width burst RAM, validation and byte strobes |
+| `axi_sub` | Interface wrapper for RAM |
+| `axi_mgr` | Single-beat command adapter |
+| `axi_top` | Serial command-port integration example |
+| `axi_protocol_checker` | Simulation SVA; not a complete AXI VIP |
 
-Compile synthesizable integration sources in the order listed by the root `files.f`.
+Use the source order in `files.f`. Detailed behavior is in
+[architecture](../docs/architecture.md) and [mastery](../ENGINEERING_MASTERY.md).

@@ -43,3 +43,37 @@ Original RAM elaboration-only statistics (the advertised coarse pass did not exe
 one 32,768-bit memory. This is neither full-interconnect area nor mapped ASIC area.
 No Liberty library, STA executable or place-and-route evidence was found. No Fmax
 or timing-closed bandwidth is claimed.
+
+
+## Final engineering audit and disposition
+
+| Finding | Disposition / evidence | Remaining boundary |
+|---|---|---|
+| Global serialization | Resolved by per-target retained arbiters; independent traffic records eight W and eight R handshakes per cycle | Hotspots remain bounded by one target |
+| No accepted-request tracking | Per-manager AW/AR queues retain identity/target payload through response retirement; depth 1/3/4/5 tests | Strict one executing head per manager/direction |
+| ID collisions / cross-target ordering | Owner-based routing and strict head issue; same/different IDs plus queued errors verified | No per-manager out-of-order completion |
+| Combinational target boundary | Optional two-entry channel stages, default bypass; directed/random and synthesized-slice verification | No STA proof of Fmax benefit; added cycles documented |
+| False coarse-synthesis evidence | Fixed stage endpoint; require process/latch/structural checks; corrected RAM/queue/slice reports | Full-fabric frontend and technology flow unavailable |
+| Struct-array synthesis fragility | Explicit packed-vector FIFO arrays; capacity sanity check; actual queue netlist substitution | No generic frontend equivalence proof |
+| Reset / exhaustion gaps | Full queues, held grants, partial write, stalled responses, buffered-channel reset and fresh-traffic recovery | Reset must encompass all participants; memory is not rolled back |
+| Burst coverage gaps | All legal WRAP lengths, FIXED limit, reserved burst, narrow/unaligned writes and page edges added | Not a complete conformance test suite |
+| 4-KiB check confounded by RAM extent | Dedicated 8-KiB RAM test crosses only the page boundary and verifies no data modification | External targets must implement their own validation contract |
+| Width/count/seed gaps | 2x2/64, 4x4/128, 8x8/256, asymmetric dimensions, 40-bit addressing and seeded matrices | Not every advertised parameter combination is exhaustively simulated |
+| Duplicated synthesis-adapter metadata | Shared signal schema and checked mechanical port expansion; explicit build-directory creation | Interface schema must track axi_if changes |
+| Stale waveform paths/counts | Target-arbiter paths updated; queue versus target acceptance distinguished; hard-coded check count removed | Waveform is one illustrative interval, not coverage |
+| Misleading performance interpretation | Separate aggregate/directional rates, assumed clock, offered/accepted latency, average/peak occupancy, stalls and target counters | Hardware bandwidth still requires mapped timing and endpoint evidence |
+| Physical library / STA / P&R | Recorded unavailable; scripts and example constraints provided | No ASIC area, Fmax, timing closure or hardware 100 Gb/s claim |
+
+The baseline arbiter's generic endpoint mapping and decode are intentionally retained
+inside each one-target instance. This supports incremental reuse and review. A
+future simplification should be justified by full-fabric synthesis/timing evidence
+and regression equivalence, rather than replacing proven logic solely for fewer
+lines. Current generated wiring uses explicit signals, avoiding opaque protocol
+macros or additional RTL package dependencies.
+
+The queue and optional slice separate transaction ownership from channel elasticity.
+The demonstration manager/top remain deliberately serial and are labeled as such.
+Independent reference checks, conditional fairness assumptions, and two-state
+simulation limitations are documented. No unresolved failing regression is accepted
+as a completed milestone; final executed commands and source hashes are in
+`synthesis/reports/validation.json`.

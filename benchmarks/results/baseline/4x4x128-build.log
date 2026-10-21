@@ -17,5 +17,5 @@ c++   -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.044/share/verilator/include -
 c++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb_axi_benchmark__ALL.a    -pthread -lpthread   -o Vtb_axi_benchmark
 rm Vtb_axi_benchmark__ALL.verilator_deplist.tmp
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
-- Verilator: Built from 0.440 MB sources in 9 modules, into 1.451 MB in 11 C++ files needing 0.004 MB
-- Verilator: Walltime 2.312 s (elab=0.008, cvt=0.083, bld=2.197); cpu 0.128 s on 4 threads; alloced 28.469 MB
+- Verilator: Built from 0.441 MB sources in 9 modules, into 1.452 MB in 11 C++ files needing 0.004 MB
+- Verilator: Walltime 2.359 s (elab=0.008, cvt=0.086, bld=2.242); cpu 0.129 s on 4 threads; alloced 28.344 MB

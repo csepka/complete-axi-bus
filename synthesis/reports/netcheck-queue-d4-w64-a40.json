@@ -1,5 +1,7 @@
 {
   "arguments": {
+    "slice": false,
+    "pipeline": 0,
     "queue": true,
     "fabric": false,
     "nm": 2,

@@ -1,0 +1,702 @@
+
+-- Running command `read_verilog -sv -DSYNTHESIS src/axi_channel_fifo.sv build/axi_register_slice_flat.sv; chparam -set ADDR_W 32 -set DATA_W 64 -set ENABLE 1 axi_register_slice_flat; hierarchy -check -top axi_register_slice_flat; synth -flatten -top axi_register_slice_flat -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/pipeline-slice-w64-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/pipeline-slice-w64-netlist.v' --
+
+1. Executing Verilog-2005 frontend: src/axi_channel_fifo.sv
+Parsing SystemVerilog input from `src/axi_channel_fifo.sv' to AST representation.
+Generating RTLIL representation for module `\axi_channel_fifo'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: build/axi_register_slice_flat.sv
+Parsing SystemVerilog input from `build/axi_register_slice_flat.sv' to AST representation.
+Generating RTLIL representation for module `\axi_register_slice_flat'.
+Successfully finished Verilog frontend.
+Parameter \ADDR_W = 32
+Parameter \DATA_W = 64
+Parameter \ENABLE = 1
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_register_slice_flat'.
+Parameter \ADDR_W = 32
+Parameter \DATA_W = 64
+Parameter \ENABLE = 1
+Generating RTLIL representation for module `$paramod$fc111251a6248534ff27bea5ab7150473d25bd6f\axi_register_slice_flat'.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \axi_register_slice_flat
+Used module:     \axi_channel_fifo
+Parameter \WIDTH = 52
+
+4.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_channel_fifo'.
+Parameter \WIDTH = 52
+Generating RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100'.
+Parameter \WIDTH = 73
+
+4.3. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_channel_fifo'.
+Parameter \WIDTH = 73
+Generating RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001'.
+Parameter \WIDTH = 6
+
+4.4. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_channel_fifo'.
+Parameter \WIDTH = 6
+Generating RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110'.
+Parameter \WIDTH = 52
+Found cached RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100'.
+Parameter \WIDTH = 71
+
+4.5. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_channel_fifo'.
+Parameter \WIDTH = 71
+Generating RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111'.
+
+4.6. Analyzing design hierarchy..
+Top module:  \axi_register_slice_flat
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111
+
+4.7. Analyzing design hierarchy..
+Top module:  \axi_register_slice_flat
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111
+Removing unused module `\axi_channel_fifo'.
+Removed 1 unused modules.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \axi_register_slice_flat
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \axi_register_slice_flat
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:30$79 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:27$72 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:30$58 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:27$51 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:30$37 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:27$30 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:30$100 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.
+Marked 1 switch rules as full_case in process $proc$src/axi_channel_fifo.sv:27$93 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 12 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \ARESETn in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+Found async reset \ARESETn in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+Found async reset \ARESETn in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+Found async reset \ARESETn in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~16 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+     1/3: $0\count[1:0]
+     2/3: $0\tail[0:0]
+     3/3: $0\head[0:0]
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+     1/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$78
+     2/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$64_DATA[5:0]$77
+     3/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$64_ADDR[0:0]$76
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+     1/3: $0\count[1:0]
+     2/3: $0\tail[0:0]
+     3/3: $0\head[0:0]
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+     1/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$57
+     2/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$43_DATA[72:0]$56
+     3/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$43_ADDR[0:0]$55
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+     1/3: $0\count[1:0]
+     2/3: $0\tail[0:0]
+     3/3: $0\head[0:0]
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+     1/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$36
+     2/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$22_DATA[51:0]$35
+     3/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$22_ADDR[0:0]$34
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+     1/3: $0\count[1:0]
+     2/3: $0\tail[0:0]
+     3/3: $0\head[0:0]
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+     1/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$99
+     2/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$85_DATA[70:0]$98
+     3/3: $1$memwr$\payload$src/axi_channel_fifo.sv:28$85_ADDR[0:0]$97
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.\head' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+  created $adff cell `$procdff$174' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.\tail' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+  created $adff cell `$procdff$179' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.\count' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+  created $adff cell `$procdff$184' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$memwr$\payload$src/axi_channel_fifo.sv:28$64_ADDR' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+  created $dff cell `$procdff$185' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$memwr$\payload$src/axi_channel_fifo.sv:28$64_DATA' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+  created $dff cell `$procdff$186' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+  created $dff cell `$procdff$187' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.\head' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+  created $adff cell `$procdff$192' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.\tail' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+  created $adff cell `$procdff$197' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.\count' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+  created $adff cell `$procdff$202' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$memwr$\payload$src/axi_channel_fifo.sv:28$43_ADDR' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+  created $dff cell `$procdff$203' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$memwr$\payload$src/axi_channel_fifo.sv:28$43_DATA' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+  created $dff cell `$procdff$204' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+  created $dff cell `$procdff$205' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.\head' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+  created $adff cell `$procdff$210' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.\tail' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+  created $adff cell `$procdff$215' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.\count' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+  created $adff cell `$procdff$220' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$memwr$\payload$src/axi_channel_fifo.sv:28$22_ADDR' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+  created $dff cell `$procdff$221' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$memwr$\payload$src/axi_channel_fifo.sv:28$22_DATA' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+  created $dff cell `$procdff$222' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+  created $dff cell `$procdff$223' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.\head' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+  created $adff cell `$procdff$228' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.\tail' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+  created $adff cell `$procdff$233' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.\count' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+  created $adff cell `$procdff$238' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$memwr$\payload$src/axi_channel_fifo.sv:28$85_ADDR' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+  created $dff cell `$procdff$239' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$memwr$\payload$src/axi_channel_fifo.sv:28$85_DATA' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+  created $dff cell `$procdff$240' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+  created $dff cell `$procdff$241' with positive edge clock.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:30$79'.
+Found and cleaned up 1 empty switch in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.$proc$src/axi_channel_fifo.sv:27$72'.
+Found and cleaned up 3 empty switches in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:30$58'.
+Found and cleaned up 1 empty switch in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.$proc$src/axi_channel_fifo.sv:27$51'.
+Found and cleaned up 3 empty switches in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:30$37'.
+Found and cleaned up 1 empty switch in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.$proc$src/axi_channel_fifo.sv:27$30'.
+Found and cleaned up 3 empty switches in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:30$100'.
+Found and cleaned up 1 empty switch in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.$proc$src/axi_channel_fifo.sv:27$93'.
+Cleaned up 16 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.
+<suppressed ~7 debug messages>
+Optimizing module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.
+<suppressed ~7 debug messages>
+Optimizing module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.
+<suppressed ~7 debug messages>
+Optimizing module axi_register_slice_flat.
+Optimizing module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.
+<suppressed ~7 debug messages>
+
+5.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000000110.
+Deleting now unused module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001001001.
+Deleting now unused module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000110100.
+Deleting now unused module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000001000111.
+<suppressed ~5 debug messages>
+
+5.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+Removed 35 unused cells and 145 unused wires.
+<suppressed ~36 debug messages>
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module axi_register_slice_flat...
+Found and reported 0 problems.
+
+5.7. Executing OPT pass (performing simple optimizations).
+
+5.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+5.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+    Consolidated identical input bits for $mux cell $flatten\g_buffered.u_ar.$procmux$146:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33
+      New ports: A=1'0, B=1'1, Y=$flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0]
+      New connections: $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [51:1] = { $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_ar.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] }
+    Consolidated identical input bits for $mux cell $flatten\g_buffered.u_aw.$procmux$146:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33
+      New ports: A=1'0, B=1'1, Y=$flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0]
+      New connections: $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [51:1] = { $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] $flatten\g_buffered.u_aw.$0$memwr$\payload$src/axi_channel_fifo.sv:28$22_EN[51:0]$33 [0] }
+    Consolidated identical input bits for $mux cell $flatten\g_buffered.u_b.$procmux$114:
+      Old ports: A=6'000000, B=6'111111, Y=$flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75
+      New ports: A=1'0, B=1'1, Y=$flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0]
+      New connections: $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [5:1] = { $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0] $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0] $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0] $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0] $flatten\g_buffered.u_b.$0$memwr$\payload$src/axi_channel_fifo.sv:28$64_EN[5:0]$75 [0] }
+    Consolidated identical input bits for $mux cell $flatten\g_buffered.u_r.$procmux$162:
+      Old ports: A=71'00000000000000000000000000000000000000000000000000000000000000000000000, B=71'11111111111111111111111111111111111111111111111111111111111111111111111, Y=$flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96
+      New ports: A=1'0, B=1'1, Y=$flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0]
+      New connections: $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [70:1] = { $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] $flatten\g_buffered.u_r.$0$memwr$\payload$src/axi_channel_fifo.sv:28$85_EN[70:0]$96 [0] }
+    Consolidated identical input bits for $mux cell $flatten\g_buffered.u_w.$procmux$130:
+      Old ports: A=73'0000000000000000000000000000000000000000000000000000000000000000000000000, B=73'1111111111111111111111111111111111111111111111111111111111111111111111111, Y=$flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54
+      New ports: A=1'0, B=1'1, Y=$flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0]
+      New connections: $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [72:1] = { $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] $flatten\g_buffered.u_w.$0$memwr$\payload$src/axi_channel_fifo.sv:28$43_EN[72:0]$54 [0] }
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 5 changes.
+
+5.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+5.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 0 changes.
+
+5.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.7.16. Finished OPT passes. (There is nothing left to do.)
+
+5.8. Executing FSM pass (extract and optimize FSM).
+
+5.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.9. Executing OPT pass (performing simple optimizations).
+
+5.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+5.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 0 changes.
+
+5.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $flatten\g_buffered.u_w.$procdff$202 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_w.$0\count[1:0], Q = \g_buffered.u_w.count).
+Adding EN signal on $flatten\g_buffered.u_w.$procdff$197 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_w.$logic_not$src/axi_channel_fifo.sv:36$60_Y, Q = \g_buffered.u_w.tail).
+Adding EN signal on $flatten\g_buffered.u_w.$procdff$192 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_w.$logic_not$src/axi_channel_fifo.sv:37$61_Y, Q = \g_buffered.u_w.head).
+Adding EN signal on $flatten\g_buffered.u_r.$procdff$238 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_r.$0\count[1:0], Q = \g_buffered.u_r.count).
+Adding EN signal on $flatten\g_buffered.u_r.$procdff$233 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_r.$logic_not$src/axi_channel_fifo.sv:36$102_Y, Q = \g_buffered.u_r.tail).
+Adding EN signal on $flatten\g_buffered.u_r.$procdff$228 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_r.$logic_not$src/axi_channel_fifo.sv:37$103_Y, Q = \g_buffered.u_r.head).
+Adding EN signal on $flatten\g_buffered.u_b.$procdff$184 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_b.$0\count[1:0], Q = \g_buffered.u_b.count).
+Adding EN signal on $flatten\g_buffered.u_b.$procdff$179 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_b.$logic_not$src/axi_channel_fifo.sv:36$81_Y, Q = \g_buffered.u_b.tail).
+Adding EN signal on $flatten\g_buffered.u_b.$procdff$174 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_b.$logic_not$src/axi_channel_fifo.sv:37$82_Y, Q = \g_buffered.u_b.head).
+Adding EN signal on $flatten\g_buffered.u_aw.$procdff$220 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_aw.$0\count[1:0], Q = \g_buffered.u_aw.count).
+Adding EN signal on $flatten\g_buffered.u_aw.$procdff$215 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_aw.$logic_not$src/axi_channel_fifo.sv:36$39_Y, Q = \g_buffered.u_aw.tail).
+Adding EN signal on $flatten\g_buffered.u_aw.$procdff$210 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_aw.$logic_not$src/axi_channel_fifo.sv:37$40_Y, Q = \g_buffered.u_aw.head).
+Adding EN signal on $flatten\g_buffered.u_ar.$procdff$220 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_ar.$0\count[1:0], Q = \g_buffered.u_ar.count).
+Adding EN signal on $flatten\g_buffered.u_ar.$procdff$215 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_ar.$logic_not$src/axi_channel_fifo.sv:36$39_Y, Q = \g_buffered.u_ar.tail).
+Adding EN signal on $flatten\g_buffered.u_ar.$procdff$210 ($adff) from module axi_register_slice_flat (D = $flatten\g_buffered.u_ar.$logic_not$src/axi_channel_fifo.sv:37$40_Y, Q = \g_buffered.u_ar.head).
+
+5.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+Removed 10 unused cells and 10 unused wires.
+<suppressed ~11 debug messages>
+
+5.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+<suppressed ~5 debug messages>
+
+5.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 0 changes.
+
+5.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.9.16. Finished OPT passes. (There is nothing left to do.)
+
+5.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_r.$procmux$155_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_r.$lt$src/axi_channel_fifo.sv:23$88 ($lt).
+Removed top 1 bits (of 2) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_ar.$procmux$139_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_ar.$lt$src/axi_channel_fifo.sv:23$25 ($lt).
+Removed top 1 bits (of 2) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_b.$procmux$107_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_b.$lt$src/axi_channel_fifo.sv:23$67 ($lt).
+Removed top 1 bits (of 2) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_w.$procmux$123_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_w.$lt$src/axi_channel_fifo.sv:23$46 ($lt).
+Removed top 1 bits (of 2) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_aw.$procmux$139_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell axi_register_slice_flat.$flatten\g_buffered.u_aw.$lt$src/axi_channel_fifo.sv:23$25 ($lt).
+
+5.11. Executing PEEPOPT pass (run peephole optimizers).
+
+5.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module axi_register_slice_flat:
+  creating $macc model for $flatten\g_buffered.u_ar.$add$src/axi_channel_fifo.sv:39$41 ($add).
+  creating $macc model for $flatten\g_buffered.u_ar.$sub$src/axi_channel_fifo.sv:40$42 ($sub).
+  creating $macc model for $flatten\g_buffered.u_aw.$add$src/axi_channel_fifo.sv:39$41 ($add).
+  creating $macc model for $flatten\g_buffered.u_aw.$sub$src/axi_channel_fifo.sv:40$42 ($sub).
+  creating $macc model for $flatten\g_buffered.u_b.$add$src/axi_channel_fifo.sv:39$83 ($add).
+  creating $macc model for $flatten\g_buffered.u_b.$sub$src/axi_channel_fifo.sv:40$84 ($sub).
+  creating $macc model for $flatten\g_buffered.u_r.$add$src/axi_channel_fifo.sv:39$104 ($add).
+  creating $macc model for $flatten\g_buffered.u_r.$sub$src/axi_channel_fifo.sv:40$105 ($sub).
+  creating $macc model for $flatten\g_buffered.u_w.$add$src/axi_channel_fifo.sv:39$62 ($add).
+  creating $macc model for $flatten\g_buffered.u_w.$sub$src/axi_channel_fifo.sv:40$63 ($sub).
+  creating $alu model for $macc $flatten\g_buffered.u_w.$sub$src/axi_channel_fifo.sv:40$63.
+  creating $alu model for $macc $flatten\g_buffered.u_w.$add$src/axi_channel_fifo.sv:39$62.
+  creating $alu model for $macc $flatten\g_buffered.u_r.$sub$src/axi_channel_fifo.sv:40$105.
+  creating $alu model for $macc $flatten\g_buffered.u_r.$add$src/axi_channel_fifo.sv:39$104.
+  creating $alu model for $macc $flatten\g_buffered.u_b.$sub$src/axi_channel_fifo.sv:40$84.
+  creating $alu model for $macc $flatten\g_buffered.u_b.$add$src/axi_channel_fifo.sv:39$83.
+  creating $alu model for $macc $flatten\g_buffered.u_aw.$sub$src/axi_channel_fifo.sv:40$42.
+  creating $alu model for $macc $flatten\g_buffered.u_aw.$add$src/axi_channel_fifo.sv:39$41.
+  creating $alu model for $macc $flatten\g_buffered.u_ar.$sub$src/axi_channel_fifo.sv:40$42.
+  creating $alu model for $macc $flatten\g_buffered.u_ar.$add$src/axi_channel_fifo.sv:39$41.
+  creating $alu model for $flatten\g_buffered.u_ar.$lt$src/axi_channel_fifo.sv:23$25 ($lt): new $alu
+  creating $alu model for $flatten\g_buffered.u_aw.$lt$src/axi_channel_fifo.sv:23$25 ($lt): new $alu
+  creating $alu model for $flatten\g_buffered.u_b.$lt$src/axi_channel_fifo.sv:23$67 ($lt): new $alu
+  creating $alu model for $flatten\g_buffered.u_r.$lt$src/axi_channel_fifo.sv:23$88 ($lt): new $alu
+  creating $alu model for $flatten\g_buffered.u_w.$lt$src/axi_channel_fifo.sv:23$46 ($lt): new $alu
+  creating $alu cell for $flatten\g_buffered.u_w.$lt$src/axi_channel_fifo.sv:23$46: $auto$alumacc.cc:495:replace_alu$281
+  creating $alu cell for $flatten\g_buffered.u_r.$lt$src/axi_channel_fifo.sv:23$88: $auto$alumacc.cc:495:replace_alu$286
+  creating $alu cell for $flatten\g_buffered.u_b.$lt$src/axi_channel_fifo.sv:23$67: $auto$alumacc.cc:495:replace_alu$291
+  creating $alu cell for $flatten\g_buffered.u_aw.$lt$src/axi_channel_fifo.sv:23$25: $auto$alumacc.cc:495:replace_alu$296
+  creating $alu cell for $flatten\g_buffered.u_ar.$lt$src/axi_channel_fifo.sv:23$25: $auto$alumacc.cc:495:replace_alu$301
+  creating $alu cell for $flatten\g_buffered.u_ar.$add$src/axi_channel_fifo.sv:39$41: $auto$alumacc.cc:495:replace_alu$306
+  creating $alu cell for $flatten\g_buffered.u_ar.$sub$src/axi_channel_fifo.sv:40$42: $auto$alumacc.cc:495:replace_alu$309
+  creating $alu cell for $flatten\g_buffered.u_aw.$add$src/axi_channel_fifo.sv:39$41: $auto$alumacc.cc:495:replace_alu$312
+  creating $alu cell for $flatten\g_buffered.u_aw.$sub$src/axi_channel_fifo.sv:40$42: $auto$alumacc.cc:495:replace_alu$315
+  creating $alu cell for $flatten\g_buffered.u_b.$add$src/axi_channel_fifo.sv:39$83: $auto$alumacc.cc:495:replace_alu$318
+  creating $alu cell for $flatten\g_buffered.u_b.$sub$src/axi_channel_fifo.sv:40$84: $auto$alumacc.cc:495:replace_alu$321
+  creating $alu cell for $flatten\g_buffered.u_r.$add$src/axi_channel_fifo.sv:39$104: $auto$alumacc.cc:495:replace_alu$324
+  creating $alu cell for $flatten\g_buffered.u_r.$sub$src/axi_channel_fifo.sv:40$105: $auto$alumacc.cc:495:replace_alu$327
+  creating $alu cell for $flatten\g_buffered.u_w.$add$src/axi_channel_fifo.sv:39$62: $auto$alumacc.cc:495:replace_alu$330
+  creating $alu cell for $flatten\g_buffered.u_w.$sub$src/axi_channel_fifo.sv:40$63: $auto$alumacc.cc:495:replace_alu$333
+  created 15 $alu and 0 $macc cells.
+
+5.14. Executing SHARE pass (SAT-based resource sharing).
+
+5.15. Executing OPT pass (performing simple optimizations).
+
+5.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 0 changes.
+
+5.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+5.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi_register_slice_flat..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi_register_slice_flat.
+Performed a total of 0 changes.
+
+5.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi_register_slice_flat'.
+Removed a total of 0 cells.
+
+5.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi_register_slice_flat.
+
+5.15.16. Finished OPT passes. (There is nothing left to do.)
+
+5.16. Executing MEMORY pass.
+
+5.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing axi_register_slice_flat.g_buffered.u_ar.payload write port 0.
+  Analyzing axi_register_slice_flat.g_buffered.u_aw.payload write port 0.
+  Analyzing axi_register_slice_flat.g_buffered.u_b.payload write port 0.
+  Analyzing axi_register_slice_flat.g_buffered.u_r.payload write port 0.
+  Analyzing axi_register_slice_flat.g_buffered.u_w.payload write port 0.
+
+5.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\g_buffered.u_ar.payload'[0] in module `\axi_register_slice_flat': no output FF found.
+Checking read port `\g_buffered.u_aw.payload'[0] in module `\axi_register_slice_flat': no output FF found.
+Checking read port `\g_buffered.u_b.payload'[0] in module `\axi_register_slice_flat': no output FF found.
+Checking read port `\g_buffered.u_r.payload'[0] in module `\axi_register_slice_flat': no output FF found.
+Checking read port `\g_buffered.u_w.payload'[0] in module `\axi_register_slice_flat': no output FF found.
+Checking read port address `\g_buffered.u_ar.payload'[0] in module `\axi_register_slice_flat': address FF has async set and/or reset, not supported.
+Checking read port address `\g_buffered.u_aw.payload'[0] in module `\axi_register_slice_flat': address FF has async set and/or reset, not supported.
+Checking read port address `\g_buffered.u_b.payload'[0] in module `\axi_register_slice_flat': address FF has async set and/or reset, not supported.
+Checking read port address `\g_buffered.u_r.payload'[0] in module `\axi_register_slice_flat': address FF has async set and/or reset, not supported.
+Checking read port address `\g_buffered.u_w.payload'[0] in module `\axi_register_slice_flat': address FF has async set and/or reset, not supported.
+
+5.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+5.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module axi_register_slice_flat...
+Found and reported 0 problems.
+
+7. Printing statistics.
+
+=== axi_register_slice_flat ===
+
+        +----------Local Count, excluding submodules.
+        |
+      229 wires
+     1746 wire bits
+      129 public wires
+     1098 public wire bits
+       64 ports
+      530 port bits
+      115 cells
+       15   $adffe
+       15   $alu
+       10   $eq
+       20   $logic_and
+       10   $logic_not
+        5   $mem_v2
+       15   $mux
+        5   $not
+        5   $pmux
+       10   $reduce_bool
+        5   $scopeinfo
+
+8. Executing JSON backend.
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$ba698a254f9a5947e85cbe7beae6b161eefc5386\_90_alu for cells of type $alu.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using template $paramod$521ce43182eecb9f60c72393a788160d2c356bf5\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~567 debug messages>
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi_register_slice_flat..
+Removed 55 unused cells and 440 unused wires.
+<suppressed ~56 debug messages>
+
+11. Executing CHECK pass (checking for obvious problems).
+Checking module axi_register_slice_flat...
+Found and reported 0 problems.
+
+12. Executing Verilog backend.
+
+12.1. Executing BMUXMAP pass.
+
+12.2. Executing DEMUXMAP pass.
+Dumping module `\axi_register_slice_flat'.

@@ -1,29 +1,35 @@
 {
-  "git_head": "f9179373c65cef2a17053db31c6d6e58164f8404",
+  "git_head": "16b8698e4b593575df084ad378b6627702b3ca44",
   "source_sha256": {
-    "Makefile": "158d50095f91db3fb1df894efe91dff3ed3a65e5e194aebffa2bea59e228d707",
-    "benchmarks/benchmark_runner.py": "fc8d52f7c4d9070653b8b2fd7b25cc43456296ae6abf42e13148b2da1016ffdc",
-    "benchmarks/verify_matrix.py": "5a6dd6da72f59735d2e47d05160a040ad5c01a9591365ef93fe2b76b4a8511e0",
+    "Makefile": "21e9b201a6cbf16d78d89454b4edc74b7e580777661872db78ea5c720d116f9b",
+    "benchmarks/benchmark_runner.py": "fa50f4f22011a29e4382d58db9659981d546ad066b64f9e5d9bd045077208c4e",
+    "benchmarks/verify_matrix.py": "f5cf530b04df2e759cd25bb84f1dc15500308b1b5e3ceaceed159fddb38cc831",
+    "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
     "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
-    "src/axi_interconnect.sv": "1a000710cf6734964b192bb113ac79c03bad1e46463d8984be6b54251acb2382",
+    "src/axi_interconnect.sv": "586f7882d65cfbd4fb4a696ad2d5e027a021fbfcb84ba8ecc905dac0a1f210b7",
     "src/axi_mgr.sv": "4771e89cd13c4019c6b2298b8527c09d25a0416266ae8acc66a83c7e94c35d6a",
     "src/axi_protocol_checker.sv": "fbf8f3cc987ab7a2cb13d797771092f113104dcb08658c79fb8bef2c513b1387",
     "src/axi_ram.sv": "2f433887cf3a027dfb9962c5c8537873936ed53f3725609871906101a00d415d",
+    "src/axi_register_slice.sv": "dcb12382d4c7cc3f8c26059e90a54f9f2ec4375fd068df482de5a7b33d9d911d",
     "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
     "src/axi_sub.sv": "d4746267122615524e1ba0405d5f5ddc4a8a2948777ed42dc450957e2d560133",
     "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
-    "src/axi_top.sv": "385f50c91414b8f76e5ce70dbb094c9222d73d614f2ce8b67c2e1cf8372dbf81",
-    "synthesis/scripts/check_queue_netlist.py": "7ffa3e896230b20b2f90655391bcbadceee943c96445a031cf2969550e5b11a4",
-    "synthesis/scripts/make_flat_queue.py": "4f8c4b5f9f214d473e60e6a261d9712a171b5800ee43239d6ea689fe32f54c56",
-    "synthesis/scripts/make_flat_top.py": "2b314a62876afaf1debaf549618b86d459d9378ded47980b77317bad9fc27941",
-    "synthesis/scripts/run_synthesis.py": "1af49358e426633400b71317f06004fdd88ec42124a10b8bc90c54f27936c5a6",
+    "src/axi_top.sv": "d7d4cb0975c694a2f6ab36ec75cdb8240e3e41f403102b01b6ff120b62b6d241",
+    "synthesis/scripts/axi_ports.py": "98b81b13d6ef035f09ec22d1645b1d7b9f1cee0dda1de5a63ed0cffde769fbfc",
+    "synthesis/scripts/check_queue_netlist.py": "427591080076de59ab6bffd6b667a151251de73cacb7a4f083729120ef6c2598",
+    "synthesis/scripts/make_flat_queue.py": "d3791f8d546d6870c83ed2384b2b1ddb260715b889374b610d947457643a89d8",
+    "synthesis/scripts/make_flat_slice.py": "5fcd9efd01397083cd2bcdf20a88c1a0df181b700c1ff80539129f5a204d2c1c",
+    "synthesis/scripts/make_flat_top.py": "f511b4577ebb780866d25cf5697a215a46a231d6988b1678116e041632ee9398",
+    "synthesis/scripts/run_synthesis.py": "9fbc27762987b39013802c1f87bd9f292665fb9797afd129c15616e5bf8bec10",
     "tb/axi_stall_sub.sv": "f7be2cdcf93e50b2aeee823d351c572adc14ba06e9cf341cd3c517033ef302c6",
-    "tb/tb_axi_benchmark.sv": "31cbaa867883eea928e2bf15a5711fa6f5fbe72c47595ed4eb88e3eb69835f51",
-    "tb/tb_axi_burst.sv": "649fdcce9dcf012d8af3f4ca12b8e718113fa751ede98648f99f6a18f802a2e2",
-    "tb/tb_axi_outstanding.sv": "422f6d8bbf31acad706763f29a4fe70230ad694b89b030a70d3b9450882625c6",
+    "tb/tb_axi_benchmark.sv": "6f3ebfacbb1dfaa07771394a745c431689c99cac43ca72e6a781dff46277c1a2",
+    "tb/tb_axi_burst.sv": "bd78e8f94bd1e80c729c180b4f7989f8670fecf0340717cdb58633db4b67e3a8",
+    "tb/tb_axi_channel_fifo.sv": "62594b528044847b5fe373e0bc7a2e7dbf91eb9bb4d214087c0064ff64edf214",
+    "tb/tb_axi_outstanding.sv": "dcf49737cdc541c3abf3007c797a0f8b7713c78602e04cabcc3fceca1c284710",
+    "tb/tb_axi_page_boundary.sv": "49a36317bbe8d5860bc5f47410ef53d31bb4e89321a5a764d4c4efad8ec4ea61",
     "tb/tb_axi_ram_params.sv": "bc81f5d7e3604a8f91f5344ffe6ef846885d7704c91f590ec99ebcd1377754ed",
     "tb/tb_top.sv": "59270226c273d55573355ee1368968a354f9185e5c3501375af42cfc58ae19e8",
-    "tools/validate_upgrade.py": "a3fdafb22a8884738c71ccecfaa7678cd15800f9bbecaafacdb4af8ddda2027f"
+    "tools/validate_upgrade.py": "95258155686ba3c6e8d6a4ced21cace3ff597b47c1575801cd3dd1ad2510ecc3"
   },
   "results": [
     {
@@ -111,6 +117,27 @@
       ],
       "exit_code": 0,
       "log": "synthesis/reports/queued-d4-bench.log"
+    },
+    {
+      "name": "pipelined-d4-bench",
+      "command": [
+        "python3",
+        "benchmarks/benchmark_runner.py",
+        "--label",
+        "pipelined-d4",
+        "--depth",
+        "4",
+        "--pipeline",
+        "1",
+        "--config",
+        "2x2x64",
+        "--config",
+        "4x4x128",
+        "--config",
+        "8x8x256"
+      ],
+      "exit_code": 0,
+      "log": "synthesis/reports/pipelined-d4-bench.log"
     },
     {
       "name": "ram-32",
@@ -211,6 +238,43 @@
       ],
       "exit_code": 0,
       "log": "synthesis/reports/queue-4.log"
+    },
+    {
+      "name": "slice-64",
+      "command": [
+        "python3",
+        "synthesis/scripts/run_synthesis.py",
+        "--slice",
+        "--width",
+        "64",
+        "--label",
+        "pipeline"
+      ],
+      "exit_code": 0,
+      "log": "synthesis/reports/slice-64.log"
+    },
+    {
+      "name": "slice-256",
+      "command": [
+        "python3",
+        "synthesis/scripts/run_synthesis.py",
+        "--slice",
+        "--width",
+        "256",
+        "--label",
+        "pipeline"
+      ],
+      "exit_code": 0,
+      "log": "synthesis/reports/slice-256.log"
+    },
+    {
+      "name": "waveform",
+      "command": [
+        "make",
+        "waveform"
+      ],
+      "exit_code": 0,
+      "log": "synthesis/reports/waveform.log"
     }
   ]
 }

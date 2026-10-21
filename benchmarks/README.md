@@ -19,8 +19,9 @@ a hotspot, response backpressure (45% READY probability), sparse arrivals (25%),
 and 1/16/64/maximum legal INCR burst lengths. Maximum is min(256, 4096/beat_bytes).
 Each active manager issues 32 transactions **per enabled direction**. IDs repeat
 0/1/2 and overlap across managers. All writes assert every strobe; therefore useful
-and transferred bus bytes coincide. This is full-duplex saturated traffic, not a
-weighted random read/write mix. Use modes 0/1/2 to select reads/writes/both.
+and transferred bus bytes coincide. The default is full-duplex saturated traffic. Modes 0/1/2 select reads/writes/both.
+For a custom case, `--read-percent 75` divides a total quota of twice
+`--transactions` into 75% reads and 25% writes; streams are independently paced.
 
 Custom example:
 
@@ -52,6 +53,9 @@ burst regression separately exercises subordinate AW/W/AR stalls.
   these are not a pure internal arbiter service-time measurement. Separate
   `arb_aw_wait` / `arb_ar_wait` count VALID&&!READY at dispatch into target arbitration.
 - W stalls and R stalls: corresponding VALID&&!READY cycles summed over managers.
+- Average outstanding occupancy: post-handshake accepted-minus-completed work
+  accumulated over the measured cycles; utilization divides by active-manager
+  capacity (or one global baseline slot).
 - Peak outstanding: accepted addresses minus completed responses; queued work is
   included and must not be confused with concurrently executing target requests.
 - `ports.csv`: per-manager/per-target beats and aggregate bandwidth. CSV includes
@@ -59,3 +63,10 @@ burst regression separately exercises subordinate AW/W/AR stalls.
 
 Raw build/run logs, metadata, CSV and Markdown live under `results/<label>/`;
 portable SVG charts are under `plots/`. Functional check counts are not coverage.
+
+## Optional registered target channels
+
+Use `--pipeline 1` with current RTL. It enables two-entry FIFOs on all five target
+channels, adding latency and a full-buffer recovery bubble while cutting paths
+across that boundary. `pipelined-d4` results use this setting; baseline does not.
+Compare the complete cycle and storage costs before deciding on a timing benefit.

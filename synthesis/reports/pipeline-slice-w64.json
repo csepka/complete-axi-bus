@@ -1,0 +1,22 @@
+{
+  "arguments": {
+    "slice": true,
+    "pipeline": 0,
+    "queue": false,
+    "fabric": false,
+    "nm": 2,
+    "ns": 2,
+    "addr_width": 32,
+    "width": 64,
+    "depth": 4,
+    "label": "pipeline"
+  },
+  "command": "read_verilog -sv -DSYNTHESIS src/axi_channel_fifo.sv build/axi_register_slice_flat.sv; chparam -set ADDR_W 32 -set DATA_W 64 -set ENABLE 1 axi_register_slice_flat; hierarchy -check -top axi_register_slice_flat; synth -flatten -top axi_register_slice_flat -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/pipeline-slice-w64-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/pipeline-slice-w64-netlist.v",
+  "summary": {
+    "generic_cells": 115,
+    "register_bits": 20,
+    "memory_bits": 508
+  },
+  "yosys": "Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)",
+  "exit_code": 0
+}

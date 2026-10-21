@@ -1,7 +1,11 @@
-# Verification Sources
+# Verification sources
 
-- `tb_top.sv` drives the integrated command-port example and performs 418 routing, error, and randomized data checks.
-- `tb_axi_burst.sv` drives AXI interfaces directly and performs 1,346 burst, ID, strobe, concurrency, backpressure, maximum-length, and negative checks.
-- `axi_stall_sub.sv` is a test-only shim that independently stalls AW, W, and AR to verify payload and grant stability.
+Retained integration, burst and parameter benches are supplemented by
+`tb_axi_outstanding` (ordered queues, errors, concurrency, reset),
+`tb_axi_channel_fifo` (independent randomized FIFO scoreboard) and
+`tb_axi_benchmark` (parameterized traffic and measured handshakes).
 
-Run both with `make test`, or the complete lint/test/synthesis flow with `make ci`.
+`axi_stall_sub` is a test-only target backpressure fixture. See
+[verification](../docs/verification.md) for test counts, scope, limitations and
+commands. `make ci` runs default checks; `make extended` adds parameter, pipeline,
+netlist and seed matrices.

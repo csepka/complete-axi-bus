@@ -16,7 +16,7 @@ Direction is shown from the manager perspective.
 | W | `WVALID/WREADY` | 1 | M→S / S→M | Backpressure-safe data handshake |
 | W | `WDATA` | `DATA_W` | M→S | Write payload |
 | W | `WSTRB` | `DATA_W/8` | M→S | One enable per byte lane |
-| W | `WLAST` | 1 | M→S | Must correspond to AWLEN; mismatch yields SLVERR |
+| W | `WLAST` | 1 | M→S | Must correspond to AWLEN; the RAM reports SLVERR on mismatch |
 | B | `BVALID/BREADY` | 1 | S→M / M→S | Persistent response handshake |
 | B | `BRESP` | 2 | S→M | OKAY, SLVERR, or DECERR |
 | B | `BID` | `ID_W` | S→M | Original AWID |
@@ -42,4 +42,4 @@ Direction is shown from the manager perspective.
 | `2'b10` | SLVERR | Request reached RAM but violated its contract |
 | `2'b11` | DECERR | Address did not decode to a configured subordinate |
 
-Optional AXI4 signals such as LOCK, CACHE, QOS, REGION, and USER are not part of `axi_if`. AXI5 signals such as ATOP, POISON, MPAM, and trace are also intentionally absent.
+Optional AXI4 signals such as LOCK, CACHE, QOS, REGION, and USER are not part of `axi_if`. Atomic extensions, poison, MPAM, and trace are also intentionally absent.

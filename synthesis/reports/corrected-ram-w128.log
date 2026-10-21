@@ -1,15 +1,17 @@
 
--- Running command `read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set DATA_W 128 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/corrected-ram-w128-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/corrected-ram-w128-netlist.v' --
+-- Running command `read_verilog -sv -DSYNTHESIS src/axi_ram.sv; chparam -set ADDR_W 32 -set DATA_W 128 axi_ram; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:fine; check -assert; select -assert-none t:$dlatch t:$adlatch; select -assert-none p:*; stat; write_json synthesis/reports/corrected-ram-w128-netlist.json; techmap; opt_clean; check -assert; write_verilog -noattr synthesis/reports/corrected-ram-w128-netlist.v' --
 
 1. Executing Verilog-2005 frontend: src/axi_ram.sv
 Parsing SystemVerilog input from `src/axi_ram.sv' to AST representation.
 Generating RTLIL representation for module `\axi_ram'.
 Successfully finished Verilog frontend.
+Parameter \ADDR_W = 32
 Parameter \DATA_W = 128
 
 2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_ram'.
+Parameter \ADDR_W = 32
 Parameter \DATA_W = 128
-Generating RTLIL representation for module `$paramod\axi_ram\DATA_W=32'00000000000000000000000010000000'.
+Generating RTLIL representation for module `$paramod$dd15c4e99d64b771658a772fe6cb2dbc5c1c49b3\axi_ram'.
 
 3. Executing HIERARCHY pass (managing design hierarchy).
 
