@@ -1,0 +1,70 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv -DSYNTHESIS src/axi_ram.sv; hierarchy -check -top axi_ram; synth -top axi_ram -run begin:coarse; stat' --
+
+1. Executing Verilog-2005 frontend: src/axi_ram.sv
+Parsing SystemVerilog input from `src/axi_ram.sv' to AST representation.
+Generating RTLIL representation for module `\axi_ram'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+2.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \axi_ram
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \axi_ram
+Removed 0 unused modules.
+
+4. Printing statistics.
+
+=== axi_ram ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      599 wires
+     9803 wire bits
+      114 public wires
+     1887 public wire bits
+       31 ports
+      192 port bits
+        1 memories
+    32768 memory bits
+        5 processes
+      215 cells
+       24   $add
+       10   $and
+       49   $eq
+        6   $ge
+       16   $gt
+       30   $logic_and
+       13   $logic_not
+       17   $logic_or
+        3   $memrd
+        4   $mux
+        9   $ne
+        6   $not
+       12   $shl
+        4   $shr
+       12   $sub
+
+End of script. Logfile hash: 02ec05ed46, CPU: user 0.03s system 0.01s, MEM: 17.42 MB peak
+Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)
+Time spent: 96% 2x read_verilog (0 sec), 1% 2x hierarchy (0 sec), ...
