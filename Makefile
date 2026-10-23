@@ -19,7 +19,7 @@ RTL := src/axi_if.sv \
        src/axi_top.sv
 
 CHECKER := src/axi_protocol_checker.sv
-VFLAGS  := -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET
+VFLAGS  := tools/verilator_waivers.vlt -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET
 
 ifeq ($(TRACE),1)
 VFLAGS += --trace --trace-depth 6

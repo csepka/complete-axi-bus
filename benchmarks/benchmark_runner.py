@@ -9,7 +9,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = '2ec5059cf00b51b40ee441fab273f5a2d1d8f462'
-FLAGS = ['-sv', '--timing', '--assert', '--Wall', '-Wno-UNUSEDSIGNAL',
+FLAGS = [str(ROOT/'tools/verilator_waivers.vlt'), '-sv', '--timing', '--assert', '--Wall', '-Wno-UNUSEDSIGNAL',
          '-Wno-UNSIGNED', '-Wno-SYNCASYNCNET']
 
 

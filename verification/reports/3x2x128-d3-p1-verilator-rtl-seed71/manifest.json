@@ -20,13 +20,14 @@
     "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
     "src/axi_interconnect.sv": "586f7882d65cfbd4fb4a696ad2d5e027a021fbfcb84ba8ecc905dac0a1f210b7",
     "build/axi_fabric_flat.sv": "0c81e20e902369d97460ab4382779ebb82b15c9c758d64a22212212eae1df583",
-    "build/independent/3x2x128-d3-p1-verilator-rtl/tb_independent.sv": "b23eb7b4bdce3abdf8cdafba27075d5b69fe3dea214bed352c135d0687194b48"
+    "build/independent/3x2x128-d3-p1-verilator-rtl/tb_independent.sv": "b23eb7b4bdce3abdf8cdafba27075d5b69fe3dea214bed352c135d0687194b48",
+    "tools/verilator_waivers.vlt": "3a269cbaf699e9406757d885bccd0898fcd21de48e988a50de1113ab8e4c2980"
   },
   "packages": {
     "cocotb": "2.0.1",
     "cocotbext-axi": "0.1.26",
     "cocotb-bus": "0.3.0"
   },
-  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "runner_sha256": "327287ae7ba2562c4ccdafc466dedcd8cbebe1b11d2553316edcc1dc8f3cadfb",
   "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
 }

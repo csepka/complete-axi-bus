@@ -110,3 +110,14 @@ impossible. Technology-specific SRAM, CDC/reset-domain, gate-level timing and
 physical signoff remain separate integration work. Reference placement/routing
 and extracted STA now exist; KLayout antenna markers and missing LVS collateral
 remain explicit failures in [physical evidence](../synthesis/physical/README.md).
+
+## Cross-version lint compatibility
+
+The pinned GitHub EDA suite uses Verilator 5.053; native validation uses 5.044.
+The newer release warns that the queue occupancy bound comparisons are constant
+when the configured depth equals the counter type's maximum (for example depths
+1 and 3). `tools/verilator_waivers.vlt` suppresses only CMPCONST at the two bound
+assertion lines. The assertions, ownership checks and other diagnostics remain
+enabled. Every Verilator entry point uses the same control file, and validation
+records its hash. This avoids changing synthesized RTL to accommodate a lint
+diagnostic about deliberately retained assertions.

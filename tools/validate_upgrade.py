@@ -29,7 +29,7 @@ for name,cmd in commands:
     results.append(dict(name=name,command=cmd,exit_code=result.returncode,log=str(log.relative_to(ROOT))))
     if result.returncode:
         print(log.read_text()[-6000:]);raise SystemExit(f'{name} failed: {log}')
-source_files=[*ROOT.glob('src/*.sv'),*ROOT.glob('tb/*.sv'),*ROOT.glob('benchmarks/*.py'),*ROOT.glob('synthesis/scripts/*.py'),ROOT/'Makefile',Path(__file__).resolve()]
+source_files=[*ROOT.glob('src/*.sv'),*ROOT.glob('tb/*.sv'),*ROOT.glob('benchmarks/*.py'),*ROOT.glob('synthesis/scripts/*.py'),ROOT/'Makefile',ROOT/'tools/verilator_waivers.vlt',Path(__file__).resolve()]
 (REPORTS/'validation.json').write_text(json.dumps(dict(
     git_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
     source_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(source_files)},

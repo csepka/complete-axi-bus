@@ -22,6 +22,6 @@
     "cocotbext-axi": "0.1.26",
     "cocotb-bus": "0.3.0"
   },
-  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "runner_sha256": "327287ae7ba2562c4ccdafc466dedcd8cbebe1b11d2553316edcc1dc8f3cadfb",
   "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
 }

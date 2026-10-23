@@ -16,7 +16,7 @@ s+=f'    {module}_flat netlist(.ACLK,.ARESETn,\n'
 s+=',\n'.join(f'        .{side}_{sig}({side}.{sig})' for side in ['up','down'] for sig in WIDTHS)+'\n    );\nendmodule\n'
 build=ROOT/'build'/f'{module}-netlist-d{a.depth}';build.mkdir(parents=True,exist_ok=True)
 (build/(module+'.sv')).write_text(s)
-command=['verilator','-sv','--timing','--assert','--Wall','-Wno-UNUSEDSIGNAL','-Wno-UNSIGNED','-Wno-SYNCASYNCNET',
+command=['verilator',str(ROOT/'tools/verilator_waivers.vlt'),'-sv','--timing','--assert','--Wall','-Wno-UNUSEDSIGNAL','-Wno-UNSIGNED','-Wno-SYNCASYNCNET',
     # Yosys emits noncanonical filenames and local helper signals; RTL lint remains strict.
     '-Wno-DECLFILENAME','--output-split','0','--binary','-j','4','--Mdir',str(build),'--top-module','tb_axi_outstanding',
     '+define+AXI_INTERNAL_CHECKS',f'-GDEPTH={a.depth}',f'-GPIPELINE={int(a.slice)}','tb/tb_axi_outstanding.sv','src/axi_if.sv','src/axi_protocol_checker.sv',

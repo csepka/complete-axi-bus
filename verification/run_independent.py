@@ -63,7 +63,7 @@ runner=get_runner(a.sim)
 # requires scc -expect 0. This waiver applies only to generated netlists.
 netlist_flags=['-Wno-UNOPTFLAT'] if a.netlist else []
 runner.build(sources=sources,hdl_toplevel='tb_independent',build_dir=build,
-    build_args=['--assert','-Wno-UNUSEDSIGNAL','-Wno-UNSIGNED','-Wno-SYNCASYNCNET','-Wno-DECLFILENAME','-j','4']+netlist_flags if a.sim=='verilator' else ['-g2012'],
+    build_args=[str(ROOT/'tools/verilator_waivers.vlt'),'--assert','-Wno-UNUSEDSIGNAL','-Wno-UNSIGNED','-Wno-SYNCASYNCNET','-Wno-DECLFILENAME','-j','4']+netlist_flags if a.sim=='verilator' else ['-g2012'],
     timescale=('1ns','1ps'),log_file=build/'compile.log')
 # Runner does not put test_module's source folder on PYTHONPATH automatically.
 os.environ['PYTHONPATH']=str(ROOT/'verification')+os.pathsep+os.environ.get('PYTHONPATH','')
@@ -75,7 +75,7 @@ results=ET.parse(xml)
 assert results.findall('.//testcase'), 'No tests ran'
 assert not results.findall('.//failure') and not results.findall('.//error'), 'Independent test failed; inspect simulation.log'
 (report/'manifest.json').write_text(json.dumps({'configuration':vars(a)|{'netlist':str(a.netlist) if a.netlist else None,'cells':str(a.cells) if a.cells else None},
-    'source_sha256':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources},
+    'source_sha256':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources+([ROOT/'tools/verilator_waivers.vlt'] if a.sim=='verilator' else [])},
     'packages':{name:version(name) for name in ['cocotb','cocotbext-axi','cocotb-bus']},
     'runner_sha256':runner_hash,
     'test_sha256':test_hash},indent=2)+'\n')

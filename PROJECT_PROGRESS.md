@@ -2,9 +2,9 @@
 
 ## Hardware-reference continuation (2026-10-22, in progress)
 
-Continue on `feat/concurrent-axi4`. Prior architecture commits are pushed; the
-current physical/independent-verification milestone is not yet committed. No
-functional RTL was changed during this continuation. Open reference technology
+Continue on `feat/concurrent-axi4`. The physical/independent-verification milestone was committed and pushed as
+`8753a97` after the prior architecture commits. Further CI compatibility and large
+physical-trial work is in progress. No functional RTL was changed during this continuation. Open reference technology
 was explicitly selected by the user; Docker must remain running.
 
 Verified evidence already obtained:
@@ -43,6 +43,13 @@ is running on that preserved layout. A separate `8x8x256-d4-p1-repair` trial use
 logs live under `build/physical/<label>/flow.log`. The repair trial starts with
 fresh synthesis and preserves the original trial. Do not quote the simulated
 327.169 Gb/s aggregate rate as physically timing-supported yet.
+
+GitHub CI's newer Verilator 5.053 reports CMPCONST on the two queue-bound
+assertions at depths whose counter maximum equals the queue depth (1, 3, ...).
+A control-file waiver limited to those exact assertion lines now passes all
+17 native validation stages and all nine independent tests; RTL and runtime
+assertions are unchanged. CI run `39895799384` predates this fix. Do not claim
+GitHub CI passes until a subsequent fixed commit completes there.
 
 Next: finish and inspect large implementation, run final-netlist tests and DRC,
 collect actual results/limits, complete evidence audit, update this file and the

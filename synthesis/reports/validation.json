@@ -1,8 +1,8 @@
 {
-  "git_head": "cb41944e43eac9910fb80240c66cbd8ed56e447f",
+  "git_head": "8753a97dea6a96b75c9f7fd3db84b232ce0738d5",
   "source_sha256": {
-    "Makefile": "21e9b201a6cbf16d78d89454b4edc74b7e580777661872db78ea5c720d116f9b",
-    "benchmarks/benchmark_runner.py": "fa50f4f22011a29e4382d58db9659981d546ad066b64f9e5d9bd045077208c4e",
+    "Makefile": "e0058da1d96cef2a6a83c8de71259bc1a9f562fe5ec046c2a642ca85ed34ae34",
+    "benchmarks/benchmark_runner.py": "c940d66f21de721d627fbb0d0247e61ca0e945d72f938762f7fbaf2b276102fe",
     "benchmarks/verify_matrix.py": "f5cf530b04df2e759cd25bb84f1dc15500308b1b5e3ceaceed159fddb38cc831",
     "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
     "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
@@ -16,7 +16,7 @@
     "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
     "src/axi_top.sv": "d7d4cb0975c694a2f6ab36ec75cdb8240e3e41f403102b01b6ff120b62b6d241",
     "synthesis/scripts/axi_ports.py": "98b81b13d6ef035f09ec22d1645b1d7b9f1cee0dda1de5a63ed0cffde769fbfc",
-    "synthesis/scripts/check_queue_netlist.py": "427591080076de59ab6bffd6b667a151251de73cacb7a4f083729120ef6c2598",
+    "synthesis/scripts/check_queue_netlist.py": "b8232fcc66c841504acc4d6b863c94e4c5235f618cdf255d948236521336d9ae",
     "synthesis/scripts/make_flat_queue.py": "d3791f8d546d6870c83ed2384b2b1ddb260715b889374b610d947457643a89d8",
     "synthesis/scripts/make_flat_slice.py": "5fcd9efd01397083cd2bcdf20a88c1a0df181b700c1ff80539129f5a204d2c1c",
     "synthesis/scripts/make_flat_top.py": "f511b4577ebb780866d25cf5697a215a46a231d6988b1678116e041632ee9398",
@@ -29,7 +29,8 @@
     "tb/tb_axi_page_boundary.sv": "49a36317bbe8d5860bc5f47410ef53d31bb4e89321a5a764d4c4efad8ec4ea61",
     "tb/tb_axi_ram_params.sv": "bc81f5d7e3604a8f91f5344ffe6ef846885d7704c91f590ec99ebcd1377754ed",
     "tb/tb_top.sv": "59270226c273d55573355ee1368968a354f9185e5c3501375af42cfc58ae19e8",
-    "tools/validate_upgrade.py": "95258155686ba3c6e8d6a4ced21cace3ff597b47c1575801cd3dd1ad2510ecc3"
+    "tools/validate_upgrade.py": "449afc151741405ce86ef94307b76bbb5abbf1307588d9bf7771d973345cd1b8",
+    "tools/verilator_waivers.vlt": "3a269cbaf699e9406757d885bccd0898fcd21de48e988a50de1113ab8e4c2980"
   },
   "results": [
     {

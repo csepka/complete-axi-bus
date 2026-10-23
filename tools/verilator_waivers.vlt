@@ -1,0 +1,6 @@
+`verilator_config
+// At depths 1, 3, 7, ... the occupancy type's maximum equals the queue depth.
+// Version 5.053 diagnoses these two bound assertions as constant comparisons.
+// Keep the assertions for all other depths; suppress only this diagnostic at
+// their exact source lines. Ownership checks and all runtime assertions remain on.
+lint_off -rule CMPCONST -file "*/axi_request_queue.sv" -lines 80-81
