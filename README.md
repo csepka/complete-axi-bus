@@ -4,8 +4,6 @@
 
 A synthesizable SystemVerilog AXI4 interconnect demonstrating subsystem RTL design, AMBA integration, protocol validation, and hardware build automation. The design connects a configurable number of managers and memory-mapped subordinates through independent read and write datapaths.
 
-> **Scope:** This is an intentionally bounded AXI4 implementation, not AXI5 and not a claim of full AMBA conformance. The supported and unsupported features are explicit below.
-
 **Proof points:** five AXI channels · FIXED, INCR, and WRAP bursts · legal bursts up to 256 beats · 1,764 self-checking regression checks plus SVA monitoring
 
 ## Architecture
@@ -37,26 +35,6 @@ See [the architecture document](docs/architecture.md) for microarchitecture, res
 ![AXI4 write-address arbitration under subordinate backpressure](docs/images/axi-aw-backpressure.svg)
 
 *Generated from the passing burst regression: manager 1 retains the AW grant while subordinate 0 applies backpressure, even after manager 0 requests service. The address transfers when the stall is released.* Regenerate it with `make waveform`; the raw VCD remains ignored.
-
-## Supported Feature Matrix
-
-| Feature | Status | Notes |
-|---|---:|---|
-| Five AXI channels | ✅ | AW, W, B, AR, R |
-| `VALID/READY` backpressure | ✅ | Payload stability checked with SVA |
-| Transaction IDs | ✅ | Routed end to end; one active read and write globally |
-| FIXED bursts | ✅ | Up to 16 beats |
-| INCR bursts | ✅ | Up to 256 beats; 4-KiB rule checked |
-| WRAP bursts | ✅ | Legal lengths 2, 4, 8, and 16 |
-| Write strobes | ✅ | Per-byte lane updates |
-| Read/write concurrency | ✅ | Independent arbitration state machines |
-| Multiple outstanding transactions | ❌ | One read plus one write may be active globally |
-| Out-of-order responses | ❌ | Not needed under the single-outstanding policy |
-| Narrow transfers | ❌ | Requests smaller than the bus width are rejected |
-| Unaligned transfers | ❌ | Rejected with `SLVERR` |
-| Exclusive accesses / atomics | ❌ | LOCK/ATOP not implemented |
-| CACHE/QOS/REGION/USER sidebands | ❌ | Deliberately outside this project’s interface |
-| AXI5 poison, trace, or MPAM | ❌ | This project targets an AXI4 core subset |
 
 ## Quick Start
 
