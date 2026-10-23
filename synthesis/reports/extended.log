@@ -5,12 +5,12 @@ verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNC
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.020 s (elab=0.000, cvt=0.000, bld=0.018); cpu 0.002 s on 4 threads; alloced 3.125 MB
+- Verilator: Walltime 0.024 s (elab=0.000, cvt=0.000, bld=0.022); cpu 0.002 s on 4 threads; alloced 3.172 MB
 build/obj_outstanding_d1_p0/Vtb_axi_outstanding
 OUTSTANDING REGRESSION PASS: depth=1 checks=375 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 9us; walltime 0.001 s; speed 6.950 ms/s
+- Verilator: $finish at 9us; walltime 0.002 s; speed 5.997 ms/s
 - Verilator: cpu 0.001 s on 1 threads; alloced 2 MB
 /Library/Developer/CommandLineTools/usr/bin/make DEPTH=3 test-outstanding
 mkdir -p build/obj_outstanding_d3_p0
@@ -19,13 +19,13 @@ verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNC
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.020 s (elab=0.000, cvt=0.000, bld=0.018); cpu 0.002 s on 4 threads; alloced 3.125 MB
+- Verilator: Walltime 0.026 s (elab=0.000, cvt=0.000, bld=0.024); cpu 0.002 s on 4 threads; alloced 3.141 MB
 build/obj_outstanding_d3_p0/Vtb_axi_outstanding
 OUTSTANDING REGRESSION PASS: depth=3 checks=475 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 10us; walltime 0.002 s; speed 7.123 ms/s
-- Verilator: cpu 0.001 s on 1 threads; alloced 2 MB
+- Verilator: $finish at 10us; walltime 0.002 s; speed 6.255 ms/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 /Library/Developer/CommandLineTools/usr/bin/make DEPTH=5 test-outstanding
 mkdir -p build/obj_outstanding_d5_p0
 verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNCASYNCNET --binary -j 4 --Mdir build/obj_outstanding_d5_p0 \
@@ -33,12 +33,12 @@ verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNC
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.025 s (elab=0.000, cvt=0.000, bld=0.020); cpu 0.002 s on 4 threads; alloced 3.141 MB
+- Verilator: Walltime 0.036 s (elab=0.000, cvt=0.000, bld=0.034); cpu 0.002 s on 4 threads; alloced 3.141 MB
 build/obj_outstanding_d5_p0/Vtb_axi_outstanding
 OUTSTANDING REGRESSION PASS: depth=5 checks=575 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 11us; walltime 0.002 s; speed 7.235 ms/s
+- Verilator: $finish at 11us; walltime 0.003 s; speed 5.420 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 /Library/Developer/CommandLineTools/usr/bin/make test-queue-netlist
 python3 synthesis/scripts/check_queue_netlist.py --depth 4
@@ -75,11 +75,11 @@ Dumping module `\axi_request_queue_flat'.
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.021 s (elab=0.000, cvt=0.000, bld=0.019); cpu 0.002 s on 4 threads; alloced 3.188 MB
+- Verilator: Walltime 0.026 s (elab=0.000, cvt=0.000, bld=0.023); cpu 0.002 s on 4 threads; alloced 3.234 MB
 OUTSTANDING REGRESSION PASS: depth=4 checks=525 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 11us; walltime 0.002 s; speed 5.997 ms/s
+- Verilator: $finish at 11us; walltime 0.002 s; speed 5.608 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 /Library/Developer/CommandLineTools/usr/bin/make PIPELINE=1 test-burst
 mkdir -p build/obj_burst_p1
@@ -88,12 +88,12 @@ verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNC
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.025 s (elab=0.000, cvt=0.000, bld=0.023); cpu 0.001 s on 1 threads; alloced 3.109 MB
+- Verilator: Walltime 0.069 s (elab=0.000, cvt=0.000, bld=0.066); cpu 0.002 s on 1 threads; alloced 3.109 MB
 build/obj_burst_p1/Vtb_axi_burst
 BURST REGRESSION PASS: 1618 checks
 - tb/tb_axi_burst.sv:536: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 21us; walltime 0.002 s; speed 9.424 ms/s
+- Verilator: $finish at 21us; walltime 0.003 s; speed 8.573 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 /Library/Developer/CommandLineTools/usr/bin/make PIPELINE=1 test-outstanding
 mkdir -p build/obj_outstanding_d4_p1
@@ -102,12 +102,12 @@ verilator -sv --timing --assert --Wall -Wno-UNUSEDSIGNAL -Wno-UNSIGNED -Wno-SYNC
 make[2]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.020 s (elab=0.000, cvt=0.000, bld=0.018); cpu 0.002 s on 4 threads; alloced 3.141 MB
+- Verilator: Walltime 0.026 s (elab=0.000, cvt=0.000, bld=0.024); cpu 0.002 s on 4 threads; alloced 3.141 MB
 build/obj_outstanding_d4_p1/Vtb_axi_outstanding
 OUTSTANDING REGRESSION PASS: depth=4 checks=525 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 11us; walltime 0.002 s; speed 6.256 ms/s
+- Verilator: $finish at 11us; walltime 0.002 s; speed 5.570 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 python3 synthesis/scripts/check_queue_netlist.py --slice
 Using template $paramod$521ce43182eecb9f60c72393a788160d2c356bf5\_90_pmux for cells of type $pmux.
@@ -143,11 +143,11 @@ Dumping module `\axi_register_slice_flat'.
 make[1]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.021 s (elab=0.000, cvt=0.000, bld=0.019); cpu 0.002 s on 4 threads; alloced 3.203 MB
+- Verilator: Walltime 0.024 s (elab=0.000, cvt=0.000, bld=0.021); cpu 0.002 s on 4 threads; alloced 3.203 MB
 OUTSTANDING REGRESSION PASS: depth=4 checks=525 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 11us; walltime 0.002 s; speed 5.086 ms/s
+- Verilator: $finish at 11us; walltime 0.002 s; speed 4.780 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB
 python3 benchmarks/verify_matrix.py
 edge-1x1 1x1x32 custom: 2512 cycles, 0.3261 GB/s (assumed clock)

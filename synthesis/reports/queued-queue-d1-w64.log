@@ -491,7 +491,7 @@ Found and reported 0 problems.
 === axi_request_queue_flat ===
 
         +----------Local Count, excluding submodules.
-        | 
+        |
       135 wires
       885 wire bits
        74 public wires

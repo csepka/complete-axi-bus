@@ -27,12 +27,12 @@ c++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated
 rm Vtb_axi_burst__ALL.verilator_deplist.tmp
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.829 MB sources in 14 modules, into 3.264 MB in 15 C++ files needing 0.001 MB
-- Verilator: Walltime 12.758 s (elab=0.015, cvt=0.214, bld=12.474); cpu 0.264 s on 1 threads; alloced 43.281 MB
+- Verilator: Walltime 15.040 s (elab=0.019, cvt=0.192, bld=14.761); cpu 0.256 s on 1 threads; alloced 42.531 MB
 build/obj_burst_p0/Vtb_axi_burst +trace
 BURST REGRESSION PASS: 1618 checks
 - tb/tb_axi_burst.sv:536: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 21us; walltime 0.005 s; speed 4.468 ms/s
-- Verilator: cpu 0.005 s on 1 threads; alloced 2 MB
+- Verilator: $finish at 21us; walltime 0.005 s; speed 4.733 ms/s
+- Verilator: cpu 0.004 s on 1 threads; alloced 2 MB
 python3 tools/vcd_to_svg.py build/tb_axi_burst.vcd docs/images/axi-aw-backpressure.svg
 Wrote docs/images/axi-aw-backpressure.svg from build/tb_axi_burst.vcd (55–195 ns)

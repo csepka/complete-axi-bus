@@ -53,7 +53,7 @@ or timing-closed bandwidth is claimed.
 | No accepted-request tracking | Per-manager AW/AR queues retain identity/target payload through response retirement; depth 1/3/4/5 tests | Strict one executing head per manager/direction |
 | ID collisions / cross-target ordering | Owner-based routing and strict head issue; same/different IDs plus queued errors verified | No per-manager out-of-order completion |
 | Combinational target boundary | Optional two-entry channel stages, default bypass; directed/random and synthesized-slice verification | No STA proof of Fmax benefit; added cycles documented |
-| False coarse-synthesis evidence | Fixed stage endpoint; require process/latch/structural checks; corrected RAM/queue/slice reports | Full-fabric frontend and technology flow unavailable |
+| False coarse-synthesis evidence | Fixed stage endpoint; require process/latch/structural checks; corrected RAM/queue/slice reports | Full-fabric read_slang flow now executed; mapped results archived separately |
 | Struct-array synthesis fragility | Explicit packed-vector FIFO arrays; capacity sanity check; actual queue netlist substitution | No generic frontend equivalence proof |
 | Reset / exhaustion gaps | Full queues, held grants, partial write, stalled responses, buffered-channel reset and fresh-traffic recovery | Reset must encompass all participants; memory is not rolled back |
 | Burst coverage gaps | All legal WRAP lengths, FIXED limit, reserved burst, narrow/unaligned writes and page edges added | Not a complete conformance test suite |
@@ -62,7 +62,7 @@ or timing-closed bandwidth is claimed.
 | Duplicated synthesis-adapter metadata | Shared signal schema and checked mechanical port expansion; explicit build-directory creation | Interface schema must track axi_if changes |
 | Stale waveform paths/counts | Target-arbiter paths updated; queue versus target acceptance distinguished; hard-coded check count removed | Waveform is one illustrative interval, not coverage |
 | Misleading performance interpretation | Separate aggregate/directional rates, assumed clock, offered/accepted latency, average/peak occupancy, stalls and target counters | Hardware bandwidth still requires mapped timing and endpoint evidence |
-| Physical library / STA / P&R | Recorded unavailable; scripts and example constraints provided | No ASIC area, Fmax, timing closure or hardware 100 Gb/s claim |
+| Physical library / STA / P&R | Pinned Nangate45 flow executes mapping, P&R, extraction and STA | Antenna markers, missing LVS deck, one typical corner; no production signoff |
 
 The baseline arbiter's generic endpoint mapping and decode are intentionally retained
 inside each one-target instance. This supports incremental reuse and review. A
@@ -73,7 +73,25 @@ macros or additional RTL package dependencies.
 
 The queue and optional slice separate transaction ownership from channel elasticity.
 The demonstration manager/top remain deliberately serial and are labeled as such.
-Independent reference checks, conditional fairness assumptions, and two-state
-simulation limitations are documented. No unresolved failing regression is accepted
+Independent BFMs and four-state full-netlist checks now complement the original
+two-state tests. FIFO safety is proven at WIDTH=8; fabric liveness remains bounded
+by endpoint fairness assumptions. No unresolved failing regression is accepted
 as a completed milestone; final executed commands and source hashes are in
 `synthesis/reports/validation.json`.
+
+## Reference-flow continuation audit
+
+- Native interface synthesis leaves no latches, processes, blackboxes or
+  combinational SCCs; independent tests also run on its emitted netlists.
+- Liberty load units were verified as fF. Final reports use 5 fF, not the earlier
+  exploratory 0.005-fF load. No obsolete trial is reported as final acceptance.
+- Hold repair needed more than the default buffer budget; bounded retries preserve
+  constraints. Its area cost is included, not hidden.
+- The independent monitor allows W to arrive before AW at a buffered target.
+  Stored beats are matched in order when AW arrives.
+- Reset exhaustion expectations distinguish baseline global capacity from upgraded
+  per-manager queues; modern full-queue assertions remain strict.
+- KLayout markers are counted as XML items, not metadata values. Router DRC=0 does
+  not override antenna errors or a missing LVS result.
+- OpenROAD transformation equivalence and zero-delay routed simulation are not
+  RTL-to-transistor equivalence or SDF timing simulation.

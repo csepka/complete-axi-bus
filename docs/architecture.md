@@ -163,3 +163,14 @@ are not reset: zero occupancy makes stale values invalid.
 
 See [verification](verification.md) for configurations actually tested. Elaborating
 a parameter combination is not itself proof of correct operation.
+
+## Reference implementation boundary
+
+The [physical reference flow](../synthesis/physical/README.md) implements the
+complete fabric with external flattened ports and preserves the interface-array
+RTL internally until native elaboration. It excludes demonstration managers/RAMs.
+Queues and slices become standard-cell storage, including unreset payload flops;
+reset valid/count/owner state keeps idle payloads unobservable. Four-state netlist
+tests check meaningful payloads and handshake controls. Layout buffering and clock
+tree insertion must preserve logical behavior, while STA checks separate timing
+constraints. The existing strict issue/ordering policy is unchanged.

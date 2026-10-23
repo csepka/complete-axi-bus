@@ -24,7 +24,7 @@ jobs:
       - name: Install build tools
         run: |
           sudo apt-get update
-          sudo apt-get install --yes make g++
+          sudo apt-get install --yes make g++ python3-venv
 
       - name: Report tool versions
         run: |
@@ -36,3 +36,9 @@ jobs:
 
       - name: Verify queue depths, synthesized queue, and parameter matrix
         run: make extended
+
+      - name: Verify independent AXI models and FIFO induction
+        run: |
+          python3 -m venv build/verification-venv
+          build/verification-venv/bin/pip install -r verification/requirements.txt
+          build/verification-venv/bin/python verification/run_matrix.py

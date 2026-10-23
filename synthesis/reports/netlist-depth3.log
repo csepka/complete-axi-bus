@@ -31,9 +31,9 @@ Dumping module `\axi_request_queue_flat'.
 make: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.024 s (elab=0.000, cvt=0.000, bld=0.021); cpu 0.002 s on 4 threads; alloced 3.203 MB
+- Verilator: Walltime 0.025 s (elab=0.000, cvt=0.000, bld=0.023); cpu 0.002 s on 4 threads; alloced 3.219 MB
 OUTSTANDING REGRESSION PASS: depth=3 checks=475 peak W/R=3/3
 - tb/tb_axi_outstanding.sv:325: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 10us; walltime 0.002 s; speed 5.896 ms/s
+- Verilator: $finish at 10us; walltime 0.002 s; speed 5.595 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB

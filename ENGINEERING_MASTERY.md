@@ -629,10 +629,77 @@ response resources to avoid circular waits. Then add independent reordering and
 resource-exhaustion tests before claiming the feature.
 
 ### 60. What is the next defensible optimization step?
-Obtain full-fabric synthesis and realistic timing constraints, identify actual
-critical paths, then evaluate narrower arbitration logic or selected pipeline
-boundaries with before/after area, latency and achievable-clock evidence. Retain
-only improvements supported by that evidence.
+Use the archived extracted paths and cell-area reports to select an optimization,
+then compare equivalent traffic, constraints and configurations. The reference
+flow now exists; it does not yet establish a pipeline Fmax benefit. Investigate
+hold-buffer cost and manager-to-target routing before changing proven ownership
+logic. Retain improvements only after regression and physical remeasurement.
+
+### 61. Why is interface-array synthesis different from flattening external ports?
+The flat wrapper only concatenates/splits signals. Internal `axi_if` instances and
+modports remain SystemVerilog objects until an interface-capable frontend expands
+them. Native `read_slang` performs that elaboration; subsequent Yosys lowering
+must leave no processes, latches, blackboxes or combinational SCCs.
+
+### 62. What exactly does the mapped area comparison include?
+The reported standard-cell area includes functional gates, queue/slice storage,
+clock buffers and timing-repair buffers. It excludes filler and is distinct from
+the 250 x 250 um small-design die. The 2x2 upgraded configuration costs about
+10.81x the original baseline here; that combines multiple architectural features
+and repair costs under these constraints. It is not a universal area multiplier.
+
+### 63. Why can a slow requested clock still require many hold buffers?
+Hold checks constrain the earliest data arrival relative to the capture edge.
+A longer clock period does not generally cure a same-edge hold failure. Short
+feedback paths, clock skew and 0.2 ns hold uncertainty led to substantial buffering
+in this flow. The repair budget was enlarged while constraints stayed unchanged.
+That cost must appear in the area report.
+
+### 64. What does +7.27049 ns setup slack prove at a 10 ns clock?
+For the specific 2x2 layout, typical library corner and stated I/O assumptions,
+the extracted setup check passes with that margin. Hold independently passes with
++0.0278701 ns. Neither number proves multi-corner signoff, an optimized Fmax, reset
+recovery/removal, or the timing of the larger fabric and attached memories.
+
+### 65. Why are router DRC and KLayout results both necessary?
+They use different geometry abstractions and rules. The 2x2 router reports zero
+errors, while KLayout finds four antenna markers in final GDS. One marker contains
+multiple diagnostic values, so counting XML values produced a misleading 28.
+The collector counts items. Neither result can replace LVS connectivity checks.
+
+### 66. Why does a passing routed-netlist test not prove layout connectivity?
+The simulator reads a logical netlist and zero-delay cell models. It cannot see
+an open or short introduced by layout geometry. LVS extracts connectivity from
+layout and compares it with the intended circuit. The pinned reference platform
+has no configured LVS deck, so that check remains unavailable, not passed.
+
+### 67. Why use an independent byte oracle as well as write/read loopback?
+A fabric that consistently routes both writes and reads to the same wrong target
+can pass loopback. The independent suite inspects the selected external RAM's
+bytes directly after writes and compares reads with separately retained expected
+data. Disjoint address regions prevent legitimate concurrent overwrites from
+making expected values ambiguous.
+
+### 68. Can W legitimately reach a target before AW in this implementation?
+Yes. The target slice buffers AW and W independently. The upstream arbiter has
+already accepted the address, but downstream AW backpressure can let buffered W
+arrive first. The monitor stores W beat/LAST observations until it can pair them
+with AW in issue order. Requiring downstream AW first would falsely reject legal
+channel decoupling.
+
+### 69. What makes the FIFO proof inductive rather than just bounded testing?
+Yosys proves a base case and an induction step with arbitrary payload/VALID/READY.
+The reference queue is related to actual count, ring pointers and second stored
+word by invariants. Read-only ports expose state without replacing control logic.
+The result is FIFO safety at WIDTH=8 under sampled-reset assumptions. It does not
+prove full-fabric liveness, analog reset behavior or every parameter value.
+
+### 70. How should a failed optional physical check affect release claims?
+Keep the usable synthesis/timing evidence but preserve the failed check and make
+acceptance fail. Here antenna markers and missing LVS collateral prevent physical
+acceptance. Do not disable a deck, invent process rules, substitute netlist tests,
+or turn missing output into zero violations. A reference educational result can
+be valuable without being a manufacturable signoff result.
 
 ## 8. What to defend in a design review
 
@@ -643,5 +710,47 @@ and unfavorable hotspot/short-burst cases alongside independent-target gains.
 
 The strongest result is a reproducible improvement with explicit bounds, not a
 claim that every AXI feature or physical target has been completed. Remaining
-work includes full-fabric synthesis, technology timing/P&R, independent VIP/formal
-assurance and, if justified by a workload, more parallel dispatch per manager.
+work includes antenna closure, LVS with complete process collateral, multi-corner
+signoff, full-fabric formal/coverage closure and, if justified by a workload, more
+parallel dispatch per manager. Reference synthesis, extracted STA/P&R and
+independent full-netlist functional tests now have archived evidence.
+
+## 9. From RTL to the physical reference
+
+The flow first elaborates the real fabric with a structural flat boundary, then
+lowers memories/processes and maps Boolean logic into a specific Liberty library.
+Floorplanning allocates a deliberately roomy die and pins; placement locates
+cells; clock-tree synthesis distributes ACLK; hold/setup repair changes buffering
+and drive strength; routing constructs metal connections; extraction supplies
+wire parasitics for final STA. GDS and logical netlist tests answer different
+questions and are retained separately.
+
+```text
+RTL/interfaces -> read_slang -> generic gates -> Liberty mapping
+     |                              |                  |
+ RTL BFM test                 generic BFM test    mapped BFM test
+                                                        |
+ placement -> clock tree + repair -> route -> extracted STA
+                                              |         |
+                                       routed BFM    setup + hold
+                                              |
+                                         GDS -> DRC / LVS
+```
+
+The BFMs drive the same flattened interface at each logical stage. Four-state
+simulation permits idle payload X values but requires definite handshake controls
+and meaningful payloads; reset valid/count state masks uninitialized storage.
+The independent checker tracks outstanding addresses, W beat counts, response IDs
+and order, including buffered W arriving before AW. Final cell models have zero
+delay: they verify logic, while STA separately verifies constrained timing.
+
+Physical results are sensitive to units and external assumptions. Nangate45 uses
+fF, so a 5-fF load is `5.0`, not `0.005`. External reset is false-pathed under an
+explicit synchronized-deassertion contract. The hold uncertainty is applied as
+well as setup uncertainty; its buffers are a real cost of that chosen model.
+A large bus also needs enough boundary pin tracks even when logic utilization is
+low. These are integration decisions, not incidental tool settings.
+
+The [physical report](synthesis/physical/README.md) records actual paths, area and
+limitations. A production process would need validated antenna/LVS collateral,
+all required PVT/variation corners, power integrity and endpoint integration.

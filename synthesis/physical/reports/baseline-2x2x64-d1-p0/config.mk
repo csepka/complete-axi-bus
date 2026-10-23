@@ -1,0 +1,15 @@
+export DESIGN_NAME = axi_fabric_flat
+export DESIGN_NICKNAME = baseline-2x2x64-d1-p0
+export PLATFORM = nangate45
+export VERILOG_FILES = /work/build/physical/baseline-2x2x64-d1-p0/generic.v
+export SDC_FILE = /work/build/physical/baseline-2x2x64-d1-p0/constraints.sdc
+export DIE_AREA = 0 0 250 250
+export CORE_AREA = 10 10 240 240
+export PLACE_DENSITY = 0.30
+export TNS_END_PERCENT = 100
+export HOLD_SLACK_MARGIN = 0.03
+export PLACE_PINS_ARGS = -min_distance 1 -min_distance_in_tracks
+export NUM_CORES = 4
+export SYNTH_REPEATABLE_BUILD = 1
+export PRE_CTS_TCL = /work/build/physical/baseline-2x2x64-d1-p0/repair_budget.tcl
+export PRE_GLOBAL_ROUTE_TCL = /work/build/physical/baseline-2x2x64-d1-p0/repair_budget.tcl

@@ -1,0 +1,27 @@
+{
+  "configuration": {
+    "nm": 2,
+    "ns": 2,
+    "width": 64,
+    "depth": 1,
+    "pipeline": 0,
+    "seed": 23,
+    "baseline": true,
+    "netlist": "build/physical/baseline-2x2x64-d1-p0/orfs/results/nangate45/baseline-2x2x64-d1-p0/base/6_final.v",
+    "cells": "build/physical/nangate45_models.v",
+    "netlist_kind": "routed",
+    "sim": "icarus"
+  },
+  "source_sha256": {
+    "build/physical/nangate45_models.v": "62f202ce18b251e751f4c9bfda125e7eef1ce45d96d74d5e3d5c81a06bf4bdfe",
+    "build/physical/baseline-2x2x64-d1-p0/orfs/results/nangate45/baseline-2x2x64-d1-p0/base/6_final.v": "cc3ed46406338b88e47f5d37ad898c609179930ef3c44072273f12de44ca9bd5",
+    "build/independent/baseline-2x2x64-d1-p0-icarus-routed/tb_independent.sv": "a8f93ce8cfb2e54007829860d166e12b09837870b1e1d0e8d7fbd31abf97fdeb"
+  },
+  "packages": {
+    "cocotb": "2.0.1",
+    "cocotbext-axi": "0.1.26",
+    "cocotb-bus": "0.3.0"
+  },
+  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
+}

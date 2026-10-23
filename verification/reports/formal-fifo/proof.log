@@ -1,0 +1,565 @@
+
+-- Executing script file `/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/verification/reports/formal-fifo/proof.ys' --
+
+1. Executing Verilog-2005 frontend: build/formal-fifo/observed.sv
+Parsing formal SystemVerilog input from `build/formal-fifo/observed.sv' to AST representation.
+Generating RTLIL representation for module `\axi_channel_fifo'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: verification/formal_fifo.sv
+Parsing formal SystemVerilog input from `verification/formal_fifo.sv' to AST representation.
+Generating RTLIL representation for module `\formal_fifo'.
+Successfully finished Verilog frontend.
+
+3. Executing PREP pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \formal_fifo
+Used module:     \axi_channel_fifo
+Parameter \WIDTH = 8
+
+3.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_channel_fifo'.
+Parameter \WIDTH = 8
+Generating RTLIL representation for module `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000'.
+
+3.1.3. Analyzing design hierarchy..
+Top module:  \formal_fifo
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000
+
+3.1.4. Analyzing design hierarchy..
+Top module:  \formal_fifo
+Used module:     $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000
+Removing unused module `\axi_channel_fifo'.
+Removed 1 unused modules.
+Module formal_fifo directly or indirectly contains formal properties -> setting "keep" attribute.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$verification/formal_fifo.sv:42$66 in module formal_fifo.
+Marked 1 switch rules as full_case in process $proc$verification/formal_fifo.sv:34$62 in module formal_fifo.
+Marked 1 switch rules as full_case in process $proc$build/formal-fifo/observed.sv:37$89 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.
+Marked 1 switch rules as full_case in process $proc$build/formal-fifo/observed.sv:34$82 in module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 8 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\formal_fifo.$proc$verification/formal_fifo.sv:16$71'.
+  Set init value: \past_valid = 1'0
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \ARESETn in `\formal_fifo.$proc$verification/formal_fifo.sv:34$62'.
+Found async reset \ARESETn in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~13 debug messages>
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\formal_fifo.$proc$verification/formal_fifo.sv:16$71'.
+Creating decoders for process `\formal_fifo.$proc$verification/formal_fifo.sv:42$66'.
+     1/2: $0\second[7:0]
+     2/2: $0\first[7:0]
+Creating decoders for process `\formal_fifo.$proc$verification/formal_fifo.sv:34$62'.
+     1/1: $0\used[1:0]
+Creating decoders for process `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+     1/10: $assert$verification/formal_fifo.sv:30$58_EN
+     2/10: $assert$verification/formal_fifo.sv:29$57_EN
+     3/10: $assert$verification/formal_fifo.sv:27$53_EN
+     4/10: $assert$verification/formal_fifo.sv:26$50_EN
+     5/10: $assert$verification/formal_fifo.sv:25$47_EN
+     6/10: $assert$verification/formal_fifo.sv:24$45_EN
+     7/10: $assert$verification/formal_fifo.sv:23$40_EN
+     8/10: $assert$verification/formal_fifo.sv:22$38_EN
+     9/10: $assert$verification/formal_fifo.sv:21$36_EN
+    10/10: $assume$verification/formal_fifo.sv:19$34_EN
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+     1/3: $0\count[1:0]
+     2/3: $0\tail[0:0]
+     3/3: $0\head[0:0]
+Creating decoders for process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+     1/3: $1$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$88
+     2/3: $1$memwr$\payload$build/formal-fifo/observed.sv:35$72_DATA[7:0]$87
+     3/3: $1$memwr$\payload$build/formal-fifo/observed.sv:35$72_ADDR[0:0]$86
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\formal_fifo.\first' using process `\formal_fifo.$proc$verification/formal_fifo.sv:42$66'.
+  created $dff cell `$procdff$154' with positive edge clock.
+Creating register for signal `\formal_fifo.\second' using process `\formal_fifo.$proc$verification/formal_fifo.sv:42$66'.
+  created $dff cell `$procdff$155' with positive edge clock.
+Creating register for signal `\formal_fifo.\used' using process `\formal_fifo.$proc$verification/formal_fifo.sv:34$62'.
+  created $adff cell `$procdff$160' with positive edge clock and positive level reset.
+Creating register for signal `\formal_fifo.\past_valid' using process `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+  created $dff cell `$procdff$161' with positive edge clock.
+Creating register for signal `\formal_fifo.$past$verification/formal_fifo.sv:28$24$0' using process `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+  created $dff cell `$procdff$162' with positive edge clock.
+Creating register for signal `\formal_fifo.$past$verification/formal_fifo.sv:28$25$0' using process `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+  created $dff cell `$procdff$163' with positive edge clock.
+Creating register for signal `\formal_fifo.$past$verification/formal_fifo.sv:30$26$0' using process `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+  created $dff cell `$procdff$164' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.\head' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+  created $adff cell `$procdff$169' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.\tail' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+  created $adff cell `$procdff$174' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.\count' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+  created $adff cell `$procdff$179' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$memwr$\payload$build/formal-fifo/observed.sv:35$72_ADDR' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+  created $dff cell `$procdff$180' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$memwr$\payload$build/formal-fifo/observed.sv:35$72_DATA' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+  created $dff cell `$procdff$181' with positive edge clock.
+Creating register for signal `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN' using process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+  created $dff cell `$procdff$182' with positive edge clock.
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `formal_fifo.$proc$verification/formal_fifo.sv:16$71'.
+Found and cleaned up 3 empty switches in `\formal_fifo.$proc$verification/formal_fifo.sv:42$66'.
+Removing empty process `formal_fifo.$proc$verification/formal_fifo.sv:42$66'.
+Found and cleaned up 1 empty switch in `\formal_fifo.$proc$verification/formal_fifo.sv:34$62'.
+Removing empty process `formal_fifo.$proc$verification/formal_fifo.sv:34$62'.
+Found and cleaned up 5 empty switches in `\formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+Removing empty process `formal_fifo.$proc$verification/formal_fifo.sv:17$29'.
+Found and cleaned up 3 empty switches in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:37$89'.
+Found and cleaned up 1 empty switch in `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+Removing empty process `$paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.$proc$build/formal-fifo/observed.sv:34$82'.
+Cleaned up 13 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+<suppressed ~5 debug messages>
+Optimizing module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~7 debug messages>
+
+3.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod\axi_channel_fifo\WIDTH=s32'00000000000000000000000000001000.
+<suppressed ~1 debug messages>
+
+3.4. Executing FUTURE pass.
+
+3.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+3.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+Removed 10 unused cells and 73 unused wires.
+<suppressed ~11 debug messages>
+
+3.7. Executing CHECK pass (checking for obvious problems).
+Checking module formal_fifo...
+Found and reported 0 problems.
+
+3.8. Executing OPT pass (performing simple optimizations).
+
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+<suppressed ~15 debug messages>
+Removed a total of 5 cells.
+
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~48 debug messages>
+
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_fifo.
+    Consolidated identical input bits for $mux cell $flatten\dut.$procmux$146:
+      Old ports: A=8'00000000, B=8'11111111, Y=$flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85
+      New ports: A=1'0, B=1'1, Y=$flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0]
+      New connections: $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [7:1] = { $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_EN[7:0]$85 [0] }
+  Optimizing cells in module \formal_fifo.
+Performed a total of 1 changes.
+
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+<suppressed ~18 debug messages>
+Removed a total of 6 cells.
+
+3.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+Removed 0 unused cells and 9 unused wires.
+<suppressed ~1 debug messages>
+
+3.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+3.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~37 debug messages>
+
+3.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_fifo.
+Performed a total of 0 changes.
+
+3.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+Removed a total of 0 cells.
+
+3.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+
+3.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+3.8.14. Finished OPT passes. (There is nothing left to do.)
+
+3.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 30 bits (of 32) from port B of cell formal_fifo.$le$verification/formal_fifo.sv:21$37 ($le).
+Removed top 1 bits (of 2) from port B of cell formal_fifo.$ne$verification/formal_fifo.sv:23$42 ($ne).
+Removed top 30 bits (of 32) from port B of cell formal_fifo.$lt$verification/formal_fifo.sv:25$48 ($lt).
+Removed top 1 bits (of 2) from port B of cell formal_fifo.$eq$verification/formal_fifo.sv:45$68 ($eq).
+Removed top 1 bits (of 2) from port B of cell formal_fifo.$flatten\dut.$procmux$139_CMP0 ($eq).
+Removed top 30 bits (of 32) from port B of cell formal_fifo.$flatten\dut.$lt$build/formal-fifo/observed.sv:30$77 ($lt).
+
+3.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+
+3.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.12. Executing OPT pass (performing simple optimizations).
+
+3.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+3.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+Removed a total of 0 cells.
+
+3.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+
+3.12.4. Finished fast OPT passes.
+
+3.13. Printing statistics.
+
+=== formal_fifo ===
+
+        +----------Local Count, excluding submodules.
+        |
+       90 wires
+      212 wire bits
+       35 public wires
+       95 public wire bits
+        5 ports
+       12 port bits
+       78 cells
+        2   $add
+        4   $adff
+       10   $check
+        6   $dff
+       12   $eq
+        1   $le
+        8   $logic_and
+        5   $logic_not
+        1   $logic_or
+        2   $lt
+        1   $mem_v2
+       18   $mux
+        1   $ne
+        2   $pmux
+        2   $reduce_bool
+        1   $scopeinfo
+        2   $sub
+
+3.14. Executing CHECK pass (checking for obvious problems).
+Checking module formal_fifo...
+Found and reported 0 problems.
+
+4. Executing ASYNC2SYNC pass.
+Replacing formal_fifo.$flatten\dut.$procdff$169 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\head[0:0], Q=\dut.head
+Replacing formal_fifo.$flatten\dut.$procdff$174 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\tail[0:0], Q=\dut.tail
+Replacing formal_fifo.$flatten\dut.$procdff$179 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\count[1:0], Q=\dut.count
+Replacing formal_fifo.$procdff$160 ($adff): ARST=\ARESETn, D=$0\used[1:0], Q=\used
+
+5. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \dut.payload in module \formal_fifo:
+  created 2 $dff cells and 0 static cells of width 8.
+  read interface: 0 $dff and 2 $mux cells.
+  write interface: 2 write mux blocks.
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+<suppressed ~3 debug messages>
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+<suppressed ~42 debug messages>
+Removed a total of 14 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~55 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_fifo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$155 ($dff) from module formal_fifo (D = \in_payload, Q = \second).
+Adding SRST signal on $auto$async2sync.cc:110:execute$205 ($dff) from module formal_fifo (D = $procmux$126_Y, Q = $auto$async2sync.cc:107:execute$203, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$223 ($dff) from module formal_fifo (D = $procmux$118_Y, Q = $auto$async2sync.cc:107:execute$221, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$235 ($dff) from module formal_fifo (D = $procmux$110_Y, Q = $auto$async2sync.cc:107:execute$233, rval = 1'0).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+Removed 25 unused cells and 47 unused wires.
+<suppressed ~26 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_fifo.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\dut.payload[1]$305 ($dff) from module formal_fifo (D = $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_DATA[7:0]$84, Q = \dut.payload[1]).
+Adding EN signal on $memory\dut.payload[0]$303 ($dff) from module formal_fifo (D = $flatten\dut.$0$memwr$\payload$build/formal-fifo/observed.sv:35$72_DATA[7:0]$84, Q = \dut.payload[0]).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+Removed 2 unused cells and 2 unused wires.
+<suppressed ~3 debug messages>
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+6.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~43 debug messages>
+
+6.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_fifo.
+Performed a total of 0 changes.
+
+6.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_fifo'.
+Removed a total of 0 cells.
+
+6.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_fifo..
+
+6.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_fifo.
+
+6.23. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$203 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$215 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$221 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$233 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$239 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$189 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$195 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$201 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$207 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$213 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$219 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$225 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$231 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$237 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$243 = 1'1
+Import set-constraint from init attribute: \past_valid = 1'0
+Final init constraint equation: { \past_valid $auto$async2sync.cc:116:execute$243 $auto$async2sync.cc:116:execute$237 $auto$async2sync.cc:116:execute$231 $auto$async2sync.cc:116:execute$225 $auto$async2sync.cc:116:execute$219 $auto$async2sync.cc:116:execute$213 $auto$async2sync.cc:116:execute$207 $auto$async2sync.cc:116:execute$201 $auto$async2sync.cc:116:execute$195 $auto$async2sync.cc:116:execute$189 $auto$async2sync.cc:107:execute$239 $auto$async2sync.cc:107:execute$233 $auto$async2sync.cc:107:execute$221 $auto$async2sync.cc:107:execute$215 $auto$async2sync.cc:107:execute$203 } = 16'0111111111100000
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import proof for assert: $auto$async2sync.cc:116:execute$189 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$195 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$201 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$207 when $auto$async2sync.cc:107:execute$203.
+Import proof for assert: $auto$async2sync.cc:116:execute$213 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$219 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$225 when $auto$async2sync.cc:107:execute$221.
+Import proof for assert: $auto$async2sync.cc:116:execute$231 when $auto$async2sync.cc:107:execute$233.
+Import proof for assert: $auto$async2sync.cc:116:execute$237 when $auto$async2sync.cc:107:execute$233.
+
+** Trying induction with length 1 **
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import proof for assert: $auto$async2sync.cc:116:execute$189 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$195 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$201 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$207 when $auto$async2sync.cc:107:execute$203.
+Import proof for assert: $auto$async2sync.cc:116:execute$213 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$219 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$225 when $auto$async2sync.cc:107:execute$221.
+Import proof for assert: $auto$async2sync.cc:116:execute$231 when $auto$async2sync.cc:107:execute$233.
+Import proof for assert: $auto$async2sync.cc:116:execute$237 when $auto$async2sync.cc:107:execute$233.
+
+[base case 1] Solving problem with 5506 variables and 14641 clauses..
+Base case for induction length 1 proven.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import proof for assert: $auto$async2sync.cc:116:execute$189 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$195 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$201 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$207 when $auto$async2sync.cc:107:execute$203.
+Import proof for assert: $auto$async2sync.cc:116:execute$213 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$219 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$225 when $auto$async2sync.cc:107:execute$221.
+Import proof for assert: $auto$async2sync.cc:116:execute$231 when $auto$async2sync.cc:107:execute$233.
+Import proof for assert: $auto$async2sync.cc:116:execute$237 when $auto$async2sync.cc:107:execute$233.
+
+[induction step 1] Solving problem with 2032 variables and 5307 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                            Dec       Hex           Bin
+  ---- ---------------------------------------------- ----------- --------- -------------
+  init $auto$async2sync.cc:107:execute$203                      0         0             0
+  init $auto$async2sync.cc:107:execute$215                      0         0             0
+  init $auto$async2sync.cc:107:execute$221                      0         0             0
+  init $auto$async2sync.cc:107:execute$233                      0         0             0
+  init $auto$async2sync.cc:107:execute$239                      0         0             0
+  init $auto$async2sync.cc:116:execute$189                      0         0             0
+  init $auto$async2sync.cc:116:execute$195                      0         0             0
+  init $auto$async2sync.cc:116:execute$201                      0         0             0
+  init $auto$async2sync.cc:116:execute$207                      0         0             0
+  init $auto$async2sync.cc:116:execute$213                      0         0             0
+  init $auto$async2sync.cc:116:execute$219                      0         0             0
+  init $auto$async2sync.cc:116:execute$225                      0         0             0
+  init $auto$async2sync.cc:116:execute$231                      0         0             0
+  init $auto$async2sync.cc:116:execute$237                      0         0             0
+  init $auto$async2sync.cc:116:execute$243                      0         0             0
+  init $auto$async2sync.cc:234:execute$245                      1         1             1
+  init $auto$async2sync.cc:234:execute$247                      0         0             0
+  init $auto$async2sync.cc:234:execute$249                      0         0            00
+  init $auto$async2sync.cc:234:execute$251                      2         2            10
+  init $past$verification/formal_fifo.sv:28$24$0                0         0             0
+  init $past$verification/formal_fifo.sv:28$25$0                0         0             0
+  init $past$verification/formal_fifo.sv:30$26$0              252        fc      11111100
+  init \dut.payload[0]                                        255        ff      11111111
+  init \dut.payload[1]                                          0         0      00000000
+  init \first                                                   0         0      00000000
+  init \past_valid                                              1         1             1
+  init \second                                                221        dd      11011101
+
+** Trying induction with length 2 **
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import proof for assert: $auto$async2sync.cc:116:execute$189 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$195 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$201 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$207 when $auto$async2sync.cc:107:execute$203.
+Import proof for assert: $auto$async2sync.cc:116:execute$213 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$219 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$225 when $auto$async2sync.cc:107:execute$221.
+Import proof for assert: $auto$async2sync.cc:116:execute$231 when $auto$async2sync.cc:107:execute$233.
+Import proof for assert: $auto$async2sync.cc:116:execute$237 when $auto$async2sync.cc:107:execute$233.
+
+[base case 2] Solving problem with 6860 variables and 18409 clauses..
+Base case for induction length 2 proven.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$243 when $auto$async2sync.cc:107:execute$239.
+Import proof for assert: $auto$async2sync.cc:116:execute$189 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$195 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$201 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$207 when $auto$async2sync.cc:107:execute$203.
+Import proof for assert: $auto$async2sync.cc:116:execute$213 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$219 when $auto$async2sync.cc:107:execute$215.
+Import proof for assert: $auto$async2sync.cc:116:execute$225 when $auto$async2sync.cc:107:execute$221.
+Import proof for assert: $auto$async2sync.cc:116:execute$231 when $auto$async2sync.cc:107:execute$233.
+Import proof for assert: $auto$async2sync.cc:116:execute$237 when $auto$async2sync.cc:107:execute$233.
+
+[induction step 2] Solving problem with 3579 variables and 9717 clauses..
+Induction step proven: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$
+                 /$$__  $$    | $$_____/    | $$__  $$
+                | $$  \ $$    | $$          | $$  \ $$
+                | $$  | $$    | $$$$$       | $$  | $$
+                | $$  | $$    | $$__/       | $$  | $$
+                | $$/$$ $$    | $$          | $$  | $$
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/

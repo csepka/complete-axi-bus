@@ -83,10 +83,14 @@ A manager's depth-4 address queues retain 416 payload bits at ADDR=32/ID=4, plus
 payload bits plus 20 control FF bits. Actual coarse operator counts and depths
 are in [synthesis evidence](../synthesis/README.md). Small memories may map to FFs.
 
-Full-fabric generic logic/register area remains unmeasured because the installed
-frontend cannot synthesize its interface arrays. Mapped area, critical paths,
-Fmax and place-and-route remain unavailable. No technology-weighted cost or timing
-claim is inferred from simulation or isolated module counts.
+Full-fabric generic synthesis and mapped reference implementation now execute in a
+pinned container. At 2x2/64, the original globally serialized baseline occupies
+2,891.15 um², while depth-4 concurrent/pipelined fabric occupies 31,245.4 um² of
+standard cells after timing repair. Both meet extracted setup/hold at 100 MHz under
+the same specified Nangate45 typical-corner constraints. This 10.81x area ratio
+includes all architectural changes and hold buffers; it does not isolate pipeline
+cost. Both layouts retain four KLayout antenna markers and lack LVS evidence.
+See [full constraints, paths and limits](../synthesis/physical/README.md).
 
 ## Pipeline decision and scalability
 

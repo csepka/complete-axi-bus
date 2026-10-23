@@ -1,0 +1,26 @@
+{
+  "configuration": {
+    "nm": 8,
+    "ns": 8,
+    "width": 256,
+    "depth": 4,
+    "pipeline": 1,
+    "seed": 23,
+    "baseline": false,
+    "netlist": "build/physical/8x8x256-d4-p1/generic.v",
+    "cells": null,
+    "netlist_kind": "generic",
+    "sim": "verilator"
+  },
+  "source_sha256": {
+    "build/physical/8x8x256-d4-p1/generic.v": "1f4317b30c99401b70bc3ab9ddce9527817758a9af3bd7cdf26ed7a6d632037b",
+    "build/independent/8x8x256-d4-p1-verilator-generic/tb_independent.sv": "a6898f8dff0cd65f51d4d7a5ac43672bd00c1bc40b779de147180bc089b9c4d7"
+  },
+  "packages": {
+    "cocotb": "2.0.1",
+    "cocotbext-axi": "0.1.26",
+    "cocotb-bus": "0.3.0"
+  },
+  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
+}

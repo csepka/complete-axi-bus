@@ -1,0 +1,202 @@
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:94   in _embed_init_python              Using Python 3.12.10 interpreter at /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.044 2026-01-01
+     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 1
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_independent.independent_axi (1/1)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master (write)
+     0.00ns INFO     cocotb.tb_independent.m0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m0           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:120: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.valid.setimmediatevalue(self._valid_init)
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:133: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          s.setimmediatevalue(v)
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:115: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.ready.setimmediatevalue(self._ready_init)
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst size: 2 (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst length: 256 cycles (1024 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m0             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wdata width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wstrb width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             buser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master (read)
+     0.00ns INFO     cocotb.tb_independent.m0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m0           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst size: 2 (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst length: 256 cycles (1024 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m0             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rdata width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model (write)
+     0.00ns INFO     cocotb.tb_independent.s0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s0           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s0             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wdata width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wstrb width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             buser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model (read)
+     0.00ns INFO     cocotb.tb_independent.s0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s0           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s0             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rdata width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/reset.py:59: DeprecationWarning: Use `signal.value_change` instead.
+                                                          await Edge(reset_signal)
+   130.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:630: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(write_resp)
+   130.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:423: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+   180.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:1030: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(read_resp)
+   180.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:834: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+ 32900.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:195: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._pause_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:156: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._run_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:434: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:437: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_resp_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:132: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._cr.kill()
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24580, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x106908380>)
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24584, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1069085c0>)
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24576, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x106851af0>)
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:845: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:848: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_resp_cr.kill()
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24576, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x106908920>)
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24580, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x106908050>)
+ 33901.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24584, length=4, size=2, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10690a5d0>)
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_slave.py:102: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_cr.kill()
+ 33901.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_slave.py:266: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_cr.kill()
+ 34230.00ns INFO     cocotb.regression                  test_independent.independent_axi passed
+ 34230.00ns INFO     cocotb.regression                  ******************************************************************************************
+                                                        ** TEST                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ******************************************************************************************
+                                                        ** test_independent.independent_axi   PASS       34230.00           0.54      63182.60  **
+                                                        ******************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                  34230.00           0.54      62958.92  **
+                                                        ******************************************************************************************
+- :0: Verilog $finish

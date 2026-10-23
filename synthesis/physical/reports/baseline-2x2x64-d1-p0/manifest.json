@@ -1,0 +1,74 @@
+{
+  "image": "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+  "configuration": {
+    "baseline": true,
+    "nm": 2,
+    "ns": 2,
+    "width": 64,
+    "depth": 1,
+    "pipeline": 0,
+    "period": 10.0,
+    "resume": false,
+    "stage": "checks"
+  },
+  "source_sha256": {
+    "build/physical/baseline-2x2x64-d1-p0/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
+    "build/physical/baseline-2x2x64-d1-p0/axi_interconnect.sv": "2906cd0f297dd2dd3c939a4639fca81de4f3dc1cf710c60a1cf39c72b300a962",
+    "build/physical/baseline-2x2x64-d1-p0/axi_fabric_flat.sv": "33a2652f441222bcedf2c95e4f1cca2789195a8777f58729224927104907a72d"
+  },
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "-v",
+        "/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus:/work",
+        "-w",
+        "/work",
+        "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+        "bash",
+        "-lc",
+        "source /OpenROAD-flow-scripts/env.sh; cd /work; yosys -V; openroad -version; yosys -Q -T -s /work/build/physical/baseline-2x2x64-d1-p0/generic.ys"
+      ],
+      "exit_code": 0,
+      "log": "generic.log"
+    },
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "-v",
+        "/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus:/work",
+        "-w",
+        "/work",
+        "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+        "bash",
+        "-lc",
+        "source /OpenROAD-flow-scripts/env.sh; cd /work; make -C /OpenROAD-flow-scripts/flow DESIGN_CONFIG=/work/build/physical/baseline-2x2x64-d1-p0/config.mk WORK_HOME=/work/build/physical/baseline-2x2x64-d1-p0/orfs finish drc lvs"
+      ],
+      "exit_code": 2,
+      "log": "flow.log"
+    }
+  ],
+  "generic_cells": 2274,
+  "generic_cell_types": {
+    "$_DFFE_PN0P_": 42,
+    "$_DFF_PN1_": 1,
+    "$_DFF_PN0_": 3,
+    "$_NOT_": 77,
+    "$_AND_": 666,
+    "$_OR_": 70,
+    "$_XOR_": 30,
+    "$_MUX_": 1385
+  }
+}

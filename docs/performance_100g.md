@@ -2,8 +2,8 @@
 
 **Simulation supports more than 100 Gb/s under specified configurations and an
 assumed clock. Hardware operation at that rate has not been demonstrated.**
-No full-fabric mapped STA/P&R is available, so no timing-verified 100 Gb/s claim is
-made. Decimal 100 Gb/s is 12.5 GB/s.
+Full-fabric reference STA/P&R is now being measured separately; remaining
+antenna/LVS and endpoint-integration gaps prevent a hardware-ready claim. Decimal 100 Gb/s is 12.5 GB/s.
 
 ## Main measured cases at an assumed 100 MHz
 
@@ -58,6 +58,9 @@ after place-and-route with extraction. Verify the selected memory macro and
 endpoint bandwidth/latency contracts. Combine the achieved clock with the observed
 useful bytes/cycle under the intended traffic, including stalls and arbitration.
 
-The current repository supplies reproducible simulation, isolated module synthesis,
-constraints/templates and explicit limitations. It does not supply missing physical
-results or infer them from the clock value used for plots.
+The repository now supplies full-fabric reference synthesis and physical evidence
+in addition to the simulation results. The 2x2/64 pipelined implementation meets
+100 MHz extracted timing, but its measured 20.448 Gb/s aggregate traffic does not
+meet 100 Gb/s. Larger configurations require their own timing evidence; do not
+transfer the small-block result to the 8x8 design. See
+[reference results](../synthesis/physical/README.md).

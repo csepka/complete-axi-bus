@@ -22,7 +22,7 @@ make[1]: Nothing to be done for `default'.
 - V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
 - Verilator: Walltime 0.029 s (elab=0.000, cvt=0.000, bld=0.027); cpu 0.002 s on 1 threads; alloced 3.141 MB
-build/obj_burst/Vtb_axi_burst 
+build/obj_burst/Vtb_axi_burst
 BURST REGRESSION PASS: 1346 checks
 - tb/tb_axi_burst.sv:513: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01

@@ -1260,7 +1260,7 @@ Found and reported 0 problems.
 === axi_ram ===
 
         +----------Local Count, excluding submodules.
-        | 
+        |
       378 wires
      5539 wire bits
        60 public wires

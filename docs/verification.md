@@ -93,10 +93,20 @@ runs the coarse stage and checks for remaining processes/latches.
 
 ## Remaining assurance gaps
 
-No independent commercial AXI VIP, formal safety/liveness proof, four-state X
-coverage closure, code coverage percentage, or assertion coverage percentage is
-claimed. Verilator's main simulation is two-state; `$isunknown` checks do not
+The [independent verification suite](../verification/README.md) adds third-party
+AXI BFMs, byte oracles, full-fabric four-state generic/mapped/routed netlist tests,
+and a WIDTH=8 FIFO inductive safety proof. It exercises narrow/unaligned forwarding
+to capable external endpoints, all legal WRAP lengths, simultaneous traffic,
+backpressure, queue exhaustion and coordinated reset. These complement the demo
+RAM's deliberate rejection tests. See manifests and coverage bins under
+`verification/reports/`.
+
+No independent commercial AXI VIP, full-fabric formal safety/liveness proof,
+four-state X coverage closure, code coverage percentage, or assertion coverage
+percentage is claimed. Verilator's main simulation is two-state; `$isunknown` checks do not
 substitute for a four-state signoff run. Fairness is checked under finite traffic
 and bounded delays; indefinite endpoint stalls make unconditional liveness
 impossible. Technology-specific SRAM, CDC/reset-domain, gate-level timing and
-physical implementation remain separate integration work.
+physical signoff remain separate integration work. Reference placement/routing
+and extracted STA now exist; KLayout antenna markers and missing LVS collateral
+remain explicit failures in [physical evidence](../synthesis/physical/README.md).

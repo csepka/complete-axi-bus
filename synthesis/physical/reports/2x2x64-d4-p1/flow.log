@@ -1,0 +1,1489 @@
+OPENROAD: /OpenROAD-flow-scripts/tools/OpenROAD
+make: Entering directory '/OpenROAD-flow-scripts/flow'
+cp /work/build/physical/2x2x64-d4-p1/constraints.sdc /work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/1_2_yosys.sdc
+touch -r /work/build/physical/2x2x64-d4-p1/constraints.sdc /work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/1_2_yosys.sdc
+/work/build/physical/2x2x64-d4-p1/orfs/logs/nangate45/2x2x64-d4-p1/base
+Log                    Ext     Elapsed      CPU     CPU/ Peak Mem sha1sum
+                                     s        s  Elapsed       MB [0:10)
+1_1_yosys_canonicalize .rtlil        1        1     0.98      173 a4354f98da
+1_2_yosys              .v           14       15     1.02       91 6ef323f8e9
+1_2_yosys              .sdc                                       de3b0f15e8
+1_synth                .odb          1        1     0.94      156 df74df9f4b
+1_synth                .sdc                                       5185e92259
+2_1_floorplan          .odb          3        4     1.06      207 160bd5d118
+2_1_floorplan          .sdc                                       5185e92259
+2_2_floorplan_macro    .odb          0        1     0.96      142 160bd5d118
+2_3_floorplan_tapcell  .odb          1        1     0.97      141 fe7a61f573
+2_4_floorplan_pdn      .odb          1        1     0.98      149 6d57294897
+3_1_place_gp_skip_io   .odb          2        4     1.65      162 59d491c22e
+3_2_place_iop          .odb          0        1     0.97      147 21c38e4768
+3_3_place_gp           .odb         11       16     1.41      509 3bae5bd291
+3_4_place_resized      .odb          5        7     1.23      312 b0ea6ebed3
+3_5_place_dp           .odb          7        8     1.19      314 e858e7bb1f
+4_1_cts                .odb          1        2     1.12       98 7af7f3afa5
+4_rsz_lec                            1        2     1.12       98 N/A
+5_1_grt                .odb         46      150     3.24      559 325cbb8d07
+5_1_grt                .sdc                                       9f7c65c138
+5_2_route              .odb        138      493     3.57     1303 39e2163499
+5_3_fillcell           .odb          1        1     0.95      213 cadd74048d
+6_1_fill               .odb          1        1     0.94      179 cadd74048d
+6_1_fill               .sdc                                       9f7c65c138
+6_1_merge                           11       11     0.97      915 N/A
+6_final_lec            .v            2        3     1.09      129 2e88e585f6
+6_report                             2        3     1.09      129 N/A
+Total                              246      722     2.84     1303
+/usr/bin/python3 /OpenROAD-flow-scripts/flow/scripts/run_command.py --log /work/build/physical/2x2x64-d4-p1/orfs/logs/nangate45/2x2x64-d4-p1/base/6_drc.log --tee -- \
+        /OpenROAD-flow-scripts/flow/scripts/klayout.sh -zz -rd in_gds="/work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/6_final.gds" \
+        -rd report_file=/work/build/physical/2x2x64-d4-p1/orfs/reports/nangate45/2x2x64-d4-p1/base/6_drc.lyrdb \
+        -r /OpenROAD-flow-scripts/flow/platforms/nangate45/drc/FreePDK45.lydrc
+KLayout 0.30.12
+"polygons" in: FreePDK45.lydrc:42
+    Polygons (raw): 57159 (flat)  157 (hierarchical)
+    Elapsed: 0.080s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:43
+    Polygons (raw): 41923 (flat)  71 (hierarchical)
+    Elapsed: 0.050s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:44
+    Polygons (raw): 41923 (flat)  71 (hierarchical)
+    Elapsed: 0.030s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:45
+    Polygons (raw): 41515 (flat)  70 (hierarchical)
+    Elapsed: 0.030s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:46
+    Polygons (raw): 41515 (flat)  70 (hierarchical)
+    Elapsed: 0.030s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:47
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:48
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:49
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:50
+    Polygons (raw): 125194 (flat)  418 (hierarchical)
+    Elapsed: 0.040s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:51
+    Polygons (raw): 386066 (flat)  1634 (hierarchical)
+    Elapsed: 0.040s  Memory: 894.00M
+"polygons" in: FreePDK45.lydrc:52
+    Polygons (raw): 326416 (flat)  948 (hierarchical)
+    Elapsed: 0.050s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:53
+    Polygons (raw): 61994 (flat)  5 (hierarchical)
+    Elapsed: 0.030s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:54
+    Polygons (raw): 167511 (flat)  58737 (hierarchical)
+    Elapsed: 0.090s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:55
+    Polygons (raw): 49737 (flat)  4 (hierarchical)
+    Elapsed: 0.030s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:56
+    Polygons (raw): 81478 (flat)  29320 (hierarchical)
+    Elapsed: 0.060s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:57
+    Polygons (raw): 5377 (flat)  4 (hierarchical)
+    Elapsed: 0.040s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:58
+    Polygons (raw): 7763 (flat)  1994 (hierarchical)
+    Elapsed: 0.050s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:59
+    Polygons (raw): 2520 (flat)  11 (hierarchical)
+    Elapsed: 0.030s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:60
+    Polygons (raw): 4211 (flat)  1771 (hierarchical)
+    Elapsed: 0.040s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:61
+    Polygons (raw): 1220 (flat)  11 (hierarchical)
+    Elapsed: 0.030s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:62
+    Polygons (raw): 1604 (flat)  956 (hierarchical)
+    Elapsed: 0.040s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:63
+    Polygons (raw): 296 (flat)  5 (hierarchical)
+    Elapsed: 0.040s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:64
+    Polygons (raw): 120 (flat)  39 (hierarchical)
+    Elapsed: 0.030s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:65
+    Polygons (raw): 4 (flat)  1 (hierarchical)
+    Elapsed: 0.050s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:66
+    Polygons (raw): 6 (flat)  3 (hierarchical)
+    Elapsed: 0.040s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:67
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:68
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:69
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 895.00M
+"polygons" in: FreePDK45.lydrc:70
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 895.00M
+FEOL checks
+"or" in: FreePDK45.lydrc:91
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.630s  Memory: 920.00M
+"&" in: FreePDK45.lydrc:92
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.420s  Memory: 926.00M
+"output" in: FreePDK45.lydrc:92
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 926.00M
+"space" in: FreePDK45.lydrc:94
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 2.440s  Memory: 959.00M
+"output" in: FreePDK45.lydrc:94
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 959.00M
+"space" in: FreePDK45.lydrc:95
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 2.550s  Memory: 959.00M
+"output" in: FreePDK45.lydrc:95
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 959.00M
+"separation" in: FreePDK45.lydrc:96
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 960.00M
+"output" in: FreePDK45.lydrc:96
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 960.00M
+"-" in: FreePDK45.lydrc:97
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 960.00M
+"output" in: FreePDK45.lydrc:97
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 960.00M
+"-" in: FreePDK45.lydrc:98
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 960.00M
+"output" in: FreePDK45.lydrc:98
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 960.00M
+"&" in: FreePDK45.lydrc:101
+    Polygons (raw): 177754 (flat)  830 (hierarchical)
+    Elapsed: 0.230s  Memory: 965.00M
+"width" in: FreePDK45.lydrc:102
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.110s  Memory: 965.00M
+"output" in: FreePDK45.lydrc:102
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 965.00M
+"enclosing" in: FreePDK45.lydrc:110
+    Edge pairs: 355508 (flat)  1660 (hierarchical)
+    Elapsed: 0.400s  Memory: 972.00M
+"polygons" in: FreePDK45.lydrc:110
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 972.00M
+"without_area" in: FreePDK45.lydrc:110
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 972.00M
+"output" in: FreePDK45.lydrc:110
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 972.00M
+"-" in: FreePDK45.lydrc:111
+    Polygons (raw): 300674 (flat)  1213 (hierarchical)
+    Elapsed: 0.250s  Memory: 972.00M
+"separation" in: FreePDK45.lydrc:111
+    Edge pairs: 355508 (flat)  1660 (hierarchical)
+    Elapsed: 0.410s  Memory: 972.00M
+"polygons" in: FreePDK45.lydrc:111
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 972.00M
+"without_area" in: FreePDK45.lydrc:111
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 972.00M
+"output" in: FreePDK45.lydrc:111
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 972.00M
+"space" in: FreePDK45.lydrc:112
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.200s  Memory: 978.00M
+"output" in: FreePDK45.lydrc:112
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 978.00M
+"width" in: FreePDK45.lydrc:115
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 978.00M
+"output" in: FreePDK45.lydrc:115
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 978.00M
+"space" in: FreePDK45.lydrc:116
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.180s  Memory: 984.00M
+"output" in: FreePDK45.lydrc:116
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 984.00M
+"enclosing" in: FreePDK45.lydrc:117
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.590s  Memory: 984.00M
+"output" in: FreePDK45.lydrc:117
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 984.00M
+"-" in: FreePDK45.lydrc:118
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.320s  Memory: 998.00M
+"output" in: FreePDK45.lydrc:118
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 998.00M
+"or" in: FreePDK45.lydrc:121
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.570s  Memory: 1006.00M
+"separation" in: FreePDK45.lydrc:122
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 1.850s  Memory: 1032.00M
+"polygons" in: FreePDK45.lydrc:122
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1032.00M
+"without_area" in: FreePDK45.lydrc:122
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1032.00M
+"output" in: FreePDK45.lydrc:122
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1032.00M
+"separation" in: FreePDK45.lydrc:123
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 2.820s  Memory: 1065.00M
+"polygons" in: FreePDK45.lydrc:123
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 1026.00M
+"without_area" in: FreePDK45.lydrc:123
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1026.00M
+"output" in: FreePDK45.lydrc:123
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1026.00M
+"width" in: FreePDK45.lydrc:124
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1026.00M
+"output" in: FreePDK45.lydrc:124
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1026.00M
+"space" in: FreePDK45.lydrc:125
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.360s  Memory: 1026.00M
+"output" in: FreePDK45.lydrc:125
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1026.00M
+"&" in: FreePDK45.lydrc:126
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.330s  Memory: 1031.00M
+"output" in: FreePDK45.lydrc:126
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1031.00M
+"width" in: FreePDK45.lydrc:129
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1031.00M
+"output" in: FreePDK45.lydrc:129
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1031.00M
+"space" in: FreePDK45.lydrc:130
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.200s  Memory: 1035.00M
+"output" in: FreePDK45.lydrc:130
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1035.00M
+"or" in: FreePDK45.lydrc:131
+    Polygons (raw): 13135 (flat)  13135 (hierarchical)
+    Elapsed: 4.050s  Memory: 1183.00M
+"or" in: FreePDK45.lydrc:131
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 44.930s  Memory: 1302.00M
+"-" in: FreePDK45.lydrc:131
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 52.000s  Memory: 1339.00M
+"output" in: FreePDK45.lydrc:131
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1339.00M
+"enclosing" in: FreePDK45.lydrc:132
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.380s  Memory: 1340.00M
+"output" in: FreePDK45.lydrc:132
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1340.00M
+"enclosing" in: FreePDK45.lydrc:133
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.370s  Memory: 1340.00M
+"output" in: FreePDK45.lydrc:133
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1340.00M
+"separation" in: FreePDK45.lydrc:134
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.470s  Memory: 1340.00M
+"output" in: FreePDK45.lydrc:134
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1340.00M
+BEOL checks
+"width" in: FreePDK45.lydrc:143
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 2.580s  Memory: 1340.00M
+"output" in: FreePDK45.lydrc:143
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1340.00M
+"space" in: FreePDK45.lydrc:144
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 28.140s  Memory: 1403.00M
+"output" in: FreePDK45.lydrc:144
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1403.00M
+"enclosing" in: FreePDK45.lydrc:145
+    Edge pairs: 738194 (flat)  103816 (hierarchical)
+    Elapsed: 20.890s  Memory: 1460.00M
+"second_edges" in: FreePDK45.lydrc:145
+    Edges: 738194 (flat)  103816 (hierarchical)
+    Elapsed: 0.030s  Memory: 1425.00M
+"width" in: FreePDK45.lydrc:146
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 1.070s  Memory: 1427.00M
+"polygons" in: FreePDK45.lydrc:147
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1427.00M
+"interacting" in: FreePDK45.lydrc:147
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1427.00M
+"output" in: FreePDK45.lydrc:147
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1427.00M
+"enclosing" in: FreePDK45.lydrc:148
+    Edge pairs: 75920 (flat)  70424 (hierarchical)
+    Elapsed: 12.850s  Memory: 1473.00M
+"second_edges" in: FreePDK45.lydrc:148
+    Edges: 75920 (flat)  70424 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"width" in: FreePDK45.lydrc:149
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.350s  Memory: 1473.00M
+"polygons" in: FreePDK45.lydrc:150
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 1473.00M
+"interacting" in: FreePDK45.lydrc:150
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:150
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 46369 (flat)  41892 (hierarchical)
+    Elapsed: 0.760s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 50600 (flat)  46123 (hierarchical)
+    Elapsed: 0.160s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.490s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 6 (flat)  6 (hierarchical)
+    Elapsed: 0.050s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"edges" in: FreePDK45.lydrc:152
+    Edges: 210736 (flat)  192828 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"with_length" in: FreePDK45.lydrc:152
+    Edges: 32052 (flat)  23894 (hierarchical)
+    Elapsed: 0.040s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:152
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:152
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"edges" in: FreePDK45.lydrc:153
+    Edges: 24 (flat)  24 (hierarchical)
+    Elapsed: 0.000s  Memory: 1473.00M
+"with_length" in: FreePDK45.lydrc:153
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:153
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:153
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"edges" in: FreePDK45.lydrc:154
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"with_length" in: FreePDK45.lydrc:154
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:154
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:154
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"edges" in: FreePDK45.lydrc:155
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"with_length" in: FreePDK45.lydrc:155
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:155
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:155
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"edges" in: FreePDK45.lydrc:156
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1473.00M
+"with_length" in: FreePDK45.lydrc:156
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:156
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:156
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"width" in: FreePDK45.lydrc:159
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:159
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1473.00M
+"space" in: FreePDK45.lydrc:160
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.400s  Memory: 1473.00M
+"output" in: FreePDK45.lydrc:160
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1473.00M
+"-" in: FreePDK45.lydrc:161
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.920s  Memory: 1481.00M
+"output" in: FreePDK45.lydrc:161
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1481.00M
+"-" in: FreePDK45.lydrc:162
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.810s  Memory: 1485.00M
+"output" in: FreePDK45.lydrc:162
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1485.00M
+"width" in: FreePDK45.lydrc:165
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 1.260s  Memory: 1485.00M
+"output" in: FreePDK45.lydrc:165
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1485.00M
+"space" in: FreePDK45.lydrc:166
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 3.750s  Memory: 1506.00M
+"output" in: FreePDK45.lydrc:166
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1506.00M
+"enclosing" in: FreePDK45.lydrc:167
+    Edge pairs: 107534 (flat)  107534 (hierarchical)
+    Elapsed: 4.680s  Memory: 1517.00M
+"second_edges" in: FreePDK45.lydrc:167
+    Edges: 107534 (flat)  107534 (hierarchical)
+    Elapsed: 0.050s  Memory: 1517.00M
+"width" in: FreePDK45.lydrc:168
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.510s  Memory: 1517.00M
+"polygons" in: FreePDK45.lydrc:169
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"interacting" in: FreePDK45.lydrc:169
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"output" in: FreePDK45.lydrc:169
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"enclosing" in: FreePDK45.lydrc:170
+    Edge pairs: 94595 (flat)  94595 (hierarchical)
+    Elapsed: 3.940s  Memory: 1517.00M
+"second_edges" in: FreePDK45.lydrc:170
+    Edges: 94595 (flat)  94595 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"width" in: FreePDK45.lydrc:171
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.320s  Memory: 1517.00M
+"polygons" in: FreePDK45.lydrc:172
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 1517.00M
+"interacting" in: FreePDK45.lydrc:172
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"output" in: FreePDK45.lydrc:172
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 768 (flat)  768 (hierarchical)
+    Elapsed: 0.290s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 768 (flat)  768 (hierarchical)
+    Elapsed: 0.010s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"edges" in: FreePDK45.lydrc:174
+    Edges: 3072 (flat)  3072 (hierarchical)
+    Elapsed: 0.000s  Memory: 1517.00M
+"with_length" in: FreePDK45.lydrc:174
+    Edges: 1476 (flat)  1476 (hierarchical)
+    Elapsed: 0.010s  Memory: 1517.00M
+"space" in: FreePDK45.lydrc:174
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1517.00M
+"output" in: FreePDK45.lydrc:174
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"edges" in: FreePDK45.lydrc:175
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"with_length" in: FreePDK45.lydrc:175
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1517.00M
+"space" in: FreePDK45.lydrc:175
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:175
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1518.00M
+"edges" in: FreePDK45.lydrc:176
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1518.00M
+"with_length" in: FreePDK45.lydrc:176
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1518.00M
+"space" in: FreePDK45.lydrc:176
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"output" in: FreePDK45.lydrc:176
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"edges" in: FreePDK45.lydrc:177
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"with_length" in: FreePDK45.lydrc:177
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1517.00M
+"space" in: FreePDK45.lydrc:177
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"output" in: FreePDK45.lydrc:177
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1517.00M
+"edges" in: FreePDK45.lydrc:178
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1517.00M
+"with_length" in: FreePDK45.lydrc:178
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1517.00M
+"space" in: FreePDK45.lydrc:178
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:178
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1518.00M
+"width" in: FreePDK45.lydrc:181
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:181
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1518.00M
+"space" in: FreePDK45.lydrc:182
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.310s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:182
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1518.00M
+"-" in: FreePDK45.lydrc:183
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.700s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:183
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1518.00M
+"-" in: FreePDK45.lydrc:184
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.690s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:184
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1518.00M
+"width" in: FreePDK45.lydrc:187
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.580s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:187
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1518.00M
+"space" in: FreePDK45.lydrc:188
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 1.500s  Memory: 1518.00M
+"output" in: FreePDK45.lydrc:188
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1518.00M
+"enclosing" in: FreePDK45.lydrc:189
+    Edge pairs: 95370 (flat)  95370 (hierarchical)
+    Elapsed: 2.210s  Memory: 1544.00M
+"second_edges" in: FreePDK45.lydrc:189
+    Edges: 95370 (flat)  95370 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:190
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.350s  Memory: 1544.00M
+"polygons" in: FreePDK45.lydrc:191
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"interacting" in: FreePDK45.lydrc:191
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:191
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"enclosing" in: FreePDK45.lydrc:192
+    Edge pairs: 7098 (flat)  7098 (hierarchical)
+    Elapsed: 1.150s  Memory: 1544.00M
+"second_edges" in: FreePDK45.lydrc:192
+    Edges: 7098 (flat)  7098 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:193
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.100s  Memory: 1544.00M
+"polygons" in: FreePDK45.lydrc:194
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"interacting" in: FreePDK45.lydrc:194
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:194
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 738 (flat)  738 (hierarchical)
+    Elapsed: 0.110s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 738 (flat)  738 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:196
+    Edges: 2952 (flat)  2952 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:196
+    Edges: 1476 (flat)  1476 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:196
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:196
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:197
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:197
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:197
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:197
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:198
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:198
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:198
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:198
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:199
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:199
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:199
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:199
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:200
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:200
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:200
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:200
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:203
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:203
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:204
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:204
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:205
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.200s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:205
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:206
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.100s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:206
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:209
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.110s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:209
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:210
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.170s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:210
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 9 (flat)  9 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 9 (flat)  9 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:212
+    Edges: 36 (flat)  36 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:212
+    Edges: 18 (flat)  18 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:212
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:212
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:213
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:213
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.090s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:213
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:213
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:214
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:214
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:214
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:214
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:217
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:217
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:218
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:218
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:219
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:219
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:220
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:220
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:223
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:223
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:224
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.110s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:224
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 72 (flat)  72 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 72 (flat)  72 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:226
+    Edges: 288 (flat)  288 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:226
+    Edges: 144 (flat)  144 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:226
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:226
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:227
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:227
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:227
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:227
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:228
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:228
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:228
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:228
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:231
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.080s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:231
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:232
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:232
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:233
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:233
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:234
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:234
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:237
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:237
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:238
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:238
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 72 (flat)  72 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 72 (flat)  72 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:240
+    Edges: 288 (flat)  288 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:240
+    Edges: 144 (flat)  144 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:240
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:240
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:241
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:241
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:241
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:241
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:242
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:242
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:242
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:242
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:245
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:245
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:246
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:246
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:247
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:247
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:248
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:248
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:251
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:251
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:252
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:252
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 16 (flat)  16 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 16 (flat)  16 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 16 (flat)  16 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 16 (flat)  16 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:254
+    Edges: 64 (flat)  64 (hierarchical)
+    Elapsed: 0.000s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:254
+    Edges: 32 (flat)  32 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:254
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:254
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:255
+    Edges: 64 (flat)  64 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:255
+    Edges: 32 (flat)  32 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:255
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:255
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:256
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:256
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:256
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:256
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:259
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.100s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:259
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:260
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:260
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:261
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:261
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:262
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:262
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:265
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:265
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:266
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:266
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:268
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:268
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:268
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:268
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:269
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:269
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:269
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:269
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:270
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:270
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:270
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:270
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:273
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:273
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:274
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:274
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:275
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:275
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:276
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:276
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:279
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:279
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:280
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:280
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:282
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:282
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:282
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:282
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:283
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:283
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:283
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:283
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:284
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:284
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.060s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:284
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:284
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:287
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.010s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:287
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:288
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:288
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:289
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:289
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"-" in: FreePDK45.lydrc:290
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:290
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"width" in: FreePDK45.lydrc:293
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:293
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:294
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:294
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"sized" in: FreePDK45.lydrc:78
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:296
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:296
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.070s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:296
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:296
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:297
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:297
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:297
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:297
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"edges" in: FreePDK45.lydrc:298
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1544.00M
+"with_length" in: FreePDK45.lydrc:298
+    Edges: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.050s  Memory: 1544.00M
+"space" in: FreePDK45.lydrc:298
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+"output" in: FreePDK45.lydrc:298
+    Edge pairs: 0 (flat)  0 (hierarchical)
+    Elapsed: 0.030s  Memory: 1544.00M
+Off-grid checks
+ANTENNA checks
+"-" in: FreePDK45.lydrc:349
+    Polygons (raw): 28581 (flat)  78 (hierarchical)
+    Elapsed: 1.350s  Memory: 1545.00M
+"&" in: FreePDK45.lydrc:349
+    Polygons (raw): 28173 (flat)  77 (hierarchical)
+    Elapsed: 0.320s  Memory: 1545.00M
+"antenna_check" in: FreePDK45.lydrc:352
+    Elapsed: 3.510s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:352
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.300s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:352
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:353
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:353
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:354
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:354
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:355
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:355
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.050s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:356
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.250s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:356
+    Polygons (raw): 1 (flat)  1 (hierarchical)
+    Elapsed: 0.020s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:357
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:357
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:358
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:358
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:359
+    Polygons (raw): 2 (flat)  2 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:359
+    Polygons (raw): 2 (flat)  2 (hierarchical)
+    Elapsed: 0.030s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:360
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.270s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:360
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.020s  Memory: 1546.00M
+"antenna_check" in: FreePDK45.lydrc:361
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.240s  Memory: 1546.00M
+"output" in: FreePDK45.lydrc:361
+    Polygons (raw): 0 (flat)  0 (hierarchical)
+    Elapsed: 0.040s  Memory: 1546.00M
+Writing report database: /work/build/physical/2x2x64-d4-p1/orfs/reports/nangate45/2x2x64-d4-p1/base/6_drc.lyrdb ..
+Total elapsed: 242.520s  Memory: 1543.00M
+Elapsed time: 3:41.26[h:]min:sec. CPU time: user 248.01 sys 5.37 (114%). Peak memory: 1584564KB.
+# Hacky way of getting DRV count (don't error on no matches)
+grep -c "<value>" /work/build/physical/2x2x64-d4-p1/orfs/reports/nangate45/2x2x64-d4-p1/base/6_drc.lyrdb > /work/build/physical/2x2x64-d4-p1/orfs/reports/nangate45/2x2x64-d4-p1/base/6_drc_count.rpt || [[ $? == 1 ]]
+make: Leaving directory '/OpenROAD-flow-scripts/flow'
+make: *** No rule to make target '/OpenROAD-flow-scripts/flow/platforms/nangate45/lvs/FreePDK45.lylvs', needed by '/work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/6_lvs.lvsdb'.  Stop.

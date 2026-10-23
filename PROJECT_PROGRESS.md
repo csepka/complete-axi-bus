@@ -1,5 +1,54 @@
 # AXI4 project progress
 
+## Hardware-reference continuation (2026-10-22, in progress)
+
+Continue on `feat/concurrent-axi4`. Prior architecture commits are pushed; the
+current physical/independent-verification milestone is not yet committed. No
+functional RTL was changed during this continuation. Open reference technology
+was explicitly selected by the user; Docker must remain running.
+
+Verified evidence already obtained:
+
+- `make ci` and all 17 stages of `tools/validate_upgrade.py` passed again. Original
+  RTL/source hashes are recorded in `synthesis/reports/validation.json`.
+- Pinned official ORFS image supplies native read_slang, Yosys, OpenROAD/OpenSTA,
+  KLayout and Nangate45. Full 2x2/64 and 8x8/256 synthesis passed structural/SCC
+  checks. Baseline is extracted from immutable `v1.0.0` revision, not rewritten.
+- Upgraded 2x2/64 depth4/pipeline1 and original 2x2/64 layouts complete routing,
+  extraction and STA at 100 MHz, 1.1 V/25 C typical. Their standard-cell areas are
+  31,245.4 and 2,891.15 um². Setup slacks are +7.27049/+7.08936 ns; hold slacks
+  +0.0278701/+0.0308236 ns. Both have zero router errors.
+- KLayout finds **four antenna markers in each** small layout. ORFS's raw counter
+  says 28 because it counts marker values rather than XML items. No other geometry
+  markers occur. Antenna violations remain unresolved; router LEF lacks the needed
+  antenna rules/gate-area collateral. No rules were invented or waived.
+- LVS cannot run: the pinned platform names but omits `lvs/FreePDK45.lylvs`.
+  Collector archives failures and returns nonzero for incomplete physical acceptance.
+- Independent cocotbext-axi tests passed on four RTL configurations, 2x2 generic,
+  mapped and routed four-state netlists, original routed baseline, and 8x8 generic
+  netlist. The final nine-run matrix and provenance audit now pass. An accidentally
+  removed `math` import caused a harness failure; it was restored and all nine
+  cases were rerun successfully. No stale passing manifests were retained.
+- FIFO WIDTH=8 arbitrary-input safety proof passes temporal induction. Scope is
+  sampled reset/occupancy/order/stall stability, not full-fabric formal/liveness.
+- Engineering guide expanded to **70 answered questions**. README, architecture,
+  audit, verification and reference-flow documentation now distinguish functional
+  evidence, extracted timing, antenna failures and unavailable LVS.
+
+The initial 8x8/256 layout completed: setup slack +6.13827 ns, hold slack
+-0.030555 ns with 2,660 hold violations and 80 capacitance violations; standard-cell
+area 325,000 um². This is a failed timing result, not accepted closure. KLayout DRC
+is running on that preserved layout. A separate `8x8x256-d4-p1-repair` trial uses
+0.10 ns repair margin and 15% capacitance repair margin with the same SDC. Both
+logs live under `build/physical/<label>/flow.log`. The repair trial starts with
+fresh synthesis and preserves the original trial. Do not quote the simulated
+327.169 Gb/s aggregate rate as physically timing-supported yet.
+
+Next: finish and inspect large implementation, run final-netlist tests and DRC,
+collect actual results/limits, complete evidence audit, update this file and the
+100-Gb/s discussion, and commit verified work. The original environment limits
+below are historical and superseded by the pinned reference flow.
+
 ## Preserved state
 
 - Repository: `complete-axi-bus`; branch: `feat/concurrent-axi4`.
@@ -75,7 +124,7 @@ was resolved with explicit packed vectors and verified using synthesized queues.
 - Reproducible source hashes, raw logs, CSV/Markdown reports, SVG charts and a
   regenerated VCD-derived address-arbitration illustration.
 
-## Environment limitations
+## Historical environment limitations (prior architecture milestone)
 
 Verilator 5.044 and Yosys 0.57 are available. No `read_slang` command/plugin,
 OpenSTA executable or suitable technology library is installed. Full-fabric

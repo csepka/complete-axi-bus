@@ -1,0 +1,68 @@
+{
+  "evidence_consistent": true,
+  "original_regression_stages_passed": 17,
+  "fifo_induction_passed": true,
+  "independent_tests_passed": [
+    "1x1x32-d1-p0-verilator-rtl-seed1",
+    "2x2x64-d4-p0-verilator-rtl-seed97",
+    "2x2x64-d4-p1-icarus-generic-seed23",
+    "2x2x64-d4-p1-icarus-mapped-seed23",
+    "2x2x64-d4-p1-icarus-routed-seed23",
+    "2x2x64-d4-p1-verilator-rtl-seed23",
+    "3x2x128-d3-p1-verilator-rtl-seed71",
+    "8x8x256-d4-p1-verilator-generic-seed23",
+    "baseline-2x2x64-d1-p0-icarus-routed-seed23"
+  ],
+  "physical_results": {
+    "2x2x64-d4-p1": {
+      "timing_and_router_clean": true,
+      "klayout_drc": {
+        "status": "fail",
+        "marker_count": 4,
+        "categories": {
+          "METAL4_ANTENNA": 1,
+          "METAL5_ANTENNA": 1,
+          "METAL8_ANTENNA": 2
+        },
+        "note": "Count XML items, not value elements; each antenna marker has multiple values."
+      },
+      "lvs": {
+        "status": "unavailable",
+        "reason": "Pinned Nangate45 platform names but does not supply FreePDK45.lylvs"
+      },
+      "physical_acceptance": false
+    },
+    "baseline-2x2x64-d1-p0": {
+      "timing_and_router_clean": true,
+      "klayout_drc": {
+        "status": "fail",
+        "marker_count": 4,
+        "categories": {
+          "METAL4_ANTENNA": 2,
+          "METAL7_ANTENNA": 1,
+          "METAL9_ANTENNA": 1
+        },
+        "note": "Count XML items, not value elements; each antenna marker has multiple values."
+      },
+      "lvs": {
+        "status": "unavailable",
+        "reason": "Pinned Nangate45 platform names but does not supply FreePDK45.lylvs"
+      },
+      "physical_acceptance": false
+    }
+  },
+  "physical_acceptance_complete": false,
+  "source_sha256": {
+    "verification/audit_evidence.py": "033b13b5f70056c041687254a394e30c80f778f31d70abddc8c3683b26d553b4",
+    "verification/formal_fifo.sv": "e708965216bd449002a4c96829397c9723d0179aa8cede1bda3985ef83e8eec6",
+    "verification/prove_fifo.py": "d942054a6408b83cb8b1c6e1b6a5010352c67d0d0000caf0caed6fa8c344b48e",
+    "verification/requirements.txt": "40519c9041b23c7bdf42e9938eb63455de0d6b08e76371e2b4d062be84a66751",
+    "verification/run_independent.py": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+    "verification/run_matrix.py": "06bfd404249c2e8b0fabfa32c56bb7a518650edac5eb30d67fcdd3d700d0ab3e",
+    "verification/test_independent.py": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d",
+    "synthesis/physical/collect_reference.py": "1dbbefa845b96f6d86e4e2b4b163c2afb8661fedb62b15e3ec3427fbabb1c33e",
+    "synthesis/physical/prepare_models.py": "ad4095831284dde6d7dd52911052c8ca544af99aa6e7b5ad0e20f70367896445",
+    "synthesis/physical/run_reference.py": "c3b00131231b96b3876427b2a5ef6b4aaba87415a259ce5cd01bc6421e65f540",
+    "synthesis/physical/toolchain.json": "9700f1ef43853012a8d30d4a9187f5828b8d7929e6715d33f1178a32a7e2232d"
+  }
+}

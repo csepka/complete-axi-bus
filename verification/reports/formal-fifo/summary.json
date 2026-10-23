@@ -1,0 +1,11 @@
+{
+  "proved": true,
+  "exit_code": 0,
+  "yosys": "Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)",
+  "source_sha256": {
+    "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
+    "verification/formal_fifo.sv": "e708965216bd449002a4c96829397c9723d0179aa8cede1bda3985ef83e8eec6",
+    "verification/prove_fifo.py": "d942054a6408b83cb8b1c6e1b6a5010352c67d0d0000caf0caed6fa8c344b48e"
+  },
+  "scope": "WIDTH=8 FIFO safety under sampled-reset model, arbitrary input data/valid and output ready; not fabric equivalence or liveness"
+}

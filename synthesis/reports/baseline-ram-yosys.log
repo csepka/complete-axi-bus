@@ -38,7 +38,7 @@ Removed 0 unused modules.
 === axi_ram ===
 
         +----------Local Count, excluding submodules.
-        | 
+        |
       599 wires
      9803 wire bits
       114 public wires

@@ -1,0 +1,169 @@
+OpenROAD unknown
+Features included (+) or not (-): -GPU +GUI -Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 4 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db /work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/3_place.odb
+read_sdc /work/build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/3_place.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is CLKBUF_X3.
+[INFO CTS-0051] Sink buffer is CLKBUF_X3.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    CLKBUF_X3
+[INFO CTS-0049] Characterization buffer is CLKBUF_X3.
+[INFO CTS-0007] Net "ACLK" found for clock "ACLK".
+[INFO CTS-0010]  Clock net "ACLK" has 2072 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net ACLK.
+[INFO CTS-0028]  Total number of sinks: 2072.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 14000  dbu (7 um).
+[INFO CTS-0206] Best clustering solution was found from max clustering size of 9 and max clustering diameter of 39.
+[INFO CTS-0019]  Total number of sinks after clustering: 322.
+[INFO CTS-0024]  Normalized sink region: [(2.07643, 2.14143), (33.3062, 33.6081)].
+[INFO CTS-0025]     Width:  31.2298.
+[INFO CTS-0026]     Height: 31.4667.
+ Level 1
+    Direction: Vertical
+    Sinks per sub-region: 161
+    Sub-region size: 31.2298 X 15.7333
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 2
+    Direction: Horizontal
+    Sinks per sub-region: 81
+    Sub-region size: 15.6149 X 15.7333
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 3
+    Direction: Vertical
+    Sinks per sub-region: 41
+    Sub-region size: 15.6149 X 7.8667
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 4
+    Direction: Horizontal
+    Sinks per sub-region: 21
+    Sub-region size: 7.8074 X 7.8667
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 5
+    Direction: Vertical
+    Sinks per sub-region: 11
+    Sub-region size: 7.8074 X 3.9333
+[INFO CTS-0034]     Segment length (rounded): 2.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (591.189 um) and max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 322.
+[INFO CTS-0018]     Created 371 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 4.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 4.
+[INFO CTS-0015]     Created 371 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 4:3, 5:29, 6:137, 7:132, 8:27, 9:4, 10:11, 11:5, 12:4, 13:2..
+[INFO CTS-0017]     Max level of the clock tree: 5.
+[INFO CTS-0098] Clock net "ACLK"
+[INFO CTS-0099]  Sinks 2345
+[INFO CTS-0100]  Leaf buffers 322
+[INFO CTS-0101]  Average sink wire length 413.77 um
+[INFO CTS-0102]  Path depth 3 - 4
+[INFO CTS-0207]  Dummy loads inserted 273
+[INFO CTS-0500] Runtime: 1.00s
+estimate_parasitics -placement
+detailed_placement -quiet
+[INFO DPL-0501] Legalized with 6939 moves: displacement total 4098.8 u, max 6.0 u; HPWL 125929.8 -> 127982.8 u (+1.6 %).
+[INFO DPL-0500] Runtime: 0.08s
+estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 0.37s
+[INFO RSZ-0046] Found 2072 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |  -0.197 | -308.983 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[1][14]$_DFFE_PP_/D
+       10 |       0 |      29 |            0 |    +0.1% |  -0.196 | -307.544 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][26]$_DFFE_PP_/D
+       20 |       0 |      67 |            0 |    +0.3% |  -0.196 | -306.089 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][70]$_DFFE_PP_/D
+       30 |       0 |     105 |            0 |    +0.4% |  -0.195 | -304.652 | dut.g_target[1].g_real.u_slice.g_buffered.u_b.payload[0][2]$_DFFE_PP_/D
+       40 |       0 |     147 |            0 |    +0.6% |  -0.195 | -303.334 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][36]$_DFFE_PP_/D
+       50 |       0 |     185 |            0 |    +0.7% |  -0.195 | -301.888 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][22]$_DFFE_PP_/D
+       60 |       0 |     223 |            0 |    +0.9% |  -0.194 | -300.445 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][65]$_DFFE_PP_/D
+       70 |       0 |     263 |            0 |    +1.0% |  -0.194 | -299.049 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][19]$_DFFE_PP_/D
+       80 |       0 |     303 |            0 |    +1.2% |  -0.194 | -297.657 | dut.g_target[0].g_real.u_slice.g_buffered.u_b.payload[0][0]$_DFFE_PP_/D
+       90 |       0 |     347 |            0 |    +1.4% |  -0.193 | -296.416 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[1][43]$_DFFE_PP_/D
+      100 |       0 |     387 |            0 |    +1.5% |  -0.193 | -295.086 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][44]$_DFFE_PP_/D
+      110 |       0 |     429 |            0 |    +1.7% |  -0.192 | -293.811 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][13]$_DFFE_PP_/D
+      120 |       0 |     471 |            0 |    +1.9% |  -0.192 | -292.505 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[0][54]$_DFFE_PP_/D
+      130 |       0 |     505 |            0 |    +2.0% |  -0.192 | -290.990 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][40]$_DFFE_PP_/D
+      140 |       0 |     545 |            0 |    +2.2% |  -0.191 | -289.631 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][42]$_DFFE_PP_/D
+      150 |       0 |     587 |            0 |    +2.3% |  -0.191 | -288.355 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[1][47]$_DFFE_PP_/D
+      160 |       0 |     625 |            0 |    +2.5% |  -0.190 | -286.953 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][62]$_DFFE_PP_/D
+      170 |       0 |     669 |            0 |    +2.7% |  -0.189 | -285.505 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][9]$_DFFE_PP_/D
+      180 |       0 |     697 |            0 |    +2.8% |  -0.189 | -283.838 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][24]$_DFFE_PP_/D
+      190 |       0 |     735 |            0 |    +2.9% |  -0.189 | -282.030 | dut.g_manager[1].u_queue.wq[3][27]$_DFFE_PP_/D
+      200 |       0 |     776 |            0 |    +3.1% |  -0.188 | -280.158 | dut.g_manager[1].u_queue.wq[1][50]$_DFFE_PP_/D
+      210 |       0 |     814 |            0 |    +3.2% |  -0.188 | -278.725 | dut.g_manager[0].u_queue.wq[2][42]$_DFFE_PP_/D
+      220 |       0 |     847 |            0 |    +3.4% |  -0.188 | -276.948 | dut.g_manager[0].u_queue.rq[1][44]$_DFFE_PP_/D
+      230 |       0 |     883 |            0 |    +3.5% |  -0.188 | -275.112 | dut.g_manager[1].u_queue.wq[0][37]$_DFFE_PP_/D
+      240 |       0 |     912 |            0 |    +3.6% |  -0.188 | -273.188 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[0][66]$_DFFE_PP_/D
+      250 |       0 |     946 |            0 |    +3.8% |  -0.187 | -271.612 | dut.g_manager[1].u_queue.wq[1][39]$_DFFE_PP_/D
+      260 |       0 |     980 |            0 |    +3.9% |  -0.187 | -270.087 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[1][2]$_DFFE_PP_/D
+      270 |       0 |    1019 |            0 |    +4.0% |  -0.187 | -268.815 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][0]$_DFFE_PP_/D
+      280 |       0 |    1059 |            0 |    +4.2% |  -0.187 | -267.500 | dut.g_manager[0].u_queue.rq[2][47]$_DFFE_PP_/D
+      290 |       0 |    1090 |            0 |    +4.3% |  -0.187 | -266.221 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][67]$_DFFE_PP_/D
+      300 |       0 |    1117 |            0 |    +4.4% |  -0.187 | -265.272 | dut.g_manager[1].u_queue.wq[0][51]$_DFFE_PP_/D
+      310 |       0 |    1144 |            0 |    +4.5% |  -0.187 | -263.910 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][46]$_DFFE_PP_/D
+      320 |       0 |    1176 |            0 |    +4.7% |  -0.186 | -262.710 | dut.g_manager[0].u_queue.wq[0][46]$_DFFE_PP_/D
+      330 |       0 |    1207 |            0 |    +4.8% |  -0.186 | -261.553 | dut.g_manager[0].u_queue.rq[2][41]$_DFFE_PP_/D
+      340 |       0 |    1239 |            0 |    +4.9% |  -0.186 | -260.199 | dut.g_manager[1].u_queue.rq[2][18]$_DFFE_PP_/D
+      350 |       0 |    1271 |            0 |    +5.0% |  -0.186 | -258.234 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[1][45]$_DFFE_PP_/D
+      360 |       0 |    1309 |            0 |    +5.2% |  -0.186 | -256.991 | dut.g_manager[0].u_queue.wq[3][49]$_DFFE_PP_/D
+      370 |       0 |    1340 |            0 |    +5.3% |  -0.185 | -255.719 | dut.g_manager[1].u_queue.rq[0][49]$_DFFE_PP_/D
+      380 |       0 |    1370 |            0 |    +5.4% |  -0.185 | -254.450 | dut.g_target[1].g_real.u_slice.g_buffered.u_r.payload[0][17]$_DFFE_PP_/D
+      390 |       0 |    1406 |            0 |    +5.6% |  -0.185 | -253.491 | dut.g_manager[0].u_queue.rq[3][20]$_DFFE_PP_/D
+      400 |       0 |    1443 |            0 |    +5.7% |  -0.185 | -251.628 | dut.g_manager[1].u_queue.rq[1][7]$_DFFE_PP_/D
+      410 |       0 |    1484 |            0 |    +5.9% |  -0.185 | -249.966 | dut.g_manager[1].u_queue.rq[0][13]$_DFFE_PP_/D
+      420 |       0 |    1522 |            0 |    +6.0% |  -0.185 | -248.581 | dut.g_manager[0].u_queue.wq[1][26]$_DFFE_PP_/D
+      430 |       0 |    1551 |            0 |    +6.2% |  -0.184 | -246.817 | dut.g_manager[1].u_queue.rq[2][44]$_DFFE_PP_/D
+      440 |       0 |    1581 |            0 |    +6.3% |  -0.184 | -245.045 | dut.g_manager[1].u_queue.rq[3][10]$_DFFE_PP_/D
+      450 |       0 |    1616 |            0 |    +6.4% |  -0.184 | -242.956 | dut.g_manager[1].u_queue.rq[2][17]$_DFFE_PP_/D
+      460 |       0 |    1653 |            0 |    +6.6% |  -0.184 | -241.070 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][28]$_DFFE_PP_/D
+      470 |       0 |    1691 |            0 |    +6.7% |  -0.184 | -240.134 | dut.g_target[0].g_real.u_slice.g_buffered.u_r.payload[0][28]$_DFFE_PP_/D
+      480 |       0 |    1722 |            0 |    +6.8% |  -0.184 | -239.123 | dut.g_manager[1].u_queue.rq[1][4]$_DFFE_PP_/D
+      490 |       0 |    1752 |            0 |    +6.9% |  -0.184 | -237.689 | dut.g_manager[1].u_queue.rq[3][2]$_DFFE_PP_/D
+      500 |       0 |    1783 |            0 |    +7.1% |  -0.183 | -235.958 | dut.g_manager[0].u_queue.wq[3][31]$_DFFE_PP_/D
+      510 |       0 |    1822 |            0 |    +7.2% |  -0.183 | -234.215 | dut.g_manager[0].u_queue.rq[3][4]$_DFFE_PP_/D
+      520 |       0 |    1856 |            0 |    +7.4% |  -0.183 | -233.010 | dut.g_manager[0].u_queue.rq[3][31]$_DFFE_PP_/D
+      530 |       0 |    1889 |            0 |    +7.5% |  -0.183 | -231.274 | dut.g_manager[1].u_queue.rq[0][14]$_DFFE_PP_/D
+      540 |       0 |    1918 |            0 |    +7.6% |  -0.183 | -229.807 | dut.g_manager[0].u_queue.wq[0][24]$_DFFE_PP_/D
+      550 |       0 |    1958 |            0 |    +7.8% |  -0.183 | -227.881 | dut.g_manager[1].u_queue.rq[2][3]$_DFFE_PP_/D
+      560 |       0 |    1993 |            0 |    +7.9% |  -0.183 | -226.309 | dut.g_manager[1].u_queue.rq[1][20]$_DFFE_PP_/D
+    final |       0 |    2023 |            0 |    +8.0% |  -0.183 | -225.498 | dut.g_manager[1].u_queue.rq[1][20]$_DFFE_PP_/D
+--------------------------------------------------------------------------------------
+[WARNING RSZ-0066] Unable to repair all hold violations.
+[INFO RSZ-0032] Inserted 2023 hold buffers.
+[ERROR RSZ-0060] Max buffer count reached.
+RSZ-0060
+    while executing
+"rsz::repair_hold $setup_margin $hold_margin  $allow_setup_violations $max_buffer_percent $max_passes  $max_iterations $match_cell_footprint $verbose $..."
+    (procedure "repair_timing" line 143)
+    invoked from within
+"repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 [list $cmd {*}$args]"
+    (procedure "log_cmd" line 13)
+    invoked from within
+"log_cmd repair_timing {*}$additional_args"
+    (procedure "repair_timing_helper" line 16)
+    invoked from within
+"repair_timing_helper"
+    invoked from within
+"if { !$::env(SKIP_CTS_REPAIR_TIMING) } {
+  set lec_enabled [lec_check_enabled]
+  if { $lec_enabled } {
+    write_lec_verilog 4_before_rsz_lec.v
+  }
+
+ ..."
+    (file "/OpenROAD-flow-scripts/flow/scripts/cts.tcl" line 61)
+Elapsed time: 0:04.19[h:]min:sec. CPU time: user 5.31 sys 0.23 (132%). Peak memory: 343792KB.

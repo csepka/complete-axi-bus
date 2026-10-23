@@ -1,0 +1,32 @@
+{
+  "configuration": {
+    "nm": 2,
+    "ns": 2,
+    "width": 64,
+    "depth": 4,
+    "pipeline": 0,
+    "seed": 97,
+    "baseline": false,
+    "netlist": null,
+    "cells": null,
+    "netlist_kind": "generic",
+    "sim": "verilator"
+  },
+  "source_sha256": {
+    "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
+    "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
+    "src/axi_register_slice.sv": "dcb12382d4c7cc3f8c26059e90a54f9f2ec4375fd068df482de5a7b33d9d911d",
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
+    "src/axi_interconnect.sv": "586f7882d65cfbd4fb4a696ad2d5e027a021fbfcb84ba8ecc905dac0a1f210b7",
+    "build/axi_fabric_flat.sv": "0c81e20e902369d97460ab4382779ebb82b15c9c758d64a22212212eae1df583",
+    "build/independent/2x2x64-d4-p0-verilator-rtl/tb_independent.sv": "a3c633e76923190b8ebf0fd5c3e01c2256c78b7624b684733a2ee09fc1be4a89"
+  },
+  "packages": {
+    "cocotb": "2.0.1",
+    "cocotbext-axi": "0.1.26",
+    "cocotb-bus": "0.3.0"
+  },
+  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
+}

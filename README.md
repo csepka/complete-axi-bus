@@ -72,7 +72,7 @@ for single-direction rates, unfavorable cases, latency, occupancy, stalls and ra
 | Optional pipelining | Two-entry stages for AW/W/B/AR/R at each real target |
 | Decode / validation errors | DECERR on misses; RAM SLVERR on invalid mapped requests |
 | Width / count validation | Benchmarks at 2x2/64, 4x4/128, 8x8/256 plus asymmetric cases |
-| Narrow / unaligned transfers | Unsupported; rejected by RAM |
+| Narrow / unaligned transfers | Forwarding verified with independent external RAM models; demo RAM rejects them |
 | Exclusives, atomics, CACHE/QOS/REGION/USER, AXI5 | Not implemented |
 | Full AXI compliance, formal closure, silicon proof | Not claimed |
 
@@ -109,15 +109,23 @@ that flow and its documentation are corrected. The default 32-bit RAM has 275
 coarse operator cells, 162 explicit FF bits and 32,768 memory bits. These are
 **not full-fabric or ASIC area figures**.
 
-Full-fabric synthesis needs an interface-capable frontend absent from this local
-installation. Mapped area, critical paths, STA and P&R remain unavailable.
-[Scripts, results and constraints](synthesis/README.md) distinguish executed evidence
-from future technology work.
+The pinned OpenROAD flow now executes full-fabric synthesis, Nangate45 mapping,
+placement, routing, parasitic extraction and STA. At 100 MHz, the 2x2/64-bit pipelined
+fabric has 31,245.4 um² standard-cell area, +7.27049 ns setup slack and +0.0278701 ns
+hold slack. The original 2x2 baseline uses 2,891.15 um² under identical constraints.
+Both have zero router errors but four KLayout antenna markers; the reference
+platform lacks its configured LVS deck. **Physical signoff remains incomplete.**
+See [reference flow and exact evidence](synthesis/physical/README.md).
+
+[Independent AXI tests](verification/README.md) now cover RTL and full-fabric
+four-state generic, mapped and routed netlists, using external BFMs and byte-level
+oracles. An inductive proof checks the two-entry FIFO's safety at WIDTH=8. These
+results extend assurance without claiming full AXI4 compliance or formal closure.
 
 ## Learn and review
 
 - [Engineering mastery](ENGINEERING_MASTERY.md): every major module, timing walkthroughs,
-  design tradeoffs and **60 implementation-grounded interview questions/answers**.
+  design tradeoffs and **70 implementation-grounded interview questions/answers**.
 - [Architecture](docs/architecture.md): acceptance policy, ownership, decode and reset.
 - [Engineering audit](docs/engineering_audit.md): findings, fixes and remaining gaps.
 - [Project progress](PROJECT_PROGRESS.md): preserved baseline, milestones and exact resume steps.

@@ -1,0 +1,26 @@
+{
+  "configuration": {
+    "nm": 2,
+    "ns": 2,
+    "width": 64,
+    "depth": 4,
+    "pipeline": 1,
+    "seed": 23,
+    "baseline": false,
+    "netlist": "build/physical/2x2x64-d4-p1/generic.v",
+    "cells": null,
+    "netlist_kind": "generic",
+    "sim": "icarus"
+  },
+  "source_sha256": {
+    "build/physical/2x2x64-d4-p1/generic.v": "8145672ddefb5e4fabb3b7971111dcde752ad3a9c6983be36254e2e60444b76a",
+    "build/independent/2x2x64-d4-p1-icarus-generic/tb_independent.sv": "a8f93ce8cfb2e54007829860d166e12b09837870b1e1d0e8d7fbd31abf97fdeb"
+  },
+  "packages": {
+    "cocotb": "2.0.1",
+    "cocotbext-axi": "0.1.26",
+    "cocotb-bus": "0.3.0"
+  },
+  "runner_sha256": "0e6332f8d75fa969dc6e723f7224ec542cfded87bda4c5f9242f7ddc75c1b9c7",
+  "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
+}

@@ -1,0 +1,9 @@
+{
+  "image": "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+  "platform": "linux/amd64",
+  "flow_home": "/OpenROAD-flow-scripts/flow",
+  "technology": "nangate45",
+  "library": "NangateOpenCellLibrary_typical.lib",
+  "nominal_voltage_V": 1.1,
+  "nominal_temperature_C": 25
+}

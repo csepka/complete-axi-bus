@@ -1,0 +1,6 @@
+read_verilog -formal -sv -DSYNTHESIS build/formal-fifo/observed.sv verification/formal_fifo.sv
+prep -top formal_fifo -flatten
+async2sync
+memory_map
+opt
+sat -seq 4 -tempinduct -maxsteps 20 -set-assumes -prove-asserts -verify

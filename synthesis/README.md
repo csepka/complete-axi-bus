@@ -1,6 +1,6 @@
 # Synthesis and timing evidence
 
-## Executed versus unavailable
+## Executed evidence and remaining limits
 
 | Stage | Status |
 |---|---|
@@ -10,8 +10,9 @@
 | Queue coarse synthesis | Executed after mechanical interface-port expansion, depths 1/3/4 |
 | Enabled register-slice coarse synthesis | Executed after port expansion at 64/256 data bits |
 | Generic queue/slice netlist simulation | Executed with directed outstanding tests |
-| Entire fabric generic synthesis | Unavailable: installed Yosys has neither read_slang nor the slang plugin |
-| Technology-mapped area / STA / P&R | Unavailable: no suitable Liberty/PVT library, STA executable or physical flow installed |
+| Entire fabric generic synthesis | Executed using native read_slang in pinned container Yosys; 2x2/64 and 8x8/256 plus preserved baseline |
+| Technology-mapped area / STA / P&R | Executed Nangate45 reference flow; see [physical reports](physical/README.md) |
+| Physical signoff | Incomplete: KLayout antenna markers and missing reference LVS deck |
 
 The supplied flat fabric top exposes all manager/target signals, preventing the
 serial demonstration command interface from hiding connectivity. It is linted.
@@ -41,7 +42,7 @@ memory bits here is not a promise of macro inference. Queue payload capacity at
 depth 4 is 416 bits per manager; the control FFs are separate. Slice storage is
 508 payload bits at DATA=64 or 1324 at DATA=256, plus 20 control bits per target.
 Do not sum these with RAM counts and call the result full-fabric area: crossbar
-and arbitration synthesis is still missing.
+and arbitration have their own mapped cost; see the separate complete-fabric reports.
 
 ## Reproduce
 
@@ -69,19 +70,18 @@ schema. Netlist simulations substitute the resulting modules into the same
 independent directed testbench used for RTL, rather than accepting parse success
 as evidence of functional synthesis.
 
-## Future technology flow and constraints
+## Reference technology flow and integration constraints
 
-Install an interface-capable frontend such as
-[sv-elab / yosys-slang](https://github.com/povik/sv-elab), run the fabric flow, and
-inspect all diagnostics. `scripts/constraints.sdc` is an **unexecuted integration
+The [pinned container flow](physical/README.md) supplies native
+[sv-elab / yosys-slang](https://github.com/povik/sv-elab), OpenROAD/OpenSTA and the
+Nangate45 reference library. It records executed constraints separately. `scripts/constraints.sdc` is an **unexecuted integration
 example**: 10 ns requested clock, 0.2 ns uncertainty and 1 ns I/O delays. Adapt the
 PVT corner, input drivers, output loads, SRAM models, reset recovery/removal and
 clock assumptions before use. A requested 10 ns clock is not achieved timing.
 
-The existing `subordinate/config.json` is an OpenLane exploration configuration,
-not a completed physical run. To establish timing-verified throughput, map a
-verified configuration to a specified library, perform STA with justified
-constraints, then floorplan/place/route and repeat STA with extracted parasitics.
-Report setup/hold paths and unconstrained endpoints. Only then combine sustainable
-cycles/beat with an achieved clock. No ASIC Fmax or 100 Gb/s hardware result is
-claimed by the current simulation measurements.
+The existing `subordinate/config.json` remains an unexecuted OpenLane exploration;
+the executed reference flow is under `physical/`. Its final timing reports include
+extracted setup/hold paths. Standard-cell area includes timing repair, while die
+area is reported separately. Antenna/LVS limitations prevent a physical-signoff
+claim. Endpoint integration and manufacturing evidence are still required before
+claiming hardware bandwidth. No measured silicon Fmax is supplied.
