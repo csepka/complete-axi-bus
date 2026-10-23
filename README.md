@@ -123,7 +123,7 @@ The protocol checker asserts that AW, W, B, AR, and R payloads remain stable whe
 
 See [verification.md](docs/verification.md) for the requirement-to-test map.
 
-## Design Limitations and Next Steps
+## Next Steps
 
 The implementation favors clear, reviewable control logic over maximum throughput. The logical next milestone is per-subordinate arbitration with multiple outstanding ID-tracked transactions. Additional production steps would include formal liveness/fairness proofs, CDC/reset-domain integration, ECC, low-power intent, configurable sparse address maps, and a technology-specific SRAM wrapper.
 
