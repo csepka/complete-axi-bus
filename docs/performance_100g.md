@@ -64,3 +64,11 @@ in addition to the simulation results. The 2x2/64 pipelined implementation meets
 meet 100 Gb/s. Larger configurations require their own timing evidence; do not
 transfer the small-block result to the 8x8 design. See
 [reference results](../synthesis/physical/README.md).
+
+The initial full 8x8/256 pipelined physical implementation is now archived with
+325,000 um² standard-cell area, +6.13827 ns setup slack, **-0.030555 ns hold slack**,
+2,660 hold violations and 80 capacitance violations at the same 100-MHz constraint.
+Its routed-netlist independent functional test passes, but its timing acceptance
+fails. Functional correctness and setup margin cannot compensate for failing
+hold/electrical checks. A separate repair-margin trial preserves this failed
+layout for comparison; no improved result is claimed before final extraction.

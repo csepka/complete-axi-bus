@@ -15,6 +15,7 @@ build/verification-venv/bin/python verification/run_matrix.py
 build/verification-venv/bin/python verification/run_independent.py --sim icarus \
   --netlist build/physical/2x2x64-d4-p1/generic.v
 python3 synthesis/physical/prepare_models.py
+python3 verification/check_cell_models.py
 build/verification-venv/bin/python verification/run_independent.py --sim icarus \
   --netlist build/physical/2x2x64-d4-p1/orfs/results/nangate45/2x2x64-d4-p1/base/6_final.v \
   --cells build/physical/nangate45_models.v --netlist-kind routed
@@ -98,3 +99,62 @@ physical acceptance. Add `--require-physical` for a gate that fails on incomplet
 physical signoff; the current antenna/LVS findings intentionally fail that gate.
 The runner deletes previous pass artifacts before rebuilding so a failed rerun
 cannot leave stale success behind.
+The evidence audit also removes its previous success record before validating;
+an unfinished test or mismatched hash fails the audit without retaining old success.
+
+## Four-state cell-model semantics
+
+Liberty-to-Verilog conversion expresses MUX as `(S & B) | (~S & A)`. In four-state
+simulation this yields X when A=B=1 and S=X, although every binary completion of
+S gives 1. ABC can legally use uninitialized idle queue payload bits as selectors
+in equivalent Boolean decompositions. The 8x8 target-4 decode cone exposed this
+pessimism: MUX `_115231_` had A=1, B=1 and S=X; that X propagated to address VALID.
+It reproduced in the mapped netlist before any clock tree or routing.
+
+`refine_mux_models.py` retains all other generated cells and substitutes a
+consensus-preserving conditional for MUX2_X1/X2. Selected Z data is treated as an
+unknown logic value. It never forces an ambiguous output to a constant: conflicting
+possible binary outputs remain X. `check_cell_models.py` exhaustively compares
+128 four-state cases against all binary input completions and checks the 16 binary
+cases against the original Liberty functions. The original pessimistic behavior
+is also reproduced as a regression check. Raw models remain in
+`build/physical/nangate45_models_raw.v`; diagnostic evidence is under
+`verification/diagnostics/mux-pessimism/`. These are zero-delay functional models,
+not timing, metastability, transistor or signoff models.
+
+## Outstanding request-queue induction
+
+`prove_request_queue.py --depth N` proves the real request queue at depths
+**1, 3, 4 and 5**, ADDR_W=32, DATA_W=32, ID_W=4. The existing structural interface
+expander retains the original functional statements. Read-only observation ports
+expose the ring pointers, counts, control state and stored payloads; they add no
+functional behavior. An independent shift-list oracle retains every accepted
+address until the corresponding B or final R handshake.
+
+The proof establishes occupancy bounds, exact payload/order retention, pointer
+wraparound, admission backpressure, head issue, address stability under stalls,
+response ownership gating, and output suppression during reset. Ring-to-list
+storage and pointer/count relations are asserted as inductive invariants, not
+assumed. All traffic inputs are arbitrary; the only environment assumption is
+reset on the first sampled cycle. Subsequent sampled resets are allowed. The
+proof does not establish endpoint response-ID/beat legality, full-fabric routing,
+W payload stability for a nonconforming manager, analog reset behavior or liveness.
+
+`check_queue_mutations.py` deliberately corrupts two generated depth-3 copies:
+one overwrites the head instead of the tail on enqueue; the other retires on the
+last W handshake instead of B acceptance. Both produce reachable counterexamples
+within eight sampled steps. Solver errors or induction failures alone do not count
+as detection. Logs and VCD counterexamples are retained under
+`diagnostics/request-queue-mutants/`; production RTL is never mutated.
+
+```sh
+python3 verification/prove_request_queue.py --depth 1
+python3 verification/prove_request_queue.py --depth 3
+python3 verification/prove_request_queue.py --depth 4
+python3 verification/prove_request_queue.py --depth 5
+python3 verification/check_queue_mutations.py
+```
+
+The default independent RTL matrix and GitHub CI include these proofs and negative
+checks. The evidence audit verifies all four proof source hashes and the retained
+counterexample hashes.

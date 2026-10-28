@@ -10,5 +10,5 @@ TARGET,3,512,512
 BENCHMARK PASS
 - tb/tb_axi_benchmark.sv:275: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.044 2026-01-01
-- Verilator: $finish at 6us; walltime 0.002 s; speed 3.719 ms/s
+- Verilator: $finish at 6us; walltime 0.002 s; speed 3.831 ms/s
 - Verilator: cpu 0.002 s on 1 threads; alloced 2 MB

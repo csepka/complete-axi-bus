@@ -331,23 +331,23 @@
                                                           self._pause_cr.kill()
  90681.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:132: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
                                                           self._cr.kill()
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24584, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6db20>)
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24592, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6ed20>)
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24576, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10bf3fbf0>)
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24576, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6e360>)
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24584, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6cb90>)
- 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24592, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6d430>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90128, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6d0a0>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90120, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6cce0>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90112, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6d850>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90112, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6e300>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90120, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6dc10>)
- 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90128, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10be6e990>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24584, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1079474a0>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24592, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1079469c0>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24576, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1078f8c80>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24576, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107946b10>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24584, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107944950>)
+ 90681.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24592, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107947a40>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90128, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107945eb0>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90120, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107945430>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90112, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1079468a0>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90112, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x1079446b0>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90120, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107945640>)
+ 90681.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90128, length=8, size=3, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x107944c80>)
  91100.00ns INFO     cocotb.regression                  test_independent.independent_axi passed
  91100.00ns INFO     cocotb.regression                  ******************************************************************************************
                                                         ** TEST                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ******************************************************************************************
-                                                        ** test_independent.independent_axi   PASS       91100.00           4.46      20439.04  **
+                                                        ** test_independent.independent_axi   PASS       91100.00           3.61      25218.61  **
                                                         ******************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                  91100.00           4.46      20428.92  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                  91100.00           3.61      25203.84  **
                                                         ******************************************************************************************

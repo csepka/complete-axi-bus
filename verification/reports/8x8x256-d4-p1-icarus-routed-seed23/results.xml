@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="23" />
+    <testcase name="independent_axi" classname="test_independent" file="/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/verification/test_independent.py" lineno="83" time="13206.895520210266" sim_time_ns="498760.0" ratio_time="37.76512044308648" />
+  </testsuite>
+</testsuites>

@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
     <property name="random_seed" value="1" />
-    <testcase name="independent_axi" classname="test_independent" file="/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/verification/test_independent.py" lineno="83" time="0.5533900260925293" sim_time_ns="34230.0" ratio_time="61855.108307059716" />
+    <testcase name="independent_axi" classname="test_independent" file="/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/verification/test_independent.py" lineno="83" time="0.5572831630706787" sim_time_ns="34230.0" ratio_time="61422.99331526494" />
   </testsuite>
 </testsuites>

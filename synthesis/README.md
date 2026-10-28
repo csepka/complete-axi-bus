@@ -85,3 +85,10 @@ extracted setup/hold paths. Standard-cell area includes timing repair, while die
 area is reported separately. Antenna/LVS limitations prevent a physical-signoff
 claim. Endpoint integration and manufacturing evidence are still required before
 claiming hardware bandwidth. No measured silicon Fmax is supplied.
+
+The first complete 8x8/256 pipelined physical run is retained under
+`physical/reports/8x8x256-d4-p1/`, including the failing hold/capacitance counts and
+incomplete memory-limited DRC attempt. Its full routed-netlist functional test
+passes with the exhaustively checked zero-delay MUX models; this does not clear
+timing failures. Request-queue order/accounting now also has inductive proofs at
+depths 1/3/4/5, with negative mutation checks, under `verification/`.

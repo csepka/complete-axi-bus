@@ -116,3 +116,11 @@ produce 1,618 comparisons. New default directed queues add 525 comparisons; the
 FIFO test adds 5,455 payload comparisons. Separate parameter/page checks,
 queue-depth/pipeline matrices, netlist simulation and seeded benchmark scoreboards
 expand evidence without claiming coverage closure or full AXI compliance.
+
+The initial 8x8/256 depth-4 pipelined layout uses 325,000 um² of standard cells.
+Although setup slack is +6.13827 ns at 100 MHz, hold slack is -0.030555 ns with
+2,660 hold and 80 capacitance violations. This measured scaling point is a failed
+physical timing result. The same layout passes the complete independent four-state
+routed-netlist functional test, illustrating why simulation and physical timing
+acceptance must remain distinct. The separate margin-repair trial is documented
+in the reference-flow reports; its results must not be inferred from this row.

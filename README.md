@@ -1,6 +1,6 @@
 # Concurrent AXI4 Burst Interconnect
 
-[![RTL CI](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/csepka/complete-axi-bus)](LICENSE)
+[![RTL CI](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml/badge.svg?branch=feat%2Fconcurrent-axi4)](https://github.com/csepka/complete-axi-bus/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/csepka/complete-axi-bus)](LICENSE)
 
 A parameterized SystemVerilog memory interconnect with **per-target arbitration,
 bounded outstanding request queues, strict per-manager ordering, and optional
@@ -10,7 +10,9 @@ single-outstanding baseline rather than replacing the project.
 At 8x8/256 bits, the measured 16-beat independent-target workload falls from **4,608
 to 577 cycles (7.99x)**. At an **assumed 100 MHz**, that is **45.432 GB/s aggregate
 (363.458 Gb/s)** across reads and writes. These are simulated cycle results;
-full-fabric technology timing and ASIC area have not been established.
+reference technology mapping and extracted timing are reported separately below.
+The initial 8x8 physical run fails hold/capacitance checks, so these rates remain
+simulation results at an assumed clock.
 
 ## Architecture and bounded policy
 
@@ -119,13 +121,14 @@ See [reference flow and exact evidence](synthesis/physical/README.md).
 
 [Independent AXI tests](verification/README.md) now cover RTL and full-fabric
 four-state generic, mapped and routed netlists, using external BFMs and byte-level
-oracles. An inductive proof checks the two-entry FIFO's safety at WIDTH=8. These
+oracles. Inductive proofs check the two-entry FIFO at WIDTH=8 and request-queue order/accounting
+at depths 1/3/4/5; deliberate corruption tests produce counterexamples. These
 results extend assurance without claiming full AXI4 compliance or formal closure.
 
 ## Learn and review
 
 - [Engineering mastery](ENGINEERING_MASTERY.md): every major module, timing walkthroughs,
-  design tradeoffs and **70 implementation-grounded interview questions/answers**.
+  design tradeoffs and **74 implementation-grounded interview questions/answers**.
 - [Architecture](docs/architecture.md): acceptance policy, ownership, decode and reset.
 - [Engineering audit](docs/engineering_audit.md): findings, fixes and remaining gaps.
 - [Project progress](PROJECT_PROGRESS.md): preserved baseline, milestones and exact resume steps.

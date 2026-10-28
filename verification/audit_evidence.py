@@ -14,6 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--require-physical', action='store_true')
 a = p.parse_args()
+# An interrupted or failed audit must not leave a stale successful release record.
+audit_report = ROOT/'verification/reports/evidence.json'
+audit_report.unlink(missing_ok=True)
 
 def read(path):
     return json.loads((ROOT/path).read_text())
@@ -28,9 +31,21 @@ def hashes(entries):
 old = read('synthesis/reports/validation.json')
 hashes(old['source_sha256'])
 assert len(old['results']) == 17 and all(x['exit_code'] == 0 for x in old['results'])
+cells = read('verification/reports/cell-models/summary.json')
+hashes(cells['source_sha256'])
+assert cells['passed'] and cells['exit_code'] == 0
 formal = read('verification/reports/formal-fifo/summary.json')
 hashes(formal['source_sha256'])
 assert formal['proved'] and formal['exit_code'] == 0
+for depth in [1,3,4,5]:
+    queue = read(f'verification/reports/formal-request-queue-d{depth}/summary.json')
+    hashes(queue['source_sha256'])
+    assert queue['proved'] and queue['exit_code'] == 0 and queue['depth'] == depth
+mutations = read('verification/diagnostics/request-queue-mutants/summary.json')
+hashes(mutations['source_sha256'])
+assert mutations['passed'] and all(x['detected'] for x in mutations['results'])
+for mutation in mutations['results']:
+    assert digest(f"verification/diagnostics/request-queue-mutants/{mutation['mutation']}.vcd") == mutation['counterexample_sha256']
 required = {
     '1x1x32-d1-p0-verilator-rtl-seed1',
     '2x2x64-d4-p0-verilator-rtl-seed97',
@@ -44,8 +59,9 @@ required = {
 }
 observed = []
 for folder in sorted((ROOT/'verification/reports').iterdir()):
-    if not folder.is_dir() or folder.name == 'formal-fifo':
+    if not folder.is_dir() or folder.name.startswith('formal-') or folder.name == 'cell-models':
         continue
+    assert (folder/'manifest.json').exists(), f'Incomplete independent test: {folder.name}'
     manifest = json.loads((folder/'manifest.json').read_text())
     hashes(manifest['source_sha256'])
     assert manifest['test_sha256'] == digest('verification/test_independent.py')
@@ -74,13 +90,15 @@ assert {'2x2x64-d4-p1','baseline-2x2x64-d1-p0'} <= set(physical)
 complete = bool(physical) and all(x['physical_acceptance'] and x['timing_and_router_clean'] for x in physical.values())
 report = {
     'evidence_consistent': True, 'original_regression_stages_passed': 17,
-    'fifo_induction_passed': True, 'independent_tests_passed': observed,
+    'fifo_induction_passed': True, 'request_queue_induction_depths': [1,3,4,5],
+    'queue_mutations_detected': len(mutations['results']),
+    'cell_model_checks_passed': True, 'independent_tests_passed': observed,
     'physical_results': physical, 'physical_acceptance_complete': complete,
     'source_sha256': {str(f.relative_to(ROOT)):digest(f) for directory in
         ['verification','synthesis/physical'] for f in sorted((ROOT/directory).glob('*'))
         if f.is_file() and f.suffix in ['.py','.sv','.json','.txt']},
 }
-(ROOT/'verification/reports/evidence.json').write_text(json.dumps(report, indent=2)+'\n')
+audit_report.write_text(json.dumps(report, indent=2)+'\n')
 print(f'Evidence consistent: 17 original stages, FIFO induction, {len(observed)} independent test runs.')
 print('Physical acceptance: '+('complete' if complete else 'INCOMPLETE (see evidence.json; no signoff claim)'))
 if a.require_physical and not complete:

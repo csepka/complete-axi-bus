@@ -74,7 +74,9 @@ macros or additional RTL package dependencies.
 The queue and optional slice separate transaction ownership from channel elasticity.
 The demonstration manager/top remain deliberately serial and are labeled as such.
 Independent BFMs and four-state full-netlist checks now complement the original
-two-state tests. FIFO safety is proven at WIDTH=8; fabric liveness remains bounded
+two-state tests. FIFO safety is proven at WIDTH=8; request-queue order/accounting
+is proven at depths 1/3/4/5, with two reachable mutation counterexamples checking
+the oracle's sensitivity. Full-fabric liveness remains bounded
 by endpoint fairness assumptions. No unresolved failing regression is accepted
 as a completed milestone; final executed commands and source hashes are in
 `synthesis/reports/validation.json`.
@@ -95,3 +97,10 @@ as a completed milestone; final executed commands and source hashes are in
   not override antenna errors or a missing LVS result.
 - OpenROAD transformation equivalence and zero-delay routed simulation are not
   RTL-to-transistor equivalence or SDF timing simulation.
+
+The large four-state mapped test found MUX reconvergence X pessimism in generated
+Liberty functional models. The diagnostic proved A=B=1 with S=X at `_115231_`;
+a model refinement now checks all 128 four-state combinations and all 16 binary
+equivalence cases across both MUX strengths. Original failure evidence is kept.
+No RTL reset behavior or X-checking assertion was weakened. See the detailed
+[model semantics](../verification/README.md#four-state-cell-model-semantics).

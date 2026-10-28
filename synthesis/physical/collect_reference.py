@@ -42,11 +42,16 @@ summary={'configuration':manifest['configuration'],'image':manifest['image'],
 summary['command_failures']=[c for c in manifest['commands'] if c['exit_code']!=0]
 drc=rpts/'6_drc.lyrdb'
 summary['klayout_drc']={'status':'not_run'}
+if not drc.exists() and any(' drc' in ' '.join(c['command']) for c in summary['command_failures']):
+    summary['klayout_drc']={'status':'incomplete','reason':'DRC command failed before producing a complete report'}
 if drc.exists():
-    items=ET.parse(drc).findall('.//items/item')
-    summary['klayout_drc']={'status':'pass' if not items else 'fail',
-        'marker_count':len(items),'categories':dict(Counter(item.findtext('category') for item in items)),
-        'note':'Count XML items, not value elements; each antenna marker has multiple values.'}
+    try:
+        items=ET.parse(drc).findall('.//items/item')
+        summary['klayout_drc']={'status':'pass' if not items else 'fail',
+            'marker_count':len(items),'categories':dict(Counter(item.findtext('category') for item in items)),
+            'note':'Count XML items, not value elements; each antenna marker has multiple values.'}
+    except ET.ParseError as error:
+        summary['klayout_drc']={'status':'incomplete','reason':str(error)}
 # Do not infer LVS success from routing, netlist simulation or GDS generation.
 summary['lvs']={'status':'unavailable','reason':'Pinned Nangate45 platform names but does not supply FreePDK45.lylvs'}
 summary['physical_acceptance']=(not summary['command_failures'] and summary['klayout_drc']['status']=='pass' and summary['lvs']['status']=='pass')

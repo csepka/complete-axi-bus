@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "four_state_cases": 128,
+  "binary_equivalence_cases": 16,
+  "source_sha256": {
+    "build/physical/nangate45_models_raw.v": "62f202ce18b251e751f4c9bfda125e7eef1ce45d96d74d5e3d5c81a06bf4bdfe",
+    "build/physical/nangate45_models.v": "4eabed844a0a99e09f396c8070035bdbe032acc5ee58b55b4c024cd327859b72",
+    "verification/test_cell_models.sv": "c2403f760bc6178280f8d8fba7c7251fc926a4b76151acc4310f9593f175419a",
+    "verification/check_cell_models.py": "36f814dcef120428dd9f7532794b4f9b66c8a9ad5c7f009b52a65718dc671e2d",
+    "synthesis/physical/refine_mux_models.py": "3812fe88dc4c2d4e9555a52545097cd32c616b54831fa67af8af7773b2bb1fe7"
+  },
+  "scope": "zero-delay MUX truth tables only; Z input treated as unknown; no timing claims"
+}

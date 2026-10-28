@@ -1,0 +1,2 @@
+PASS: 128 four-state MUX cases; 16 binary equivalence cases; original pessimism reproduced
+verification/test_cell_models.sv:35: $finish called at 65000 (1ps)

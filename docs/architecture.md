@@ -174,3 +174,14 @@ reset valid/count/owner state keeps idle payloads unobservable. Four-state netli
 tests check meaningful payloads and handshake controls. Layout buffering and clock
 tree insertion must preserve logical behavior, while STA checks separate timing
 constraints. The existing strict issue/ordering policy is unchanged.
+
+## Verification of queue representation
+
+The queue's accepted-request lifetime is now checked inductively, in addition to
+simulation: an independent shift-list oracle stores complete address payloads and
+removes them only on B or final R acceptance. The ring-to-list equality, pointer
+wraparound and occupancy bounds are proved for depths 1/3/4/5 with 32-bit address
+and data, 4-bit IDs, arbitrary inputs and sampled reset. Deliberately overwriting
+the head or retiring a write at its last W beat causes reachable counterexamples.
+These checks explain why storage lifetime, ownership and ordered head issue belong
+in one module. They do not prove full-fabric routing or endpoint conformance.

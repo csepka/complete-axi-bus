@@ -1,5 +1,78 @@
 # AXI4 project progress
 
+## Resume checkpoint (2026-10-28)
+
+Same branch; verified queue-proof milestone `01abc7f` is committed and pushed after
+`1af87ab`. GitHub CI passed run
+[40719189236](https://github.com/csepka/complete-axi-bus/actions/runs/40719189236).
+Existing uncommitted work preserved. Original
+requirements and repository state reviewed. `make ci` and all **17** stages of
+`tools/validate_upgrade.py` passed again; logs are
+`build/resume-oct28-ci.log` and `build/resume-oct28-validation.log`.
+
+The refined-model **8x8/256 routed four-state test passed**: 498,760 simulated ns,
+all eight managers reach four outstanding reads and writes, all five stall bins,
+eight random batches, narrow/unaligned forwarding, bursts, errors, queue exhaustion
+and coordinated reset/recovery. This tests the initial routed netlist, whose hold
+and capacitance violations remain failures. The small mapped/routed and baseline
+reruns also passed. The interrupted large mapped test has been restarted; inspect
+`build/independent-large-mapped-refined.log` before reporting its result.
+
+Request-queue inductive safety proofs now pass at depths 1/3/4/5 with an independent
+shift-list oracle and arbitrary traffic inputs under sampled reset. Two deliberately
+faulty generated copies produce reachable counterexamples: overwritten oldest
+payload and slot retirement before B acceptance. Production RTL is unchanged.
+These proofs and mutation checks are added to the independent matrix/CI. The full
+independent RTL matrix passed in `build/resume-oct28-independent-matrix.log`.
+
+The 393-MB exploratory model trace is preserved under ignored
+`build/diagnostic/full-trace.log`. A bounded excerpt with original line numbers,
+original SHA-256 and the actual offending MUX observation is retained in Git-facing
+diagnostics. The engineering guide now contains 74 answered questions.
+
+Docker was again stopped after the previous session. It was restarted and the
+8x8 repair run resumed (`build/physical-large-repair-oct28.log`); detailed routing
+is active. Do not run memory-heavy KLayout concurrently. Final timing/electrical
+metrics, repair-netlist verification and sequential DRC remain pending. Antenna
+collateral/LVS limitations remain; do not claim physical acceptance or hardware
+100-Gb/s operation. Run the evidence audit after pending reports are complete,
+update measured results, then commit/push verified milestones.
+
+## Historical checkpoint (2026-10-27)
+
+HEAD `1af87ab` and prior `8753a97` are committed and pushed on the same branch.
+GitHub CI **passed** run [39896478108](https://github.com/csepka/complete-axi-bus/actions/runs/39896478108),
+including the independent RTL tests and FIFO proof. `make ci` passed again on
+resumption. Functional RTL remains unchanged.
+
+The large mapped and routed four-state tests exposed a simulation-model issue,
+reproduced by a single write to target 4 immediately after reset. In the mapped
+decode cone, MUX `_115231_` receives A=B=1, S=X from idle queue payloads; the raw
+Liberty-derived AND/OR model returns X despite both binary choices giving 1.
+This propagates to target AWVALID. It is present before placement/routing and is
+not a clock-tree failure. Original logs are preserved in
+`verification/diagnostics/mux-pessimism/`.
+
+A strict, localized MUX model refinement now passes **128 exhaustive four-state
+cases**, **16 binary equivalence cases**, reproduces the original pessimism, and
+passes the minimal target-4 transaction. RTL/netlists are unchanged. Small mapped,
+routed and baseline tests and full large mapped/routed tests are rerunning with
+these refined models. Inspect `build/independent-*-refined.log` before claiming
+those runs pass; refresh `verification/audit_evidence.py` after completion.
+
+Docker was stopped; it has been restarted. The initial large DRC job was killed
+with exit 137 after reaching about 6.2 GB while another physical job was running.
+It did not produce accepted DRC evidence. The repair trial stopped during routing
+when Docker disconnected. It is now resumed from cached stages with `--stage
+finish`; check `build/physical-large-repair-resume.log`. Run large DRC separately
+after routing finishes to avoid competing for the Docker VM's roughly 8 GB RAM.
+Do not relax or remove DRC rules to fit the environment.
+
+Next: complete the refined-model full regressions; finish large routing/extraction,
+inspect setup/hold/electrical results, run DRC sequentially, archive failures and
+successes honestly, update performance claims/docs, audit hashes and commit/push
+verified milestones. Missing Nangate45 LVS collateral remains an explicit limit.
+
 ## Hardware-reference continuation (2026-10-22, in progress)
 
 Continue on `feat/concurrent-axi4`. The physical/independent-verification milestone was committed and pushed as

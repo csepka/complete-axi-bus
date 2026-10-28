@@ -604,10 +604,12 @@ storage-capacity checks verified the result.
 It checks whether synthesis preserved observable behavior under ordering, stalls,
 errors and reset. Successful parsing or a plausible area number alone cannot do that.
 
-### 55. Why is full-fabric synthesis still a limitation?
-The installed Yosys frontend cannot elaborate internal interface arrays and has no
-slang plugin. Isolated RAM/queue/slice synthesis must not be presented as complete
-fabric synthesis or timing evidence.
+### 55. How was the full-fabric synthesis limitation resolved?
+The native Yosys frontend cannot elaborate internal interface arrays. The pinned
+ORFS container supplies read_slang, which lowers the actual interface-array RTL
+before full-fabric synthesis and technology mapping. Isolated RAM/queue/slice
+statistics remain separately labeled. Full-fabric synthesis now executes; physical
+acceptance still requires timing, electrical, DRC and LVS evidence for that layout.
 
 ### 56. Do 8,016 default numeric checks mean full coverage?
 No. They include 418 integration, 1,618 burst, 525 outstanding and 5,455 FIFO payload
@@ -754,3 +756,79 @@ low. These are integration decisions, not incidental tool settings.
 The [physical report](synthesis/physical/README.md) records actual paths, area and
 limitations. A production process would need validated antenna/LVS collateral,
 all required PVT/variation corners, power integrity and endpoint integration.
+
+## 10. Four-state debugging in the actual mapped fabric
+
+The 8x8 mapped test exposed a useful distinction between a hardware logic error
+and an overly pessimistic simulation abstraction. A write to target 4 produced
+`AWVALID=X`, although the two-state tests passed. The same failure appeared before
+placement and after routing, ruling out the inserted clock tree as its source.
+A minimal first write reproduced it immediately after reset.
+
+Tracing the unknown backwards reached mapped MUX2_X1 `_115231_`. Its data inputs
+were both 1 and its selector was X, originating in an idle manager's uninitialized
+queue payload. Synthesis can reorder Boolean logic and use such bits as selectors
+while still making the ultimate result independent of their binary values.
+
+| A | B | S | Raw `(S & B) \| (~S & A)` | Binary-completion result |
+|---|---|---|---|---|
+| 1 | 1 | X | X | 1 |
+| 0 | 0 | X | 0 | 0 |
+| 0 | 1 | X | X | X |
+| X | 1 | 1 | 1 | 1 |
+
+The correction is a localized zero-delay cell-model refinement, with every
+four-state input combination tested against the set of possible binary outcomes.
+It does not initialize payload memories, alter RTL, change a mapped cell, disable
+unknown checks or replace every X with a convenient constant. The original model
+and diagnostic failure remain available. Physical timing is checked separately.
+
+### 71. How do you distinguish X pessimism from an uninitialized control bug?
+Trace the first meaningful unknown to its source, rather than changing reset or
+forcing a value. In this case both MUX data inputs were known 1, so every binary
+choice of its unknown selector produced 1. That proves this local unknown was
+pessimistic. If the choices had differed, X would correctly express uncertainty.
+Reproduce the failure minimally, validate the model change exhaustively, and rerun
+the complete test. A passing two-state simulation alone cannot settle the question.
+
+### 72. Why not reset every queue payload bit to make this test pass?
+That would change the implemented storage and reset tree, hide the abstraction
+problem and add hardware cost. The architecture resets occupancy, validity and
+ownership so idle payloads are not meaningful. The decoded Boolean circuit remains
+independent of those idle bits. Correct the demonstrated model pessimism and keep
+unknown checks on meaningful controls/data; do not impose a new payload-reset
+requirement merely to appease a simulation artifact.
+
+## 11. Proving the outstanding queues
+
+The queue's circular payload RAM and the formal oracle's shift list represent the
+same ordered sequence differently. For each occupied position k, the invariant is
+`ring[(head+k) % depth] == oracle[k]`, with `tail == (head+used) % depth`. Both are
+assertions proved by induction. This makes enqueue, response retirement, concurrent
+push/pop, non-power-of-two wraparound and reset tractable without assuming the
+result to be proved. Exact address payloads include address, protection, ID, length,
+size and burst type. An address handshake downstream does not pop either model;
+only B acceptance or final R acceptance retires the corresponding request.
+
+Read-only generated observation ports expose internal state. The functional RTL is
+unchanged. The proof covers depths 1/3/4/5 with ADDR_W=DATA_W=32 and ID_W=4, arbitrary
+traffic inputs, and initially asserted sampled reset. It establishes queue safety,
+not endpoint correctness, full-fabric routing or eventual progress. The independent
+BFM tests and extracted STA answer different questions and remain necessary.
+
+### 73. Why assert the complete ring-to-list relation instead of only comparing the head?
+
+Induction starts from any state satisfying the invariants. A head-only relation
+allows an arbitrary wrong value in a later occupied slot; after retirement that
+slot becomes the head, causing an unreachable induction counterexample. Relating
+every occupied slot constrains the entire live sequence. Unoccupied storage stays
+unconstrained, matching the implementation's intentional lack of payload reset.
+
+### 74. How do the negative formal tests improve confidence in this proof?
+
+Generated copies deliberately write a new request into the oldest slot or release
+a write slot at WLAST rather than B acceptance. The same oracle finds a reachable
+counterexample for both within eight steps. The harness checks explicit SAT
+failure evidence and saves VCDs; a tool error is not treated as detection. This
+shows these particular assertions detect real ordering/accounting defects, while
+making no claim that every possible defect or vacuous property has been excluded.

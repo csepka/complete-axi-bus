@@ -130,3 +130,12 @@ is retained. Margin controls ask the implementation tools to repair beyond the
 constraint boundary; they do not relax the clock, load, uncertainty or I/O delays.
 Until its final extracted report and checks are complete, this is an experiment,
 not evidence of achieved bandwidth.
+
+## Functional cell-model correction
+
+The raw Liberty-derived MUX model has reconvergence X pessimism for equal 1-valued
+data inputs and an unknown select. The verified functional refinement and its
+exhaustive four-state/binary-equivalence tests are documented in
+[verification](../../verification/README.md#four-state-cell-model-semantics). This
+changes simulation abstraction only; RTL, mapped netlists and physical cells are
+unchanged. Use `prepare_models.py` followed by `verification/check_cell_models.py`.
