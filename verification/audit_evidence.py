@@ -56,6 +56,8 @@ required = {
     '2x2x64-d4-p1-icarus-routed-seed23',
     'baseline-2x2x64-d1-p0-icarus-routed-seed23',
     '8x8x256-d4-p1-verilator-generic-seed23',
+    '8x8x256-d4-p1-icarus-mapped-seed23',
+    '8x8x256-d4-p1-icarus-routed-seed23',
 }
 observed = []
 for folder in sorted((ROOT/'verification/reports').iterdir()):
@@ -99,7 +101,7 @@ report = {
         if f.is_file() and f.suffix in ['.py','.sv','.json','.txt']},
 }
 audit_report.write_text(json.dumps(report, indent=2)+'\n')
-print(f'Evidence consistent: 17 original stages, FIFO induction, {len(observed)} independent test runs.')
+print(f'Evidence consistent: 17 original stages, FIFO/queue induction, cell models, mutation checks, {len(observed)} independent test runs.')
 print('Physical acceptance: '+('complete' if complete else 'INCOMPLETE (see evidence.json; no signoff claim)'))
 if a.require_physical and not complete:
     raise SystemExit(1)

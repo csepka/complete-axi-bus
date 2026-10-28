@@ -5,7 +5,15 @@
 Same branch; verified queue-proof milestone `01abc7f` is committed and pushed after
 `1af87ab`. GitHub CI passed run
 [40719189236](https://github.com/csepka/complete-axi-bus/actions/runs/40719189236).
-Existing uncommitted work preserved. Original
+The model/routed-test milestone `d98b283` is committed and pushed; GitHub CI
+passed run [40721382617](https://github.com/csepka/complete-axi-bus/actions/runs/40721382617). It includes ten
+completed independent cases and the failed initial large physical report. The
+large mapped test subsequently passed (498,760 simulated ns, 1,714 s host time).
+The regenerated evidence audit passes with all **11 independent cases**, FIFO and
+queue induction, both mutation counterexamples, cell-model checks and three
+physical archives. `--require-physical` correctly fails; physical acceptance remains
+incomplete. The audit removes old success before checking current evidence.
+Original
 requirements and repository state reviewed. `make ci` and all **17** stages of
 `tools/validate_upgrade.py` passed again; logs are
 `build/resume-oct28-ci.log` and `build/resume-oct28-validation.log`.
@@ -15,8 +23,8 @@ all eight managers reach four outstanding reads and writes, all five stall bins,
 eight random batches, narrow/unaligned forwarding, bursts, errors, queue exhaustion
 and coordinated reset/recovery. This tests the initial routed netlist, whose hold
 and capacitance violations remain failures. The small mapped/routed and baseline
-reruns also passed. The interrupted large mapped test has been restarted; inspect
-`build/independent-large-mapped-refined.log` before reporting its result.
+reruns also passed. The previously interrupted large mapped test now also passes; see
+`build/independent-large-mapped-refined.log` and its manifest/coverage/XML.
 
 Request-queue inductive safety proofs now pass at depths 1/3/4/5 with an independent
 shift-list oracle and arbitrary traffic inputs under sampled reset. Two deliberately

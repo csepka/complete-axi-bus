@@ -158,3 +158,22 @@ python3 verification/check_queue_mutations.py
 The default independent RTL matrix and GitHub CI include these proofs and negative
 checks. The evidence audit verifies all four proof source hashes and the retained
 counterexample hashes.
+
+## Executed full-fabric matrix
+
+The current evidence audit requires these **11 passing independent runs**:
+
+| Representation | Configurations | Simulator |
+|---|---|---|
+| RTL | 1x1/32 d1 bypass; 2x2/64 d4 bypass and pipeline; 3x2/128 d3 pipeline | Verilator |
+| Generic full fabric | 2x2/64 d4 pipeline; 8x8/256 d4 pipeline | Icarus (2x2), Verilator (8x8) |
+| Mapped standard cells | 2x2/64 and 8x8/256 d4 pipeline | Icarus |
+| Routed standard cells | 2x2/64 and initial 8x8/256 d4 pipeline | Icarus |
+| Original baseline routed | 2x2/64 d1 bypass, explicit global-capacity policy | Icarus |
+
+The two large four-state cases each complete 498,760 ns of simulated traffic,
+including eight random batches and every manager's full-queue/reset checks. These
+are zero-delay functional results. In particular, the passing initial 8x8 routed
+case still has failing extracted hold/electrical timing. It cannot stand in for a
+new repair-layout netlist without separate validation. Exact seeds, sources,
+packages and observed bins are in the per-run manifests and coverage JSON files.
