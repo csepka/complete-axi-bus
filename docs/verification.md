@@ -121,3 +121,14 @@ assertion lines. The assertions, ownership checks and other diagnostics remain
 enabled. Every Verilator entry point uses the same control file, and validation
 records its hash. This avoids changing synthesized RTL to accommodate a lint
 diagnostic about deliberately retained assertions.
+
+## Request-queue inductive evidence
+
+The actual outstanding-request queues now also have inductive safety proofs at
+32-bit address/data, 4-bit ID and depths 1/3/4/5. A shift-list oracle checks every
+retained address against the circular storage until response acceptance, with
+arbitrary input traffic and sampled reset. Pointer/storage invariants are proved,
+not assumed. Head/tail corruption and premature write-slot release in generated
+negative tests both yield reachable counterexamples. See
+[proof scope and reproduction](../verification/README.md#outstanding-request-queue-induction).
+This extends the existing FIFO proof; it does not prove full-fabric AXI compliance.

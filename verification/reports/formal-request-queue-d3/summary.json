@@ -1,0 +1,13 @@
+{
+  "proved": true,
+  "exit_code": 0,
+  "depth": 3,
+  "yosys": "Yosys 0.57 (git sha1 3aca86049e79a165932e3e7660358376f45acaed, clang++ 17.0.0 -fPIC -O3)",
+  "source_sha256": {
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "synthesis/scripts/axi_ports.py": "98b81b13d6ef035f09ec22d1645b1d7b9f1cee0dda1de5a63ed0cffde769fbfc",
+    "verification/formal_request_queue.sv": "651ff135e804865d5d1c2ea7830922e8c89cf3cb40e4b21bd91194d48dc190c1",
+    "verification/prove_request_queue.py": "4c3cca8ec25e6772de6db2455025546559babbde7f4f644d3cc49ed3f4951e9a"
+  },
+  "scope": "ADDR_W=32 DATA_W=32 ID_W=4; sampled reset; arbitrary inputs; address order, retention, ownership and accounting safety; not full fabric, response legality or liveness"
+}

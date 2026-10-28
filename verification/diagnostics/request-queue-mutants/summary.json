@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "mutation": "overwrite-head",
+      "detected": true,
+      "exit_code": 0,
+      "counterexample_sha256": "48444aa4ea3eb38dc7c6b8037e5174c688f84189d455fa62e7a9bdd9786c328b"
+    },
+    {
+      "mutation": "early-release",
+      "detected": true,
+      "exit_code": 0,
+      "counterexample_sha256": "2a49ba8705c90742216d980c64565586578ff0f2d456337dbf300cc6bdc7a678"
+    }
+  ],
+  "source_sha256": {
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "synthesis/scripts/axi_ports.py": "98b81b13d6ef035f09ec22d1645b1d7b9f1cee0dda1de5a63ed0cffde769fbfc",
+    "verification/formal_request_queue.sv": "651ff135e804865d5d1c2ea7830922e8c89cf3cb40e4b21bd91194d48dc190c1",
+    "verification/prove_request_queue.py": "4c3cca8ec25e6772de6db2455025546559babbde7f4f644d3cc49ed3f4951e9a",
+    "verification/check_queue_mutations.py": "35005f747d3c820971b295027625b7fc65be375f380c1cf49d5b2d531f84dfba"
+  }
+}

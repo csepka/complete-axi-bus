@@ -37,7 +37,7 @@ jobs:
       - name: Verify queue depths, synthesized queue, and parameter matrix
         run: make extended
 
-      - name: Verify independent AXI models and FIFO induction
+      - name: Verify independent AXI models, queue induction and mutation checks
         run: |
           python3 -m venv build/verification-venv
           build/verification-venv/bin/pip install -r verification/requirements.txt

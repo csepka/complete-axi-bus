@@ -11,6 +11,7 @@ obj_dir/
 sim/
 *.out
 *.vcd
+!verification/diagnostics/request-queue-mutants/*.vcd
 *.fst
 coverage.dat
 

@@ -1,0 +1,7 @@
+read_verilog -formal -sv -DSYNTHESIS -Ibuild/formal-request-queue/3 build/formal-request-queue/3/overwrite-head.sv verification/formal_request_queue.sv
+chparam -set DEPTH 3 formal_request_queue
+prep -top formal_request_queue -flatten
+async2sync
+memory_map
+opt
+sat -seq 8 -set-assumes -prove-asserts -dump_vcd verification/diagnostics/request-queue-mutants/overwrite-head.vcd

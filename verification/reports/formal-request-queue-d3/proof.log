@@ -1,0 +1,1131 @@
+
+-- Executing script file `/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/verification/reports/formal-request-queue-d3/proof.ys' --
+
+1. Executing Verilog-2005 frontend: build/formal-request-queue/3/observed.sv
+Parsing formal SystemVerilog input from `build/formal-request-queue/3/observed.sv' to AST representation.
+Generating RTLIL representation for module `\axi_request_queue_flat'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: verification/formal_request_queue.sv
+Parsing formal SystemVerilog input from `verification/formal_request_queue.sv' to AST representation.
+Generating RTLIL representation for module `\formal_request_queue'.
+Successfully finished Verilog frontend.
+Parameter \DEPTH = 3
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\formal_request_queue'.
+Parameter \DEPTH = 3
+Generating RTLIL representation for module `$paramod\formal_request_queue\DEPTH=32'00000000000000000000000000000011'.
+
+4. Executing PREP pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \formal_request_queue
+Used module:     \axi_request_queue_flat
+Parameter \ADDR_W = 32
+Parameter \DATA_W = 32
+Parameter \ID_W = 4
+Parameter \MAX_OUTSTANDING = 3
+
+4.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi_request_queue_flat'.
+Parameter \ADDR_W = 32
+Parameter \DATA_W = 32
+Parameter \ID_W = 4
+Parameter \MAX_OUTSTANDING = 3
+Generating RTLIL representation for module `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat'.
+
+4.1.3. Analyzing design hierarchy..
+Top module:  \formal_request_queue
+Used module:     $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat
+
+4.1.4. Analyzing design hierarchy..
+Top module:  \formal_request_queue
+Used module:     $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat
+Removing unused module `\axi_request_queue_flat'.
+Removed 1 unused modules.
+Module formal_request_queue directly or indirectly contains formal properties -> setting "keep" attribute.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$verification/formal_request_queue.sv:31$415 in module formal_request_queue.
+Marked 1 switch rules as full_case in process $proc$verification/formal_request_queue.sv:78$594 in module formal_request_queue.
+Marked 4 switch rules as full_case in process $proc$verification/formal_request_queue.sv:93$600 in module formal_request_queue.
+Marked 6 switch rules as full_case in process $proc$build/formal-request-queue/3/observed.sv:123$696 in module $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.
+Marked 2 switch rules as full_case in process $proc$build/formal-request-queue/3/observed.sv:119$683 in module $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 42 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\formal_request_queue.$proc$verification/formal_request_queue.sv:30$639'.
+  Set init value: \past_valid = 1'0
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \ARESETn in `\formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+Found async reset \ARESETn in `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~40 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+     1/36: $1$fordecl_block$114.k[31:0]$429
+     2/36: $assert$verification/formal_request_queue.sv:75$578_EN
+     3/36: $assert$verification/formal_request_queue.sv:74$570_EN
+     4/36: $assert$verification/formal_request_queue.sv:73$562_EN
+     5/36: $assert$verification/formal_request_queue.sv:70$559_EN
+     6/36: $assert$verification/formal_request_queue.sv:69$556_EN
+     7/36: $assert$verification/formal_request_queue.sv:67$554_EN
+     8/36: $assert$verification/formal_request_queue.sv:67$553_EN
+     9/36: $assert$verification/formal_request_queue.sv:64$551_EN
+    10/36: $assert$verification/formal_request_queue.sv:64$550_EN
+    11/36: $assert$verification/formal_request_queue.sv:60$541_EN
+    12/36: $assert$verification/formal_request_queue.sv:59$532_EN
+    13/36: $assert$verification/formal_request_queue.sv:60$523_EN
+    14/36: $assert$verification/formal_request_queue.sv:59$514_EN
+    15/36: $assert$verification/formal_request_queue.sv:60$505_EN
+    16/36: $assert$verification/formal_request_queue.sv:59$496_EN
+    17/36: $assert$verification/formal_request_queue.sv:56$492_EN
+    18/36: $assert$verification/formal_request_queue.sv:55$488_EN
+    19/36: $assert$verification/formal_request_queue.sv:52$485_EN
+    20/36: $assert$verification/formal_request_queue.sv:51$481_EN
+    21/36: $assert$verification/formal_request_queue.sv:49$476_EN
+    22/36: $assert$verification/formal_request_queue.sv:48$473_EN
+    23/36: $assert$verification/formal_request_queue.sv:47$469_EN
+    24/36: $assert$verification/formal_request_queue.sv:46$467_EN
+    25/36: $assert$verification/formal_request_queue.sv:45$464_EN
+    26/36: $assert$verification/formal_request_queue.sv:44$462_EN
+    27/36: $assert$verification/formal_request_queue.sv:43$460_EN
+    28/36: $assert$verification/formal_request_queue.sv:42$457_EN
+    29/36: $assert$verification/formal_request_queue.sv:41$454_EN
+    30/36: $assert$verification/formal_request_queue.sv:40$450_EN
+    31/36: $assert$verification/formal_request_queue.sv:39$446_EN
+    32/36: $assert$verification/formal_request_queue.sv:38$442_EN
+    33/36: $assert$verification/formal_request_queue.sv:37$438_EN
+    34/36: $assert$verification/formal_request_queue.sv:36$434_EN
+    35/36: $assert$verification/formal_request_queue.sv:35$430_EN
+    36/36: $assume$verification/formal_request_queue.sv:33$427_EN
+Creating decoders for process `\formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+     1/2: $0\used_r[1:0]
+     2/2: $0\used_w[1:0]
+Creating decoders for process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+     1/16: $1$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$637
+     2/16: $1$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA[51:0]$636
+     3/16: $1$memwr$\reads$verification/formal_request_queue.sv:97$409_ADDR[31:0]$635
+     4/16: $1$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$633
+     5/16: $1$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA[51:0]$632
+     6/16: $1$memwr$\writes$verification/formal_request_queue.sv:96$408_ADDR[31:0]$631
+     7/16: $1$fordecl_block$118.k[31:0]$624
+     8/16: $1$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$628
+     9/16: $1$memwr$\reads$verification/formal_request_queue.sv:95$407_DATA[51:0]$627
+    10/16: $1$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$626
+    11/16: $1$memwr$\reads$verification/formal_request_queue.sv:95$406_DATA[51:0]$625
+    12/16: $1$fordecl_block$116.k[31:0]$617
+    13/16: $1$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$621
+    14/16: $1$memwr$\writes$verification/formal_request_queue.sv:94$405_DATA[51:0]$620
+    15/16: $1$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$619
+    16/16: $1$memwr$\writes$verification/formal_request_queue.sv:94$404_DATA[51:0]$618
+Creating decoders for process `\formal_request_queue.$proc$verification/formal_request_queue.sv:30$639'.
+Creating decoders for process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+     1/26: $2\advance$func$build/formal-request-queue/3/observed.sv:149$643.$result[1:0]$739
+     2/26: $2\advance$func$build/formal-request-queue/3/observed.sv:149$643.ptr[1:0]$740
+     3/26: $2\advance$func$build/formal-request-queue/3/observed.sv:148$642.$result[1:0]$734
+     4/26: $2\advance$func$build/formal-request-queue/3/observed.sv:148$642.ptr[1:0]$735
+     5/26: $2\advance$func$build/formal-request-queue/3/observed.sv:139$641.$result[1:0]$723
+     6/26: $2\advance$func$build/formal-request-queue/3/observed.sv:139$641.ptr[1:0]$724
+     7/26: $2\advance$func$build/formal-request-queue/3/observed.sv:138$640.$result[1:0]$718
+     8/26: $2\advance$func$build/formal-request-queue/3/observed.sv:138$640.ptr[1:0]$719
+     9/26: $1\advance$func$build/formal-request-queue/3/observed.sv:149$643.ptr[1:0]$713
+    10/26: $1\advance$func$build/formal-request-queue/3/observed.sv:149$643.$result[1:0]$712
+    11/26: $1\advance$func$build/formal-request-queue/3/observed.sv:148$642.ptr[1:0]$711
+    12/26: $1\advance$func$build/formal-request-queue/3/observed.sv:148$642.$result[1:0]$710
+    13/26: $1\advance$func$build/formal-request-queue/3/observed.sv:139$641.ptr[1:0]$709
+    14/26: $1\advance$func$build/formal-request-queue/3/observed.sv:139$641.$result[1:0]$708
+    15/26: $1\advance$func$build/formal-request-queue/3/observed.sv:138$640.ptr[1:0]$707
+    16/26: $1\advance$func$build/formal-request-queue/3/observed.sv:138$640.$result[1:0]$706
+    17/26: $0\wleft[8:0]
+    18/26: $0\w_done[0:0]
+    19/26: $0\r_sent[0:0]
+    20/26: $0\w_sent[0:0]
+    21/26: $0\rc[1:0]
+    22/26: $0\wc[1:0]
+    23/26: $0\rt[1:0]
+    24/26: $0\rh[1:0]
+    25/26: $0\wt[1:0]
+    26/26: $0\wh[1:0]
+Creating decoders for process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+     1/6: $1$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$695
+     2/6: $1$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_DATA[51:0]$694
+     3/6: $1$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_ADDR[1:0]$693
+     4/6: $1$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$692
+     5/6: $1$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_DATA[51:0]$691
+     6/6: $1$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_ADDR[1:0]$690
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\formal_request_queue.\past_valid' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1054' with positive edge clock.
+Creating register for signal `\formal_request_queue.$fordecl_block$114.k' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1055' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:62$395$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1056' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:63$396$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1057' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:64$397$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1058' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:66$398$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1059' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:67$399$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1060' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:69$400$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1061' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:69$401$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1062' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:70$402$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1063' with positive edge clock.
+Creating register for signal `\formal_request_queue.$past$verification/formal_request_queue.sv:70$403$0' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+  created $dff cell `$procdff$1064' with positive edge clock.
+Creating register for signal `\formal_request_queue.\used_w' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+  created $adff cell `$procdff$1069' with positive edge clock and positive level reset.
+Creating register for signal `\formal_request_queue.\used_r' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+  created $adff cell `$procdff$1074' with positive edge clock and positive level reset.
+Creating register for signal `\formal_request_queue.$fordecl_block$116.k' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1075' with positive edge clock.
+Creating register for signal `\formal_request_queue.$fordecl_block$118.k' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1076' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:94$404_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1077' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:94$404_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1078' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:94$405_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1079' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:94$405_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1080' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:95$406_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1081' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:95$406_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1082' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:95$407_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1083' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:95$407_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1084' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:96$408_ADDR' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1085' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1086' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\writes$verification/formal_request_queue.sv:96$408_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1087' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:97$409_ADDR' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1088' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1089' with positive edge clock.
+Creating register for signal `\formal_request_queue.$memwr$\reads$verification/formal_request_queue.sv:97$409_EN' using process `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+  created $dff cell `$procdff$1090' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\wh' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1095' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\wt' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1100' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\rh' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1105' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\rt' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1110' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\wc' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1115' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\rc' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1120' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\w_sent' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1125' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\r_sent' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1130' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\w_done' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1135' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\wleft' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1140' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:138$640.$result' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1145' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:138$640.ptr' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1150' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:139$641.$result' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1155' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:139$641.ptr' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1160' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:148$642.$result' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1165' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:148$642.ptr' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1170' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:149$643.$result' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1175' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.\advance$func$build/formal-request-queue/3/observed.sv:149$643.ptr' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+  created $adff cell `$procdff$1180' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_ADDR' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1181' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_DATA' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1182' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1183' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_ADDR' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1184' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_DATA' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1185' with positive edge clock.
+Creating register for signal `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN' using process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+  created $dff cell `$procdff$1186' with positive edge clock.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 22 empty switches in `\formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+Removing empty process `formal_request_queue.$proc$verification/formal_request_queue.sv:31$415'.
+Found and cleaned up 2 empty switches in `\formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+Removing empty process `formal_request_queue.$proc$verification/formal_request_queue.sv:78$594'.
+Found and cleaned up 4 empty switches in `\formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+Removing empty process `formal_request_queue.$proc$verification/formal_request_queue.sv:93$600'.
+Removing empty process `formal_request_queue.$proc$verification/formal_request_queue.sv:30$639'.
+Found and cleaned up 10 empty switches in `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+Removing empty process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:123$696'.
+Found and cleaned up 2 empty switches in `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+Removing empty process `$paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.$proc$build/formal-request-queue/3/observed.sv:119$683'.
+Cleaned up 40 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+<suppressed ~15 debug messages>
+Optimizing module $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.
+<suppressed ~38 debug messages>
+
+4.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$45b726453ba70c186ebd5c7b827ea223eb94771e\axi_request_queue_flat.
+<suppressed ~1 debug messages>
+
+4.4. Executing FUTURE pass.
+
+4.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+4.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+Removed 65 unused cells and 348 unused wires.
+<suppressed ~70 debug messages>
+
+4.7. Executing CHECK pass (checking for obvious problems).
+Checking module formal_request_queue...
+Found and reported 0 problems.
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+<suppressed ~114 debug messages>
+Removed a total of 38 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_request_queue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~176 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_request_queue.
+    Consolidated identical input bits for $mux cell $flatten\dut.$procmux$1037:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689
+      New ports: A=1'0, B=1'1, Y=$flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0]
+      New connections: $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [51:1] = { $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] $flatten\dut.$0$memwr$\rq$build/formal-request-queue/3/observed.sv:121$645_EN[51:0]$689 [0] }
+    Consolidated identical input bits for $mux cell $flatten\dut.$procmux$1046:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686
+      New ports: A=1'0, B=1'1, Y=$flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0]
+      New connections: $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [51:1] = { $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] $flatten\dut.$0$memwr$\wq$build/formal-request-queue/3/observed.sv:120$644_EN[51:0]$686 [0] }
+    Consolidated identical input bits for $mux cell $procmux$922:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0]
+      New connections: $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [51:1] = { $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] $0$memwr$\reads$verification/formal_request_queue.sv:97$409_EN[51:0]$616 [0] }
+    Consolidated identical input bits for $mux cell $procmux$931:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0]
+      New connections: $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [51:1] = { $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] $0$memwr$\writes$verification/formal_request_queue.sv:96$408_EN[51:0]$613 [0] }
+    Consolidated identical input bits for $mux cell $procmux$943:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0]
+      New connections: $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [51:1] = { $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$407_EN[51:0]$610 [0] }
+    Consolidated identical input bits for $mux cell $procmux$949:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0]
+      New connections: $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [51:1] = { $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] $0$memwr$\reads$verification/formal_request_queue.sv:95$406_EN[51:0]$608 [0] }
+    Consolidated identical input bits for $mux cell $procmux$958:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0]
+      New connections: $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [51:1] = { $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$405_EN[51:0]$606 [0] }
+    Consolidated identical input bits for $mux cell $procmux$964:
+      Old ports: A=52'0000000000000000000000000000000000000000000000000000, B=52'1111111111111111111111111111111111111111111111111111, Y=$0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0]
+      New connections: $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [51:1] = { $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] $0$memwr$\writes$verification/formal_request_queue.sv:94$404_EN[51:0]$604 [0] }
+  Optimizing cells in module \formal_request_queue.
+Performed a total of 8 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+<suppressed ~75 debug messages>
+Removed a total of 25 cells.
+
+4.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+Removed 0 unused cells and 59 unused wires.
+<suppressed ~1 debug messages>
+
+4.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+4.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_request_queue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~132 debug messages>
+
+4.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_request_queue.
+Performed a total of 0 changes.
+
+4.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+Removed a total of 0 cells.
+
+4.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+
+4.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+4.8.14. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1187 (writes).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1188 (writes).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1189 (reads).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1190 (reads).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1191 (writes).
+Removed top 30 address bits (of 32) from memory init port formal_request_queue.$auto$proc_memwr.cc:45:proc_memwr$1192 (reads).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\rq$build/formal-request-queue/3/observed.sv:82$745 (dut.rq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\rq$build/formal-request-queue/3/observed.sv:82$747 (dut.rq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\rq$build/formal-request-queue/3/observed.sv:82$749 (dut.rq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\wq$build/formal-request-queue/3/observed.sv:81$744 (dut.wq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\wq$build/formal-request-queue/3/observed.sv:81$746 (dut.wq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$flatten\dut.$memrd$\wq$build/formal-request-queue/3/observed.sv:81$748 (dut.wq).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\reads$verification/formal_request_queue.sv:56$493 (reads).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\reads$verification/formal_request_queue.sv:60$529 (reads).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\reads$verification/formal_request_queue.sv:60$547 (reads).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\writes$verification/formal_request_queue.sv:52$486 (writes).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\writes$verification/formal_request_queue.sv:59$520 (writes).
+Removed top 30 address bits (of 32) from memory read port formal_request_queue.$memrd$\writes$verification/formal_request_queue.sv:59$538 (writes).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:39$448 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:40$452 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:59$498 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:59$516 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:59$534 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:60$507 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:60$525 ($mod).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$mod$verification/formal_request_queue.sv:60$543 ($mod).
+Removed top 30 bits (of 32) from mux cell formal_request_queue.$procmux$928 ($mux).
+Removed top 30 bits (of 32) from mux cell formal_request_queue.$procmux$937 ($mux).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$le$verification/formal_request_queue.sv:35$431 ($le).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$le$verification/formal_request_queue.sv:35$432 ($le).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:37$439 ($lt).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:37$440 ($lt).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:38$443 ($lt).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:38$444 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:39$447 ($add).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:39$447 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:39$447 ($add).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:40$451 ($add).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:40$451 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:40$451 ($add).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:41$455 ($lt).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$lt$verification/formal_request_queue.sv:42$458 ($lt).
+Removed top 31 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:59$495 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$497 ($add).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$497 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$497 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:59$499 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$500 ($add).
+Removed top 31 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:60$504 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$506 ($add).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$506 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$506 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:60$508 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$509 ($add).
+Removed top 31 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:59$513 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$515 ($add).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$515 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$515 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:59$517 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$518 ($add).
+Removed top 31 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:60$522 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$524 ($add).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$524 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$524 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:60$526 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$527 ($add).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:59$531 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$533 ($add).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$533 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$533 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:59$535 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:59$536 ($add).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$lt$verification/formal_request_queue.sv:60$540 ($lt).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$542 ($add).
+Removed top 30 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$542 ($add).
+Removed top 29 bits (of 32) from port Y of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$542 ($add).
+Removed top 26 bits (of 32) from port B of cell formal_request_queue.$mul$verification/formal_request_queue.sv:60$544 ($mul).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$add$verification/formal_request_queue.sv:60$545 ($add).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$sub$verification/formal_request_queue.sv:96$634 ($sub).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$sub$verification/formal_request_queue.sv:96$634 ($sub).
+Removed top 30 bits (of 32) from port Y of cell formal_request_queue.$sub$verification/formal_request_queue.sv:96$634 ($sub).
+Removed top 30 bits (of 32) from port A of cell formal_request_queue.$sub$verification/formal_request_queue.sv:97$638 ($sub).
+Removed top 31 bits (of 32) from port B of cell formal_request_queue.$sub$verification/formal_request_queue.sv:97$638 ($sub).
+Removed top 30 bits (of 32) from port Y of cell formal_request_queue.$sub$verification/formal_request_queue.sv:97$638 ($sub).
+Removed top 1 bits (of 2) from port B of cell formal_request_queue.$flatten\dut.$procmux$1022_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell formal_request_queue.$flatten\dut.$procmux$1019_CMP0 ($eq).
+Removed top 8 bits (of 9) from port B of cell formal_request_queue.$flatten\dut.$eq$build/formal-request-queue/3/observed.sv:145$732 ($eq).
+Removed top 1 bits (of 9) from port A of cell formal_request_queue.$flatten\dut.$add$build/formal-request-queue/3/observed.sv:141$729 ($add).
+Removed top 8 bits (of 9) from port B of cell formal_request_queue.$flatten\dut.$add$build/formal-request-queue/3/observed.sv:141$729 ($add).
+Removed top 30 bits (of 32) from wire formal_request_queue.$0$memwr$\reads$verification/formal_request_queue.sv:97$409_ADDR[31:0]$614.
+Removed top 30 bits (of 32) from wire formal_request_queue.$0$memwr$\writes$verification/formal_request_queue.sv:96$408_ADDR[31:0]$611.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:39$447_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:40$451_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:59$497_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:59$515_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:59$533_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:60$506_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:60$524_Y.
+Removed top 29 bits (of 32) from wire formal_request_queue.$add$verification/formal_request_queue.sv:60$542_Y.
+Removed top 30 bits (of 32) from wire formal_request_queue.$sub$verification/formal_request_queue.sv:96$634_Y.
+Removed top 30 bits (of 32) from wire formal_request_queue.$sub$verification/formal_request_queue.sv:97$638_Y.
+
+4.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+Removed 0 unused cells and 12 unused wires.
+<suppressed ~1 debug messages>
+
+4.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.12. Executing OPT pass (performing simple optimizations).
+
+4.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+4.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+Removed a total of 0 cells.
+
+4.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+
+4.12.4. Finished fast OPT passes.
+
+4.13. Printing statistics.
+
+=== formal_request_queue ===
+
+        +----------Local Count, excluding submodules.
+        |
+      422 wires
+     4042 wire bits
+      177 public wires
+     1705 public wire bits
+       64 ports
+      394 port bits
+      306 cells
+       23   $add
+       12   $adff
+       35   $check
+       10   $dff
+       27   $eq
+        2   $le
+       47   $logic_and
+       18   $logic_not
+       14   $lt
+        4   $mem_v2
+        8   $mod
+        6   $mul
+       77   $mux
+        4   $pmux
+        5   $reduce_bool
+        1   $scopeinfo
+        6   $shiftx
+        7   $sub
+
+4.14. Executing CHECK pass (checking for obvious problems).
+Checking module formal_request_queue...
+Found and reported 0 problems.
+
+5. Executing ASYNC2SYNC pass.
+Replacing formal_request_queue.$flatten\dut.$procdff$1095 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\wh[1:0], Q=\dut.wh
+Replacing formal_request_queue.$flatten\dut.$procdff$1100 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\wt[1:0], Q=\dut.wt
+Replacing formal_request_queue.$flatten\dut.$procdff$1105 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\rh[1:0], Q=\dut.rh
+Replacing formal_request_queue.$flatten\dut.$procdff$1110 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\rt[1:0], Q=\dut.rt
+Replacing formal_request_queue.$flatten\dut.$procdff$1115 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\wc[1:0], Q=\dut.wc
+Replacing formal_request_queue.$flatten\dut.$procdff$1120 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\rc[1:0], Q=\dut.rc
+Replacing formal_request_queue.$flatten\dut.$procdff$1125 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\w_sent[0:0], Q=\dut.w_sent
+Replacing formal_request_queue.$flatten\dut.$procdff$1130 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\r_sent[0:0], Q=\dut.r_sent
+Replacing formal_request_queue.$flatten\dut.$procdff$1135 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\w_done[0:0], Q=\dut.w_done
+Replacing formal_request_queue.$flatten\dut.$procdff$1140 ($adff): ARST=\ARESETn, D=$flatten\dut.$0\wleft[8:0], Q=\dut.wleft
+Replacing formal_request_queue.$procdff$1069 ($adff): ARST=\ARESETn, D=$0\used_w[1:0], Q=\used_w
+Replacing formal_request_queue.$procdff$1074 ($adff): ARST=\ARESETn, D=$0\used_r[1:0], Q=\used_r
+
+6. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \dut.rq in module \formal_request_queue:
+  created 3 $dff cells and 0 static cells of width 52.
+  read interface: 0 $dff and 12 $mux cells.
+  write interface: 3 write mux blocks.
+Mapping memory \dut.wq in module \formal_request_queue:
+  created 3 $dff cells and 0 static cells of width 52.
+  read interface: 0 $dff and 12 $mux cells.
+  write interface: 3 write mux blocks.
+Mapping memory \reads in module \formal_request_queue:
+  created 3 $dff cells and 0 static cells of width 52.
+  read interface: 0 $dff and 9 $mux cells.
+  write interface: 9 write mux blocks.
+Mapping memory \writes in module \formal_request_queue:
+  created 3 $dff cells and 0 static cells of width 52.
+  read interface: 0 $dff and 9 $mux cells.
+  write interface: 9 write mux blocks.
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+<suppressed ~96 debug messages>
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+<suppressed ~141 debug messages>
+Removed a total of 47 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_request_queue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~200 debug messages>
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_request_queue.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1258 ($dff) from module formal_request_queue (D = $procmux$885_Y, Q = $auto$async2sync.cc:107:execute$1256, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1264 ($dff) from module formal_request_queue (D = $procmux$880_Y, Q = $auto$async2sync.cc:107:execute$1262, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1270 ($dff) from module formal_request_queue (D = $procmux$875_Y, Q = $auto$async2sync.cc:107:execute$1268, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1276 ($dff) from module formal_request_queue (D = $procmux$870_Y, Q = $auto$async2sync.cc:107:execute$1274, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1282 ($dff) from module formal_request_queue (D = $procmux$865_Y, Q = $auto$async2sync.cc:107:execute$1280, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1288 ($dff) from module formal_request_queue (D = $procmux$860_Y, Q = $auto$async2sync.cc:107:execute$1286, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1294 ($dff) from module formal_request_queue (D = $procmux$855_Y, Q = $auto$async2sync.cc:107:execute$1292, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1306 ($dff) from module formal_request_queue (D = $procmux$845_Y, Q = $auto$async2sync.cc:107:execute$1304, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1318 ($dff) from module formal_request_queue (D = $procmux$835_Y, Q = $auto$async2sync.cc:107:execute$1316, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1324 ($dff) from module formal_request_queue (D = $procmux$830_Y, Q = $auto$async2sync.cc:107:execute$1322, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1330 ($dff) from module formal_request_queue (D = $procmux$820_Y, Q = $auto$async2sync.cc:107:execute$1328, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1336 ($dff) from module formal_request_queue (D = $procmux$810_Y, Q = $auto$async2sync.cc:107:execute$1334, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1342 ($dff) from module formal_request_queue (D = $procmux$825_Y, Q = $auto$async2sync.cc:107:execute$1340, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1348 ($dff) from module formal_request_queue (D = $procmux$815_Y, Q = $auto$async2sync.cc:107:execute$1346, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1354 ($dff) from module formal_request_queue (D = $procmux$805_Y, Q = $auto$async2sync.cc:107:execute$1352, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1366 ($dff) from module formal_request_queue (D = $procmux$791_Y, Q = $auto$async2sync.cc:107:execute$1364, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1378 ($dff) from module formal_request_queue (D = $procmux$777_Y, Q = $auto$async2sync.cc:107:execute$1376, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1384 ($dff) from module formal_request_queue (D = $procmux$770_Y, Q = $auto$async2sync.cc:107:execute$1382, rval = 1'0).
+Adding SRST signal on $auto$async2sync.cc:110:execute$1390 ($dff) from module formal_request_queue (D = $procmux$763_Y, Q = $auto$async2sync.cc:107:execute$1388, rval = 1'0).
+Adding SRST signal on $flatten\dut.$procdff$1125 ($sdff) from module formal_request_queue (D = $flatten\dut.$procmux$1013_Y, Q = $auto$async2sync.cc:234:execute$1430, rval = 1'0).
+Adding SRST signal on $flatten\dut.$procdff$1130 ($sdff) from module formal_request_queue (D = $flatten\dut.$procmux$1008_Y, Q = $auto$async2sync.cc:234:execute$1432, rval = 1'0).
+Adding SRST signal on $flatten\dut.$procdff$1135 ($sdff) from module formal_request_queue (D = $flatten\dut.$procmux$1003_Y, Q = $auto$async2sync.cc:234:execute$1434, rval = 1'0).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+Removed 96 unused cells and 284 unused wires.
+<suppressed ~105 debug messages>
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_request_queue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~174 debug messages>
+
+7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_request_queue.
+Performed a total of 0 changes.
+
+7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+<suppressed ~18 debug messages>
+Removed a total of 6 cells.
+
+7.13. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\writes[2]$1860 ($dff) from module formal_request_queue (D = $0$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA[51:0]$612, Q = \writes[2]).
+Adding EN signal on $memory\writes[1]$1858 ($dff) from module formal_request_queue (D = $memory\writes$wrmux[1][2][0]$y$1922, Q = \writes[1]).
+Adding EN signal on $memory\writes[0]$1856 ($dff) from module formal_request_queue (D = $memory\writes$wrmux[0][2][0]$y$1906, Q = \writes[0]).
+Adding EN signal on $memory\reads[2]$1757 ($dff) from module formal_request_queue (D = $0$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA[51:0]$615, Q = \reads[2]).
+Adding EN signal on $memory\reads[1]$1755 ($dff) from module formal_request_queue (D = $memory\reads$wrmux[1][2][0]$y$1835, Q = \reads[1]).
+Adding EN signal on $memory\reads[0]$1753 ($dff) from module formal_request_queue (D = $memory\reads$wrmux[0][2][0]$y$1811, Q = \reads[0]).
+Adding EN signal on $memory\dut.wq[2]$1689 ($dff) from module formal_request_queue (D = $0$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA[51:0]$612, Q = \dut.wq[2]).
+Adding EN signal on $memory\dut.wq[1]$1687 ($dff) from module formal_request_queue (D = $0$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA[51:0]$612, Q = \dut.wq[1]).
+Adding EN signal on $memory\dut.wq[0]$1685 ($dff) from module formal_request_queue (D = $0$memwr$\writes$verification/formal_request_queue.sv:96$408_DATA[51:0]$612, Q = \dut.wq[0]).
+Adding EN signal on $memory\dut.rq[2]$1621 ($dff) from module formal_request_queue (D = $0$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA[51:0]$615, Q = \dut.rq[2]).
+Adding EN signal on $memory\dut.rq[1]$1619 ($dff) from module formal_request_queue (D = $0$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA[51:0]$615, Q = \dut.rq[1]).
+Adding EN signal on $memory\dut.rq[0]$1617 ($dff) from module formal_request_queue (D = $0$memwr$\reads$verification/formal_request_queue.sv:97$409_DATA[51:0]$615, Q = \dut.rq[0]).
+
+7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+Removed 8 unused cells and 14 unused wires.
+<suppressed ~9 debug messages>
+
+7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+<suppressed ~4 debug messages>
+
+7.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \formal_request_queue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~146 debug messages>
+
+7.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \formal_request_queue.
+Performed a total of 0 changes.
+
+7.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\formal_request_queue'.
+Removed a total of 0 cells.
+
+7.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \formal_request_queue..
+
+7.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module formal_request_queue.
+
+7.23. Finished OPT passes. (There is nothing left to do.)
+
+8. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1250 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1256 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1262 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1268 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1274 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1280 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1286 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1292 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1304 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1316 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1322 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1328 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1334 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1340 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1346 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1352 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1364 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1376 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1382 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1388 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1406 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:107:execute$1412 = 1'0
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1212 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1218 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1224 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1230 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1236 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1242 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1248 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1254 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1260 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1266 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1272 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1278 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1284 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1290 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1296 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1302 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1308 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1314 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1320 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1326 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1332 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1338 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1344 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1350 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1356 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1362 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1368 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1374 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1380 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1386 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1392 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1398 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1404 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1410 = 1'1
+Import set-constraint from init attribute: $auto$async2sync.cc:116:execute$1416 = 1'1
+Import set-constraint from init attribute: \past_valid = 1'0
+Final init constraint equation: { \past_valid $auto$async2sync.cc:116:execute$1416 $auto$async2sync.cc:116:execute$1410 $auto$async2sync.cc:116:execute$1404 $auto$async2sync.cc:116:execute$1398 $auto$async2sync.cc:116:execute$1392 $auto$async2sync.cc:116:execute$1386 $auto$async2sync.cc:116:execute$1380 $auto$async2sync.cc:116:execute$1374 $auto$async2sync.cc:116:execute$1368 $auto$async2sync.cc:116:execute$1362 $auto$async2sync.cc:116:execute$1356 $auto$async2sync.cc:116:execute$1350 $auto$async2sync.cc:116:execute$1344 $auto$async2sync.cc:116:execute$1338 $auto$async2sync.cc:116:execute$1332 $auto$async2sync.cc:116:execute$1326 $auto$async2sync.cc:116:execute$1320 $auto$async2sync.cc:116:execute$1314 $auto$async2sync.cc:116:execute$1308 $auto$async2sync.cc:116:execute$1302 $auto$async2sync.cc:116:execute$1296 $auto$async2sync.cc:116:execute$1290 $auto$async2sync.cc:116:execute$1284 $auto$async2sync.cc:116:execute$1278 $auto$async2sync.cc:116:execute$1272 $auto$async2sync.cc:116:execute$1266 $auto$async2sync.cc:116:execute$1260 $auto$async2sync.cc:116:execute$1254 $auto$async2sync.cc:116:execute$1248 $auto$async2sync.cc:116:execute$1242 $auto$async2sync.cc:116:execute$1236 $auto$async2sync.cc:116:execute$1230 $auto$async2sync.cc:116:execute$1224 $auto$async2sync.cc:116:execute$1218 $auto$async2sync.cc:116:execute$1212 $auto$async2sync.cc:107:execute$1412 $auto$async2sync.cc:107:execute$1406 $auto$async2sync.cc:107:execute$1388 $auto$async2sync.cc:107:execute$1382 $auto$async2sync.cc:107:execute$1376 $auto$async2sync.cc:107:execute$1364 $auto$async2sync.cc:107:execute$1352 $auto$async2sync.cc:107:execute$1346 $auto$async2sync.cc:107:execute$1340 $auto$async2sync.cc:107:execute$1334 $auto$async2sync.cc:107:execute$1328 $auto$async2sync.cc:107:execute$1322 $auto$async2sync.cc:107:execute$1316 $auto$async2sync.cc:107:execute$1304 $auto$async2sync.cc:107:execute$1292 $auto$async2sync.cc:107:execute$1286 $auto$async2sync.cc:107:execute$1280 $auto$async2sync.cc:107:execute$1274 $auto$async2sync.cc:107:execute$1268 $auto$async2sync.cc:107:execute$1262 $auto$async2sync.cc:107:execute$1256 $auto$async2sync.cc:107:execute$1250 } = 58'0111111111111111111111111111111111110000000000000000000000
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import proof for assert: $auto$async2sync.cc:116:execute$1212 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1218 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1224 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1230 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1236 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1242 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1248 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1254 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1260 when $auto$async2sync.cc:107:execute$1256.
+Import proof for assert: $auto$async2sync.cc:116:execute$1266 when $auto$async2sync.cc:107:execute$1262.
+Import proof for assert: $auto$async2sync.cc:116:execute$1272 when $auto$async2sync.cc:107:execute$1268.
+Import proof for assert: $auto$async2sync.cc:116:execute$1278 when $auto$async2sync.cc:107:execute$1274.
+Import proof for assert: $auto$async2sync.cc:116:execute$1284 when $auto$async2sync.cc:107:execute$1280.
+Import proof for assert: $auto$async2sync.cc:116:execute$1290 when $auto$async2sync.cc:107:execute$1286.
+Import proof for assert: $auto$async2sync.cc:116:execute$1296 when $auto$async2sync.cc:107:execute$1292.
+Import proof for assert: $auto$async2sync.cc:116:execute$1302 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1308 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1314 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1320 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1326 when $auto$async2sync.cc:107:execute$1322.
+Import proof for assert: $auto$async2sync.cc:116:execute$1332 when $auto$async2sync.cc:107:execute$1328.
+Import proof for assert: $auto$async2sync.cc:116:execute$1338 when $auto$async2sync.cc:107:execute$1334.
+Import proof for assert: $auto$async2sync.cc:116:execute$1344 when $auto$async2sync.cc:107:execute$1340.
+Import proof for assert: $auto$async2sync.cc:116:execute$1350 when $auto$async2sync.cc:107:execute$1346.
+Import proof for assert: $auto$async2sync.cc:116:execute$1356 when $auto$async2sync.cc:107:execute$1352.
+Import proof for assert: $auto$async2sync.cc:116:execute$1362 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1368 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1374 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1380 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1386 when $auto$async2sync.cc:107:execute$1382.
+Import proof for assert: $auto$async2sync.cc:116:execute$1392 when $auto$async2sync.cc:107:execute$1388.
+Import proof for assert: $auto$async2sync.cc:116:execute$1398 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1404 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1410 when $auto$async2sync.cc:107:execute$1406.
+
+** Trying induction with length 1 **
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import proof for assert: $auto$async2sync.cc:116:execute$1212 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1218 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1224 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1230 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1236 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1242 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1248 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1254 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1260 when $auto$async2sync.cc:107:execute$1256.
+Import proof for assert: $auto$async2sync.cc:116:execute$1266 when $auto$async2sync.cc:107:execute$1262.
+Import proof for assert: $auto$async2sync.cc:116:execute$1272 when $auto$async2sync.cc:107:execute$1268.
+Import proof for assert: $auto$async2sync.cc:116:execute$1278 when $auto$async2sync.cc:107:execute$1274.
+Import proof for assert: $auto$async2sync.cc:116:execute$1284 when $auto$async2sync.cc:107:execute$1280.
+Import proof for assert: $auto$async2sync.cc:116:execute$1290 when $auto$async2sync.cc:107:execute$1286.
+Import proof for assert: $auto$async2sync.cc:116:execute$1296 when $auto$async2sync.cc:107:execute$1292.
+Import proof for assert: $auto$async2sync.cc:116:execute$1302 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1308 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1314 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1320 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1326 when $auto$async2sync.cc:107:execute$1322.
+Import proof for assert: $auto$async2sync.cc:116:execute$1332 when $auto$async2sync.cc:107:execute$1328.
+Import proof for assert: $auto$async2sync.cc:116:execute$1338 when $auto$async2sync.cc:107:execute$1334.
+Import proof for assert: $auto$async2sync.cc:116:execute$1344 when $auto$async2sync.cc:107:execute$1340.
+Import proof for assert: $auto$async2sync.cc:116:execute$1350 when $auto$async2sync.cc:107:execute$1346.
+Import proof for assert: $auto$async2sync.cc:116:execute$1356 when $auto$async2sync.cc:107:execute$1352.
+Import proof for assert: $auto$async2sync.cc:116:execute$1362 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1368 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1374 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1380 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1386 when $auto$async2sync.cc:107:execute$1382.
+Import proof for assert: $auto$async2sync.cc:116:execute$1392 when $auto$async2sync.cc:107:execute$1388.
+Import proof for assert: $auto$async2sync.cc:116:execute$1398 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1404 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1410 when $auto$async2sync.cc:107:execute$1406.
+
+[base case 1] Solving problem with 587519 variables and 1722398 clauses..
+Base case for induction length 1 proven.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import proof for assert: $auto$async2sync.cc:116:execute$1212 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1218 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1224 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1230 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1236 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1242 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1248 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1254 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1260 when $auto$async2sync.cc:107:execute$1256.
+Import proof for assert: $auto$async2sync.cc:116:execute$1266 when $auto$async2sync.cc:107:execute$1262.
+Import proof for assert: $auto$async2sync.cc:116:execute$1272 when $auto$async2sync.cc:107:execute$1268.
+Import proof for assert: $auto$async2sync.cc:116:execute$1278 when $auto$async2sync.cc:107:execute$1274.
+Import proof for assert: $auto$async2sync.cc:116:execute$1284 when $auto$async2sync.cc:107:execute$1280.
+Import proof for assert: $auto$async2sync.cc:116:execute$1290 when $auto$async2sync.cc:107:execute$1286.
+Import proof for assert: $auto$async2sync.cc:116:execute$1296 when $auto$async2sync.cc:107:execute$1292.
+Import proof for assert: $auto$async2sync.cc:116:execute$1302 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1308 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1314 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1320 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1326 when $auto$async2sync.cc:107:execute$1322.
+Import proof for assert: $auto$async2sync.cc:116:execute$1332 when $auto$async2sync.cc:107:execute$1328.
+Import proof for assert: $auto$async2sync.cc:116:execute$1338 when $auto$async2sync.cc:107:execute$1334.
+Import proof for assert: $auto$async2sync.cc:116:execute$1344 when $auto$async2sync.cc:107:execute$1340.
+Import proof for assert: $auto$async2sync.cc:116:execute$1350 when $auto$async2sync.cc:107:execute$1346.
+Import proof for assert: $auto$async2sync.cc:116:execute$1356 when $auto$async2sync.cc:107:execute$1352.
+Import proof for assert: $auto$async2sync.cc:116:execute$1362 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1368 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1374 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1380 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1386 when $auto$async2sync.cc:107:execute$1382.
+Import proof for assert: $auto$async2sync.cc:116:execute$1392 when $auto$async2sync.cc:107:execute$1388.
+Import proof for assert: $auto$async2sync.cc:116:execute$1398 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1404 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1410 when $auto$async2sync.cc:107:execute$1406.
+
+[induction step 1] Solving problem with 232155 variables and 679856 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                                      Dec       Hex                                                     Bin
+  ---- -------------------------------------------------------- ----------- --------- -------------------------------------------------------
+  init $auto$async2sync.cc:107:execute$1250                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1256                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1262                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1268                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1274                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1280                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1286                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1292                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1304                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1316                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1322                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1328                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1334                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1340                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1346                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1352                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1364                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1376                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1382                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1388                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1406                               0         0                                                       0
+  init $auto$async2sync.cc:107:execute$1412                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1212                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1218                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1224                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1230                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1236                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1242                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1248                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1254                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1260                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1266                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1272                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1278                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1284                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1290                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1296                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1302                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1308                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1314                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1320                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1326                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1332                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1338                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1344                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1350                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1356                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1362                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1368                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1374                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1380                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1386                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1392                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1398                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1404                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1410                               0         0                                                       0
+  init $auto$async2sync.cc:116:execute$1416                               0         0                                                       0
+  init $auto$async2sync.cc:234:execute$1418                               1         1                                                      01
+  init $auto$async2sync.cc:234:execute$1420                               3         3                                                      11
+  init $auto$async2sync.cc:234:execute$1422                               1         1                                                      01
+  init $auto$async2sync.cc:234:execute$1424                               1         1                                                      01
+  init $auto$async2sync.cc:234:execute$1426                               0         0                                                      00
+  init $auto$async2sync.cc:234:execute$1428                               0         0                                                      00
+  init $auto$async2sync.cc:234:execute$1430                               1         1                                                       1
+  init $auto$async2sync.cc:234:execute$1432                               1         1                                                       1
+  init $auto$async2sync.cc:234:execute$1434                               0         0                                                       0
+  init $auto$async2sync.cc:234:execute$1436                               0         0                                               000000000
+  init $auto$async2sync.cc:234:execute$1438                               0         0                                                      00
+  init $auto$async2sync.cc:234:execute$1440                               3         3                                                      11
+  init $past$verification/formal_request_queue.sv:62$395$0                1         1                                                       1
+  init $past$verification/formal_request_queue.sv:63$396$0                1         1                                                       1
+  init $past$verification/formal_request_queue.sv:64$397$0               --        --    1101111111111111111111111111111111111111111111111111
+  init $past$verification/formal_request_queue.sv:66$398$0                1         1                                                       1
+  init $past$verification/formal_request_queue.sv:67$399$0               --        --    0000000000000000000000000000000000000000000000000000
+  init $past$verification/formal_request_queue.sv:69$400$0                1         1                                                       1
+  init $past$verification/formal_request_queue.sv:69$401$0               --        --    1111111001111111111111011111111111100111111111111111
+  init $past$verification/formal_request_queue.sv:70$402$0                1         1                                                       1
+  init $past$verification/formal_request_queue.sv:70$403$0               --        --    1111011111111111111111111111111111111111111111111111
+  init \dut.rq[0]                                                        --        --    0000000000000000000000000000000000000000000000000000
+  init \dut.rq[1]                                                        --        --    1111111111111111111111111111111111111111111111111111
+  init \dut.rq[2]                                                        --        --    0000000000000000000000000000000000000000000000000000
+  init \dut.wq[0]                                                        --        --    0000000000000000000000000000000000000000000000000000
+  init \dut.wq[1]                                                        --        --    0000000000000000000000000000000000000000000000000000
+  init \dut.wq[2]                                                        --        --    0000000000000000000000000000000000000000000000000000
+  init \past_valid                                                        1         1                                                       1
+  init \reads[0]                                                         --        --    0000000000000000000000000000000000000000000000000000
+  init \reads[1]                                                         --        --    0000000000000000000000000000000000000000000000000001
+  init \reads[2]                                                         --        --    0000000000000000000000000000000000000000000000000001
+  init \writes[0]                                                        --        --    0000000110000000000000000000000000000000000000000000
+  init \writes[1]                                                        --        --    1111111111111111111111111111111111111111111111111111
+  init \writes[2]                                                        --        --    1111111111111111111111111111111111111111111111111111
+
+** Trying induction with length 2 **
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import proof for assert: $auto$async2sync.cc:116:execute$1212 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1218 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1224 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1230 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1236 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1242 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1248 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1254 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1260 when $auto$async2sync.cc:107:execute$1256.
+Import proof for assert: $auto$async2sync.cc:116:execute$1266 when $auto$async2sync.cc:107:execute$1262.
+Import proof for assert: $auto$async2sync.cc:116:execute$1272 when $auto$async2sync.cc:107:execute$1268.
+Import proof for assert: $auto$async2sync.cc:116:execute$1278 when $auto$async2sync.cc:107:execute$1274.
+Import proof for assert: $auto$async2sync.cc:116:execute$1284 when $auto$async2sync.cc:107:execute$1280.
+Import proof for assert: $auto$async2sync.cc:116:execute$1290 when $auto$async2sync.cc:107:execute$1286.
+Import proof for assert: $auto$async2sync.cc:116:execute$1296 when $auto$async2sync.cc:107:execute$1292.
+Import proof for assert: $auto$async2sync.cc:116:execute$1302 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1308 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1314 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1320 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1326 when $auto$async2sync.cc:107:execute$1322.
+Import proof for assert: $auto$async2sync.cc:116:execute$1332 when $auto$async2sync.cc:107:execute$1328.
+Import proof for assert: $auto$async2sync.cc:116:execute$1338 when $auto$async2sync.cc:107:execute$1334.
+Import proof for assert: $auto$async2sync.cc:116:execute$1344 when $auto$async2sync.cc:107:execute$1340.
+Import proof for assert: $auto$async2sync.cc:116:execute$1350 when $auto$async2sync.cc:107:execute$1346.
+Import proof for assert: $auto$async2sync.cc:116:execute$1356 when $auto$async2sync.cc:107:execute$1352.
+Import proof for assert: $auto$async2sync.cc:116:execute$1362 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1368 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1374 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1380 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1386 when $auto$async2sync.cc:107:execute$1382.
+Import proof for assert: $auto$async2sync.cc:116:execute$1392 when $auto$async2sync.cc:107:execute$1388.
+Import proof for assert: $auto$async2sync.cc:116:execute$1398 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1404 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1410 when $auto$async2sync.cc:107:execute$1406.
+
+[base case 2] Solving problem with 708752 variables and 2079194 clauses..
+Base case for induction length 2 proven.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 403 cells to SAT database.
+Import constraint from assume cell: $auto$async2sync.cc:116:execute$1416 when $auto$async2sync.cc:107:execute$1412.
+Import proof for assert: $auto$async2sync.cc:116:execute$1212 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1218 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1224 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1230 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1236 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1242 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1248 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1254 when $auto$async2sync.cc:107:execute$1250.
+Import proof for assert: $auto$async2sync.cc:116:execute$1260 when $auto$async2sync.cc:107:execute$1256.
+Import proof for assert: $auto$async2sync.cc:116:execute$1266 when $auto$async2sync.cc:107:execute$1262.
+Import proof for assert: $auto$async2sync.cc:116:execute$1272 when $auto$async2sync.cc:107:execute$1268.
+Import proof for assert: $auto$async2sync.cc:116:execute$1278 when $auto$async2sync.cc:107:execute$1274.
+Import proof for assert: $auto$async2sync.cc:116:execute$1284 when $auto$async2sync.cc:107:execute$1280.
+Import proof for assert: $auto$async2sync.cc:116:execute$1290 when $auto$async2sync.cc:107:execute$1286.
+Import proof for assert: $auto$async2sync.cc:116:execute$1296 when $auto$async2sync.cc:107:execute$1292.
+Import proof for assert: $auto$async2sync.cc:116:execute$1302 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1308 when $auto$async2sync.cc:107:execute$1304.
+Import proof for assert: $auto$async2sync.cc:116:execute$1314 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1320 when $auto$async2sync.cc:107:execute$1316.
+Import proof for assert: $auto$async2sync.cc:116:execute$1326 when $auto$async2sync.cc:107:execute$1322.
+Import proof for assert: $auto$async2sync.cc:116:execute$1332 when $auto$async2sync.cc:107:execute$1328.
+Import proof for assert: $auto$async2sync.cc:116:execute$1338 when $auto$async2sync.cc:107:execute$1334.
+Import proof for assert: $auto$async2sync.cc:116:execute$1344 when $auto$async2sync.cc:107:execute$1340.
+Import proof for assert: $auto$async2sync.cc:116:execute$1350 when $auto$async2sync.cc:107:execute$1346.
+Import proof for assert: $auto$async2sync.cc:116:execute$1356 when $auto$async2sync.cc:107:execute$1352.
+Import proof for assert: $auto$async2sync.cc:116:execute$1362 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1368 when $auto$async2sync.cc:107:execute$1364.
+Import proof for assert: $auto$async2sync.cc:116:execute$1374 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1380 when $auto$async2sync.cc:107:execute$1376.
+Import proof for assert: $auto$async2sync.cc:116:execute$1386 when $auto$async2sync.cc:107:execute$1382.
+Import proof for assert: $auto$async2sync.cc:116:execute$1392 when $auto$async2sync.cc:107:execute$1388.
+Import proof for assert: $auto$async2sync.cc:116:execute$1398 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1404 when $auto$async2sync.cc:107:execute$1406.
+Import proof for assert: $auto$async2sync.cc:116:execute$1410 when $auto$async2sync.cc:107:execute$1406.
+
+[induction step 2] Solving problem with 356158 variables and 1045884 clauses..
+Induction step proven: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$
+                 /$$__  $$    | $$_____/    | $$__  $$
+                | $$  \ $$    | $$          | $$  \ $$
+                | $$  | $$    | $$$$$       | $$  | $$
+                | $$  | $$    | $$__/       | $$  | $$
+                | $$/$$ $$    | $$          | $$  | $$
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/
