@@ -73,7 +73,7 @@ for name in ['manifest.json','generic.ys','constraints.sdc','config.mk','repair_
 for name in ['flow.log','lvs.log']:
     if (work/name).exists():shutil.copy2(work/name,archive/name)
 if (work/'closure.tcl').exists():shutil.copy2(work/'closure.tcl',archive/'closure.tcl')
-for name in ['1_2_yosys.log','6_report.json','6_report.log','5_2_route.json','6_final_lec.log']:
+for name in ['1_2_yosys.log','6_report.json','6_report.log','5_2_route.json','6_final_lec.log','6_drc.log']:
     if (logs/name).exists():shutil.copy2(logs/name,archive/name)
 for name in ['synth_stat.txt','synth_check.txt','6_finish.rpt','5_route_drc.rpt','drt_antennas.log','final_all.webp','final_worst_path.webp','6_drc.lyrdb','6_drc_count.rpt']:
     if (rpts/name).exists():shutil.copy2(rpts/name,archive/name)

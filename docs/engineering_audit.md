@@ -104,3 +104,9 @@ a model refinement now checks all 128 four-state combinations and all 16 binary
 equivalence cases across both MUX strengths. Original failure evidence is kept.
 No RTL reset behavior or X-checking assertion was weakened. See the detailed
 [model semantics](../verification/README.md#four-state-cell-model-semantics).
+
+The large margin-repair variant passes its own independent routed test, but has
+2,571 hold, 25 capacitance, one slew and 999 KLayout antenna violations. The
+wrapper lost its command completion record while the stage log and DRC XML
+survived. The runner now records commands before launch, the collector archives
+the stage DRC log, and hard-interruption/trial-isolation tests are part of CI.

@@ -2,7 +2,7 @@
 
 ## Resume checkpoint (2026-10-29)
 
-Same branch, HEAD `70fac90` committed and pushed. GitHub CI passed run
+Same branch; checkpoint `b22ed99` committed locally after pushed `70fac90`. GitHub CI passed run
 [40909212235](https://github.com/csepka/complete-axi-bus/actions/runs/40909212235).
 Original requirements and local changes reviewed; native `make ci` passed again
 (`build/resume-oct29-cont-ci.log`). No functional RTL changes.
@@ -14,12 +14,13 @@ Its own routed four-state independent test passed at seed 71 (506,450 simulated
 ns, 2,026 s host time), and the tested netlist SHA matches the final artifact.
 The provenance audit now passes with **12 independent cases**.
 
-Large KLayout DRC stopped without a complete report or recorded exit status;
-there is no remaining container. The last log was at deck line 167, around 5.7 GB.
-Do not label this an OOM without evidence. The collector now archives this legacy
-interruption as incomplete; the runner persists an in-progress record before
-launch so a future interruption cannot lose the attempted command. Native KLayout
-was present but subsequently unavailable; no native DRC result exists.
+The wrapper log stopped at deck line 167 and has no exit status, but the separate
+ORFS `6_drc.log` and valid XML confirm KLayout subsequently completed: **999 antenna
+markers**, no other reported categories, peak memory about 7.0 GiB. The first
+resume diagnosis based only on the truncated wrapper log was incomplete. Archive
+the stage log as well as XML; command-recording completeness remains false.
+The runner now persists an in-progress record before launch. Native KLayout was
+present but subsequently unavailable; no native DRC result exists.
 
 The pinned resizer defaults to 10,000 repair passes; the large trial processed
 14,791 hold endpoints in one sweep before stopping with violations. A new optional

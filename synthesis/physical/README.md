@@ -133,8 +133,10 @@ constraint boundary; they do not relax the clock, load, uncertainty or I/O delay
 The repair variant completed final extraction with **332,737 um²** standard-cell
 area, setup **+6.15926 ns**, hold **-0.0295455 ns**, **2,571 hold**, **25 capacitance**
 and **one slew** violation. Router DRC is zero. Its independent routed functional
-test passes at seed 71; timing still fails. KLayout stopped before producing a
-complete report, with no captured exit status, so large-layout DRC is incomplete.
+test passes at seed 71; timing still fails. KLayout completed with **999 antenna
+markers** and no other reported categories. The wrapper failed to record its exit
+status, but the stage log records completion and the XML is intact; both are
+archived. Command provenance is incomplete, and DRC is a measured failure.
 
 The pinned resizer defaults to 10,000 passes. Its large hold-repair log stops after
 one sweep of 14,791 endpoints. The runner now permits an explicit
