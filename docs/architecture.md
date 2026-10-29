@@ -185,3 +185,9 @@ and data, 4-bit IDs, arbitrary inputs and sampled reset. Deliberately overwritin
 the head or retiring a write at its last W beat causes reachable counterexamples.
 These checks explain why storage lifetime, ownership and ordered head issue belong
 in one module. They do not prove full-fabric routing or endpoint conformance.
+
+Physical repair controls are isolated from functional RTL: per-trial resizer pass
+budgets and routed repair rounds change implementation effort, not queue capacity,
+ownership, IDs or ordering. Both current large layouts pass independent functional
+netlist tests but fail hold/electrical timing. See the measured reference reports
+before selecting a physical configuration.

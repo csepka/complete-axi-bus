@@ -1,0 +1,9 @@
+read_slang --top axi_fabric_flat -G NM=8 -G NS=8 -G DATA_W=256 -G MAX_OUTSTANDING=4 -G TARGET_PIPELINE=1 src/axi_if.sv src/axi_channel_fifo.sv src/axi_register_slice.sv src/axi_request_queue.sv src/axi_target_arbiter.sv src/axi_interconnect.sv build/axi_fabric_flat.sv
+hierarchy -check -top axi_fabric_flat
+synth -flatten -top axi_fabric_flat -noabc
+check -assert
+scc -expect 0
+select -assert-none t:$dlatch t:$adlatch t:$_DLATCH_* p:*
+stat
+write_json /work/build/physical/8x8x256-d4-p1-repair/generic.json
+write_verilog -noattr /work/build/physical/8x8x256-d4-p1-repair/generic.v

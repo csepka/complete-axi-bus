@@ -58,6 +58,7 @@ required = {
     '8x8x256-d4-p1-verilator-generic-seed23',
     '8x8x256-d4-p1-icarus-mapped-seed23',
     '8x8x256-d4-p1-icarus-routed-seed23',
+    '8x8x256-d4-p1-icarus-routed-seed71',
 }
 observed = []
 for folder in sorted((ROOT/'verification/reports').iterdir()):

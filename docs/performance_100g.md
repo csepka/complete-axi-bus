@@ -71,4 +71,7 @@ The initial full 8x8/256 pipelined physical implementation is now archived with
 Its routed-netlist independent functional test passes, but its timing acceptance
 fails. Functional correctness and setup margin cannot compensate for failing
 hold/electrical checks. A separate repair-margin trial preserves this failed
-layout for comparison; no improved result is claimed before final extraction.
+layout for comparison. Its final hold slack is -0.0295455 ns, with 2,571 hold,
+25 capacitance and one slew violation despite setup +6.15926 ns. It uses
+332,737 um² of standard cells and passes its own routed functional test. Neither
+large layout supports a timing-closed 100-Gb/s claim.

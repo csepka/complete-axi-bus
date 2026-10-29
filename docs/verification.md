@@ -132,3 +132,8 @@ not assumed. Head/tail corruption and premature write-slot release in generated
 negative tests both yield reachable counterexamples. See
 [proof scope and reproduction](../verification/README.md#outstanding-request-queue-induction).
 This extends the existing FIFO proof; it does not prove full-fabric AXI compliance.
+
+The repair 8x8 routed variant now independently passes seed 71. All 12 completed
+independent cases pass the provenance audit. Physical runner failure tests cover
+pre-launch recording, hard interruption and refusal to overwrite changed trials;
+these host tests do not substitute for layout or protocol verification.

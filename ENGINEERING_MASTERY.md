@@ -832,3 +832,21 @@ counterexample for both within eight steps. The harness checks explicit SAT
 failure evidence and saves VCDs; a tool error is not treated as detection. This
 shows these particular assertions detect real ordering/accounting defects, while
 making no claim that every possible defect or vacuous property has been excluded.
+
+### 75. Why did increasing the hold margin not close the large layout?
+
+The first repair trial reduced hold violations from 2,660 to 2,571 but left
+negative slack. Repair margin is a target for the optimizer, not a guarantee.
+The tool also has buffer and pass budgets, and placement changes estimated wire
+delay. The pinned resizer defaults to 10,000 passes; the large log ended after one
+14,791-endpoint sweep. A larger budget and repeated routed repair are experiments
+until final extracted timing confirms their effect. Lowering uncertainty would
+change the integration contract rather than prove this design meets it.
+
+### 76. Why record physical commands before launching them?
+
+A host shutdown can kill the wrapper before it records a return code. Recording
+only after execution loses evidence that a check was attempted. The runner now
+saves a null exit code before launch, then records the actual result. A hard-kill
+test verifies the record stays incomplete; the collector cannot infer success
+from an old netlist, partial log or absent error message.

@@ -1,6 +1,41 @@
 # AXI4 project progress
 
-## Resume checkpoint (2026-10-28)
+## Resume checkpoint (2026-10-29)
+
+Same branch, HEAD `70fac90` committed and pushed. GitHub CI passed run
+[40909212235](https://github.com/csepka/complete-axi-bus/actions/runs/40909212235).
+Original requirements and local changes reviewed; native `make ci` passed again
+(`build/resume-oct29-cont-ci.log`). No functional RTL changes.
+
+The repair 8x8/256 layout completed final extraction: standard-cell area
+332,737 um², setup +6.15926 ns, hold -0.0295455 ns, 2,571 hold,
+25 capacitance and one slew violation; router DRC zero. Timing remains failed.
+Its own routed four-state independent test passed at seed 71 (506,450 simulated
+ns, 2,026 s host time), and the tested netlist SHA matches the final artifact.
+The provenance audit now passes with **12 independent cases**.
+
+Large KLayout DRC stopped without a complete report or recorded exit status;
+there is no remaining container. The last log was at deck line 167, around 5.7 GB.
+Do not label this an OOM without evidence. The collector now archives this legacy
+interruption as incomplete; the runner persists an in-progress record before
+launch so a future interruption cannot lose the attempted command. Native KLayout
+was present but subsequently unavailable; no native DRC result exists.
+
+The pinned resizer defaults to 10,000 repair passes; the large trial processed
+14,791 hold endpoints in one sweep before stopping with violations. A new optional
+pass budget and bounded post-global-route electrical/hold repair rounds are being
+validated in an isolated `2x2x64-d4-p1-closure-smoke` trial (100,000 passes, two
+rounds, 0.10 ns hold/15% cap margins, unchanged SDC). Check
+`build/physical-closure-smoke.log` and its flow log before claiming this works.
+Three host failure tests pass, including hard interruption and immutable-trial
+rejection. Never reuse a variant with changed constraints or repair controls.
+
+Next: complete the small control validation, then run the large `closure` variant
+with these controls. Run large DRC separately from physical implementation, collect
+final evidence, rerun any changed final netlist, refresh docs/audit, commit and push.
+Missing reference antenna collateral/LVS remains a hard signoff limitation.
+
+## Historical checkpoint (2026-10-28)
 
 Same branch; verified queue-proof milestone `01abc7f` is committed and pushed after
 `1af87ab`. GitHub CI passed run

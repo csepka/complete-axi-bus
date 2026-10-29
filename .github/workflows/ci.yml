@@ -37,6 +37,9 @@ jobs:
       - name: Verify queue depths, synthesized queue, and parameter matrix
         run: make extended
 
+      - name: Verify physical runner interruption and trial isolation
+        run: python3 synthesis/physical/test_flow_controls.py
+
       - name: Verify independent AXI models, queue induction and mutation checks
         run: |
           python3 -m venv build/verification-venv

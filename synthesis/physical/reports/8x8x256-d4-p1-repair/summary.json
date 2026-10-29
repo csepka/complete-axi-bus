@@ -1,0 +1,82 @@
+{
+  "configuration": {
+    "baseline": false,
+    "nm": 8,
+    "ns": 8,
+    "width": 256,
+    "depth": 4,
+    "pipeline": 1,
+    "period": 10.0,
+    "hold_margin": 0.1,
+    "cap_margin": 15.0,
+    "max_repair_passes": null,
+    "variant": "repair",
+    "resume": true,
+    "stage": "checks"
+  },
+  "image": "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+  "library": "NangateOpenCellLibrary_typical.lib",
+  "voltage_V": 1.1,
+  "temperature_C": 25,
+  "stdcell_area_um2": 332737,
+  "die_area_um2": 1000000.0,
+  "setup_worst_slack_ns": 6.15926,
+  "hold_worst_slack_ns": -0.0295455,
+  "setup_violations": 0,
+  "hold_violations": 2571,
+  "route_drc_errors": 0,
+  "max_cap_violations": 25,
+  "max_slew_violations": 1,
+  "max_fanout_violations": 0,
+  "source_sha256": {
+    "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
+    "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
+    "src/axi_register_slice.sv": "dcb12382d4c7cc3f8c26059e90a54f9f2ec4375fd068df482de5a7b33d9d911d",
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
+    "src/axi_interconnect.sv": "586f7882d65cfbd4fb4a696ad2d5e027a021fbfcb84ba8ecc905dac0a1f210b7",
+    "build/axi_fabric_flat.sv": "0c81e20e902369d97460ab4382779ebb82b15c9c758d64a22212212eae1df583"
+  },
+  "limitations": [
+    "Reference library, one typical corner; not foundry signoff",
+    "External reset recovery/removal excluded; synchronous deassertion required",
+    "Fabric macro only: no RAMs, package, pads, or endpoint implementation",
+    "Reported clock is constrained period, not independently optimized Fmax"
+  ],
+  "command_failures": [],
+  "command_recording_complete": false,
+  "klayout_drc": {
+    "status": "fail",
+    "marker_count": 999,
+    "categories": {
+      "METAL3_ANTENNA": 9,
+      "METAL4_ANTENNA": 133,
+      "METAL5_ANTENNA": 387,
+      "METAL6_ANTENNA": 235,
+      "METAL7_ANTENNA": 132,
+      "METAL8_ANTENNA": 82,
+      "METAL9_ANTENNA": 17,
+      "METAL10_ANTENNA": 4
+    },
+    "note": "Count XML items, not value elements; each antenna marker has multiple values."
+  },
+  "lvs": {
+    "status": "unavailable",
+    "reason": "Pinned Nangate45 platform names but does not supply FreePDK45.lylvs"
+  },
+  "physical_acceptance": false,
+  "artifact_sha256": {
+    "6_final.v": "133377fb3f77c567206f80da9714c434106c3a6a5af0373d51b4e9a8ba368d44",
+    "6_final.sdc": "f6b85065fe7b234b544fcf4785db0e9fa8eb69a24fbb99714bebad1ba7056dfe",
+    "6_final.gds": "97938417368c4e7d989a37ed3d069febf9660465a5a1a186fffddae68e0dd2b7",
+    "6_final.def": "5677aef51b9d7419d4cdcb89bd23ee352f12d5ca600e2d016644785bccdf488b",
+    "6_final.spef": "3315ffbcb9fe10185e203666020a145ced2556f7d7c0108d1cb113c8b12dde0c"
+  },
+  "flow_inputs_sha256": {
+    "generic.ys": "bf6c90541483000562bd8dd72fa05f2e25f909f5fd1b29630a2146ca286f8d21",
+    "constraints.sdc": "e199bfe30430132f5aa495225605329d04babb2e50483b7f2a5a5d9588d76b2f",
+    "config.mk": "14081ce2e81ec03df32e9ca44765292f1e78ee57bcfcbe59d270c378988f8c7a",
+    "repair_budget.tcl": "feed7602b154482455e87bd91b98c50c1d84cc27f8023c17865e7e07454364bb"
+  },
+  "timing_and_router_clean": false
+}

@@ -30,7 +30,9 @@ CI by ignoring exit codes. `--stage finish` runs through GDS/extraction/STA with
 claiming DRC/LVS acceptance. `--stage generic` and `--stage synth` stop earlier.
 `--resume` reuses generic synthesis only after checking RTL hashes and parameters;
 ORFS make dependencies determine later-stage reuse. A changed clock or physical
-configuration requires regeneration of affected stages.
+configuration requires a new `--variant`; the runner rejects changes before
+touching an existing trial. It records each command before launch; a missing exit
+status is incomplete evidence, never a successful check.
 
 Outputs, netlists, GDS, DEF and SPEF are under `build/physical/<label>/`. Compact
 reports, source/artifact hashes, constraints, tool commands, detailed paths and
@@ -128,8 +130,24 @@ python3 synthesis/physical/run_reference.py --nm 8 --ns 8 --width 256 \
 The variant has its own output directory and fresh synthesis; the initial layout
 is retained. Margin controls ask the implementation tools to repair beyond the
 constraint boundary; they do not relax the clock, load, uncertainty or I/O delays.
-Until its final extracted report and checks are complete, this is an experiment,
-not evidence of achieved bandwidth.
+The repair variant completed final extraction with **332,737 um²** standard-cell
+area, setup **+6.15926 ns**, hold **-0.0295455 ns**, **2,571 hold**, **25 capacitance**
+and **one slew** violation. Router DRC is zero. Its independent routed functional
+test passes at seed 71; timing still fails. KLayout stopped before producing a
+complete report, with no captured exit status, so large-layout DRC is incomplete.
+
+The pinned resizer defaults to 10,000 passes. Its large hold-repair log stops after
+one sweep of 14,791 endpoints. The runner now permits an explicit
+`--max-repair-passes 100000` and `--closure-rounds 2` for a new variant. Extra rounds
+alternate electrical and hold repair with legalization, incremental routing and
+parasitic re-estimation; final guides/metrics are refreshed. A small isolated
+trial validates tool compatibility before the large experiment. These controls
+are not evidence of timing closure until extracted results pass.
+
+Host-side failure handling can be checked without Docker:
+`python3 synthesis/physical/test_flow_controls.py`. The tests deliberately fail or
+kill a fake tool runner and verify that incomplete work cannot retain success;
+they also check that changed parameters cannot overwrite an existing trial.
 
 ## Functional cell-model correction
 

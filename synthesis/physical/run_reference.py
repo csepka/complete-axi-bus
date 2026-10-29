@@ -27,6 +27,8 @@ p.add_argument('--pipeline', type=int, choices=[0, 1], default=1)
 p.add_argument('--period', type=float, default=10.0)
 p.add_argument('--hold-margin', type=float, default=0.03, help='positive hold repair margin in ns')
 p.add_argument('--cap-margin', type=float, default=0.0, help='capacitance repair margin in percent')
+p.add_argument('--max-repair-passes', type=int, help='explicit resizer pass budget; requires a distinct --variant')
+p.add_argument('--closure-rounds', type=int, default=0, help='extra electrical/hold repair rounds after global routing; requires a distinct --variant')
 p.add_argument('--variant', default='', help='separate physical trial label; lowercase letters, digits, hyphens')
 p.add_argument('--resume', action='store_true', help='reuse generic synthesis only if source hashes/configuration match')
 p.add_argument('--stage', choices=['generic', 'synth', 'finish', 'checks'], default='finish')
@@ -35,6 +37,10 @@ if min(a.nm, a.ns, a.depth) < 1 or a.width < 32 or a.width & (a.width-1) or a.pe
     p.error('positive counts/period and power-of-two data width >=32 required')
 if a.hold_margin<0 or not 0<=a.cap_margin<100 or (a.variant and not re.fullmatch('[a-z0-9-]+',a.variant)):
     p.error('nonnegative hold margin, cap margin in [0,100), and safe variant required')
+if a.max_repair_passes is not None and (a.max_repair_passes<1 or not a.variant):
+    p.error('--max-repair-passes requires a positive count and a distinct --variant')
+if a.closure_rounds<0 or (a.closure_rounds and not a.variant):
+    p.error('--closure-rounds requires a nonnegative count and a distinct --variant')
 if a.baseline and (a.depth!=1 or a.pipeline!=0):p.error('baseline requires --depth 1 --pipeline 0')
 label = ('baseline-' if a.baseline else '')+f'{a.nm}x{a.ns}x{a.width}-d{a.depth}-p{a.pipeline}'
 if a.variant:label+='-'+a.variant
@@ -42,6 +48,13 @@ out = ROOT/'build/physical'/label
 out.mkdir(parents=True, exist_ok=True)
 inside = '/work/'+str(out.relative_to(ROOT))
 previous = json.loads((out/'manifest.json').read_text()) if (out/'manifest.json').exists() else None
+# Reject a different experiment before touching its constraints or checkpoints.
+# Older manifests predate these optional controls; preserve their actual defaults.
+if previous:
+    defaults={'hold_margin':0.03,'cap_margin':0.0,'max_repair_passes':None,'closure_rounds':0}
+    for key in ['nm','ns','width','depth','pipeline','baseline','period',*defaults]:
+        if previous['configuration'].get(key,defaults.get(key)) != getattr(a,key):
+            p.error(f'{label}: {key} differs from saved trial; choose a new --variant')
 def put(path, text):
     if not path.exists() or path.read_text()!=text:path.write_text(text)
 subprocess.run(['python3', 'synthesis/scripts/make_flat_top.py'], cwd=ROOT, check=True)
@@ -85,7 +98,7 @@ set_load 5.0 [all_outputs]
 set_false_path -from [get_ports ARESETn]
 '''
 put(out/'constraints.sdc', sdc)
-put(out/'repair_budget.tcl', '''# Preserve timing constraints; permit hold buffering beyond ORFS's default cap.
+repair_budget = '''# Preserve timing constraints; permit hold buffering beyond ORFS's default cap.
 rename repair_timing_helper repair_timing_helper_original
 proc repair_timing_helper { args } {
     # A cap exception leaves the inserted buffers in the design. A second
@@ -96,7 +109,11 @@ proc repair_timing_helper { args } {
         puts "Retry hold repair after buffer cap; constraints unchanged"
     }
 }
-''')
+'''
+if a.max_repair_passes is not None:
+    repair_budget=repair_budget.replace('-max_buffer_percent 100 {*}$args',
+        f'-max_buffer_percent 100 -max_passes {a.max_repair_passes} {{*}}$args')
+put(out/'repair_budget.tcl', repair_budget)
 # Explicit die size accommodates wide parallel external buses; cell area is
 # reported separately and must not be confused with the deliberately roomy die.
 die = max(250, 125*max(a.nm, a.ns))
@@ -116,6 +133,31 @@ export NUM_CORES = 4
 export SYNTH_REPEATABLE_BUILD = 1
 export PRE_CTS_TCL = {inside}/repair_budget.tcl
 export PRE_GLOBAL_ROUTE_TCL = {inside}/repair_budget.tcl
+''' + (f'export POST_GLOBAL_ROUTE_TCL = {inside}/closure.tcl\n' if a.closure_rounds else ''))
+if a.closure_rounds:
+    put(out/'closure.tcl', f'set closure_rounds {a.closure_rounds}\n'+'''# Re-estimate routed parasitics after legalization before the next repair.
+# No clock, load, uncertainty, DRC or endpoint constraint is relaxed.
+for {set round 1} {$round <= $closure_rounds} {incr round} {
+    foreach kind {electrical hold} {
+        puts "Closure round $round: $kind"
+        log_cmd global_route -start_incremental
+        if {$kind eq "electrical"} {
+            repair_design_helper
+        } else {
+            repair_timing_helper -hold
+        }
+        detailed_placement_helper -quiet
+        log_cmd check_placement -verbose
+        log_cmd global_route -end_incremental -congestion_report_file $::env(REPORTS_DIR)/closure_${round}_${kind}.rpt
+        log_cmd estimate_parasitics -global_routing
+    }
+    report_metrics 5 "global route closure round $round"
+}
+# POST_GLOBAL_ROUTE runs after the stock metrics and guide output. Refresh both
+# so reports/guides describe the actual saved checkpoint, not the pre-hook state.
+report_metrics 5 "global route after closure"
+write_guides $::env(RESULTS_DIR)/route.guide
+source [file join $::env(SCRIPTS_DIR) "write_ref_sdc.tcl"]
 ''')
 meta = dict(image=IMAGE, configuration=vars(a), source_sha256={f:hashlib.sha256((ROOT/f).read_bytes()).hexdigest() for f in rtl}, commands=[])
 def run(command, logfile):
@@ -123,9 +165,19 @@ def run(command, logfile):
               '-v', f'{ROOT}:/work', '-w', '/work', IMAGE, 'bash', '-lc',
               'set -e; source /OpenROAD-flow-scripts/env.sh; cd /work; '+command]
     print('Running '+logfile, flush=True)
-    with (out/logfile).open('w') as log:
-        result = subprocess.run(docker, stdout=log, stderr=subprocess.STDOUT)
-    meta['commands'].append(dict(command=docker, exit_code=result.returncode, log=logfile))
+    # Persist before launching: an interrupted host/container must not erase the
+    # fact that a check was attempted or leave a previous successful exit code.
+    record = dict(command=docker, exit_code=None, status='running', log=logfile)
+    meta['commands'].append(record)
+    (out/'manifest.json').write_text(json.dumps(meta, indent=2)+'\n')
+    try:
+        with (out/logfile).open('w') as log:
+            result = subprocess.run(docker, stdout=log, stderr=subprocess.STDOUT)
+    except BaseException as error:
+        record.update(status='interrupted', error=type(error).__name__)
+        (out/'manifest.json').write_text(json.dumps(meta, indent=2)+'\n')
+        raise
+    record.update(exit_code=result.returncode, status='completed')
     (out/'manifest.json').write_text(json.dumps(meta, indent=2)+'\n')
     if result.returncode:
         print((out/logfile).read_text()[-6000:])

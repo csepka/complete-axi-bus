@@ -1,0 +1,16 @@
+export DESIGN_NAME = axi_fabric_flat
+export DESIGN_NICKNAME = 8x8x256-d4-p1-repair
+export PLATFORM = nangate45
+export VERILOG_FILES = /work/build/physical/8x8x256-d4-p1-repair/generic.v
+export SDC_FILE = /work/build/physical/8x8x256-d4-p1-repair/constraints.sdc
+export DIE_AREA = 0 0 1000 1000
+export CORE_AREA = 10 10 990 990
+export PLACE_DENSITY = 0.30
+export TNS_END_PERCENT = 100
+export HOLD_SLACK_MARGIN = 0.1
+export CAP_MARGIN = 15.0
+export PLACE_PINS_ARGS = -min_distance 1 -min_distance_in_tracks
+export NUM_CORES = 4
+export SYNTH_REPEATABLE_BUILD = 1
+export PRE_CTS_TCL = /work/build/physical/8x8x256-d4-p1-repair/repair_budget.tcl
+export PRE_GLOBAL_ROUTE_TCL = /work/build/physical/8x8x256-d4-p1-repair/repair_budget.tcl

@@ -14,7 +14,6 @@ a=p.parse_args()
 if not a.label.replace('-','').isalnum():p.error('invalid label')
 work=ROOT/'build/physical'/a.label
 manifest=json.loads((work/'manifest.json').read_text())
-assert manifest['commands'], 'No flow commands recorded'
 logs=work/'orfs/logs/nangate45'/a.label/'base'
 rpts=work/'orfs/reports/nangate45'/a.label/'base'
 results=work/'orfs/results/nangate45'/a.label/'base'
@@ -40,9 +39,12 @@ summary={'configuration':manifest['configuration'],'image':manifest['image'],
                         'Fabric macro only: no RAMs, package, pads, or endpoint implementation',
                         'Reported clock is constrained period, not independently optimized Fmax']}
 summary['command_failures']=[c for c in manifest['commands'] if c['exit_code']!=0]
+summary['command_recording_complete']=bool(manifest['commands']) and all(
+    c.get('exit_code') is not None for c in manifest['commands'])
 drc=rpts/'6_drc.lyrdb'
 summary['klayout_drc']={'status':'not_run'}
-if not drc.exists() and any(' drc' in ' '.join(c['command']) for c in summary['command_failures']):
+if not drc.exists() and (any(' drc' in ' '.join(c['command']) for c in summary['command_failures']) or
+        (manifest['configuration']['stage']=='checks' and not summary['command_recording_complete'])):
     summary['klayout_drc']={'status':'incomplete','reason':'DRC command failed before producing a complete report'}
 if drc.exists():
     try:
@@ -54,13 +56,15 @@ if drc.exists():
         summary['klayout_drc']={'status':'incomplete','reason':str(error)}
 # Do not infer LVS success from routing, netlist simulation or GDS generation.
 summary['lvs']={'status':'unavailable','reason':'Pinned Nangate45 platform names but does not supply FreePDK45.lylvs'}
-summary['physical_acceptance']=(not summary['command_failures'] and summary['klayout_drc']['status']=='pass' and summary['lvs']['status']=='pass')
+summary['physical_acceptance']=(summary['command_recording_complete'] and not summary['command_failures'] and summary['klayout_drc']['status']=='pass' and summary['lvs']['status']=='pass')
 summary['artifact_sha256']={}
 for name in ['6_final.v','6_final.sdc','6_final.gds','6_final.def','6_final.spef']:
     path=results/name
     assert path.exists() and path.stat().st_size>0, f'Missing {name}'
     summary['artifact_sha256'][name]=hashlib.sha256(path.read_bytes()).hexdigest()
 summary['flow_inputs_sha256']={name:hashlib.sha256((work/name).read_bytes()).hexdigest() for name in ['generic.ys','constraints.sdc','config.mk','repair_budget.tcl']}
+if (work/'closure.tcl').exists():
+    summary['flow_inputs_sha256']['closure.tcl']=hashlib.sha256((work/'closure.tcl').read_bytes()).hexdigest()
 summary['timing_and_router_clean']=(summary['setup_worst_slack_ns']>=0 and summary['hold_worst_slack_ns']>=0 and summary['setup_violations']==0 and summary['hold_violations']==0 and summary['route_drc_errors']==0 and all(summary[key]==0 for key in ['max_cap_violations','max_slew_violations','max_fanout_violations']))
 archive=ROOT/'synthesis/physical/reports'/a.label
 archive.mkdir(parents=True,exist_ok=True)
@@ -68,6 +72,7 @@ for name in ['manifest.json','generic.ys','constraints.sdc','config.mk','repair_
     shutil.copy2(work/name,archive/name)
 for name in ['flow.log','lvs.log']:
     if (work/name).exists():shutil.copy2(work/name,archive/name)
+if (work/'closure.tcl').exists():shutil.copy2(work/'closure.tcl',archive/'closure.tcl')
 for name in ['1_2_yosys.log','6_report.json','6_report.log','5_2_route.json','6_final_lec.log']:
     if (logs/name).exists():shutil.copy2(logs/name,archive/name)
 for name in ['synth_stat.txt','synth_check.txt','6_finish.rpt','5_route_drc.rpt','drt_antennas.log','final_all.webp','final_worst_path.webp','6_drc.lyrdb','6_drc_count.rpt']:

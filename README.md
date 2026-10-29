@@ -11,7 +11,7 @@ At 8x8/256 bits, the measured 16-beat independent-target workload falls from **4
 to 577 cycles (7.99x)**. At an **assumed 100 MHz**, that is **45.432 GB/s aggregate
 (363.458 Gb/s)** across reads and writes. These are simulated cycle results;
 reference technology mapping and extracted timing are reported separately below.
-The initial 8x8 physical run fails hold/capacitance checks, so these rates remain
+Both initial and repair 8x8 physical runs fail hold/electrical checks, so these rates remain
 simulation results at an assumed clock.
 
 ## Architecture and bounded policy

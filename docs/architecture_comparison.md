@@ -124,3 +124,8 @@ physical timing result. The same layout passes the complete independent four-sta
 routed-netlist functional test, illustrating why simulation and physical timing
 acceptance must remain distinct. The separate margin-repair trial is documented
 in the reference-flow reports; its results must not be inferred from this row.
+
+The margin-repair 8x8 variant uses 332,737 um², with +6.15926 ns setup and
+-0.0295455 ns hold slack. Its 2,571 hold, 25 capacitance and one slew violations
+remain failures. Increasing repair margin alone did not close timing; no change
+to the verified architecture is justified by positive setup slack alone.
