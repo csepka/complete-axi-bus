@@ -75,3 +75,29 @@ layout for comparison. Its final hold slack is -0.0295455 ns, with 2,571 hold,
 25 capacitance and one slew violation despite setup +6.15926 ns. It uses
 332,737 um² of standard cells and passes its own routed functional test. Neither
 large layout supports a timing-closed 100-Gb/s claim.
+
+## Four-target wide-bus candidate
+
+The independently verified 4x4/256-bit, depth-4, pipelined configuration was
+benchmarked with the same 100-MHz assumption, seed 7, 32 requests per manager
+per direction, full strobes and finite-run startup/drain accounting.
+
+| Workload | Cycles | Aggregate Gb/s | Gb/s per direction |
+|---|---:|---:|---:|
+| Independent targets, 16 beats | 641 | 163.584 | 81.792 |
+| One hotspot, 16 beats | 2,561 | 40.944 | 20.472 |
+| Independent, 45% response-ready probability | 1,226 | 85.528 | 42.764 |
+| Independent, 128 beats (maximum at 256 bits within one page) | 4,225 | 198.547 | 99.273 |
+
+This is a candidate for **aggregate** 100-Gb/s operation under independent traffic,
+not evidence of 100 Gb/s in each direction or under arbitrary stalls. A separate
+reference physical run is in progress; no physical timing result is available yet.
+The original eight-target comparison remains preserved. Raw counts, latency,
+occupancy, per-port utilization and unfavorable cases are in
+[the measured report](../benchmarks/results/pipelined-4x4x256/summary.md).
+
+Reproduce with:
+
+```sh
+python3 benchmarks/benchmark_runner.py --label pipelined-4x4x256 --config 4x4x256 --pipeline 1 --depth 4
+```

@@ -16,8 +16,10 @@
     "2x2x64-d4-p1-icarus-generic-seed23",
     "2x2x64-d4-p1-icarus-mapped-seed23",
     "2x2x64-d4-p1-icarus-routed-seed23",
+    "2x2x64-d4-p1-icarus-routed-seed71",
     "2x2x64-d4-p1-verilator-rtl-seed23",
     "3x2x128-d3-p1-verilator-rtl-seed71",
+    "4x4x256-d4-p1-verilator-rtl-seed71",
     "8x8x256-d4-p1-icarus-mapped-seed23",
     "8x8x256-d4-p1-icarus-routed-seed23",
     "8x8x256-d4-p1-icarus-routed-seed71",
@@ -34,6 +36,24 @@
           "METAL4_ANTENNA": 1,
           "METAL5_ANTENNA": 1,
           "METAL8_ANTENNA": 2
+        },
+        "note": "Count XML items, not value elements; each antenna marker has multiple values."
+      },
+      "lvs": {
+        "status": "unavailable",
+        "reason": "Pinned Nangate45 platform names but does not supply FreePDK45.lylvs"
+      },
+      "physical_acceptance": false
+    },
+    "2x2x64-d4-p1-closure-smoke": {
+      "timing_and_router_clean": true,
+      "klayout_drc": {
+        "status": "fail",
+        "marker_count": 3,
+        "categories": {
+          "METAL4_ANTENNA": 1,
+          "METAL5_ANTENNA": 1,
+          "METAL7_ANTENNA": 1
         },
         "note": "Count XML items, not value elements; each antenna marker has multiple values."
       },
@@ -99,7 +119,7 @@
   },
   "physical_acceptance_complete": false,
   "source_sha256": {
-    "verification/audit_evidence.py": "cee7448ff92bd30d51a9b2a47e341468a6099c70dbb8ef280ae9ca3e4d2bbd09",
+    "verification/audit_evidence.py": "c13f2889bad9b335f8c20bd8c60461cd220e7f26897ebb7a55218ec983089894",
     "verification/check_cell_models.py": "36f814dcef120428dd9f7532794b4f9b66c8a9ad5c7f009b52a65718dc671e2d",
     "verification/check_queue_mutations.py": "35005f747d3c820971b295027625b7fc65be375f380c1cf49d5b2d531f84dfba",
     "verification/formal_fifo.sv": "e708965216bd449002a4c96829397c9723d0179aa8cede1bda3985ef83e8eec6",
@@ -115,7 +135,7 @@
     "synthesis/physical/prepare_models.py": "e160299cb07df7b93d94e13889c591a773f3f1bfa5ff946ae6314f28e5730830",
     "synthesis/physical/refine_mux_models.py": "3812fe88dc4c2d4e9555a52545097cd32c616b54831fa67af8af7773b2bb1fe7",
     "synthesis/physical/run_reference.py": "4f4d785d446d69fbd133d320be5bc3f53211a077cff436a169cbc15c4808bd55",
-    "synthesis/physical/test_flow_controls.py": "0924ec053639804c8806a52ebc86baeb1a65f24f2bd6fb71cf3d93c558ce237e",
+    "synthesis/physical/test_flow_controls.py": "cad333ad9c913b296f96caa447e44d7d2ac76d07adf7ea3d9c4627547b0e9004",
     "synthesis/physical/toolchain.json": "9700f1ef43853012a8d30d4a9187f5828b8d7929e6715d33f1178a32a7e2232d"
   }
 }

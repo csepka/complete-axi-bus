@@ -17,6 +17,7 @@ class FlowControls(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         for name in ['synthesis/physical/run_reference.py',
+                     'synthesis/physical/collect_reference.py',
                      'synthesis/physical/toolchain.json',
                      'synthesis/scripts/make_flat_top.py',
                      'synthesis/scripts/axi_ports.py']:
@@ -77,6 +78,37 @@ raise SystemExit(42)
             self.assertFalse((self.root/'invoked').exists())
             self.assertEqual(before, {p.name: p.read_bytes() for p in folder.iterdir()
                                       if p.is_file()})
+
+    def test_legacy_interrupted_check_archives_incomplete_evidence(self):
+        self.assertEqual(self.run_flow('--stage', 'generic').returncode, 42)
+        work = self.manifest().parent
+        manifest = json.loads(self.manifest().read_text())
+        # Reproduce the old wrapper's lost completion record, not a fake pass.
+        manifest['commands'] = []
+        manifest['configuration']['stage'] = 'checks'
+        self.manifest().write_text(json.dumps(manifest))
+        label = work.name
+        logs = work/'orfs/logs/nangate45'/label/'base'
+        logs.mkdir(parents=True)
+        for name in ['6_report.json', '5_2_route.json']:
+            shutil.copy2(ROOT/'synthesis/physical/reports/2x2x64-d4-p1'/name,
+                         logs/name)
+        results = work/'orfs/results/nangate45'/label/'base'
+        results.mkdir(parents=True)
+        # These are deliberately dummy test artifacts, only used to exercise
+        # rejection/archival. No simulation or physical success is claimed.
+        for name in ['6_final.v', '6_final.sdc', '6_final.gds',
+                     '6_final.def', '6_final.spef']:
+            (results/name).write_text('test fixture, not a physical result\n')
+        result = subprocess.run(['python3', 'synthesis/physical/collect_reference.py',
+                                 label], cwd=self.root, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 1, result.stderr)
+        archive = self.root/'synthesis/physical/reports'/label
+        summary = json.loads((archive/'summary.json').read_text())
+        self.assertFalse(summary['command_recording_complete'])
+        self.assertFalse(summary['physical_acceptance'])
+        self.assertEqual(summary['klayout_drc']['status'], 'incomplete')
+        self.assertTrue((archive/'6_report.json').exists())
 
 
 if __name__ == '__main__':

@@ -1,0 +1,102 @@
+{
+  "configuration": {
+    "baseline": false,
+    "nm": 2,
+    "ns": 2,
+    "width": 64,
+    "depth": 4,
+    "pipeline": 1,
+    "period": 10.0,
+    "hold_margin": 0.1,
+    "cap_margin": 15.0,
+    "max_repair_passes": 100000,
+    "closure_rounds": 2,
+    "variant": "closure-smoke",
+    "resume": true,
+    "stage": "checks"
+  },
+  "image": "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+  "library": "NangateOpenCellLibrary_typical.lib",
+  "voltage_V": 1.1,
+  "temperature_C": 25,
+  "stdcell_area_um2": 36983.3,
+  "die_area_um2": 62500,
+  "setup_worst_slack_ns": 7.35791,
+  "hold_worst_slack_ns": 0.0943568,
+  "setup_violations": 0,
+  "hold_violations": 0,
+  "route_drc_errors": 0,
+  "max_cap_violations": 0,
+  "max_slew_violations": 0,
+  "max_fanout_violations": 0,
+  "source_sha256": {
+    "src/axi_if.sv": "416f342eebb63ff5ffefdc8c20cfae3e5deb2d90da72b23d0e3d71d3b627d5a8",
+    "src/axi_channel_fifo.sv": "70fcf4a4fd90b5527f3f1edc9e8a64ac4c652dd0821b662ecfb5184f375b58b6",
+    "src/axi_register_slice.sv": "dcb12382d4c7cc3f8c26059e90a54f9f2ec4375fd068df482de5a7b33d9d911d",
+    "src/axi_request_queue.sv": "2befde5f432ef7c976cfa0ccc3e01ec34b5831515f795bb207ea6f0a9a4dd871",
+    "src/axi_target_arbiter.sv": "4f78f9e6edadbdb240520abb1a8cd22ac3105175ae69597364030c7cfe7ab19b",
+    "src/axi_interconnect.sv": "586f7882d65cfbd4fb4a696ad2d5e027a021fbfcb84ba8ecc905dac0a1f210b7",
+    "build/axi_fabric_flat.sv": "0c81e20e902369d97460ab4382779ebb82b15c9c758d64a22212212eae1df583"
+  },
+  "limitations": [
+    "Reference library, one typical corner; not foundry signoff",
+    "External reset recovery/removal excluded; synchronous deassertion required",
+    "Fabric macro only: no RAMs, package, pads, or endpoint implementation",
+    "Reported clock is constrained period, not independently optimized Fmax"
+  ],
+  "command_failures": [
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "-v",
+        "/Users/christophersepka/Desktop/AXI_proj/complete-axi-bus:/work",
+        "-w",
+        "/work",
+        "openroad/orfs@sha256:aa878fd872d8b5981f7f0b7a6964c982d06e85a430277c8e3e5fae5338544282",
+        "bash",
+        "-lc",
+        "set -e; source /OpenROAD-flow-scripts/env.sh; cd /work; test -f /OpenROAD-flow-scripts/flow/platforms/nangate45/lvs/FreePDK45.lylvs || { echo \"LVS unavailable: pinned platform has no FreePDK45.lylvs\"; exit 2; }; make -C /OpenROAD-flow-scripts/flow DESIGN_CONFIG=/work/build/physical/2x2x64-d4-p1-closure-smoke/config.mk WORK_HOME=/work/build/physical/2x2x64-d4-p1-closure-smoke/orfs lvs"
+      ],
+      "exit_code": 2,
+      "status": "completed",
+      "log": "lvs.log"
+    }
+  ],
+  "command_recording_complete": true,
+  "klayout_drc": {
+    "status": "fail",
+    "marker_count": 3,
+    "categories": {
+      "METAL4_ANTENNA": 1,
+      "METAL5_ANTENNA": 1,
+      "METAL7_ANTENNA": 1
+    },
+    "note": "Count XML items, not value elements; each antenna marker has multiple values."
+  },
+  "lvs": {
+    "status": "unavailable",
+    "reason": "Pinned Nangate45 platform names but does not supply FreePDK45.lylvs"
+  },
+  "physical_acceptance": false,
+  "artifact_sha256": {
+    "6_final.v": "8176cbba8aed4fa8f30730c124f1bf1607e4dc4a7e42d459a54b5e4c57fc98b6",
+    "6_final.sdc": "3b01a1e6b2b0a840b69178e0ac3f9250581f06d424a96798e62a77916a2b3580",
+    "6_final.gds": "7413a9b2c92adb0b591d2f543ff563df548b7cec81f3a54852fc33cfa06a8cd6",
+    "6_final.def": "7ee5d16a88f4c184cdeb7bda04c4489c6b826316914e95b0dc544483d92c55a8",
+    "6_final.spef": "7981be4c9a2b40031753bcbdb1df8b14743f450c06684d92c652e8e111f9d403"
+  },
+  "flow_inputs_sha256": {
+    "generic.ys": "6b8be683d45e7c13e71dfd6c4d07074b684e22273428031676143a8c2426f9f5",
+    "constraints.sdc": "e199bfe30430132f5aa495225605329d04babb2e50483b7f2a5a5d9588d76b2f",
+    "config.mk": "c76766dff668e2eeb7079e1f7dbac9080e60e639e88b9c7751fda29db8f45c85",
+    "repair_budget.tcl": "237d36735d0a990c1507aec485ed829dd3174e1a7bdfc210339565387f6db483",
+    "closure.tcl": "c7c15a6d314487ac9fdcbcf4603d3d8fd24d69f73602fd7363795921cf324dc0"
+  },
+  "timing_and_router_clean": true
+}

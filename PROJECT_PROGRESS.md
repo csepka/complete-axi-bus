@@ -2,8 +2,10 @@
 
 ## Resume checkpoint (2026-10-29)
 
-Same branch; checkpoint `b22ed99` committed locally after pushed `70fac90`. GitHub CI passed run
+Same branch; checkpoints `b22ed99` and `048e35b` committed and pushed after `70fac90`. GitHub CI passed run
 [40909212235](https://github.com/csepka/complete-axi-bus/actions/runs/40909212235).
+CI for `048e35b` also passed run
+[40953917166](https://github.com/csepka/complete-axi-bus/actions/runs/40953917166).
 Original requirements and local changes reviewed; native `make ci` passed again
 (`build/resume-oct29-cont-ci.log`). No functional RTL changes.
 
@@ -26,13 +28,25 @@ The pinned resizer defaults to 10,000 repair passes; the large trial processed
 14,791 hold endpoints in one sweep before stopping with violations. A new optional
 pass budget and bounded post-global-route electrical/hold repair rounds are being
 validated in an isolated `2x2x64-d4-p1-closure-smoke` trial (100,000 passes, two
-rounds, 0.10 ns hold/15% cap margins, unchanged SDC). Check
-`build/physical-closure-smoke.log` and its flow log before claiming this works.
-Three host failure tests pass, including hard interruption and immutable-trial
+rounds, 0.10 ns hold/15% cap margins, unchanged SDC). Both hook rounds executed,
+final extraction passed setup/hold/electrical checks: area 36,983.3 um²,
+setup +7.35791 ns, hold +0.0943568 ns, all violation counts zero and router DRC zero.
+Its routed BFM test passed seed 71 (73,650 simulated ns). The unchanged DRC
+deck completed with three antenna markers (metal4/5/7), no other categories.
+LVS remains unavailable. Complete command records and failing physical status
+are archived; the final netlist hash still matches its passing test. This validates the flow controls,
+not the large design. The 8x8 `closure` variant is now running with the same
+controls in `build/physical-large-closure.log`; no large result is claimed.
+The 4x4/256 pipelined candidate passed its ten-scenario benchmark and independent
+RTL seed 71. At assumed 100 MHz, 16-beat independent traffic measures 163.584 Gb/s
+aggregate (81.792 each direction), hotspot 40.944 aggregate, backpressure 85.528.
+Its separate physical trial is running in `build/physical-4x4x256-closure.log`.
+There is no physical result for this candidate yet. The audit now requires 14 cases.
+
+Four host failure tests pass, including hard interruption and immutable-trial
 rejection. Never reuse a variant with changed constraints or repair controls.
 
-Next: complete the small control validation, then run the large `closure` variant
-with these controls. Run large DRC separately from physical implementation, collect
+Next: inspect the running 8x8 and 4x4 `closure` variants after final extraction. Run large DRC separately from physical implementation, collect
 final evidence, rerun any changed final netlist, refresh docs/audit, commit and push.
 Missing reference antenna collateral/LVS remains a hard signoff limitation.
 

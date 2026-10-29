@@ -142,9 +142,13 @@ The pinned resizer defaults to 10,000 passes. Its large hold-repair log stops af
 one sweep of 14,791 endpoints. The runner now permits an explicit
 `--max-repair-passes 100000` and `--closure-rounds 2` for a new variant. Extra rounds
 alternate electrical and hold repair with legalization, incremental routing and
-parasitic re-estimation; final guides/metrics are refreshed. A small isolated
-trial validates tool compatibility before the large experiment. These controls
-are not evidence of timing closure until extracted results pass.
+parasitic re-estimation; final guides/metrics are refreshed. The isolated
+2x2/64 `closure-smoke` trial executed both rounds and passed extracted timing:
+setup +7.35791 ns, hold +0.0943568 ns, zero electrical violations and router DRC,
+36,983.3 um² standard-cell area. This combines changed margins, budget and extra
+rounds; it does not isolate their individual area or timing effects. Its independent routed test passes. KLayout reports three antenna markers
+(metal4/5/7), and LVS is unavailable, so physical acceptance remains incomplete. The corresponding large `closure` trial is running;
+the small result does not establish large-design closure.
 
 Host-side failure handling can be checked without Docker:
 `python3 synthesis/physical/test_flow_controls.py`. The tests deliberately fail or
