@@ -161,13 +161,13 @@ counterexample hashes.
 
 ## Executed full-fabric matrix
 
-The current evidence audit requires these **14 passing independent runs**:
+The current evidence audit requires these **15 passing independent runs**:
 
 | Representation | Configurations | Simulator |
 |---|---|---|
 | RTL | 1x1/32 d1 bypass; 2x2/64 d4 bypass and pipeline; 3x2/128 d3 pipeline; 4x4/256 d4 pipeline | Verilator |
 | Generic full fabric | 2x2/64 d4 pipeline; 8x8/256 d4 pipeline | Icarus (2x2), Verilator (8x8) |
-| Mapped standard cells | 2x2/64 and 8x8/256 d4 pipeline | Icarus |
+| Mapped standard cells | 2x2/64, 4x4/256 and 8x8/256 d4 pipeline | Icarus |
 | Routed standard cells | 2x2/64 original/closure and initial/repair 8x8/256 d4 pipeline | Icarus |
 | Original baseline routed | 2x2/64 d1 bypass, explicit global-capacity policy | Icarus |
 
@@ -186,3 +186,7 @@ The small closure trial also passes routed seed 71 (73,650 simulated ns), and
 the 4x4/256 pipelined RTL candidate passes independent seed 71. The audit now
 requires all 14 cases, so removing either new result is detected as missing
 evidence. Their physical checks are reported separately.
+
+The 4x4/256 mapped four-state test passes seed 71 (158,170 simulated ns);
+its RTL and mapped evidence are separate from the pending final routed test.
+The audit now requires 15 completed independent cases.

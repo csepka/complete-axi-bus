@@ -19,6 +19,7 @@
     "2x2x64-d4-p1-icarus-routed-seed71",
     "2x2x64-d4-p1-verilator-rtl-seed23",
     "3x2x128-d3-p1-verilator-rtl-seed71",
+    "4x4x256-d4-p1-icarus-mapped-seed71",
     "4x4x256-d4-p1-verilator-rtl-seed71",
     "8x8x256-d4-p1-icarus-mapped-seed23",
     "8x8x256-d4-p1-icarus-routed-seed23",
@@ -119,7 +120,7 @@
   },
   "physical_acceptance_complete": false,
   "source_sha256": {
-    "verification/audit_evidence.py": "c13f2889bad9b335f8c20bd8c60461cd220e7f26897ebb7a55218ec983089894",
+    "verification/audit_evidence.py": "d6c1e8fba73ef1b2a6aa2ae44286c0b19f524f9bebfb6d59956a8ebb38a4d927",
     "verification/check_cell_models.py": "36f814dcef120428dd9f7532794b4f9b66c8a9ad5c7f009b52a65718dc671e2d",
     "verification/check_queue_mutations.py": "35005f747d3c820971b295027625b7fc65be375f380c1cf49d5b2d531f84dfba",
     "verification/formal_fifo.sv": "e708965216bd449002a4c96829397c9723d0179aa8cede1bda3985ef83e8eec6",

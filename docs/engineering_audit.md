@@ -110,3 +110,11 @@ The large margin-repair variant passes its own independent routed test, but has
 wrapper lost its command completion record while the stage log and DRC XML
 survived. The runner now records commands before launch, the collector archives
 the stage DRC log, and hard-interruption/trial-isolation tests are part of CI.
+
+In the 4x4/256 closure trial, all first 1,000 printed RSZ-0104 single-pin-net
+warnings were traced in the saved CTS netlist to unused cell outputs: 814
+DFF_X1.QN, 34 DFFR_X1.QN, 124 HA_X1.S and 28 HA_X1.CO. Pin directions were
+checked against the Liberty-derived models. The report stores the netlist/model
+hashes and each inspected net. The tool suppresses subsequent warnings, so this
+is a bounded classification, not a claim that every possible warning is benign.
+No timing/electrical check or diagnostic was disabled.

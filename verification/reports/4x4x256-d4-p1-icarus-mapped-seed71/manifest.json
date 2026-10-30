@@ -1,0 +1,27 @@
+{
+  "configuration": {
+    "nm": 4,
+    "ns": 4,
+    "width": 256,
+    "depth": 4,
+    "pipeline": 1,
+    "seed": 71,
+    "baseline": false,
+    "netlist": "build/physical/4x4x256-d4-p1-closure/orfs/results/nangate45/4x4x256-d4-p1-closure/base/1_2_yosys.v",
+    "cells": "build/physical/nangate45_models.v",
+    "netlist_kind": "mapped",
+    "sim": "icarus"
+  },
+  "source_sha256": {
+    "build/physical/nangate45_models.v": "4eabed844a0a99e09f396c8070035bdbe032acc5ee58b55b4c024cd327859b72",
+    "build/physical/4x4x256-d4-p1-closure/orfs/results/nangate45/4x4x256-d4-p1-closure/base/1_2_yosys.v": "1e293d8832a221ad3dc62d1dc1b2c26fb4cb70f1f2626e113c750358954a9886",
+    "build/independent/4x4x256-d4-p1-icarus-mapped/tb_independent.sv": "0e1e42299ee4657f511817684a433050eb15476de9019674ef8a661b7a749465"
+  },
+  "packages": {
+    "cocotb": "2.0.1",
+    "cocotbext-axi": "0.1.26",
+    "cocotb-bus": "0.3.0"
+  },
+  "runner_sha256": "327287ae7ba2562c4ccdafc466dedcd8cbebe1b11d2553316edcc1dc8f3cadfb",
+  "test_sha256": "97d5e6bb2512d61d57f1671b1bd6842b4c757196e24fe4e036624ac23f5c5d0d"
+}

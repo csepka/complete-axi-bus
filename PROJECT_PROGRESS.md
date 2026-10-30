@@ -1,6 +1,44 @@
 # AXI4 project progress
 
-## Resume checkpoint (2026-10-29)
+## Resume checkpoint (2026-10-30)
+
+HEAD `8e901df` is committed and pushed on `feat/concurrent-axi4`; the working tree
+was clean on resumption. GitHub CI passed run
+[40955215802](https://github.com/csepka/complete-axi-bus/actions/runs/40955215802).
+Original requirements and prior checkpoint remain the active scope. Native
+`make ci` passed again (`build/resume-oct30-ci.log`). No functional RTL changed.
+
+Both large `closure` trials stopped with Docker EOF at 2026-10-29 14:15 PDT.
+The new runner correctly recorded exit 125; no incomplete run is called a pass.
+Original failed manifests/logs are preserved in each build directory's
+`interrupted-2026-10-29/`. Both runs resumed with identical RTL/constraints and
+100,000 repair passes/two closure rounds: 4x4 from completed CTS, 8x8 from completed
+placement. Active logs are `build/physical-4x4x256-closure-oct30.log` and
+`build/physical-large-closure-oct30.log`; per-stage logs remain inside each ORFS
+build. Inspect stage logs as well as the wrapper log after any interruption.
+
+Completed evidence: 14 independent runs, all 17 original validation stages,
+FIFO and request-queue induction, mutation tests, four-state cell models, four
+host failure tests, small closure layout with passing extracted timing and routed
+BFM but three antenna markers/missing LVS. The repair 8x8 layout passes its routed
+BFM but fails hold/electrical checks and has 999 antenna markers. The 4x4/256
+candidate measures 163.584 Gb/s aggregate under the documented independent-target
+100-MHz assumption; its physical timing is not yet established.
+
+The new 4x4/256 mapped four-state test also passed seed 71; its manifest and
+coverage are under `verification/reports/4x4x256-d4-p1-icarus-mapped-seed71/`.
+Final routed tests remain pending. The source/physical provenance audit passes
+with 15 cases. The 4x4 run has completed both additional repair rounds and is
+in detailed routing. The 8x8 CTS repair completed and passed equivalence; its
+mapped netlist hash exactly matches the prior repair trial. Final timing is
+still pending.
+
+Next: finish and inspect both resumed implementations, validate their final
+netlists, run DRC sequentially, archive actual results, refresh the evidence audit
+and documentation, and commit/push. Do not claim physical acceptance, unrestricted
+AXI4 compliance, or hardware 100-Gb/s operation while required checks fail.
+
+## Historical checkpoint (2026-10-29)
 
 Same branch; checkpoints `b22ed99` and `048e35b` committed and pushed after `70fac90`. GitHub CI passed run
 [40909212235](https://github.com/csepka/complete-axi-bus/actions/runs/40909212235).

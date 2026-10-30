@@ -1,0 +1,681 @@
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:94   in _embed_init_python              Using Python 3.12.10 interpreter at /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 71
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_independent.independent_axi (1/1)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master (write)
+     0.00ns INFO     cocotb.tb_independent.m0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m0           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:120: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.valid.setimmediatevalue(self._valid_init)
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:133: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          s.setimmediatevalue(v)
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:115: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.ready.setimmediatevalue(self._ready_init)
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m0             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             buser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master (read)
+     0.00ns INFO     cocotb.tb_independent.m0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m0           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m0           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m0             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m0             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m0             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.m0             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master (write)
+     0.00ns INFO     cocotb.tb_independent.m1           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m1           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m1           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m1             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m1             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m1             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m1             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.m1             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.m1             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.m1             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.m1             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m1             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.m1             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m1             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m1             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.m1             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m1             buser: not present
+     0.00ns INFO     cocotb.tb_independent.m1             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master (read)
+     0.00ns INFO     cocotb.tb_independent.m1           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m1           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m1           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m1             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m1             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m1             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m1           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m1             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.m1             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.m1             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.m1             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.m1             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m1             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.m1             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m1             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m1             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m1             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.m1             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master (write)
+     0.00ns INFO     cocotb.tb_independent.m2           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m2           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m2           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m2             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m2             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m2             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m2             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.m2             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.m2             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.m2             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.m2             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m2             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.m2             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m2             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m2             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.m2             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m2             buser: not present
+     0.00ns INFO     cocotb.tb_independent.m2             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master (read)
+     0.00ns INFO     cocotb.tb_independent.m2           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m2           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m2           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m2             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m2             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m2             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m2           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m2             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.m2             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.m2             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.m2             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.m2             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m2             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.m2             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m2             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m2             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m2             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.m2             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master (write)
+     0.00ns INFO     cocotb.tb_independent.m3           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m3           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m3           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m3             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m3             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m3             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m3             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.m3             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.m3             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.m3             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.m3             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m3             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.m3             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m3             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m3             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.m3             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m3             buser: not present
+     0.00ns INFO     cocotb.tb_independent.m3             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master (read)
+     0.00ns INFO     cocotb.tb_independent.m3           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.m3           Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.m3           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master configuration:
+     0.00ns INFO     cocotb.tb_independent.m3             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m3             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m3             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3             Max burst size: 5 (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3             Max burst length: 256 cycles (8192 bytes)
+     0.00ns INFO     cocotb.tb_independent.m3           AXI master signals:
+     0.00ns INFO     cocotb.tb_independent.m3             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.m3             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.m3             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.m3             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.m3             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.m3             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.m3             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.m3             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.m3             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.m3             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.m3             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.m3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model (write)
+     0.00ns INFO     cocotb.tb_independent.s0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s0           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s0             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             buser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model (read)
+     0.00ns INFO     cocotb.tb_independent.s0           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s0           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s0           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s0             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s0           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s0             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s0             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s0             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.s0             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s0           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model (write)
+     0.00ns INFO     cocotb.tb_independent.s1           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s1           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s1           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s1             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s1             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s1             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s1             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.s1             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.s1             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.s1             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.s1             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s1             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.s1             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s1             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s1             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.s1             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s1             buser: not present
+     0.00ns INFO     cocotb.tb_independent.s1             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model (read)
+     0.00ns INFO     cocotb.tb_independent.s1           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s1           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s1           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s1             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s1             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s1             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s1           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s1             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.s1             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.s1             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.s1             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.s1             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s1             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.s1             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s1             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s1             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s1             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.s1             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s1           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model (write)
+     0.00ns INFO     cocotb.tb_independent.s2           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s2           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s2           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s2             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s2             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s2             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s2             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.s2             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.s2             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.s2             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.s2             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s2             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.s2             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s2             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s2             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.s2             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s2             buser: not present
+     0.00ns INFO     cocotb.tb_independent.s2             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model (read)
+     0.00ns INFO     cocotb.tb_independent.s2           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s2           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s2           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s2             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s2             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s2             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s2           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s2             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.s2             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.s2             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.s2             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.s2             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s2             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.s2             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s2             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s2             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s2             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.s2             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s2           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model (write)
+     0.00ns INFO     cocotb.tb_independent.s3           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s3           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s3           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s3             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s3             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s3             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s3             awaddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awcache: not present
+     0.00ns INFO     cocotb.tb_independent.s3             awid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awlock: not present
+     0.00ns INFO     cocotb.tb_independent.s3             awprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awqos: not present
+     0.00ns INFO     cocotb.tb_independent.s3             awready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awregion: not present
+     0.00ns INFO     cocotb.tb_independent.s3             awsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s3             awuser: not present
+     0.00ns INFO     cocotb.tb_independent.s3             awvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             wdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s3             wlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             wready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             wstrb width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s3             wuser: not present
+     0.00ns INFO     cocotb.tb_independent.s3             wvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             bid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             bready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             bresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s3             buser: not present
+     0.00ns INFO     cocotb.tb_independent.s3             bvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model (read)
+     0.00ns INFO     cocotb.tb_independent.s3           cocotbext-axi version 0.1.26
+     0.00ns INFO     cocotb.tb_independent.s3           Copyright (c) 2021-2025 Alex Forencich
+     0.00ns INFO     cocotb.tb_independent.s3           https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model configuration:
+     0.00ns INFO     cocotb.tb_independent.s3             Address width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s3             ID width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             Byte size: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s3             Data width: 256 bits (32 bytes)
+     0.00ns INFO     cocotb.tb_independent.s3           AXI slave model signals:
+     0.00ns INFO     cocotb.tb_independent.s3             araddr width: 32 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arburst width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arcache: not present
+     0.00ns INFO     cocotb.tb_independent.s3             arid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arlen width: 8 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arlock: not present
+     0.00ns INFO     cocotb.tb_independent.s3             arprot width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arqos: not present
+     0.00ns INFO     cocotb.tb_independent.s3             arready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             arregion: not present
+     0.00ns INFO     cocotb.tb_independent.s3             arsize width: 3 bits
+     0.00ns INFO     cocotb.tb_independent.s3             aruser: not present
+     0.00ns INFO     cocotb.tb_independent.s3             arvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             rdata width: 256 bits
+     0.00ns INFO     cocotb.tb_independent.s3             rid width: 4 bits
+     0.00ns INFO     cocotb.tb_independent.s3             rlast width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             rready width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3             rresp width: 2 bits
+     0.00ns INFO     cocotb.tb_independent.s3             ruser: not present
+     0.00ns INFO     cocotb.tb_independent.s3             rvalid width: 1 bits
+     0.00ns INFO     cocotb.tb_independent.s3           Reset de-asserted
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/reset.py:59: DeprecationWarning: Use `signal.value_change` instead.
+                                                          await Edge(reset_signal)
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:156: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._run_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:434: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:437: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_resp_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:845: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:848: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_resp_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_slave.py:102: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_cr.kill()
+     0.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_slave.py:266: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_cr.kill()
+   150.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:630: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(write_resp)
+   150.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:423: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+   220.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:1030: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(read_resp)
+   220.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:834: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+156290.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/stream.py:195: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._pause_cr.kill()
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteCmd(address=24736, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=2, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b58fd10>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteCmd(address=24704, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=1, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b58ec00>)
+157291.00ns WARNING  py.warnings                        /Users/christophersepka/Desktop/AXI_proj/complete-axi-bus/build/verification-venv/lib/python3.12/site-packages/cocotbext/axi/axi_master.py:132: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._cr.kill()
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24640, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b617b90>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24576, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b5b1880>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24672, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b616de0>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed write operation during reset: AxiWriteRespCmd(address=24608, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b615f70>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24576, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b616d80>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24672, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b615a90>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24608, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b616480>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24704, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b58d6d0>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24640, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b615fa0>)
+157291.00ns WARNING  cocotb.tb_independent.m0           Flushed read operation during reset: AxiReadRespCmd(address=24736, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b58ec30>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteCmd(address=90272, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=2, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b6d5790>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteCmd(address=90240, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=1, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b6d5970>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90112, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7cb0>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90208, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7a70>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90144, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7860>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed write operation during reset: AxiWriteRespCmd(address=90176, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d5d30>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90112, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d4d70>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90208, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7dd0>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90144, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d4bf0>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90240, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d5bb0>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90176, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d4d40>)
+157291.00ns WARNING  cocotb.tb_independent.m1           Flushed read operation during reset: AxiReadRespCmd(address=90272, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d5400>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteCmd(address=155808, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=2, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b53b560>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteCmd(address=155776, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=1, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b55a690>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteRespCmd(address=155712, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d6f00>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteRespCmd(address=155648, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7290>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteRespCmd(address=155744, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d6ed0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed write operation during reset: AxiWriteRespCmd(address=155680, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d7ec0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155648, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d70e0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155744, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b55b890>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155680, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d55e0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155776, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b53b5f0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155712, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b6d63c0>)
+157291.00ns WARNING  cocotb.tb_independent.m2           Flushed read operation during reset: AxiReadRespCmd(address=155808, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b712cc0>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteCmd(address=221344, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=2, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b713f80>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteCmd(address=221312, data=b'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', awid=1, burst=<AxiBurstType.INCR: 1>, size=5, lock=<AxiLockType.NORMAL: 0>, cache=3, prot=<AxiProt.NONSECURE: 2>, qos=0, region=0, user=0, wuser=0, event=<Event at 0x10b711670>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteRespCmd(address=221184, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b7134d0>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteRespCmd(address=221280, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b710110>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteRespCmd(address=221216, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b711610>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed write operation during reset: AxiWriteRespCmd(address=221248, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b711490>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221184, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b7116a0>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221280, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b711dc0>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221216, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b713140>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221312, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b710260>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221248, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b713c80>)
+157291.00ns WARNING  cocotb.tb_independent.m3           Flushed read operation during reset: AxiReadRespCmd(address=221344, length=32, size=5, cycles=1, prot=<AxiProt.NONSECURE: 2>, burst_list=[1], event=<Event at 0x10b711d90>)
+158170.00ns INFO     cocotb.regression                  test_independent.independent_axi passed
+158170.00ns INFO     cocotb.regression                  ******************************************************************************************
+                                                        ** TEST                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ******************************************************************************************
+                                                        ** test_independent.independent_axi   PASS      158170.00         188.57        838.79  **
+                                                        ******************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                 158170.00         188.57        838.78  **
+                                                        ******************************************************************************************

@@ -52,6 +52,7 @@ required = {
     '2x2x64-d4-p1-verilator-rtl-seed23',
     '3x2x128-d3-p1-verilator-rtl-seed71',
     '4x4x256-d4-p1-verilator-rtl-seed71',
+    '4x4x256-d4-p1-icarus-mapped-seed71',
     '2x2x64-d4-p1-icarus-generic-seed23',
     '2x2x64-d4-p1-icarus-mapped-seed23',
     '2x2x64-d4-p1-icarus-routed-seed23',
@@ -81,6 +82,11 @@ for folder in sorted((ROOT/'verification/reports').iterdir()):
 assert required <= set(observed), f'Missing required tests: {required-set(observed)}'
 physical = {}
 for folder in sorted((ROOT/'synthesis/physical/reports').iterdir()):
+    diagnostic = folder/'unused-output-diagnostic.json'
+    if diagnostic.is_file():
+        reviewed = json.loads(diagnostic.read_text())
+        hashes({reviewed['netlist']:reviewed['netlist_sha256'],
+                'build/physical/nangate45_models.v':reviewed['models_sha256']})
     if not folder.is_dir() or not (folder/'summary.json').exists():
         continue
     summary = json.loads((folder/'summary.json').read_text())
